@@ -6,7 +6,36 @@ export default {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: "var(--color-primary)",
+                secondary: "var(--color-secondary)",
+                tertiary: "var(--color-tertiary)",
+                quaternary: "var(--color-quaternary)",
+            },
+            fontFamily: {
+                primary: ["League Spartan", "sans-serif"],
+                secondary: ["Poppins", "sans-serif"],
+            },
+            borderColor: {
+                primary: "var(--color-primary)",
+                secondary: "var(--color-secondary)",
+                tertiary: "var(--color-tertiary)",
+                quaternary: "var(--color-quaternary)",
+            },
+            textColor: {
+                primary: "var(--color-primary)",
+                secondary: "var(--color-secondary)",
+                tertiary: "var(--color-tertiary)",
+                quaternary: "var(--color-quaternary)",
+            },
+            backgroundColor: {
+                primary: "var(--color-primary)",
+                secondary: "var(--color-secondary)",
+                tertiary: "var(--color-tertiary)",
+                quaternary: "var(--color-quaternary)",
+            },
+        },
     },
-    plugins: [],
+    plugins: [require("flowbite/plugin")],
 };
