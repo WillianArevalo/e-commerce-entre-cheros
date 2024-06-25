@@ -10,3 +10,21 @@
     --color-tertiary: #138fdc;
     --color-quaternary: #f6f4f1;
 }
+
+.is-invalid {
+    border-color: #e3342f;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.dark .is-invalid {
+    border-color: #e3342f;
+    box-shadow: 0 0 0 0.2rem rgba(225, 64, 80, 0.322);
+}
+
+.is-valid {
+    border: 2px solid #38c172;
+}
+
+.dark .is-valid {
+    border: 2px solid #38c172 !important;
+}
