@@ -2,6 +2,8 @@ import "./bootstrap";
 import "./jquery";
 import "flowbite";
 import "./loginAdmin";
+import "./customSelect";
+import "./categorie";
 
 $(document).ready(function () {
     const $btnToggleTheme = $("#toggleTheme");
