@@ -17,7 +17,7 @@
 }
 
 .dark .is-invalid {
-    border-color: #e3342f;
+    border-color: #e3342f !important;
     box-shadow: 0 0 0 0.2rem rgba(225, 64, 80, 0.322);
 }
 
