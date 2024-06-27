@@ -23,9 +23,15 @@
 
 </head>
 
-<body class="font-secondary">
+<body class="font-secondary dark:bg-gray-900">
     @include('layouts.__partials.navbar-admin')
-    @yield('content')
+    @include('layouts.__partials.toast')
+    <main class="bg-gray-50 dark:bg-gray-900 h-full">
+        <div class="p-4 sm:ml-72">
+            @include('layouts.__partials.breadcrumb')
+            @yield('content')
+        </div>
+    </main>
 </body>
 @vite('resources/js/app.js')
 
