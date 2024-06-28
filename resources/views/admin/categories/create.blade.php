@@ -3,7 +3,7 @@
 @section('title', 'Nueva categoría')
 
 @section('content')
-    <div class="p-4 rounded-lg mt-4 border border-gray-200 dark:border-gray-700">
+    <div class="mt-4">
         <div class="dark:bg-gray-800 py-3 px-4 rounded-lg shadow-sm flex items-center gap-2">
             <span class="bg-blue-500 p-2 rounded-lg dark:bg-opacity-15 bg-opacity-40">
                 <x-icon icon="bookmark-add" class="w-5 h-5 dark:text-blue-300 text-blue-600" />
@@ -12,7 +12,7 @@
                 Nueva categoría
             </h1>
         </div>
-        <div class="bg-white dark:bg-gray-900 mt-4">
+        <div class="bg-white dark:bg-gray-900 mt-8">
             <div class="mx-auto w-full">
                 <form action="{{ route('admin.categories.store') }}" class="flex flex-col gap-4" enctype="multipart/form-data"
                     method="POST">
