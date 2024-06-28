@@ -22,7 +22,7 @@ class CategorieController extends Controller
 
     public function index()
     {
-        $categories = Categorie::with("subcategories")->get();
+        $categories = Categorie::with("subcategories")->paginate(10);
         return view("admin.categories.index", compact("categories"));
     }
 
@@ -159,5 +159,34 @@ class CategorieController extends Controller
 
         $categorie->delete();
         return redirect()->route("admin.categories.index")->with("success", "Categoría eliminada correctamente");
+    }
+
+
+    public function search(Request $request)
+    {
+        $query = Categorie::query();
+        if ($request->input("searchCategorie")) {
+            $name = $request->input("searchCategorie");
+            $query->where("name", "like", "%$name%");
+        }
+
+        if ($request->input("filter")) {
+            $filters = $request->input("filter");
+
+            if (!(in_array('has_subcategories', $filters) && in_array('no_subcategories', $filters))) {
+                if (in_array('no_subcategories', $filters)) {
+                    $query->doesntHave('subcategories');
+                }
+
+                if (in_array('has_subcategories', $filters)) {
+                    $query->has('subcategories');
+                }
+            }
+        }
+
+        $categories = $query->get();
+        if ($request->ajax()) {
+            return view("layouts.__partials.ajax.row-categorie", compact("categories"))->render();
+        }
     }
 }

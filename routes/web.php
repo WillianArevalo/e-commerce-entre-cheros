@@ -33,6 +33,7 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::get("/", [AdminController::class, "index"])->name("index");
     Route::resource("/categories", CategorieController::class);
     Route::resource("/subcategories", SubCategorieController::class);
+    Route::post("/categories/search", [CategorieController::class, "search"])->name("categories.search");
 });
 
 Route::post("/logout", [AuthController::class, "logout"])->name("logout");

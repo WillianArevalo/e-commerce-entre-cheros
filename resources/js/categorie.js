@@ -23,12 +23,55 @@ $(document).ready(function () {
         }
     });
 
-    $(".buttonDelete").on("click", function () {
-        let id = $(this).data("id");
-        let modalId = $(this).data("modal-target");
-        $(".deleteModal").attr("data-id", id);
-        let form = $("#" + modalId).find("form");
-        let baseAction = form.data("base-action");
-        form.attr("action", baseAction + "/" + id);
+    $(document).on("click", ".buttonDelete", function () {
+        $(".deleteModal").removeClass("hidden").addClass("flex");
+        let formId = $(this).data("form");
+        $(".deleteModal .confirmDelete").attr("data-form", formId);
+    });
+
+    $(document).on("click", ".closeModal", function () {
+        $(".deleteModal").removeClass("flex").addClass("hidden");
+    });
+
+    $(document).on("click", ".confirmDelete", function () {
+        let formId = $(this).data("form");
+        $("#" + formId).submit();
+    });
+
+    $(document).on("click", ".btnDropDown", function () {
+        $(".dropDownContent").addClass("hidden");
+        $(this).next().toggleClass("hidden");
+    });
+
+    $(document).on("click", function (e) {
+        if (!$(e.target).closest(".btnDropDown").length) {
+            $(".dropDownContent").addClass("hidden");
+        }
+    });
+
+    $("#inputSearchCategorie").on("keyup", function () {
+        let data = $("#formSearchCategorie").serialize();
+        let url = $("#formSearchCategorie").attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function (response) {
+                $("#tableCategorie").html(response);
+            },
+        });
+    });
+
+    $("input[type='checkbox']").on("change", function () {
+        let data = $("#formSearchCategorieCheck").serialize();
+        let url = $("#formSearchCategorieCheck").attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function (response) {
+                $("#tableCategorie").html(response);
+            },
+        });
     });
 });
