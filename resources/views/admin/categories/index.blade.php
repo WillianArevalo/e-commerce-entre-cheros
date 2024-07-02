@@ -1,15 +1,25 @@
 @extends('layouts.admin-template')
 
-@section('title', 'Categories')
+@section('title', 'Categorías')
 
 @section('content')
-    <div class=" rounded-lg dark:border-gray-700 mt-4">
-        <div class="dark:bg-gray-800 py-3 px-4 rounded-lg shadow-sm">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">Administrar categorías</h1>
+    <div class="rounded-lg dark:border-gray-700 mt-4">
+        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
+                Administrar categorías
+            </h1>
+            <p class="text-sm text-gray-400">
+                Administra las categorías de tu tienda
+            </p>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-900 mt-4">
+        <div class="bg-gray-50 dark:bg-gray-900 p-4">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
+                    <div class="p-4 border-b dark:border-gray-700 border-gray-200">
+                        <h2 class="dark:text-gray-200 text-base font-semibold text-gray-700">
+                            Lista de categorías
+                        </h2>
+                    </div>
                     <div
                         class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
@@ -31,14 +41,11 @@
                         </div>
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <a href="{{ route('admin.categories.create') }}"
-                                class="flex items-center justify-center text-white bg-tertiary hover:bg-blue-600 dark:bg-secondary dark:hover:bg-blue-950 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2  focus:outline-none dark:focus:ring-primary-800">
-                                <x-icon icon="plus" class="h-3.5 w-3.5 mr-2 text-current" />
-                                Agregar categoría
-                            </a>
+                            <x-button type="a" href="{{ route('admin.categories.create') }}" text="Nueva categoría"
+                                icon="add-circle" typeClass="primary" />
                             <div class="flex items-center space-x-3 w-full md:w-auto">
                                 <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                     type="button">
                                     <x-icon icon="filter" class="h-4 w-4 mr-2 text-gray-400" />
                                     Filtros
@@ -78,7 +85,7 @@
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">Imagen</th>
@@ -111,7 +118,7 @@
                                                     <div class="flex flex-col gap-2">
                                                         @foreach ($categorie->subcategories as $subcategorie)
                                                             <div
-                                                                class="relative flex items-center gap-2 px-3 py-2 rounded-lg dark:bg-gray-700 w-max bg-gray-100">
+                                                                class="relative flex items-center gap-2 px-3 py-2 rounded-2xl dark:bg-gray-700 w-max bg-gray-100">
                                                                 <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                                                                 {{ $subcategorie->name }}
                                                                 <button class="dark:text-white text-gray-600 btnDropDown"
@@ -120,7 +127,7 @@
                                                                         class="w-5 h-5 text-current" />
                                                                 </button>
                                                                 <div
-                                                                    class="hidden absolute top-10 z-30 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 dropDownContent">
+                                                                    class="hidden absolute top-10 z-30 w-44 bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 dropDownContent">
                                                                     <ul
                                                                         class="py-1 text-sm text-gray-700 dark:text-gray-200">
                                                                         <li>
@@ -153,21 +160,16 @@
                                             </td>
                                             <td class="px-4 py-3">
                                                 <div class="flex gap-2">
-                                                    <a href="{{ route('admin.categories.edit', $categorie->id) }}"
-                                                        class="text-green-800 bg-green-300 bg-opacity-75 hover:text-white hover:bg-green-800 dark:text-green-300 font-medium dark:bg-green-700 dark:bg-opacity-20 p-2.5 rounded-lg flex items-center gap-2 dark:hover:bg-opacity-40 buttonUpdateCategorie">
-                                                        <x-icon icon="edit" class="w-5 h-5 text-current" />
-                                                        Editar
-                                                    </a>
+                                                    <x-button type="a"
+                                                        href="{{ route('admin.categories.edit', $categorie->id) }}"
+                                                        text="Editar" icon="edit" typeButton="success" />
                                                     <form action="{{ route('admin.categories.destroy', $categorie->id) }}"
                                                         id="formDeleteCategorie" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button"
-                                                            class="text-red-800 hover:bg-red-800 bg-opacity-75 hover:text-white bg-red-300 dark:text-red-300 font-medium dark:bg-red-700 dark:bg-opacity-20 p-2.5 rounded-lg flex items-center gap-2 dark:hover:bg-opacity-40 buttonDelete"
-                                                            data-form="formDeleteCategorie">
-                                                            <x-icon icon="delete" class="w-5 h-5 text-current" />
-                                                            Eliminar
-                                                        </button>
+                                                        <x-button type="button" data-form="formDeleteCategorie"
+                                                            text="Eliminar" icon="delete" typeButton="danger"
+                                                            class="buttonDelete" />
                                                     </form>
                                                 </div>
                                             </td>

@@ -1,18 +1,20 @@
 @extends('layouts.admin-template')
 
-@section('title', 'Nueva categoría')
+@section('title', 'Editar categoría')
 
 @section('content')
     <div class="mt-4">
-        <div class="dark:bg-gray-800 py-3 px-4 rounded-lg shadow-sm flex items-center gap-2">
-            <span class="bg-blue-500 p-2 rounded-lg dark:bg-opacity-15 bg-opacity-40">
-                <x-icon icon="bookmark-add" class="w-5 h-5 dark:text-blue-300 text-blue-600" />
-            </span>
+        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+            <a href="{{ route('admin.categories.index') }}"
+                class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
+                <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
+                Regresar a categorías
+            </a>
             <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
                 Editar categoría
             </h1>
         </div>
-        <div class="bg-white dark:bg-gray-900 mt-8">
+        <div class="bg-white dark:bg-gray-900 p-4">
             <div class="mx-auto w-full">
                 <form action="{{ route('admin.categories.update', $categorie->id) }}" class="flex flex-col gap-4"
                     enctype="multipart/form-data" method="POST">
@@ -40,11 +42,11 @@
                                 <ul
                                     class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 selectOptions hidden">
                                     <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                        data-value="principal" data-input="typeCategorie">
+                                        data-value="principal" data-input="#typeCategorie">
                                         Principal
                                     </li>
                                     <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                        data-value="secundaria" data-input="typeCategorie">
+                                        data-value="secundaria" data-input="#typeCategorie">
                                         Secundaria
                                     </li>
                                 </ul>
@@ -78,7 +80,7 @@
                                         @if ($categories->count() > 0)
                                             @foreach ($categories as $category)
                                                 <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="{{ $category->id }}" data-input="categorieParent">
+                                                    data-value="{{ $category->id }}" data-input="#categorieParent">
                                                     {{ $category->name }}
                                                 </li>
                                             @endforeach
@@ -122,15 +124,7 @@
                         @enderror
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <button type="submit"
-                            class="w-max flex items-center justify-center text-white bg-tertiary hover:bg-blue-600 dark:bg-secondary dark:hover:bg-blue-950 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3  focus:outline-none dark:focus:ring-primary-800 gap-2">
-                            <x-icon icon="edit" class="w-4 h-4 text-current" />
-                            Editar
-                        </button>
-                        <a href="{{ route('admin.categories.index') }}"
-                            class="px-5 py-3 dark:hover:bg-gray-950 bg-gray-200 dark:bg-gray-950 dark:bg-opacity-30 hover:bg-gray-300 rounded-lg dark:text-white text-sm font-medium">
-                            Regresar
-                        </a>
+                        <x-button type="submit" icon="edit" typeButton="success" text="Editar categoría" />
                     </div>
                 </form>
             </div>
