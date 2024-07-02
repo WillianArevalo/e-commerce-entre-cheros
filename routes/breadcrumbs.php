@@ -43,3 +43,28 @@ Breadcrumbs::for('admin.subcategories.edit', function (BreadcrumbTrail $trail, $
     $trail->parent('admin.categories.index');
     $trail->push('Editar', route('admin.subcategories.edit', $subcategory));
 });
+
+
+// Home > Brands
+Breadcrumbs::for('admin.brands.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Marcas', route('admin.brands.index'));
+});
+
+// Home > Products
+Breadcrumbs::for('admin.products.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Productos', route('admin.products.index'));
+});
+
+// Home > Products > Create
+Breadcrumbs::for('admin.products.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.products.index');
+    $trail->push('Crear nuevo', route('admin.products.create'));
+});
+
+//Home > Products > Detalles > {product}
+Breadcrumbs::for('admin.products.show', function (BreadcrumbTrail $trail, $product) {
+    $trail->parent('admin.products.index');
+    $trail->push('Detalles', route('admin.products.show', $product));
+});
