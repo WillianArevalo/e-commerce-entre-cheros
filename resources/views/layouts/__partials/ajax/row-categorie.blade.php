@@ -26,7 +26,7 @@
                                      <x-icon icon="more-hortizontal" class="w-5 h-5 text-current" />
                                  </button>
                                  <div
-                                     class="hidden absolute top-10 z-30 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                     class="hidden absolute top-10 z-30 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 dropDownContent">
                                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
                                          <li>
                                              <a href="{{ route('admin.subcategories.edit', $subcategorie->id) }}"
@@ -57,7 +57,7 @@
              <td class="px-4 py-3">
                  <div class="flex gap-2">
                      <a href="{{ route('admin.categories.edit', $categorie->id) }}"
-                         class="text-green-800 bg-green-300 bg-opacity-75 hover:text-white hover:bg-green-800 dark:text-green-300 font-medium dark:bg-green-700 dark:bg-opacity-20 p-2.5 rounded-lg flex items-center gap-2 dark:hover:bg-opacity-40 buttonUpdateCategorie">
+                         class="text-white font-medium bg-emerald-600 p-2.5 rounded-lg flex items-center gap-2 buttonUpdateCategorie hover:bg-emerald-800 transition-colors">
                          <x-icon icon="edit" class="w-5 h-5 text-current" />
                          Editar
                      </a>
@@ -66,7 +66,7 @@
                          @csrf
                          @method('DELETE')
                          <button type="button"
-                             class="text-red-800 hover:bg-red-800 bg-opacity-75 hover:text-white bg-red-300 dark:text-red-300 font-medium dark:bg-red-700 dark:bg-opacity-20 p-2.5 rounded-lg flex items-center gap-2 dark:hover:bg-opacity-40 buttonDelete"
+                             class="bg-red-600 text-white p-2.5 rounded-lg flex items-center gap-2 buttonDelete hover:bg-red-800 transition-colors"
                              data-form="formDeleteCategorie">
                              <x-icon icon="delete" class="w-5 h-5 text-current" />
                              Eliminar
