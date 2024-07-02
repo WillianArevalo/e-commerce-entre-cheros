@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 "resources/css/app.css",
                 "resources/css/home.css",
+                "resources/css/timeline.css",
                 "resources/js/app.js",
             ],
             refresh: true,
