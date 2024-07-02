@@ -28,3 +28,17 @@
 .dark .is-valid {
     border: 2px solid #38c172 !important;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"] {
+    -webkit-appearance: none;
+    margin: 0;
+    padding-right: 10px;
+}
+
+div[modal-backdrop] {
+    display: none !important;
+}
