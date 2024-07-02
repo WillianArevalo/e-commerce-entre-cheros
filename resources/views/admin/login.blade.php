@@ -33,7 +33,7 @@
                                         </div>
                                     @enderror
                                     <div
-                                        class="absolute inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none hidden icon-success">
+                                        class="absolute inset-y-0 end-0 items-center pe-3.5 pointer-events-none hidden icon-success">
                                         <x-icon icon="checkmark-circle"
                                             class="w-5 h-5 text-green-700 dark:text-green-500" />
                                     </div>
@@ -60,7 +60,7 @@
                                         </div>
                                     @enderror
                                     <div
-                                        class="absolute inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none hidden icon-success">
+                                        class="absolute inset-y-0 end-0  items-center pe-3.5 pointer-events-none hidden icon-success">
                                         <x-icon icon="checkmark-circle"
                                             class="w-5 h-5 text-green-700 dark:text-green-500" />
                                     </div>
@@ -70,11 +70,7 @@
                                 @enderror
                             </div>
                             <div class="flex items-center justify-center">
-                                <button type="submit"
-                                    class="w-max text-white bg-secondary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 hover:bg-blue-900 flex items-center justify-center gap-1">
-                                    <x-icon icon="login" class="w-5 h-5 text-current" />
-                                    Iniciar sesión
-                                </button>
+                                <x-button type="submit" text="Iniciar sesión" icon="login" typeButton="primary" />
                             </div>
                         </form>
                     </div>
