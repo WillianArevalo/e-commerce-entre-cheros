@@ -2,13 +2,17 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LabelController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategorieController;
+use App\Http\Controllers\TaxController;
+use App\Models\SubCategorie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +38,11 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::resource("/categories", CategorieController::class);
     Route::resource("/subcategories", SubCategorieController::class);
     Route::post("/categories/search", [CategorieController::class, "search"])->name("categories.search");
+    Route::post("/subcategories/search", [SubCategorieController::class, "search"])->name("subcategories.search");
+    Route::resource("/brands", BrandController::class);
+    Route::resource("/products", ProductController::class);
+    Route::resource("/taxes", TaxController::class);
+    Route::resource("/labels", LabelController::class);
 });
 
 Route::post("/logout", [AuthController::class, "logout"])->name("logout");
