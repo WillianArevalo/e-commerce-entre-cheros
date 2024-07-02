@@ -1,12 +1,12 @@
 <header>
     <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="px-3 py-3 lg:px-5 lg:pl-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center justify-start rtl:justify-end">
+        <div class="py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center justify-start rtl:justify-end  md:min-w-72 ps-4">
                     <button data-drawer-target="sidebar-multi-level-sidebar"
                         data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar"
                         type="button"
-                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                         <span class="sr-only">Open sidebar</span>
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +15,7 @@
                             </path>
                         </svg>
                     </button>
-                    <a href="https://flowbite.com" class="flex ms-2 md:me-24">
+                    <a href="https://flowbite.com" class="flex md:me-24">
                         <img src="{{ asset('images/photo.jpg') }}" class="h-8 me-3 w-8 object-cover rounded-full"
                             alt="Entre Cheros logo" />
                         <span
@@ -24,12 +24,20 @@
                         </span>
                     </a>
                 </div>
-                <div class="flex items-center">
-                    <div class="flex items-center ms-3 gap-2">
+                <div class="flex justify-end items-center px-4 w-auto md:w-full xl:justify-between">
+                    <div class="text-gray-500 hidden xl:block">
+                        @include('layouts.__partials.breadcrumb')
+                    </div>
+                    <div class="flex items-center gap-2">
                         <div class="flex items-center justify-center">
-                            <button data-dropdown-toggle="dropdown-alerts"
-                                class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                            <button type="button" data-dropdown-toggle="dropdown-alerts"
+                                class="relative inline-flex items-center text-sm font-medium text-center text-white focus:outline-none    p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                                 <x-icon icon="notification" class="w-6 h-6 text-gray-700 dark:text-white" />
+                                <span class="sr-only">Notifications</span>
+                                <div
+                                    class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-1 -end-1 dark:border-gray-800">
+                                    3
+                                </div>
                             </button>
                             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600 sm:w-80 w-full"
                                 id="dropdown-alerts">
@@ -145,7 +153,7 @@
     </nav>
 </header>
 <aside id="sidebar-multi-level-sidebar"
-    class="pt-12 fixed top-0 left-0 z-40 h-screen transition-transform -translate-x-full sm:translate-x-0 w-72 border border-zinc-200 dark:border-gray-700"
+    class="pt-12 fixed top-0 left-0 z-40 h-screen transition-transform -translate-x-full xl:translate-x-0 w-72 border border-zinc-200 dark:border-gray-700"
     aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 mt-2">
         <ul class="space-y-2 font-medium">
@@ -172,11 +180,11 @@
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Categorías</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('admin.brands.index') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Marcas</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('admin.products.index') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Productos</a>
                     </li>
                 </ul>

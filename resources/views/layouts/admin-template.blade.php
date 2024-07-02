@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
-
+    @vite('resources/css/timeline.css')
     <!-- Theme switcher -->
     <script>
         (function() {
@@ -20,15 +20,16 @@
             }
         })();
     </script>
-
 </head>
 
 <body class="font-secondary dark:bg-gray-900">
     @include('layouts.__partials.navbar-admin')
     @include('layouts.__partials.toast')
     <main class="bg-gray-50 dark:bg-gray-900 h-full">
-        <div class="p-4 sm:ml-72">
-            @include('layouts.__partials.breadcrumb')
+        <div class="xl:ml-72 mt-16">
+            <div class="pt-4 px-4 xl:hidden">
+                @include('layouts.__partials.breadcrumb')
+            </div>
             @yield('content')
         </div>
     </main>
