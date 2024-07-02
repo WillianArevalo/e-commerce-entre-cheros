@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    $("#typeCategorie").on("change", function () {
+    $("#typeCategorie").on("Changed", function () {
         var typeCategorie = $(this).val();
-
         if (typeCategorie === "secundaria") {
             $("#categorieParentSelect").removeClass("hidden");
         } else {
@@ -38,15 +37,18 @@ $(document).ready(function () {
         $("#" + formId).submit();
     });
 
-    $(document).on("click", ".btnDropDown", function () {
+    $(document).on("click", ".btnDropDown", function (e) {
+        e.stopPropagation();
         $(".dropDownContent").addClass("hidden");
-        $(this).next().toggleClass("hidden");
+        $(this).next(".dropDownContent").toggleClass("hidden");
     });
 
-    $(document).on("click", function (e) {
-        if (!$(e.target).closest(".btnDropDown").length) {
-            $(".dropDownContent").addClass("hidden");
-        }
+    $(document).on("click", function () {
+        $(".dropDownContent").addClass("hidden");
+    });
+
+    $(document).on("click", ".dropDownContent", function (e) {
+        e.stopPropagation();
     });
 
     $("#inputSearchCategorie").on("keyup", function () {

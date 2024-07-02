@@ -4,6 +4,8 @@ import "flowbite";
 import "./loginAdmin";
 import "./customSelect";
 import "./categorie";
+import "./brand";
+import "./product";
 
 $(document).ready(function () {
     const $btnToggleTheme = $("#toggleTheme");

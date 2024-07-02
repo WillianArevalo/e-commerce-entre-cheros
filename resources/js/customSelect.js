@@ -22,9 +22,7 @@ $(document).ready(function () {
                 .prev(".selected")
                 .find(".itemSelected")
                 .text(item);
-            $("#" + input)
-                .val(value)
-                .trigger("change");
+            $(input).val(value).trigger("Changed");
             $(this).parent().addClass("hidden");
         });
     });
@@ -36,6 +34,8 @@ $(document).ready(function () {
     $(document).on("click", function (e) {
         if (!$(e.target).closest(".selected").length) {
             $(".selectOptions").addClass("hidden");
+            $(".selectOptionsLabels").addClass("hidden");
+            $(".selectOptionsSubCategories").addClass("hidden");
         }
     });
 });
