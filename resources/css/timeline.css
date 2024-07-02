@@ -1,0 +1,66 @@
+.timeline-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline {
+    position: relative;
+    list-style: none;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: #fff;
+    transform: translateX(-50%);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.timeline-event {
+    position: relative;
+    margin: 20px 0;
+}
+
+.timeline-event:nth-child(odd) .timeline-content {
+    left: 0;
+}
+
+.timeline-event:nth-child(even) .timeline-content {
+    left: 50%;
+}
+
+.timeline-event:nth-child(odd) .timeline-content::before,
+.timeline-event:nth-child(even) .timeline-content::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: -18px;
+    width: 16px;
+    height: 16px;
+    background: #3498db;
+    border-radius: 50%;
+}
+
+.timeline-event:nth-child(even) .timeline-content::before {
+    left: -18px;
+    right: auto;
+}
+
+.timeline-content {
+    position: relative;
+    width: 45%;
+}
+
+.timeline-event.end-date {
+    left: 10px;
+}
+
+.timeline-event.start-date {
+    left: 10px;
+}
