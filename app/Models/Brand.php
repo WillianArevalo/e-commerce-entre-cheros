@@ -9,6 +9,12 @@ class Brand extends Model
 {
     use HasFactory;
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, "brand_id");
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *

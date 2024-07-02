@@ -1,16 +1,18 @@
 @extends('layouts.admin-template')
 
-@section('title', 'Brands')
-
+@section('title', 'Marcas')
 
 @section('content')
     <div class=" rounded-lg dark:border-gray-700 mt-4">
-        <div class="dark:bg-gray-800 py-3 px-4 rounded-lg shadow-sm">
+        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
             <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
                 Administrar marcas
             </h1>
+            <p class="text-sm text-gray-400">
+                Administra las marcas de los productos de tu tienda
+            </p>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-900 mt-4">
+        <div class="bg-gray-50 dark:bg-gray-900 p-4">
             <div class="mx-auto w-full">
                 <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                     <div
@@ -34,12 +36,9 @@
                         </div>
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" id="addBrandModalButton" data-modal-target="addBrandModal"
-                                data-modal-toggle="addBrandModal"
-                                class="flex items-center justify-center text-white bg-tertiary hover:bg-blue-600 dark:bg-secondary dark:hover:bg-blue-950 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2  focus:outline-none dark:focus:ring-primary-800">
-                                <x-icon icon="plus" class="h-3.5 w-3.5 mr-2 text-current" />
-                                Agregar marca
-                            </button>
+                            <x-button type="button" id="addBrandModalButton" data-modal-target="addBrandModal"
+                                data-modal-toggle="addBrandModal" typeButton="primary" text="Agregar marca"
+                                icon="add-circle" />
                         </div>
                     </div>
                     <div>
@@ -81,22 +80,18 @@
                                             </td>
                                             <td class="px-4 py-3">
                                                 <div class="flex gap-2">
-                                                    <button type="button" data-id="{{ $brand->id }}"
+                                                    <x-button type="button" data-id="{{ $brand->id }}"
                                                         data-action="{{ route('admin.brands.edit', $brand->id) }}"
-                                                        class="text-green-800 bg-green-300 bg-opacity-75 hover:text-white hover:bg-green-800 dark:text-green-300 font-medium dark:bg-green-700 dark:bg-opacity-20 p-2.5 rounded-lg flex items-center gap-2 dark:hover:bg-opacity-40 btnEditBrand">
-                                                        <x-icon icon="edit" class="w-5 h-5 text-current" />
-                                                        Editar
-                                                    </button>
+                                                        typeButton="success" icon="edit" text="Editar"
+                                                        class="btnEditBrand" />
+
                                                     <form action="{{ route('admin.brands.destroy', $brand->id) }}"
                                                         id="formDeleteCategorie" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button"
-                                                            class="text-red-800 hover:bg-red-800 bg-opacity-75 hover:text-white bg-red-300 dark:text-red-300 font-medium dark:bg-red-700 dark:bg-opacity-20 p-2.5 rounded-lg flex items-center gap-2 dark:hover:bg-opacity-40 buttonDelete"
-                                                            data-form="formDeleteCategorie">
-                                                            <x-icon icon="delete" class="w-5 h-5 text-current" />
-                                                            Eliminar
-                                                        </button>
+                                                        <x-button type="button" data-form="formDeleteCategorie"
+                                                            class="buttonDelete" text="Eliminar" icon="delete"
+                                                            typeButton="danger" />
                                                     </form>
                                                 </div>
                                             </td>
@@ -144,7 +139,7 @@
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
                                 <input type="text" name="name" id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Escribe el nombre de la marca">
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
@@ -152,21 +147,16 @@
                                 <label for="description"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
                                 <textarea id="description" rows="4" name="description"
-                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Escribe la descripción de la marca"></textarea>
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
                         </div>
-                        <div class="flex justify-end gap-2">
-                            <button type="button" id="addBrandButton"
-                                class="flex items-center justify-center text-white bg-tertiary hover:bg-blue-600 dark:bg-secondary dark:hover:bg-blue-950 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2  focus:outline-none dark:focus:ring-primary-800 mt-4">
-                                <x-icon icon="plus" class="h-3.5 w-3.5 mr-2 text-current" />
-                                Agregar
-                            </button>
-                            <button type="button" data-modal-toggle="addBrandModal"
-                                class="flex items-center justify-center text-white bg-red-500 hover:bg-red-600 dark:bg-red-500 dark:hover:bg-red-600 focus:ring-4 focus:ring-red-400 font-medium rounded-lg text-sm px-4 py-2  focus:outline-none dark:focus:ring-primary-800 mt-4">
-                                Cancelar
-                            </button>
+                        <div class="flex justify-end gap-2 mt-4">
+                            <x-button type="button" id="addBrandButton" typeButton="success" text="Agregar"
+                                icon="add-circle" />
+                            <x-button type="button" data-modal-toggle="addBrandModal" typeButton="danger"
+                                text="Cancelar" />
                         </div>
                     </form>
                 </div>
@@ -207,7 +197,7 @@
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
                                 <input type="text" name="name" id="name_edit"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Escribe el nombre de la marca">
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
@@ -215,21 +205,15 @@
                                 <label for="description"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
                                 <textarea id="description_edit" rows="4" name="description"
-                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Escribe la descripción de la marca"></textarea>
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
                         </div>
-                        <div class="flex justify-end gap-2">
-                            <button type="button" id="editBrandButton"
-                                class="flex items-center justify-center text-white bg-tertiary hover:bg-blue-600 dark:bg-secondary dark:hover:bg-blue-950 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2  focus:outline-none dark:focus:ring-primary-800 mt-4">
-                                <x-icon icon="edit" class="h-3.5 w-3.5 mr-2 text-current" />
-                                Editar
-                            </button>
-                            <button type="button"
-                                class="flex items-center justify-center text-white bg-red-500 hover:bg-red-600 dark:bg-red-500 dark:hover:bg-red-600 focus:ring-4 focus:ring-red-400 font-medium rounded-lg text-sm px-4 py-2  focus:outline-none dark:focus:ring-primary-800 mt-4 closeModalEdit">
-                                Cancelar
-                            </button>
+                        <div class="flex justify-end gap-2 mt-4">
+                            <x-button type="button" id="editBrandButton" typeButton="success" text="Editar"
+                                icon="edit" />
+                            <x-button type="button" class="closeModalEdit" typeButton="danger" text="Cancelar" />
                         </div>
                     </form>
                 </div>
