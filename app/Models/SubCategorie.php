@@ -14,6 +14,11 @@ class SubCategorie extends Model
         return $this->belongsTo(Categorie::class, "categorie_id");
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, "subcategorie_id");
+    }
+
     /**
      * The table associated with the model.
      *
