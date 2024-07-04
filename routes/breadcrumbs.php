@@ -68,3 +68,9 @@ Breadcrumbs::for('admin.products.show', function (BreadcrumbTrail $trail, $produ
     $trail->parent('admin.products.index');
     $trail->push('Detalles', route('admin.products.show', $product));
 });
+
+// Home > Products > Edit > {product}
+Breadcrumbs::for('admin.products.edit', function (BreadcrumbTrail $trail, $product) {
+    $trail->parent('admin.products.index');
+    $trail->push('Editar', route('admin.products.edit', $product));
+});
