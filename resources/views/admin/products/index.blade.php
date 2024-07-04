@@ -100,7 +100,7 @@
                                         id="formSearchCategorieCheck">
                                         @csrf
                                         <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                                            Categorías:
+                                            Filtros
                                         </h6>
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
@@ -109,7 +109,7 @@
                                                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    Sin subcategorías
+                                                    Con ofertas
                                                 </label>
                                             </li>
                                             <li class="flex items-center">
@@ -194,7 +194,7 @@
                                             </td>
                                             <td class="px-4 py-3">
                                                 <img src="{{ Storage::url($product->main_image) }}" alt=""
-                                                    class="w-16 h-16 rounded-lg">
+                                                    class="w-16 h-16 rounded-lg object-cover">
                                             </td>
                                             <td class="px-4 py-3">
                                                 <span>${{ $product->price }}</span>
@@ -213,8 +213,9 @@
                                             </td>
                                             <td class="px-4 py-3">
                                                 <div class="flex items-center space-x-2">
-                                                    <x-button type="a" icon="edit" typeButton="success" />
-                                                    <form action="{{ route('admin.categories.destroy', $product->id) }}"
+                                                    <x-button type="a" icon="edit" typeButton="success"
+                                                        href="{{ route('admin.products.edit', $product->id) }}" />
+                                                    <form action="{{ route('admin.products.destroy', $product->id) }}"
                                                         id="formDeleteCategorie" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -227,9 +228,16 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td class="px-4 py-3 text-center" colspan="8">
+                                            <span>No hay productos registrados</span>
+                                        </td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>
+                        {{ $products->links('vendor.pagination.pagination-custom') }}
                     </div>
                 </div>
             </div>

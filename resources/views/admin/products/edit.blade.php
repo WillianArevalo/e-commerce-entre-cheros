@@ -11,17 +11,19 @@
                 Regresar a productos
             </a>
             <h1 class="text-3xl dark:text-blue-400 font-secondary text-secondary font-bold">
-                Nuevo producto
+                Editar producto
             </h1>
         </div>
         <div class="bg-white dark:bg-gray-900 p-4">
             <div class="mx-auto w-full">
-                <form action="{{ route('admin.products.store') }}" class="flex flex-col gap-4" enctype="multipart/form-data"
-                    method="POST" id="formAddProduct">
+                <form action="{{ route('admin.products.update', $product->id) }}" class="flex flex-col gap-4"
+                    enctype="multipart/form-data" method="POST">
                     @csrf
+                    @method('PUT')
                     <div>
                         <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-700 dark:text-gray-300 text-lg uppercase">Información del producto</h2>
+                            <h2 class="text-gray-700 dark:text-gray-300 text-lg uppercase">Editar información del producto
+                            </h2>
                             <p class="text-gray-500 dark:text-gray-400 text-sm">
                                 Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                             </p>
@@ -40,7 +42,7 @@
                                             <input type="text" id="name" name="name"
                                                 class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
                                                 @error('name') is-invalid @enderror"
-                                                value="{{ old('name') }}"
+                                                value="{{ $product->name }}"
                                                 placeholder="Escribe el nombre del producto aquí" />
                                             @error('name')
                                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -53,7 +55,7 @@
                                             </label>
                                             <input type="text" id="short_description" name="short_description"
                                                 class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('short_description') is-invalid @enderror"
-                                                value="{{ old('short_description') }}"
+                                                value="{{ $product->short_description }}"
                                                 placeholder="Escribe la escripción corta del producto aquí" />
                                             @error('short_description')
                                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -66,7 +68,7 @@
                                             </label>
                                             <textarea id="long_description" name="long_description" rows="4"
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="Escribe la descripción larga del producto aquí">{{ old('long_description') }}</textarea>
+                                                placeholder="Escribe la descripción larga del producto aquí">{{ $product->long_description }}</textarea>
                                         </div>
                                         <div class="flex gap-4 flex-col">
                                             <div class="flex-1">
@@ -82,7 +84,7 @@
                                                     <input type="number" id="weight" name="weight" step="0.1"
                                                         min="1"
                                                         class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500      @error('weight') is-invalid @enderror"
-                                                        value="{{ old('weight') }}" placeholder="0.00">
+                                                        value="{{ $product->weight }}" placeholder="0.00">
                                                 </div>
                                                 @error('weight')
                                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -91,8 +93,10 @@
                                             <div class="flex-[4]">
                                                 <p
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                    Dimensiones (cm)
+                                                    Dimensione(cm):
                                                 </p>
+                                                <p class="dark:text-white text-black text-sm mb-2">
+                                                    {{ $product->dimensions }}</p>
                                                 <div class="flex gap-2 items-center">
                                                     <div>
                                                         <label for="long"
@@ -101,7 +105,7 @@
                                                         </label>
                                                         <input type="number" min="1" id="long" name="long"
                                                             class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('long') is-invalid @enderror"
-                                                            value="{{ old('long') }}" placeholder="10" />
+                                                            value="{{ $product->length }}" placeholder="10" />
                                                     </div>
                                                     <span
                                                         class="p-2 dark:bg-gray-700 bg-gray-100 dark:text-white text-gray-900 rounded-lg border-2 mt-7 dark:border-gray-600 border-gray-300">
@@ -114,7 +118,7 @@
                                                         </label>
                                                         <input type="number" min="1" id="width" name="width"
                                                             class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('width') is-invalid @enderror"
-                                                            value="{{ old('width') }}" placeholder="20" />
+                                                            value="{{ $product->width }}" placeholder="20" />
                                                     </div>
                                                     <span
                                                         class="p-2 dark:bg-gray-700 bg-gray-100 dark:text-white text-gray-900 rounded-lg border-2 mt-7 dark:border-gray-600 border-gray-300">
@@ -127,7 +131,7 @@
                                                         </label>
                                                         <input type="number" min="1" id="hight" name="height"
                                                             class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('height') is-invalid @enderror"
-                                                            value="{{ old('height') }}" placeholder="30" />
+                                                            value="{{ $product->height }}" placeholder="30" />
                                                     </div>
                                                 </div>
                                                 @error('dimensions')
@@ -150,7 +154,7 @@
                                                     Categoría del producto
                                                 </label>
                                                 <input type="hidden" name="categorie_id" id="categorie_id"
-                                                    value="{{ old('categorie_id') }}">
+                                                    value="{{ $product->categorie_id }}">
                                                 <div class="relative">
                                                     <div
                                                         class="selected border-2 border-gray-300 bg-gray-50 dark:border-gray-600 rounded-lg py-2.5 dark:bg-gray-700 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('categorie_id') is-invalid @enderror">
@@ -159,7 +163,7 @@
                                                                 @php
                                                                     $selectedCategorie = $categories->firstWhere(
                                                                         'id',
-                                                                        old('categorie_id'),
+                                                                        $product->categorie_id,
                                                                     );
                                                                 @endphp
                                                                 @if ($selectedCategorie)
@@ -196,7 +200,7 @@
                                                     Subcategoría del producto
                                                 </label>
                                                 <input type="hidden" name="subcategorie_id" id="subcategorie_id"
-                                                    value="{{ old('categorie_id') }}">
+                                                    value="{{ $product->subcategorie_id }}">
                                                 <div class="relative">
                                                     <div
                                                         class="selected border-2 border-gray-300 bg-gray-50 dark:border-gray-600 rounded-lg py-2.5 dark:bg-gray-700 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('subcategorie_id') is-invalid @enderror">
@@ -225,7 +229,7 @@
                                                 Marca del producto
                                             </label>
                                             <input type="hidden" name="brand_id" id="brand_id"
-                                                value="{{ old('brand_id') }}">
+                                                value="{{ $product->brand_id }}">
                                             <div class="relative">
                                                 <div
                                                     class="selected border-2 border-gray-300 bg-gray-50 dark:border-gray-600 rounded-lg py-2.5 dark:bg-gray-700 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('brand_id') is-invalid @enderror">
@@ -234,7 +238,7 @@
                                                             @php
                                                                 $selectedBrand = $brands->firstWhere(
                                                                     'id',
-                                                                    old('brand_id'),
+                                                                    $product->brand_id,
                                                                 );
                                                             @endphp
                                                             @if ($selectedBrand)
@@ -286,7 +290,7 @@
                                                     <input type="number" id="price" name="price" step="0.1"
                                                         min="0.1"
                                                         class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('price') is-invalid @enderror"
-                                                        value="{{ old('price') }}" placeholder="0.00">
+                                                        value="{{ $product->price }}" placeholder="0.00">
                                                 </div>
                                                 @error('price')
                                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -306,7 +310,7 @@
                                                     <input type="number" id="offer_price" name="offer_price"
                                                         step="0.1" min="0.1"
                                                         class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                        value="{{ old('offer_price') }}" placeholder="0.00">
+                                                        value="{{ $product->offer_price }}" placeholder="0.00">
                                                 </div>
                                             </div>
                                         </div>
@@ -323,7 +327,7 @@
                                                     </div>
                                                     <input name="offer_start_date" type="date"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                        value="{{ old('offer_start_date') }}"
+                                                        value="{{ $product->offer_start_date }}"
                                                         placeholder="Seleccionar fecha de inicio">
                                                 </div>
                                                 <span class="mx-4 text-gray-500">a</span>
@@ -335,7 +339,7 @@
                                                     </div>
                                                     <input name="offer_end_date" type="date"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                        value="{{ old('offer_end_date') }}"
+                                                        value="{{ $product->offer_end_date }}"
                                                         placeholder="Seleccionar fecha de fin">
                                                 </div>
                                             </div>
@@ -367,7 +371,14 @@
                                                             <div>
                                                                 <input id="{{ $tax->name }}" type="checkbox"
                                                                     value="{{ $tax->id }}" name="tax_id[]"
-                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                                    @php if($product->taxes->count()>0){
+                                                                    foreach($product->taxes as $taxProduct){
+                                                                        if($taxProduct->id ==$tax->id){
+                                                                            echo 'checked';
+                                                                        }
+                                                                    }
+                                                                } @endphp>
                                                                 <label for="{{ $tax->name }}"
                                                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                                                     {{ $tax->name }}
@@ -394,7 +405,7 @@
                                         </p>
                                         <label for="main_image"
                                             class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-800 @error('main_image') is-invalid  @enderror">
-                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <div class="flex-col items-center justify-center pt-5 pb-6 hidden">
                                                 <x-icon icon="cloud-upload"
                                                     class="w-12 h-12 text-gray-400 dark:text-gray-500" />
                                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
@@ -408,8 +419,8 @@
                                                 </p>
                                             </div>
                                             <input id="main_image" type="file" class="hidden" name="main_image" />
-                                            <img src="" alt="Preview Image" id="previewImage"
-                                                class="w-56 h-64 object-cover hidden m-10">
+                                            <img src="{{ Storage::url($product->main_image) }}" alt="Preview Image"
+                                                id="previewImage" class="w-56 h-64 object-cover  m-10">
                                         </label>
                                     </div>
                                     <div class="mt-4">
@@ -434,14 +445,24 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="flex gap-2 h-24 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg mt-4 flex-wrap justify-start"
+                                        <div class="flex gap-2 @php $product->images->count()>0 ? "h-auto": "h-24" @endphp  border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg mt-4 flex-wrap justify-start"
                                             id="previewImagesContainer">
+                                            @if ($product->images->count() > 0)
+                                                @foreach ($product->images as $image)
+                                                    <div class="inline-block m-2">
+                                                        <img src="{{ Storage::url($image->image) }}"
+                                                            alt="Galería de imágenes {{ $product->name }}"
+                                                            class="w-20 h-20 object-cover rounded-lg">
+                                                    </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div
                                     class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
-                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">Inventario
+                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                                        Inventario
                                     </h4>
                                     <div class="flex gap-4">
                                         <div class="flex-1">
@@ -451,7 +472,7 @@
                                             </label>
                                             <input type="text" id="sku" name="sku"
                                                 class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('sku') is-invalid @enderror"
-                                                value="{{ old('sku') }}" placeholder="XXXXXX" />
+                                                value="{{ $product->sku }}" placeholder="XXXXXX" />
                                             @error('sku')
                                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                             @enderror
@@ -463,7 +484,7 @@
                                             </label>
                                             <input type="number" id="stock" name="stock"
                                                 class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('stock') is-invalid @enderror"
-                                                value="{{ old('stock') }}" placeholder="#" />
+                                                value="{{ $product->stock }}" placeholder="#" />
                                             @error('stock')
                                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                             @enderror
@@ -475,7 +496,7 @@
                                             </label>
                                             <input type="text" id="barcode" name="barcode"
                                                 class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('barcode') is-invalid @enderror"
-                                                value="{{ old('barcode') }}"
+                                                value="{{ $product->barcode }}"
                                                 placeholder="Código de barras del producto" />
                                             @error('barcode')
                                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -527,18 +548,46 @@
                                         <x-button type="button" typeButton="primary" icon="arrow-right-02"
                                             id="addLabelSelected" class="mt-7" />
                                     </div>
-                                    <input type="hidden" name="labels_ids[]" id="labels_ids">
-                                    <div id="hiddenLabelsContainer"></div>
+                                    <input type="hidden" name="labels_ids[]" id="labels_ids"
+                                        value="@php if($product->labels->count()>0){
+                                        $labels = '';
+                                        foreach($product->labels as $label){
+                                            $labels .= $label->name.',';
+                                        }
+                                        echo rtrim($labels,',');
+                                    } @endphp">
+                                    <div id="hiddenLabelsContainer">
+                                        @if ($product->labels->count() > 0)
+                                            @foreach ($product->labels as $label)
+                                                <input type="hidden" name="labels[]" value="{{ $label->name }}">
+                                            @endforeach
+                                        @endif
+                                    </div>
                                     <div class="mt-4 w-full h-20 border-2 border-gray-300 border-dashed rounded-lg bg-gray-50  dark:bg-transparent dark:border-gray-600 flex flex-wrap items-start p-2 gap-1"
                                         id="previewLabelsContainer">
+                                        @if ($product->labels->count() > 0)
+                                            @foreach ($product->labels as $label)
+                                                <div
+                                                    class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 flex items-center justify-between gap-1">
+                                                    <span>{{ $label->name }}</span>
+                                                    <button type="button" class="text-white removeLabelEdit"
+                                                        data-label="{{ $label->name }}">
+                                                        <x-icon icon="cancel"
+                                                            class="w-3 h-3 dark:text-white text-blue-800" />
+                                                    </button>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center">
-                        <x-button type="submit" text="Agregar producto" icon="add-circle" typeButton="primary"
+                    <div class="flex items-center justify-center gap-2">
+                        <x-button type="submit" text="Editar producto" icon="edit" typeButton="success"
                             id="addButtonProduct" />
+                        <x-button type="a" href="{{ route('admin.products.index') }}" text="Cancelar"
+                            icon="cancel" typeButton="danger" iconAlign="left" />
                     </div>
                 </form>
                 <form action="{{ route('admin.subcategories.search') }}" id="formSearchSubcategorie" method="POST">

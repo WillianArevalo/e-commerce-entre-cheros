@@ -34,6 +34,11 @@ class Product extends Model
         return $this->belongsToMany(Label::class, "labels_products");
     }
 
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
     protected $fillable = [
         "name",
         "short_description",
