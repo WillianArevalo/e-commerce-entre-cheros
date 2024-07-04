@@ -13,17 +13,19 @@ class Button extends Component
     public $icon;
     public $typeButton;
     public $class;
+    public $iconAlign;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($type = 'primary', $text = '', $icon = '', $typeButton = '', $class = '')
+    public function __construct($type = 'primary', $text = '', $icon = '', $typeButton = '', $class = '', $iconAlign = 'left')
     {
         $this->type = $type;
         $this->text = $text;
         $this->icon = $icon;
         $this->typeButton = $typeButton;
         $this->class = $class;
+        $this->iconAlign = $iconAlign;
     }
 
 

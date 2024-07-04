@@ -1,4 +1,4 @@
-@props(['type', 'text', 'icon', 'typeButton', 'class'])
+@props(['type', 'text', 'icon', 'typeButton', 'class', 'icon-align' => 'left'])
 
 @switch($typeButton)
     @case('primary')
@@ -44,10 +44,20 @@
 
 
 @if ($type === 'a')
-    <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-        <x-icon :icon="$icon" class="w-5 h-5 text-current" />
-        {{ $text }}
-    </a>
+    @if ($iconAlign === 'left')
+        <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
+            <x-icon :icon="$icon" class="w-5 h-5 text-current" />
+            {{ $text }}
+        </a>
+    @elseif ($iconAlign === 'right')
+        <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
+            {{ $text }}
+            <x-icon :icon="$icon" class="w-5 h-5 text-current" />
+        </a>
+    @else
+        <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
+            {{ $text }}
+    @endif
 @else
     <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
         <x-icon :icon="$icon" class="w-5 h-5 text-current" />
