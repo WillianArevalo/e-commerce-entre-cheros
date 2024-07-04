@@ -20,7 +20,9 @@ class ImageHelper
 
     public static function saveImage(HttpUploadedFile $image, $directory = "images", $disk = "public")
     {
-        $path = $image->store($directory, $disk);
+        $originalName = $image->getClientOriginalName();
+        $uniqueName = $originalName . "-" . time() . "." . $image->getClientOriginalExtension();
+        $path = $image->storeAs($directory, $uniqueName, $disk);
         return $path;
     }
 
@@ -36,5 +38,22 @@ class ImageHelper
     public static function deleteImage($image, $disk = "public")
     {
         return Storage::disk($disk)->delete($image);
+    }
+
+    /**
+     * 
+     * Elimina un directorio
+     * 
+     * @param string $directory
+     * 
+     */
+
+    public static function deleteDirectory($directory)
+    {
+        $files = Storage::disk("public")->files($directory);
+        Storage::disk("public")->delete($files);
+
+        $directories = Storage::disk("public")->allDirectories($directory);
+        Storage::disk("public")->deleteDirectory($directory);
     }
 }
