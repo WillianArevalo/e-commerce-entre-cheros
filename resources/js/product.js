@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    let images = [];
-    let labels = [];
-    let inputLabelsIds = $("#labels_ids");
-
     /* Select custom de etiquetas */
     $(document).on("click", ".selectOptionsLabels .itemOption", function () {
         let item = $(this).text();
@@ -37,12 +33,19 @@ $(document).ready(function () {
 
     const $selectedSubCategory = $("#selectedSubCategorie");
     const $parentSubCategory = $selectedSubCategory.parent();
-    $selectedSubCategory.text("Selecciona una categoría");
-    $parentSubCategory.addClass("pointer-events-none");
-    $parentSubCategory.find("svg").addClass("hidden");
+
+    document.ready =
+        $("#categorie_od").val() != ""
+            ? getSubcategories($("#categorie_id").val())
+            : initalState();
 
     $("#categorie_id").on("Changed", function () {
-        const categorieId = $(this).val();
+        const id = $(this).val();
+        getSubcategories(id);
+    });
+
+    function getSubcategories(id) {
+        const categorieId = id;
         $("#categorieIdSearch").val(categorieId);
         const action = $("#formSearchSubcategorie").attr("action");
         const data = $("#formSearchSubcategorie").serialize();
@@ -71,7 +74,13 @@ $(document).ready(function () {
                 console.log(error);
             },
         });
-    });
+    }
+
+    function initalState() {
+        $selectedSubCategory.text("Selecciona una categoría");
+        $parentSubCategory.addClass("pointer-events-none");
+        $parentSubCategory.find("svg").addClass("hidden");
+    }
 
     if ($("#offer_price").val() != 0) {
         $("#dateOffer").removeClass("hidden");
@@ -100,8 +109,12 @@ $(document).ready(function () {
     });
 
     $("#gallery_image").on("change", imageUpload);
-
+    const previewImagesContainer = $("#previewImagesContainer");
+    let images = [];
     function imageUpload(e) {
+        previewImagesContainer.html("");
+        previewImagesContainer.removeClass("h-auto").addClass("h-20");
+        images = [];
         const files = e.target.files;
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -116,45 +129,41 @@ $(document).ready(function () {
     }
 
     function updateImagePreview() {
-        const previewImagesContainer = $("#previewImagesContainer");
-        previewImagesContainer.removeClass("h-24").addClass("h-auto");
+        previewImagesContainer.removeClass("h-20").addClass("h-auto");
         previewImagesContainer.html("");
         images.forEach((imageUrl, index) => {
             const previewDiv = $("<div></div>");
-            previewDiv.addClass("relative inline-block m-2");
+            previewDiv.addClass("inline-block m-2");
             const imageElement = $("<img />");
             imageElement.addClass("w-20 h-20 object-cover rounded-lg");
             imageElement.attr("src", imageUrl);
-
-            const removeBtn = $("<button></button>");
-            removeBtn.html(
-                '<svg class="w-3 h-3 text-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none"><path d="M19.0005 4.99988L5.00045 18.9999M5.00045 4.99988L19.0005 18.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
-            );
-            removeBtn.attr("type", "button");
-            removeBtn.addClass(
-                "absolute top-0 right-0 text-white rounded-full p-1 m-1 hover:bg-red-800 transition-colors bg-red-500"
-            );
-            removeBtn.on("click", () => {
-                removeImage(index);
-            });
-
             previewDiv.append(imageElement);
-            previewDiv.append(removeBtn);
             previewImagesContainer.append(previewDiv);
         });
     }
 
-    function removeImage(index) {
-        images.splice(index, 1);
-        updateImagePreview();
+    $("#reloadImages").on("click", function () {
+        $("#gallery_image").val("");
+        previewImagesContainer.html("");
+        previewImagesContainer.removeClass("h-auto").addClass("h-20");
+    });
 
-        if (images.length == 0) {
-            const previewImagesContainer = $("#previewImagesContainer");
-            previewImagesContainer.removeClass("h-auto").addClass("h-24");
+    $("#formAddProduct").on("submit", function (e) {
+        e.preventDefault();
+        if ($("#gallery_image").val() != "") {
+            this.submit();
+        } else {
+            alert("No hay imágenes");
         }
-    }
+    });
 
     $("#addLabelSelected").on("click", addLabel);
+    let labels = [];
+    let inputLabelsIds = $("#labels_ids");
+
+    if (inputLabelsIds.val() != "") {
+        labels = inputLabelsIds.val().split(",");
+    }
 
     function addLabel() {
         let labelValue = $("#label_id").val();
@@ -190,6 +199,7 @@ $(document).ready(function () {
         previewLabelsContainer.html("");
 
         labels.forEach((labelValue, index) => {
+            console.log(index, labelValue);
             const previewDiv = $("<div></div>");
             previewDiv.addClass(
                 "bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 flex items-center justify-between gap-1"
@@ -213,8 +223,15 @@ $(document).ready(function () {
         });
     }
 
+    $(".removeLabelEdit").on("click", function () {
+        let labelValue = $(this).data("value");
+        let index = labels.indexOf(labelValue);
+        removeLabel(index);
+    });
+
     function removeLabel(index) {
         labels.splice(index, 1);
+        inputLabelsIds.val(labels);
         updateHiddenLabels();
         updatePreviewLabels();
     }

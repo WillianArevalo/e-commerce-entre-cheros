@@ -6,6 +6,7 @@ import "./customSelect";
 import "./categorie";
 import "./brand";
 import "./product";
+import "./modal-image";
 
 $(document).ready(function () {
     const $btnToggleTheme = $("#toggleTheme");
