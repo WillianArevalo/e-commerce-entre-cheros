@@ -29,64 +29,31 @@
                         <div class="flex gap-4 mt-4 flex-col lg:flex-row">
                             <div class="flex-1 flex flex-col gap-4">
                                 <div
-                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
+                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-200 dark:border-transparent rounded-lg h-max">
                                     <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">General</h4>
                                     <div class="flex gap-4 flex-col">
                                         <div>
-                                            <label for="name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                Nombre
-                                            </label>
-                                            <input type="text" id="name" name="name"
-                                                class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 
-                                                @error('name') is-invalid @enderror"
-                                                value="{{ old('name') }}"
-                                                placeholder="Escribe el nombre del producto aquí" />
-                                            @error('name')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-input label="Nombre" type="text" id="name" name="name"
+                                                placeholder="Escribe el nombre del producto aquí" required="required"
+                                                value="{{ old('name') }}" />
                                         </div>
                                         <div>
-                                            <label for="short_description"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                Descripción corta
-                                            </label>
-                                            <input type="text" id="short_description" name="short_description"
-                                                class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('short_description') is-invalid @enderror"
-                                                value="{{ old('short_description') }}"
-                                                placeholder="Escribe la escripción corta del producto aquí" />
-                                            @error('short_description')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-input label="Descripción corta" type="text" id="short_description"
+                                                name="short_description" value="{{ old('short_description') }}"
+                                                required="required"
+                                                placeholder="Escribe la descripción corta del producto aquí" />
                                         </div>
                                         <div>
-                                            <label for="long_description"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Descripción larga
-                                            </label>
-                                            <textarea id="long_description" name="long_description" rows="4"
-                                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="Escribe la descripción larga del producto aquí">{{ old('long_description') }}</textarea>
+                                            <x-input label="Descripción larga" type="textarea" name="long_description"
+                                                id="long_description"
+                                                placeholder="Escribe la descripción larga del producto aquí"
+                                                value="{{ old('long_description') }}" />
                                         </div>
                                         <div class="flex gap-4 flex-col">
                                             <div class="flex-1">
-                                                <label for="weight"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                    Peso
-                                                </label>
-                                                <div class="relative">
-                                                    <div
-                                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                        <span class="text-gray-500 dark:text-gray-400 font-medium">KG</span>
-                                                    </div>
-                                                    <input type="number" id="weight" name="weight" step="0.1"
-                                                        min="1"
-                                                        class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500      @error('weight') is-invalid @enderror"
-                                                        value="{{ old('weight') }}" placeholder="0.00">
-                                                </div>
-                                                @error('weight')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
+                                                <x-input label="Peso(KG)" required="required" name="weight" id="weight"
+                                                    type="number" step="0.1" min="1" placeholder="0.00"
+                                                    value="{{ old('weight') }}" icon="weight-scale" />
                                             </div>
                                             <div class="flex-[4]">
                                                 <p
@@ -95,50 +62,41 @@
                                                 </p>
                                                 <div class="flex gap-2 items-center">
                                                     <div>
-                                                        <label for="long"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                            Largo
-                                                        </label>
-                                                        <input type="number" min="1" id="long" name="long"
-                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('long') is-invalid @enderror"
-                                                            value="{{ old('long') }}" placeholder="10" />
+                                                        <x-input type="number" label="Largo" id="long" name="long"
+                                                            value="{{ old('long') }}" placeholder="10" min="1"
+                                                            required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
                                                         class="p-2 dark:bg-gray-700 bg-gray-100 dark:text-white text-gray-900 rounded-lg border-2 mt-7 dark:border-gray-600 border-gray-300">
                                                         <x-icon icon="cancel" class="w-4 h-4 text-current" />
                                                     </span>
                                                     <div>
-                                                        <label for="width"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                            Ancho
-                                                        </label>
-                                                        <input type="number" min="1" id="width" name="width"
-                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('width') is-invalid @enderror"
-                                                            value="{{ old('width') }}" placeholder="20" />
+                                                        <x-input type="number" label="Ancho" id="width" name="width"
+                                                            value="{{ old('width') }}" placeholder="20" min="1"
+                                                            required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
                                                         class="p-2 dark:bg-gray-700 bg-gray-100 dark:text-white text-gray-900 rounded-lg border-2 mt-7 dark:border-gray-600 border-gray-300">
                                                         <x-icon icon="cancel" class="w-4 h-4 text-current" />
                                                     </span>
                                                     <div>
-                                                        <label for="hight"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                            Alto
-                                                        </label>
-                                                        <input type="number" min="1" id="hight" name="height"
-                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('height') is-invalid @enderror"
-                                                            value="{{ old('height') }}" placeholder="30" />
+                                                        <x-input type="number" label="Alto" id="height" name="height"
+                                                            value="{{ old('height') }}" placeholder="10" min="1"
+                                                            required="required" error="false"
+                                                            error="{{ false }}" />
                                                     </div>
                                                 </div>
-                                                @error('dimensions')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
+                                                @if ($errors->has('long') || $errors->has('width') || $errors->has('height'))
+                                                    <span class="text-red-500 text-sm">
+                                                        Las dimensions son obligatorias
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
+                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-200 dark:border-transparent rounded-lg h-max">
                                     <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
                                         Categoría y marca
                                     </h4>
@@ -266,48 +224,21 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
+                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-200 dark:border-transparent rounded-lg h-max">
                                     <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
                                         Información de venta
                                     </h4>
                                     <div class="flex flex-col">
                                         <div class="flex gap-4">
                                             <div class="flex-1">
-                                                <label for="price"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                    Precio
-                                                </label>
-                                                <div class="relative">
-                                                    <div
-                                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                        <x-icon icon="dollar"
-                                                            class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                                    </div>
-                                                    <input type="number" id="price" name="price" step="0.1"
-                                                        min="0.1"
-                                                        class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('price') is-invalid @enderror"
-                                                        value="{{ old('price') }}" placeholder="0.00">
-                                                </div>
-                                                @error('price')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
+                                                <x-input label="Precio" icon="dollar" type="number" id="price"
+                                                    name="price" step="0.1" min="0.1" placeholder="0.00"
+                                                    value="{{ old('price') }}" />
                                             </div>
                                             <div class="flex-1">
-                                                <label for="offer_price"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Precio de oferta
-                                                </label>
-                                                <div class="relative">
-                                                    <div
-                                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                        <x-icon icon="dollar"
-                                                            class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                                    </div>
-                                                    <input type="number" id="offer_price" name="offer_price"
-                                                        step="0.1" min="0.1"
-                                                        class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                        value="{{ old('offer_price') }}" placeholder="0.00">
-                                                </div>
+                                                <x-input label="Precio de oferta" icon="dollar" type="number"
+                                                    id="offer_price" name="offer_price" step="0.1" min="0.1"
+                                                    placeholder="0.00" value="{{ old('offer_price') }}" />
                                             </div>
                                         </div>
                                         <div class="hidden mt-4" id="dateOffer">
@@ -385,7 +316,7 @@
                             </div>
                             <div class="flex-1 flex flex-col gap-4">
                                 <div
-                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
+                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-200 dark:border-transparent rounded-lg h-max">
                                     <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">Imágenes</h4>
                                     <div>
                                         <p
@@ -440,51 +371,27 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
+                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-200 dark:border-transparent rounded-lg h-max">
                                     <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">Inventario
                                     </h4>
                                     <div class="flex gap-4">
                                         <div class="flex-1">
-                                            <label for="sku"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                SKU
-                                            </label>
-                                            <input type="text" id="sku" name="sku"
-                                                class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('sku') is-invalid @enderror"
-                                                value="{{ old('sku') }}" placeholder="XXXXXX" />
-                                            @error('sku')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-input label="SKU" type="text" id="sku" name="sku"
+                                                value="{{ old('sku') }}" placeholder="XXXXXX" required="required" />
                                         </div>
                                         <div class="flex-1">
-                                            <label for="stock"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                Cantidad
-                                            </label>
-                                            <input type="number" id="stock" name="stock"
-                                                class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('stock') is-invalid @enderror"
-                                                value="{{ old('stock') }}" placeholder="#" />
-                                            @error('stock')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-input label="Cantidad" type="number" id="stock" name="stock"
+                                                value="{{ old('stock') }}" placeholder="#" required="required" />
                                         </div>
                                         <div class="flex-[2]">
-                                            <label for="barcode"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                Código de barras
-                                            </label>
-                                            <input type="text" id="barcode" name="barcode"
-                                                class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('barcode') is-invalid @enderror"
-                                                value="{{ old('barcode') }}"
-                                                placeholder="Código de barras del producto" />
-                                            @error('barcode')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-input label="Código de barras" type="text" id="barcode"
+                                                name="barcode" value="{{ old('barcode') }}"
+                                                placeholder="Código de barras del producto" required="required" />
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-300 dark:border-transparent rounded-lg h-max">
+                                    class="p-4 dark:bg-gray-800 bg-transparent border border-gray-200 dark:border-transparent rounded-lg h-max">
                                     <div class="flex justify-between items-center">
                                         <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
                                             Etiquetas
@@ -577,26 +484,15 @@
                         @csrf
                         <div class="flex flex-col gap-4">
                             <div>
-                                <label for="name_tax"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                <input type="text" name="name" id="name_tax"
-                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    data-message="#message-nameTax" placeholder="Escribe el nombre del impuesto">
+                                <x-input label="Nombre" type="text" name="name" id="name_tax"
+                                    placeholder="Escribe el nombre del impuesto" error="{{ false }}"
+                                    data-message="#message-nameTax" required="required" />
                                 <span class="text-red-500 text-sm hidden invalid-feedback" id="message-nameTax"></span>
                             </div>
                             <div class="flex flex-col gap-1">
-                                <label for="description"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Tasa de impuesto
-                                </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                        <x-icon icon="percent" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                    </div>
-                                    <input type="number" id="rate" name="rate" step="0.1" min="0.1"
-                                        class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        data-message="#message-rate" placeholder="0.00">
-                                </div>
+                                <x-input label="Tasa de impuesto" type="number" name="rate" id="rate"
+                                    placeholder="0" error="{{ false }}" step="0.1" min="0.1"
+                                    icon="percent" data-message="#message-rate" required="required" />
                                 <span class="text-red-500 text-sm hidden invalid-feedback" id="message-rate"></span>
                             </div>
                         </div>
@@ -639,11 +535,8 @@
                         @csrf
                         <div class="flex flex-col gap-4">
                             <div>
-                                <label for="name_label"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                <input type="text" name="name" id="name_label"
-                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    data-message="#message-nameLabel" placeholder="Escribe el nombre del impuesto">
+                                <x-input label="Nombre" id="name_label" name="name" data-message="#message-nameLabel"
+                                    placeholder="Escribe el nombre del impuesto" required="required" type="text" />
                                 <span class="text-red-500 text-sm hidden invalid-feedback" id="message-nameLabel"></span>
                             </div>
                         </div>

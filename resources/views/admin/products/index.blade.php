@@ -224,6 +224,19 @@
                                                     </form>
                                                     <x-button type="a" icon="view" typeButton="secondary"
                                                         href="{{ route('admin.products.show', $product->id) }}" />
+                                                    <form action="{{ route('admin.flash-offers.add-flash-offer') }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id"
+                                                            value="{{ $product->id }}">
+                                                        <x-button type="submit" icon="flash" typeButton="tertiary"
+                                                            data-tooltip-target="tooltip-default-{{ $product->id }}" />
+                                                        <div id="tooltip-default-{{ $product->id }}" role="tooltip"
+                                                            class="absolute z-10 invisible inline-block px-3 py-2 font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-xs">
+                                                            Oferta flash
+                                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
