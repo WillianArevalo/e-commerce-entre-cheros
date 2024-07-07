@@ -55,3 +55,8 @@ div[modal-backdrop] {
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.9);
 }
+
+.imagePoup:hover > button,
+.inputPopup:hover > button {
+    display: block;
+}
