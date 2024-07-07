@@ -39,6 +39,11 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function flash_offers()
+    {
+        return $this->hasOne(FlashOffer::class);
+    }
+
     protected $fillable = [
         "name",
         "short_description",
