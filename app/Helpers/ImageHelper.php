@@ -21,7 +21,7 @@ class ImageHelper
     public static function saveImage(HttpUploadedFile $image, $directory = "images", $disk = "public")
     {
         $originalName = $image->getClientOriginalName();
-        $uniqueName = $originalName . "-" . time() . "." . $image->getClientOriginalExtension();
+        $uniqueName = time() . "-" . $originalName;
         $path = $image->storeAs($directory, $uniqueName, $disk);
         return $path;
     }
