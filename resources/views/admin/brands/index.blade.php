@@ -139,7 +139,7 @@
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
                                 <input type="text" name="name" id="name"
-                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Escribe el nombre de la marca">
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
@@ -147,7 +147,7 @@
                                 <label for="description"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
                                 <textarea id="description" rows="4" name="description"
-                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Escribe la descripción de la marca"></textarea>
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
@@ -197,7 +197,7 @@
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
                                 <input type="text" name="name" id="name_edit"
-                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Escribe el nombre de la marca">
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
@@ -205,7 +205,7 @@
                                 <label for="description"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
                                 <textarea id="description_edit" rows="4" name="description"
-                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Escribe la descripción de la marca"></textarea>
                                 <span class="text-red-500 text-sm hidden"></span>
                             </div>
