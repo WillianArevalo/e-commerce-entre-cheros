@@ -7,6 +7,9 @@ import "./categorie";
 import "./brand";
 import "./product";
 import "./modal-image";
+import "./flash-offers";
+import "./popup";
+import "./user";
 
 $(document).ready(function () {
     const $btnToggleTheme = $("#toggleTheme");
