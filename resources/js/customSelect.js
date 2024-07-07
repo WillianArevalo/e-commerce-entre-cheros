@@ -14,14 +14,14 @@ $(document).ready(function () {
 
     $(items).each(function () {
         $(this).on("click", function () {
-            let item = $(this).text();
+            let item = $(this).html();
             let value = $(this).data("value");
             let input = $(this).data("input");
             $(this)
                 .closest(".selectOptions")
                 .prev(".selected")
                 .find(".itemSelected")
-                .text(item);
+                .html(item);
             $(input).val(value).trigger("Changed");
             $(this).parent().addClass("hidden");
         });

@@ -148,20 +148,11 @@ $(document).ready(function () {
         previewImagesContainer.removeClass("h-auto").addClass("h-20");
     });
 
-    $("#formAddProduct").on("submit", function (e) {
-        e.preventDefault();
-        if ($("#gallery_image").val() != "") {
-            this.submit();
-        } else {
-            alert("No hay imágenes");
-        }
-    });
-
     $("#addLabelSelected").on("click", addLabel);
     let labels = [];
     let inputLabelsIds = $("#labels_ids");
 
-    if (inputLabelsIds.val() != "") {
+    if (inputLabelsIds.val() && inputLabelsIds.val() != "") {
         labels = inputLabelsIds.val().split(",");
     }
 
