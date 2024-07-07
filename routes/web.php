@@ -6,12 +6,15 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\FlashOfferController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PopupController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategorieController;
 use App\Http\Controllers\TaxController;
+use App\Http\Controllers\UserController;
 use App\Models\SubCategorie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +46,11 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::resource("/products", ProductController::class);
     Route::resource("/taxes", TaxController::class);
     Route::resource("/labels", LabelController::class);
+    Route::resource("/flash-offers", FlashOfferController::class);
+    Route::post("/flash-offers/add-flash-offer", [FlashOfferController::class, "addFlashOffer"])->name("flash-offers.add-flash-offer");
+    Route::post("/flash-offers/changeStatus", [FlashOfferController::class, "changeStatus"])->name("flash-offers.changeStatus");
+    Route::resource("/popups", PopupController::class);
+    Route::resource("/users", UserController::class);
 });
 
 Route::post("/logout", [AuthController::class, "logout"])->name("logout");
