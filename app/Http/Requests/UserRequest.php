@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
         ];
 
         if ($isUpdate) {
-            $rules["passowrd"] = "nullable|string";
+            $rules["password"] = "nullable|string";
             $rules["profile"] = "nullable|image";
         } else {
             $rules["password"] = "required|string";
