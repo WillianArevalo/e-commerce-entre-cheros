@@ -121,3 +121,22 @@ Breadcrumbs::for('admin.users.edit', function (BreadcrumbTrail $trail, $user) {
     $trail->parent('admin.users.index');
     $trail->push('Editar', route('admin.users.edit', $user));
 });
+
+//Admin > Customers
+Breadcrumbs::for('admin.customers.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Clientes', route('admin.customers.index'));
+});
+
+//Admin > Customers > Create
+Breadcrumbs::for('admin.customers.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.customers.index');
+    $trail->push('Crear nuevo', route('admin.customers.create'));
+});
+
+
+//Admin > Customers > Edit > {customer}
+Breadcrumbs::for('admin.customers.edit', function (BreadcrumbTrail $trail, $customer) {
+    $trail->parent('admin.customers.index');
+    $trail->push('Editar', route('admin.customers.edit', $customer));
+});
