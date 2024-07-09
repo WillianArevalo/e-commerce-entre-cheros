@@ -60,3 +60,14 @@ div[modal-backdrop] {
 .inputPopup:hover > button {
     display: block;
 }
+
+.desactive {
+    background-color: #6b7280 !important;
+    border-color: #6b7280 !important;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.desactive > svg {
+    display: none;
+}

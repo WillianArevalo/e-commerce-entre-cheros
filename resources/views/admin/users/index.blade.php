@@ -108,7 +108,7 @@
                                         <td class="px-4 py-3">
                                             <img src="{{ Storage::url($user->profile_photo_path) }}"
                                                 alt="Foto de perfil del usuario {{ $user->username }}"
-                                                class="w-12 h-12 rounded-full object-cover">
+                                                class="w-10 h-10 rounded-full object-cover">
                                         </td>
                                         <td class="px-4 py-3">
                                             <span>{{ $user->name }}</span>
