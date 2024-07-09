@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FlashOfferController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LabelController;
@@ -51,6 +52,7 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::post("/flash-offers/changeStatus", [FlashOfferController::class, "changeStatus"])->name("flash-offers.changeStatus");
     Route::resource("/popups", PopupController::class);
     Route::resource("/users", UserController::class);
+    Route::resource("/customers", CustomerController::class);
 });
 
 Route::post("/logout", [AuthController::class, "logout"])->name("logout");
