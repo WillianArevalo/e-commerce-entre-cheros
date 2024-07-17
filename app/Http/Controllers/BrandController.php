@@ -31,6 +31,7 @@ class BrandController extends Controller
     {
         $rules = [
             "name" => "required|string",
+            "description" => "nullable|string"
         ];
         $request->validate($rules);
         $brand = Brand::create($request->all());
@@ -57,7 +58,7 @@ class BrandController extends Controller
         if (!$brand) {
             return back()->with("error", "No se pudo encontrar la marca");
         }
-        return response()->json($brand);
+        return response()->json(["brand" => $brand]);
     }
 
     /**
@@ -88,5 +89,20 @@ class BrandController extends Controller
         }
         $brand->delete();
         return back()->with("success", "Marca eliminada correctamente");
+    }
+
+
+    public function search(Request $request)
+    {
+        $query = Brand::query();
+        if ($request->input("inputSearch")) {
+            $name = $request->input("inputSearch");
+            $query->where("name", "like", "%$name%");
+        }
+
+        $brands = $query->get();
+        if ($request->ajax()) {
+            return view("layouts.__partials.ajax.row-brand", compact("brands"))->render();
+        }
     }
 }
