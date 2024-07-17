@@ -7,12 +7,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FlashOfferController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PoliciesController;
 use App\Http\Controllers\PopupController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingsGeneralController;
 use App\Http\Controllers\SubCategorieController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UserController;
@@ -44,6 +47,7 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::post("/categories/search", [CategorieController::class, "search"])->name("categories.search");
     Route::post("/subcategories/search", [SubCategorieController::class, "search"])->name("subcategories.search");
     Route::resource("/brands", BrandController::class);
+    Route::post("/brands/search", [BrandController::class, "search"])->name("brands.search");
     Route::resource("/products", ProductController::class);
     Route::resource("/taxes", TaxController::class);
     Route::resource("/labels", LabelController::class);
@@ -53,6 +57,9 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::resource("/popups", PopupController::class);
     Route::resource("/users", UserController::class);
     Route::resource("/customers", CustomerController::class);
+    Route::get("/settings", [SettingsGeneralController::class, "index"])->name("settings");
+    Route::resource("/policies", PoliciesController::class);
+    Route::resource("/faq", FAQController::class);
 });
 
 Route::post("/logout", [AuthController::class, "logout"])->name("logout");

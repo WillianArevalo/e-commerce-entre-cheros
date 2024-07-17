@@ -19,7 +19,6 @@ Breadcrumbs::for('admin.categories.index', function (BreadcrumbTrail $trail) {
     $trail->push('Categorías', route('admin.categories.index'));
 });
 
-
 // Admin > Categories > Create
 Breadcrumbs::for('admin.categories.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.categories.index');
@@ -32,13 +31,11 @@ Breadcrumbs::for('admin.categories.edit', function (BreadcrumbTrail $trail, $cat
     $trail->push('Editar', route('admin.categories.edit', $category));
 });
 
-
 // Admin > SubCategories > Edit > {subcategory}
 Breadcrumbs::for('admin.subcategories.edit', function (BreadcrumbTrail $trail, $subcategory) {
     $trail->parent('admin.categories.index');
     $trail->push('Editar', route('admin.subcategories.edit', $subcategory));
 });
-
 
 // Admin > Brands
 Breadcrumbs::for('admin.brands.index', function (BreadcrumbTrail $trail) {
@@ -76,7 +73,6 @@ Breadcrumbs::for('admin.flash-offers.index', function (BreadcrumbTrail $trail) {
     $trail->push('Ofertas Flash', route('admin.flash-offers.index'));
 });
 
-
 //Admin > Flash Offers > Create
 Breadcrumbs::for('admin.flash-offers.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.flash-offers.index');
@@ -89,20 +85,17 @@ Breadcrumbs::for('admin.flash-offers.edit', function (BreadcrumbTrail $trail, $f
     $trail->push('Editar', route('admin.flash-offers.edit', $flashOffer));
 });
 
-
 //Admin > Popups
 Breadcrumbs::for('admin.popups.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
     $trail->push('Popups', route('admin.popups.index'));
 });
 
-
 //Admin > Popups > Create
 Breadcrumbs::for('admin.popups.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.popups.index');
     $trail->push('Crear nuevo', route('admin.popups.create'));
 });
-
 
 //Admin > Users
 Breadcrumbs::for('admin.users.index', function (BreadcrumbTrail $trail) {
@@ -134,9 +127,26 @@ Breadcrumbs::for('admin.customers.create', function (BreadcrumbTrail $trail) {
     $trail->push('Crear nuevo', route('admin.customers.create'));
 });
 
-
 //Admin > Customers > Edit > {customer}
 Breadcrumbs::for('admin.customers.edit', function (BreadcrumbTrail $trail, $customer) {
     $trail->parent('admin.customers.index');
     $trail->push('Editar', route('admin.customers.edit', $customer));
+});
+
+//Admin > Settings
+Breadcrumbs::for('admin.settings', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Configuración', route('admin.settings'));
+});
+
+//Admin > Policies
+Breadcrumbs::for('admin.policies.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Políticas', route('admin.policies.index'));
+});
+
+//Admin > FAQ 
+Breadcrumbs::for('admin.faq.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Preguntas frecuentes', route('admin.faq.index'));
 });
