@@ -4,7 +4,7 @@
     @case('primary')
         @php
             $classes =
-                'text-white font-medium bg-blue-600 p-2.5 rounded flex items-center gap-2 hover:bg-blue-800 transition-colors text-sm ' .
+                'text-blue-800 font-medium bg-blue-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-blue-200 dark:text-blue-300 dark:bg-blue-900 dark:hover:bg-blue-950 dark:bg-opacity-30 focus:ring-blue-300 focus:ring-4 dark:focus:ring-blue-800 ' .
                 $class;
         @endphp
     @break
@@ -12,7 +12,7 @@
     @case('secondary')
         @php
             $classes =
-                'text-gray-900 font-medium bg-gray-200 p-2.5 rounded flex items-center gap-2 hover:bg-gray-300 transition-colors text-sm ' .
+                'text-teal-800 font-medium bg-teal-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-teal-200 dark:text-teal-300 dark:bg-teal-900 dark:hover:bg-teal-950 dark:bg-opacity-30 focus:ring-teal-300 focus:ring-4 dark:focus:ring-teal-800 ' .
                 $class;
         @endphp
     @break
@@ -20,15 +20,15 @@
     @case('success')
         @php
             $classes =
-                'text-white font-medium bg-green-600 p-2.5 rounded flex items-center gap-2 hover:bg-green-800
-        transition-colors text-sm ' . $class;
+                'text-emerald-800 font-medium bg-emerald-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-emerald-200 dark:text-emerald-300 dark:bg-emerald-900 dark:bg-opacity-30 dark:hover:bg-emerald-950  focus:ring-emerald-300 focus:ring-4 dark:focus:ring-emerald-800 ' .
+                $class;
         @endphp
     @break
 
     @case('danger')
         @php
             $classes =
-                'text-white font-medium bg-red-600 p-2.5 rounded flex items-center gap-2 hover:bg-red-800 transition-colors text-sm ' .
+                'text-red-800 font-medium bg-red-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-red-200 dark:text-red-300 dark:bg-red-900 dark:hover:bg-red-950 dark:bg-opacity-30 focus:ring-red-300 focus:ring-4 dark:focus:ring-red-800 ' .
                 $class;
         @endphp
     @break
@@ -36,7 +36,7 @@
     @case('tertiary')
         @php
             $classes =
-                'text-white font-medium bg-purple-600 p-2.5 rounded flex items-center gap-2 hover:bg-purple-800 transition-colors text-sm ' .
+                'text-purple-800 font-medium bg-purple-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-purple-200 dark:text-purple-300 dark:bg-purple-900 dark:hover:bg-purple-950 dark:bg-opacity-30 focus:ring-purple-300 focus:ring-4 dark:focus:ring-purple-800 ' .
                 $class;
         @endphp
     @break
@@ -44,7 +44,7 @@
     @default
         @php
             $classes =
-                'text-white font-medium bg-blue-600 p-2.5 rounded flex items-center gap-2 hover:bg-blue-800 transition-colors text-sm' .
+                'text-blue-800 font-medium bg-blue-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-blue-200 dark:text-blue-300 dark:bg-blue-900 dark:hover:bg-blue-950 dark:bg-opacity-30 focus:ring-blue-300 focus:ring-4 dark:focus:ring-blue-800 ' .
                 $class;
         @endphp
     @break
