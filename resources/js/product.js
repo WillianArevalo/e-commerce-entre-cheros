@@ -109,11 +109,11 @@ $(document).ready(function () {
     });
 
     $("#gallery_image").on("change", imageUpload);
-    const previewImagesContainer = $("#previewImagesContainer");
+    const $previewImagesContainer = $("#previewImagesContainer");
     let images = [];
     function imageUpload(e) {
-        previewImagesContainer.html("");
-        previewImagesContainer.removeClass("h-auto").addClass("h-20");
+        $previewImagesContainer.html("");
+        $previewImagesContainer.removeClass("h-auto").addClass("h-20");
         images = [];
         const files = e.target.files;
         for (let i = 0; i < files.length; i++) {
@@ -129,8 +129,8 @@ $(document).ready(function () {
     }
 
     function updateImagePreview() {
-        previewImagesContainer.removeClass("h-20").addClass("h-auto");
-        previewImagesContainer.html("");
+        $previewImagesContainer.removeClass("h-20").addClass("h-auto");
+        $previewImagesContainer.html("");
         images.forEach((imageUrl, index) => {
             const previewDiv = $("<div></div>");
             previewDiv.addClass("inline-block m-2");
@@ -138,14 +138,16 @@ $(document).ready(function () {
             imageElement.addClass("w-20 h-20 object-cover rounded-lg");
             imageElement.attr("src", imageUrl);
             previewDiv.append(imageElement);
-            previewImagesContainer.append(previewDiv);
+            $previewImagesContainer.append(previewDiv);
         });
     }
 
     $("#reloadImages").on("click", function () {
         $("#gallery_image").val("");
-        previewImagesContainer.html("");
-        previewImagesContainer.removeClass("h-auto").addClass("h-20");
+        $previewImagesContainer.html(
+            '<p class="m-auto text-sm dark:text-gray-400">Sin imágenes seleccionadas</p>'
+        );
+        $previewImagesContainer.removeClass("h-auto").addClass("h-20");
     });
 
     $("#addLabelSelected").on("click", addLabel);
@@ -186,46 +188,52 @@ $(document).ready(function () {
     }
 
     function updatePreviewLabels() {
-        const previewLabelsContainer = $("#previewLabelsContainer");
-        previewLabelsContainer.html("");
-
+        const $previewLabelsContainer = $("#previewLabelsContainer");
+        $previewLabelsContainer.html("");
         labels.forEach((labelValue, index) => {
             console.log(index, labelValue);
             const previewDiv = $("<div></div>");
             previewDiv.addClass(
-                "bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 flex items-center justify-between gap-1"
+                "bg-blue-100 text-blue-800 text-sm font-medium me-2 px-3 py-2 rounded dark:bg-blue-900 dark:text-blue-300 flex items-center justify-between gap-2"
             );
             const labelElement = $("<span></span>");
             labelElement.text(labelValue);
 
             const removeBtn = $("<button></button>");
             removeBtn.html(
-                '<svg class="w-3 h-3 dark:text-white text-blue-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none"><path d="M19.0005 4.99988L5.00045 18.9999M5.00045 4.99988L19.0005 18.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
+                '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-current" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none"><path d="M15 9L9 14.9996M15 15L9 9.00039" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" stroke-width="1.5" /></svg>'
             );
             removeBtn.attr("type", "button");
-            removeBtn.addClass("text-white");
+            removeBtn.addClass(
+                "text-current dark:hover:text-blue-500 hover:text-blue-500"
+            );
             removeBtn.on("click", () => {
                 removeLabel(index);
             });
 
             previewDiv.append(labelElement);
             previewDiv.append(removeBtn);
-            previewLabelsContainer.append(previewDiv);
+            $previewLabelsContainer.append(previewDiv);
         });
     }
-
-    $(".removeLabelEdit").on("click", function () {
-        let labelValue = $(this).data("value");
-        let index = labels.indexOf(labelValue);
-        removeLabel(index);
-    });
 
     function removeLabel(index) {
         labels.splice(index, 1);
         inputLabelsIds.val(labels);
         updateHiddenLabels();
         updatePreviewLabels();
+        labelTextHide();
     }
+
+    function labelTextHide() {
+        if (labels.length === 0) {
+            $("#previewLabelsContainer").html(
+                '<p class="m-auto text-sm dark:text-gray-400">Sin etiquetas seleccionadas</p>'
+            );
+        }
+    }
+
+    labelTextHide();
 
     $("#showModalTax").on("click", function () {
         $("#formAddTax")[0].reset();
