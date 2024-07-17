@@ -1,25 +1,51 @@
 $(document).ready(function () {
-    $("#addBrandButton").click(function () {
-        const name = $("#name");
-        if (name.val() == "") {
-            name.focus().addClass("is-invalid");
-            $("#name")
-                .next()
-                .removeClass("hidden")
-                .addClass("block")
-                .text("El nombre de la marca es requerido.");
-            return;
-        }
-        $("#formAddBrand").submit();
+    $("#new-brand").on("click", function () {
+        resetErrors();
+        $("#drawer-new-brand").removeClass("translate-x-full");
+        showOverlay();
     });
 
-    $("#name").on("input", function () {
-        $(this)
-            .removeClass("is-invalid")
-            .next("span")
-            .removeClass("block")
-            .addClass("hidden");
+    $(".close-drawer-brand").on("click", function () {
+        $("#drawer-new-brand").addClass("translate-x-full");
+        $("#drawer-edit-brand").addClass("translate-x-full");
+        hideOverlay();
     });
+
+    $("#overlay").on("click", function () {
+        $("#drawer-new-brand").addClass("translate-x-full");
+        $("#drawer-edit-brand").addClass("translate-x-full");
+        hideOverlay();
+    });
+
+    $(document).on("click", ".editBrand", function () {
+        resetErrors();
+        const href = $(this).data("href");
+        const action = $(this).data("action");
+        $.ajax({
+            type: "GET",
+            url: href,
+            success: function (response) {
+                $("#drawer-edit-brand").removeClass("translate-x-full");
+                showOverlay();
+                $("#edit_name_brand").val(response.brand.name);
+                $("#edit_description_brand").val(response.brand.description);
+                $("#formEditBrand").attr("action", action);
+            },
+        });
+    });
+
+    function showOverlay() {
+        $("#overlay").removeClass("hidden");
+    }
+
+    function hideOverlay() {
+        $("#overlay").addClass("hidden");
+    }
+
+    function resetErrors() {
+        $(".is-invalid").removeClass("is-invalid");
+        $("form .error-msg").remove();
+    }
 
     $(document).on("click", ".btnEditBrand", function () {
         const action = $(this).data("action");
@@ -38,33 +64,5 @@ $(document).ready(function () {
                 $("#editBrandModal").removeClass("hidden").addClass("flex");
             },
         });
-    });
-
-    $(document).on("click", ".closeModalEdit", function () {
-        $("#editBrandModal").removeClass("flex").addClass("hidden");
-    });
-
-    $(document).on("click", ".closeModalEdit", function () {
-        $("#editBrandModal").removeClass("flex").addClass("hidden");
-    });
-
-    $("#editBrandButton").click(function () {
-        const name = $("#name_edit");
-        if (name.val() == "") {
-            name.focus().addClass("is-invalid");
-            $("#name_edit")
-                .next()
-                .removeClass("hidden")
-                .addClass("block")
-                .text("El nombre de la marca es requerido.");
-            return;
-        }
-        $("#formUpdateBrand").submit();
-    });
-
-    $(document).on("click", function (e) {
-        if (!$(e.target).closest(".btn").length) {
-            $(".dropDownContent").addClass("hidden");
-        }
     });
 });
