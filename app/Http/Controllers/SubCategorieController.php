@@ -6,6 +6,7 @@ use App\Helpers\ImageHelper;
 use App\Models\Categorie;
 use App\Models\SubCategorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SubCategorieController extends Controller
 {
@@ -13,11 +14,34 @@ class SubCategorieController extends Controller
     public function edit(string $id)
     {
         $subcategorie = SubCategorie::find($id);
-        $categories = Categorie::all();
         if (!$subcategorie) {
             return redirect()->back()->with("error", "No se pudo encontrar la subcategoría");
         }
-        return view("admin.categories.edit", ["categorie" => $subcategorie, "categories" => $categories, "type" => "secundaria"]);
+        $subcategorie->image = Storage::url($subcategorie->image);
+        return response()->json(["categorie" => $subcategorie]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            "name" => "required|string",
+            "image" => "nullable|image",
+        ]);
+
+        $subCategorie = SubCategorie::find($id);
+        if (!$subCategorie) {
+            return redirect()->back()->with("error", "No se pudo encontrar la subcategoría");
+        }
+
+        if ($request->hasFile("image")) {
+            if ($subCategorie->image) {
+                ImageHelper::deleteImage($subCategorie->image);
+            }
+            $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/subcategories");
+        }
+
+        $subCategorie->update($validated);
+        return redirect()->route("admin.categories.index")->with("success", "Subcategoría actualizada correctamente");
     }
 
     public function destroy(string $id)
