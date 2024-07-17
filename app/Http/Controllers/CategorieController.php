@@ -20,10 +20,10 @@ class CategorieController extends Controller
     }
 
 
-    public function index()
+    public function index(Categorie $categorie = null)
     {
         $categories = Categorie::with("subcategories")->paginate(10);
-        return view("admin.categories.index", compact("categories"));
+        return view("admin.categories.index", ["categories" => $categories, "categorie" => $categorie]);
     }
 
 
@@ -85,11 +85,11 @@ class CategorieController extends Controller
     public function edit(string $id)
     {
         $categorie = Categorie::find($id);
-        $categories = Categorie::where("id", "!=", $id)->get();
         if (!$categorie) {
             return redirect()->back()->with("error", "No se pudo encontrar la categoría");
         }
-        return view("admin.categories.edit", ["categorie" => $categorie, "categories" => $categories]);
+        $categorie->image = Storage::url($categorie->image);
+        return response()->json(["categorie" => $categorie]);
     }
 
     /**
@@ -99,48 +99,25 @@ class CategorieController extends Controller
     {
         $rules = [
             "name" => "required|string",
+            "image" => "nullable|image",
         ];
 
-        if ($request->input("typeCategorie") === "secundaria") {
-
-            $rules["categorie_id"] = "required|exists:categories,id";
-            $validated = $request->validate($rules);
-
-            $categorie = Categorie::find($request->input("categorie_id"));
-            if (!$categorie) {
-                return redirect()->back()->with("error", "No se pudo encontrar la categoría padre");
-            }
-            $subCategorie = SubCategorie::find($id);
-            if (!$subCategorie) {
-                return redirect()->back()->with("error", "No se pudo encontrar la subcategoría");
-            }
-
-            if ($request->hasFile("image")) {
-                if ($subCategorie->image) {
-                    ImageHelper::deleteImage($subCategorie->image);
-                }
-                $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/subcategories");
-            }
-
-            $subCategorie->update($validated);
-            return redirect()->route("admin.categories.index")->with("success", "Subcategoría actualizada correctamente");
-        } else {
-
-            $categorie = Categorie::find($id);
-            if (!$categorie) {
-                return redirect()->back()->with("error", "No se pudo encontrar la categoría");
-            }
-
-            $validated = $request->validate($rules);
-            if ($request->hasFile("image")) {
-                if ($categorie->image) {
-                    ImageHelper::deleteImage($categorie->image);
-                }
-                $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
-            }
-            $categorie->update($validated);
-            return redirect()->route("admin.categories.index")->with("success", "Categoría actualizada correctamente");
+        $categorie = Categorie::find($id);
+        if (!$categorie) {
+            return redirect()->back()->with("error", "No se pudo encontrar la categoría");
         }
+
+        $validated = $request->validate($rules);
+        if ($request->hasFile("image")) {
+            if ($categorie->image) {
+                ImageHelper::deleteImage($categorie->image);
+            }
+            $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
+        } else {
+            return redirect()->back()->with("error", "No se pudo encontrar la imagen");
+        }
+        $categorie->update($validated);
+        return redirect()->route("admin.categories.index")->with("success", "Categoría actualizada correctamente");
     }
 
     /**
@@ -165,8 +142,8 @@ class CategorieController extends Controller
     public function search(Request $request)
     {
         $query = Categorie::query();
-        if ($request->input("searchCategorie")) {
-            $name = $request->input("searchCategorie");
+        if ($request->input("inputSearch")) {
+            $name = $request->input("inputSearch");
             $query->where("name", "like", "%$name%");
         }
 
