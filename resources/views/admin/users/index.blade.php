@@ -3,8 +3,8 @@
 @section('title', 'Categorías')
 
 @section('content')
-    <div class="rounded-lg dark:border-gray-700 mt-4">
-        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+    <div class="rounded-lg  mt-4">
+        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
             <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
                 Administrar usuarios
             </h1>
@@ -12,10 +12,10 @@
                 Administra los usuarios de tu sistema
             </p>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-900 p-4">
+        <div class="bg-gray-50 dark:bg-black p-4">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
-                    <div class="p-4 border-b dark:border-gray-700 border-gray-200">
+                <div class="bg-white dark:bg-black dark:border dark:border-zinc-900 relative shadow-md sm:rounded-lg">
+                    <div class="p-4 border-b dark:border-zinc-900 border-gray-200">
                         <h2 class="dark:text-gray-200 text-base font-semibold text-gray-700">
                             Lista de usuarios registrados
                         </h2>
@@ -24,19 +24,10 @@
                         class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center" action="{{ route('admin.categories.search') }}"
-                                id="formSearchCategorie">
+                                id="formSearchProduct">
                                 @csrf
-                                <label for="simple-search" class="sr-only">
-                                    Buscar
-                                </label>
-                                <div class="relative w-full">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <x-icon icon="search" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                    </div>
-                                    <input type="text" id="inputSearchCategorie" name="searchCategorie"
-                                        class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Buscar" required="">
-                                </div>
+                                <x-input type="text" id="inputSearch" name="inputSearch" data-form="#formSearchProduct"
+                                    data-table="#tableProduct" placeholder="Buscar" icon="search" />
                             </form>
                         </div>
                         <div
@@ -45,37 +36,36 @@
                                 icon="add-circle" typeClass="primary" />
                             <div class="flex items-center space-x-3 w-full md:w-auto">
                                 <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
                                     type="button">
-                                    <x-icon icon="filter" class="h-4 w-4 mr-2 text-gray-400" />
+                                    <x-icon icon="filter" class="h-4 w-4 mr-2 text-current" />
                                     Filtros
                                     <x-icon icon="arrow-down" class="-mr-1 ml-1.5 w-4 h-4 text-current" />
                                 </button>
                                 <div id="filterDropdown"
-                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
                                         id="formSearchCategorieCheck">
                                         @csrf
                                         <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                                            Categorías:
+                                            Filtros
                                         </h6>
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
-                                                <input id="no_subcategories" name="filter[]" type="checkbox"
-                                                    value="no_subcategories"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="no_subcategories"
+                                                <input id="offers" name="filter[]" type="checkbox" value="offers"
+                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
+                                                <label for="offers"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    Sin subcategorías
+                                                    Con ofertas
                                                 </label>
                                             </li>
                                             <li class="flex items-center">
-                                                <input id="has_subcategories" name="filter[]" type="checkbox"
-                                                    value="has_subcategories"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="fitbit"
+                                                <input id="flash_offers" name="filter[]" type="checkbox"
+                                                    value="flash_offers"
+                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
+                                                <label for="flash_offers"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    Con subcategorías
+                                                    Con ofertas flash
                                                 </label>
                                             </li>
                                         </ul>
@@ -86,13 +76,13 @@
                     </div>
                     <div>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">ID</th>
                                     <th scope="col" class="px-4 py-3">Foto</th>
                                     <th scope="col" class="px-4 py-3">Nombre</th>
                                     <th scope="col" class="px-4 py-3">Apellido</th>
-                                    <th scope="col" class="px-4 py-3">Nombre de usuario</th>
+                                    <th scope="col" class="px-4 py-3">Usuario</th>
                                     <th scope="col" class="px-4 py-3">Correo</th>
                                     <th scope="col" class="px-4 py-3">Rol</th>
                                     <th scope="col" class="px-4 py-3">Estado</th>
@@ -136,9 +126,8 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <div class="flex gap-2">
-                                                <x-button type="a"
-                                                    href="{{ route('admin.users.edit', $user->id) }}" text="Editar"
-                                                    icon="edit" typeButton="success" />
+                                                <x-button type="a" href="{{ route('admin.users.edit', $user->id) }}"
+                                                    text="Editar" icon="edit" typeButton="success" />
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}"
                                                     id="formDeleteUser" method="POST">
                                                     @csrf

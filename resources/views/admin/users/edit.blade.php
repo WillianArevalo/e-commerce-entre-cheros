@@ -3,8 +3,8 @@
 @section('title', 'Nueva categoría')
 
 @section('content')
-    <div class="mt-4">
-        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+    <div class="mt-4 dark:bg-black">
+        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
             <a href="{{ route('admin.users.index') }}"
                 class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
                 <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
@@ -14,7 +14,7 @@
                 Editar usuario
             </h1>
         </div>
-        <div class="bg-white dark:bg-gray-900 px-4 mt-4">
+        <div class="bg-white dark:bg-black px-4 mt-4">
             <div class="mx-auto w-full mt-4">
                 <form action="{{ route('admin.users.update', $user->id) }}" class="flex flex-col gap-4"
                     enctype="multipart/form-data" method="POST">
@@ -22,9 +22,9 @@
                     @method('PUT')
                     <div class="flex gap-4">
                         <div
-                            class="flex  flex-col flex-1 dark:bg-gray-800 bg-gray-50 rounded-lg border border-gray-200 dark:border-none">
+                            class="h-max flex flex-col flex-1 dark:bg-black bg-white rounded-lg border border-gray-300 dark:border-zinc-900">
                             <p
-                                class="text-sm dark:text-gray-400 text-gray-600 font-medium p-4 border-b dark:border-gray-700 border-gray-200">
+                                class="text-sm dark:text-gray-400 text-gray-600 font-medium p-4 border-b dark:border-zinc-900 border-gray-200">
                                 Foto de perfil
                             </p>
                             <div class="flex items-center justify-center flex-col py-4">
@@ -33,7 +33,7 @@
                                     class="rounded-full w-60 h-60 object-cover">
                             </div>
                             <div
-                                class="flex items-center justify-end p-4 h-full border-t dark:border-gray-700 border-gray-200">
+                                class="flex items-center justify-end p-4 h-full border-t dark:border-zinc-900 border-gray-200">
                                 <label for="profile"
                                     class="text-sm bg-blue-600 text-white px-4 py-2 block rounded cursor-pointer hover:bg-blue-800 w-max">
                                     Cambiar foto
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div
-                            class="flex-[2] dark:bg-gray-800 bg-gray-50  rounded-lg border border-gray-200 dark:border-none">
+                            class="flex-[2] dark:bg-black bg-white  rounded-lg border border-gray-300 dark:border-zinc-900">
                             <p
                                 class="text-sm dark:text-gray-400 text-gray-600 font-medium p-4 border-b dark:border-gray-700 border-gray-200">
                                 Información del usuario
@@ -80,46 +80,19 @@
                                 </div>
                                 <div class="flex">
                                     <div class="flex-1">
-                                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Rol
-                                        </label>
-                                        <input type="hidden" id="role" name="role" value="{{ $user->role }}">
-                                        <div class="relative">
-                                            <div
-                                                class="selected border-2 border-gray-300 bg-gray-50 dark:border-gray-600 rounded-lg py-2.5 dark:bg-gray-700 w-full px-4 dark:text-white text-sm flex items-center justify-between">
-                                                <span class="itemSelected">
-                                                    @if ($user->role === 'admin')
-                                                        Administrador
-                                                    @else
-                                                    @endif
-                                                </span>
-                                                <x-icon icon="arrow-down" class="w-5 h-5 dark:text-white text-gray-500" />
-                                            </div>
-                                            <ul
-                                                class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 selectOptions hidden">
-                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="admin" data-input="#role">
-                                                    Administrador
-                                                </li>
-                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="supervisor" data-input="#role">
-                                                    Supervisor
-                                                </li>
-                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="colaborador" data-input="#role">
-                                                    Colaborador
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        @error('role')
-                                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                                        @enderror
+                                        <x-select label="Rol" id="role" name="role" value="user"
+                                            :options="[
+                                                'admin' => 'Administrador',
+                                                'supervisor' => 'Supervisor',
+                                                'user' => 'Usuario',
+                                                'customer' => 'Cliente',
+                                            ]" selected="{{ $user->role }}" value="{{ $user->role }}" />
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2 ms-2">
                                     <span class="block w-2 h-2 ring-2 ring-green-300 bg-green-600 rounded-full"></span>
-                                    <span
-                                        class="dark:text-white text-black text-sm">{{ Str::ucfirst($user->status) }}</span>
+                                    <span class="dark:text-white text-black text-sm">{{ Str::ucfirst($user->status) }}
+                                    </span>
                                 </div>
                             </div>
                         </div>

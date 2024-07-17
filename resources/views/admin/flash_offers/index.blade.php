@@ -3,8 +3,8 @@
 @section('title', 'Marcas')
 
 @section('content')
-    <div class=" rounded-lg dark:border-gray-700 mt-4">
-        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+    <div class=" rounded-lg mt-4">
+        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
             <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
                 Administrar ofertas relámpago
             </h1>
@@ -12,26 +12,18 @@
                 Desde aquí puedes administrar ofertas relámpago que se muestran en la página de inicio
             </p>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-900 p-4">
+        <div class="bg-gray-50 dark:bg-black p-4">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div
+                    class="bg-white dark:bg-black dark:border dark:border-gray-900 relative shadow-md sm:rounded-lg overflow-hidden">
                     <div
                         class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center" action="{{ route('admin.categories.search') }}"
                                 id="formSearchCategorie">
                                 @csrf
-                                <label for="simple-search" class="sr-only">
-                                    Buscar
-                                </label>
-                                <div class="relative w-full">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <x-icon icon="search" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                    </div>
-                                    <input type="text" id="inputSearchCategorie" name="searchCategorie"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Buscar" required="">
-                                </div>
+                                <x-input type="text" id="inputSearch" name="inputSearch" data-form="#formSearchCategorie"
+                                    data-table="#tableCategorie" placeholder="Buscar" icon="search" />
                             </form>
                         </div>
                         <div
@@ -42,7 +34,7 @@
                     </div>
                     <div>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-auto">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">#</th>
                                     <th scope="col" class="px-4 py-3">
@@ -59,22 +51,22 @@
                             </thead>
                             <tbody>
                                 @if ($offers->count() == 0)
-                                    <tr class="border-b dark:border-gray-700">
-                                        <td colspan="4"
+                                    <tr class="border-b dark:border-zinc-900">
+                                        <td colspan="7"
                                             class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
                                             No hay ofertas relámpago registradas
                                         </td>
                                     </tr>
                                 @else
                                     @foreach ($offers as $offer)
-                                        <tr class="border-b dark:border-gray-700">
+                                        <tr class="border-b dark:border-zinc-900">
                                             <th scope="row"
                                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $loop->iteration }}
                                             </th>
                                             <td class="px-4 py-3">
                                                 <a href="{{ route('admin.products.show', $offer->product->id) }}"
-                                                    class="flex gap-2 items-center dark:hover:bg-gray-700 hover:bg-gray-100 p-2 rounded-lg w-max">
+                                                    class="flex gap-2 items-center dark:hover:bg-zinc-950 hover:bg-gray-100 p-2 rounded-lg w-max">
                                                     <img src="{{ Storage::url($offer->product->main_image) }}"
                                                         alt="" class="w-12 h-12 rounded-lg object-cover">
                                                     <div class="flex flex-col">

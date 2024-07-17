@@ -18,7 +18,8 @@
             <p class="text-base dark:text-gray-400 text-gray-600 font-medium">
                 Información de la categoría
             </p>
-            <div class="mx-auto w-full mt-4">
+            <div
+                class="mx-auto w-full mt-4 bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-300 dark:border-gray-700">
                 <form action="{{ route('admin.categories.store') }}" class="flex flex-col gap-4"
                     enctype="multipart/form-data" method="POST">
                     @csrf
@@ -110,6 +111,8 @@
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar categoría" icon="add-circle" typeButton="primary" />
+                        <x-button type="a" href="{{ route('admin.categories.index') }}" icon="cancel" text="Cancelar"
+                            typeButton="danger" />
                     </div>
                 </form>
             </div>

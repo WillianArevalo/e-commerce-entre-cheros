@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
             <a href="{{ route('admin.products.index') }}"
                 class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
                 <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
@@ -14,7 +14,7 @@
                 Nuevo cliente
             </h1>
         </div>
-        <div class="bg-white dark:bg-gray-900 p-4">
+        <div class="bg-white dark:bg-black p-4">
             <div class="mx-auto w-full">
                 <form action="{{ route('admin.customers.store') }}" class="flex flex-col gap-4" enctype="multipart/form-data"
                     method="POST">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="flex-[2] flex flex-col gap-4">
-                            <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="bg-white border border-gray-200 p-4 rounded-lg dark:bg-black dark:border-zinc-900">
                                 <h2 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
                                     Información general
                                 </h2>
@@ -54,40 +54,12 @@
                                             required />
                                     </div>
                                     <div class="w-max flex-1">
-                                        <label for="category"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Género
-                                        </label>
-                                        <input type="hidden" id="gender" name="gender" value="male">
-                                        <div class="relative">
-                                            <div
-                                                class="selected border-2 border-gray-300 bg-gray-50 dark:border-gray-600 rounded-lg py-2.5 dark:bg-gray-700 w-full px-4 dark:text-white text-sm flex items-center justify-between">
-                                                <span class="itemSelected">Masculino</span>
-                                                <x-icon icon="arrow-down" class="w-5 h-5 dark:text-white text-gray-500" />
-                                            </div>
-                                            <ul
-                                                class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 selectOptions hidden">
-                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="male" data-input="#gender">
-                                                    Masculino
-                                                </li>
-                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="female" data-input="#gender">
-                                                    Femenino
-                                                </li>
-                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    data-value="other" data-input="#gender">
-                                                    Otro
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        @error('gender')
-                                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                                        @enderror
+                                        <x-select label="Sexo" id="gender" name="gender" value="male" selected=""
+                                            :options="['male' => 'Masculino', 'female' => 'Femenino']" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="bg-white border border-gray-200 p-4 rounded-lg dark:bg-black dark:border-zinc-900">
                                 <h2 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
                                     Información de contacto
                                 </h2>
@@ -130,7 +102,7 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="bg-white border border-gray-200 p-4 rounded-lg dark:bg-black dark:border-zinc-900">
                                 <h2 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
                                     Datos de usuario
                                 </h2>
@@ -141,7 +113,7 @@
                                         </p>
                                         <div class="flex justify-end">
                                             <label for="profile"
-                                                class="flex items-center justify-center gap-2 text-sm bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-800 w-max m-4">
+                                                class="flex items-center justify-center gap-2 text-sm bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-800 w-max m-4 hover:ring-4 hover:ring-blue-200 dark:ring-blue-900">
                                                 <x-icon icon="image-add" class="w-5 h-5 text-current" />
                                                 Agregar foto
                                             </label>
@@ -186,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-4">
+                    <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar cliente" icon="add-circle" typeButton="primary" />
                         <x-button type="a" href="{{ route('admin.customers.index') }}" text="Cancelar"
                             icon="cancel" typeButton="danger" />

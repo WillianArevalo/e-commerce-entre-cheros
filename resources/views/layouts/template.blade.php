@@ -11,7 +11,10 @@
 </head>
 
 <body>
-    @include('layouts.__partials.navbar')
+    @include('layouts.__partials.navbar', [
+        'classHead' => 'z-10 absolute top-0',
+        'classNav' => ' w-9/12',
+    ])
     @yield('content')
     @include('layouts.__partials.footer')
 </body>

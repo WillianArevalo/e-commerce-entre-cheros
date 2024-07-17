@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
     @vite('resources/css/timeline.css')
+    @vite('resources/js/app.js')
     <!-- Theme switcher -->
     <script>
         (function() {
@@ -22,9 +23,10 @@
     </script>
 </head>
 
-<body class="font-secondary dark:bg-gray-900">
+<body class="font-secondary dark:bg-black">
     @include('layouts.__partials.navbar-admin')
     @include('layouts.__partials.toast')
+    <div id="overlay" class="bg-gray-900/80 dark:bg-zinc-900/90 fixed inset-0 z-30 hidden"></div>
     <main class="bg-gray-50 dark:bg-gray-900 h-full">
         <div class="xl:ml-72 mt-16">
             <div class="pt-4 px-4 xl:hidden">
@@ -34,6 +36,5 @@
         </div>
     </main>
 </body>
-@vite('resources/js/app.js')
 
 </html>

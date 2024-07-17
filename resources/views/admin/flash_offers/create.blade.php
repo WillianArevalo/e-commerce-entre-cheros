@@ -10,9 +10,9 @@
             $id = old('product_id');
         }
     @endphp
-    <div class="mt-4">
-        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
-            <a href="{{ route('admin.products.index') }}"
+    <div class="mt-4 bg-black">
+        <div class="py-4 px-4 shadow-sm flex flex-col items-start border-y dark:bg-black dark:border-zinc-900">
+            <a href="{{ route('admin.flash-offers.index') }}"
                 class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
                 <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
                 Regresar a ofertas
@@ -21,8 +21,13 @@
                 Nueva oferta relámpago
             </h1>
         </div>
-        <div class="p-4 dark:bg-gray-800 bg-gray-100 m-4 rounded-lg text-sm">
+        <div class="flex flex-col gap-1 p-4">
             <h2 class="text-gray-700 dark:text-gray-300 text-lg uppercase">Información de la oferta</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">
+                Los campos marcados con <span class="text-red-500">*</span> son obligatorios
+            </p>
+        </div>
+        <div class="p-4 dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 mx-4 rounded-lg text-sm">
             <form action="{{ route('admin.flash-offers.store') }}" method="POST">
                 @csrf
                 <div class="flex gap-2">
@@ -34,7 +39,7 @@
                         <input type="hidden" name="product_id" id="product_id" value="{{ $id }}">
                         <div class="relative">
                             <div
-                                class="selected border-2 border-gray-300 bg-gray-50 dark:border-gray-600 rounded-lg py-2.5 dark:bg-gray-700 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('categorie_id') is-invalid @enderror h-11">
+                                class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('categorie_id') is-invalid @enderror h-11">
                                 <span class="itemSelected flex items-center gap-2">
                                     @if ($products->count() > 0)
                                         @php
@@ -57,10 +62,10 @@
                                 <x-icon icon="arrow-down" class="w-5 h-5 dark:text-white text-gray-500" />
                             </div>
                             <ul
-                                class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 selectOptions hidden">
+                                class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptions hidden overflow-auto h-60">
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)
-                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2 hover:bg-gray-100 dark:hover:bg-zinc-900 flex items-center gap-2"
                                             data-value="{{ $product->id }}" data-input="#product_id">
                                             <img src="{{ Storage::url($product->main_image) }}"
                                                 alt="Imagen principal de {{ $product->name }}"

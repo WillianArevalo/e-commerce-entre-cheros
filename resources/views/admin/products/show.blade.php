@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="dark:bg-gray-800 py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-gray-700">
+        <div class="dark:bg-black py-4 px-4 flex flex-col items-start border-y dark:border-zinc-900">
             <a href="{{ route('admin.products.index') }}"
                 class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
                 <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
@@ -14,12 +14,20 @@
                 Detalles del producto
             </h1>
         </div>
-        <div class="flex p-4 gap-4 h-full">
+        <div class="flex p-4 gap-4 h-full bg-black">
             <div class="w-1/2">
-                <div class="flex flex-col gap-2 dark:bg-gray-800 bg-gray-100 p-4 rounded-lg">
-                    <h2 class="text-2xl font-bold dark:text-blue-200 text-secondary">
+                <div
+                    class="dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg mb-4 flex justify-between">
+                    <h2 class="text-2xl font-bold dark:text-blue-200 text-secondary  uppercase">
                         {{ $product->name }}
                     </h2>
+                    <span
+                        class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 flex items-center">
+                        {{ Str::ucfirst($product->status) }}
+                    </span>
+                </div>
+                <div
+                    class="flex flex-col gap-2 dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg">
                     <div class="flex flex-col gap-1 mt-2">
                         <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Descripción corta:</h3>
                         <p class="dark:text-gray-400 text-gray-500 text-sm">
@@ -29,11 +37,11 @@
                     <div class="flex flex-col gap-1 mt-2">
                         <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Descripción larga:</h3>
                         <p class="dark:text-gray-400 text-gray-500 text-sm">
-                            {{ $product->long_description }}
+                            {{ $product->long_description ?? 'No hay descripción larga' }}
                         </p>
                     </div>
                 </div>
-                <div class="dark:bg-gray-800 bg-gray-100 p-4 rounded-lg mt-4">
+                <div class="dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg mt-4">
                     <h2 class="text-xl font-bold dark:text-blue-200 text-secondary">Imágenes del producto</h2>
                     <div class="flex gap-4 mt-2 flex-col">
                         <div class="flex gap-2 flex-1 flex-col">
@@ -54,7 +62,7 @@
                         </div>
                     </div>
                     <h2
-                        class="text-xl font-bold dark:text-blue-200 text-secondary mt-4 border-t dark:border-gray-700 border-gray-300 pt-2">
+                        class="text-xl font-bold dark:text-blue-200 text-secondary mt-4 border-t dark:border-zinc-900 border-gray-200 pt-2">
                         Inventario
                     </h2>
                     <div class="flex gap-4">
@@ -94,7 +102,7 @@
                 </div>
             </div>
             <div class="w-1/2 flex flex-col">
-                <div class="categorie dark:bg-gray-800 bg-gray-100 p-4 rounded-lg">
+                <div class="categorie dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg">
                     <h2 class="text-xl font-bold dark:text-blue-200 text-secondary">Categoría</h2>
                     <div class="flex flex-col gap-1 mt-2">
                         <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Categoría principal:</h3>
@@ -105,7 +113,7 @@
                         <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->subcategories->name }}</p>
                     </div>
                     <h2
-                        class="text-xl font-bold dark:text-blue-200 text-secondary border-t dark:border-gray-700 border-gray-300 pt-2">
+                        class="text-xl font-bold dark:text-blue-200 text-secondary border-t dark:border-zinc-900 border-gray-200 pt-2">
                         Precio
                     </h2>
                     <div class="flex flex-col gap-1 mt-">
@@ -145,7 +153,7 @@
                         </div>
                     @endif
                     <h2
-                        class="text-xl font-bold dark:text-blue-200 text-secondary mt-4 border-t dark:border-gray-700 border-gray-300 pt-2">
+                        class="text-xl font-bold dark:text-blue-200 text-secondary mt-4 border-t dark:border-zinc-900 border-gray-200 pt-2">
                         Impuestos
                     </h2>
                     <div>
@@ -153,8 +161,13 @@
                             <tbody>
                                 @if ($product->taxes->count() > 0)
                                     @foreach ($product->taxes as $tax)
-                                        <tr class="border-b dark:border-gray-700 border-gray-300">
-                                            <td class="py-2">{{ $tax->name }}</td>
+                                        <tr class="border-b dark:border-zinc-900 border-gray-200">
+                                            <td class="py-2">
+                                                <span
+                                                    class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                                                    {{ $tax->name }}
+                                                </span>
+                                            </td>
                                             <td class="py-2">{{ $tax->rate }}%</td>
                                         </tr>
                                     @endforeach
@@ -166,17 +179,21 @@
                         Etiquetas
                     </h2>
                     <div class="mt-2 flex gap-2">
-                        @foreach ($product->labels as $label)
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                                {{ $label->name }}
-                            </span>
-                        @endforeach
+                        @if ($product->labels->count() == 0)
+                            <p class="dark:text-gray-400 text-gray-500 text-sm">No hay etiquetas</p>
+                        @else
+                            @foreach ($product->labels as $label)
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                                    {{ $label->name }}
+                                </span>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-        <div class="px-4 pb-4 text-sm flex gap-2 items-center justify-between">
+        <div class="px-4 pb-4 text-sm flex gap-2 items-center justify-between bg-black">
             <x-button type="a" text="Regresar" icon="arrow-left-02" typeButton="danger"
                 href="{{ route('admin.products.index') }}" class="w-max" />
             <div class="flex gap-2 items-center">
