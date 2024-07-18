@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class FAQController extends Controller
@@ -11,7 +12,8 @@ class FAQController extends Controller
      */
     public function index()
     {
-        return view("admin.faq.index");
+        $faqs = Faq::all();
+        return view("admin.faq.index", compact("faqs"));
     }
 
     /**
@@ -27,7 +29,14 @@ class FAQController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = ["question" => "required|string", "answer" => "required|string"];
+        $validated = $request->validate($rules);
+        $faq = Faq::create($validated);
+        if ($faq) {
+            return redirect()->route("admin.faq.index")->with("success", "FAQ creada correctamente");
+        } else {
+            return redirect()->route("admin.faq.index")->with("error", "No se pudo crear la FAQ");
+        }
     }
 
     /**
@@ -43,7 +52,11 @@ class FAQController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $faq = Faq::find($id);
+        if (!$faq) {
+            return back()->with("error", "No se pudo encontrar la FAQ");
+        }
+        return response()->json(["faq" => $faq]);
     }
 
     /**
@@ -51,7 +64,14 @@ class FAQController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $rules = ["question" => "required|string", "answer" => "required|string"];
+        $validated = $request->validate($rules);
+        $faq = Faq::find($id);
+        if (!$faq) {
+            return back()->with("error", "No se pudo encontrar la FAQ");
+        }
+        $faq->update($validated);
+        return redirect()->route("admin.faq.index")->with("success", "FAQ actualizada correctamente");
     }
 
     /**
@@ -59,6 +79,11 @@ class FAQController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $faq = Faq::find($id);
+        if (!$faq) {
+            return back()->with("error", "No se pudo encontrar la FAQ");
+        }
+        $faq->delete();
+        return redirect()->route("admin.faq.index")->with("success", "FAQ eliminada correctamente");
     }
 }

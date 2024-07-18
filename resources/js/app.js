@@ -11,3 +11,4 @@ import "./modal-image";
 import "./flash-offers";
 import "./popup";
 import "./user";
+import "./faq";
