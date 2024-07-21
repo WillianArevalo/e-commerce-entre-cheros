@@ -24,9 +24,11 @@ class ProductController extends Controller
         return view("admin.products.index", ["products" => $products]);
     }
 
-    public function details()
+    public function details(string $id)
     {
-        return view("products.view");
+        $products = Product::with("categories", "subcategories", "brands", "taxes", "labels", "images")->paginate(10);
+        $product = Product::with("categories", "brands", "taxes", "labels", "images")->find($id);
+        return view("products.view", ["product" => $product, "products" => $products]);
     }
 
     public function create()
