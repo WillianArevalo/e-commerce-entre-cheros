@@ -4,7 +4,7 @@
 
 @section('content')
     <main>
-        <section class="home__header text-white w-full mt-12 relative"
+        <section class="home__header text-white w-full relative"
             style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
             <div class="relative top-32 w-2/3 flex gap-4 flex-col left-20">
                 <h1 class="text-6xl font-primary font-bold uppercase text-start">
@@ -15,7 +15,7 @@
                 </p>
             </div>
             <button
-                class="rounded-2xl font-medium bg-primary px-5 py-3 absolute bottom-14 z-20 left-52 font-secondary text-secondary uppercase border-2 border-secondary hover:bg-secondary hover:text-white flex items-center justify-center gap-2">
+                class="rounded-full font-medium bg-primary px-5 py-3 absolute bottom-14 z-20 left-52 font-secondary text-white uppercase hover:bg-secondary flex items-center justify-center gap-2 bg-gradient">
                 <x-icon icon="store" class="w-5 h-5 text-current" />
                 Comprar ahora
             </button>
@@ -25,64 +25,36 @@
                 </path>
             </svg>
         </section>
+        <section class="mt-4">
+            <h2 class="text-center text-3xl font-primary text-secondary font-bold p-4">
+                Categorías
+            </h2>
+            <div class="flex justify-center gap-2">
+                @if ($categories->count() > 0)
+                    @foreach ($categories as $category)
+                        <x-button type="a" typeButton="store-secondary" text="{{ $category->name }}" href="" />
+                    @endforeach
+                @endif
+            </div>
+        </section>
         <section class="home__body px-20 py-4">
             <div class="flex flex-col gap-4 justify-center w-full text-center">
-                <h2 class="uppercase text-3xl font-primary text-secondary font-bold p-4">Productos más vendidos</h2>
-                <div class="flex flex-wrap justify-center gap-6">
-                    <div class="card bg-primary flex flex-col text-start rounded-2xl overflow-hidden w-96">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-full h-72 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-secondary font-bold text-xl font-primary">Product name</h3>
-                            <p class="text-gray-800 font-secondary text-sm text-wrap">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua
-                            </p>
-                        </div>
-                        <div class="p-4 flex justify-between items-end mt-auto">
-                            <a href="{{ route('products.details', 12) }}"
-                                class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                                <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                            </a>
-                            <span class="font-bold text-lg text-secondary font-secondary">$4.50</span>
-                        </div>
+                <h2 class="uppercase text-3xl font-primary text-secondary font-bold p-4">
+                    Ofertas relampago
+                </h2>
+                @if ($flashOffers->count() > 3)
+                    @include('layouts.__partials.slider', [
+                        'products' => $flashOffers,
+                    ])
+                @else
+                    <div class="flex gap-4 items-center justify-center">
+                        @foreach ($flashOffers as $product)
+                            <x-card-product :product="$product" :slide="false" />
+                        @endforeach
                     </div>
-                    <div class="card bg-primary flex flex-col text-start rounded-2xl overflow-hidden w-96">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-full h-72 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-secondary font-bold text-xl font-primary">Product name</h3>
-                            <p class="text-gray-800 font-secondary text-sm text-wrap">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua
-                            </p>
-                        </div>
-                        <div class="p-4 flex justify-between items-end mt-auto">
-                            <a href=""
-                                class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                                <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                            </a>
-                            <span class="font-bold text-lg text-secondary font-secondary">$4.50</span>
-                        </div>
-                    </div>
-                    <div class="card bg-primary flex flex-col text-start rounded-2xl overflow-hidden w-96">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-full h-72 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-secondary font-bold text-xl font-primary">Product name</h3>
-                            <p class="text-gray-800 font-secondary text-sm text-wrap">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua
-                            </p>
-                        </div>
-                        <div class="p-4 flex justify-between items-end mt-auto">
-                            <a href=""
-                                class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                                <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                            </a>
-                            <span class="font-bold text-lg text-secondary font-secondary">$4.50</span>
-                        </div>
-                    </div>
-                </div>
+                @endif
                 <a href=""
-                    class="rounded-2xl bg-primary px-5 py-3 mx-auto w-max font-secondary text-secondary uppercase font-medium border-secondary border-2 hover:bg-secondary hover:text-white">
+                    class="rounded-full bg-primary px-5 py-3 mx-auto w-max font-secondary text-white uppercase font-medium  hover:bg-secondary bg-gradient">
                     Ver más
                 </a>
             </div>
@@ -93,13 +65,10 @@
                     <h2 class="font-bold text-white text-4xl font-primary uppercase">
                         Descubre el sabor y la tradición de El Salvador con nuestra variedad de productos únicos
                     </h2>
-                    <button
-                        class="rounded-2xl bg-primary px-5 py-3 w-max font-secondary text-secondary uppercase font-medium border-secondary border-2 hover:bg-secondary hover:text-white">
-                        Comprar ahora
-                    </button>
+                    <x-button type="button" typeButton="store-secondary" text="Comprar ahora" />
                 </div>
                 <div class="w-full flex items-center justify-center  flex-1">
-                    <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-72 h-64">
+                    <img src="{{ asset('images/imagen1.png') }}" alt="" class="w-72 h-64">
                 </div>
             </div>
         </section>
@@ -114,86 +83,17 @@
                     ex ea commodo consequat.
                 </p>
             </div>
-            <div class="flex gap-4 mt-10">
-                <button>
-                    <x-icon icon="arrow-left" class="w-12 h-12 text-secondary" />
-                </button>
-                <div
-                    class="card border-2 border-primary relative flex flex-col text-start rounded-2xl overflow-hidden w-96 p-6 gap-4">
-                    <img src="{{ asset('images/photo.jpg') }}" alt=""
-                        class="w-full h-72 object-cover rounded-2xl border-2 border-primary">
-                    <div class="flex flex-col gap-2">
-                        <h3 class="text-secondary font-bold text-2xl font-primary">Product name</h3>
-                        <p class="text-gray-800 font-secondary text-sm text-wrap">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua
-                        </p>
-                        <span class="font-bold text-lg text-secondary font-primary">$4.50</span>
-                    </div>
-                    <div class="bg-primary w-20 py-1 px-2 font-secondary font-bold absolute top-80 right-0">20%</div>
-                    <div class="flex justify-between items-center mt-auto">
-                        <a href=""
-                            class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                            <x-icon icon="shopping-cart" class="w-5 h-5 text-current" />
-                        </a>
-                        <a href=""
-                            class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                        </a>
-                    </div>
+            @if ($products->count() > 3)
+                @include('layouts.__partials.slider', [
+                    'products' => $products,
+                ])
+            @else
+                <div class="flex gap-4 items-center justify-center mt-4">
+                    @foreach ($products as $product)
+                        <x-card-product :product="$product" :slide="false" />
+                    @endforeach
                 </div>
-                <div
-                    class="card border-2 border-primary relative flex flex-col text-start rounded-2xl overflow-hidden w-96 p-6 gap-4">
-                    <img src="{{ asset('images/photo.jpg') }}" alt=""
-                        class="w-full h-72 object-cover rounded-2xl border-2 border-primary">
-                    <div class="flex flex-col gap-2">
-                        <h3 class="text-secondary font-bold text-2xl font-primary">Product name</h3>
-                        <p class="text-gray-800 font-secondary text-sm text-wrap">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua
-                        </p>
-                        <span class="font-bold text-lg text-secondary font-primary">$4.50</span>
-                    </div>
-                    <div class="bg-primary w-20 py-1 px-2 font-secondary font-bold absolute top-80 right-0">20%</div>
-                    <div class="flex justify-between items-center mt-auto">
-                        <a href=""
-                            class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                            <x-icon icon="shopping-cart" class="w-5 h-5 text-current" />
-                        </a>
-                        <a href=""
-                            class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                        </a>
-                    </div>
-                </div>
-                <div
-                    class="card border-2 border-primary relative flex flex-col text-start rounded-2xl overflow-hidden w-96 p-6 gap-4">
-                    <img src="{{ asset('images/photo.jpg') }}" alt=""
-                        class="w-full h-72 object-cover rounded-2xl border-2 border-primary">
-                    <div class="flex flex-col gap-2">
-                        <h3 class="text-secondary font-bold text-2xl font-primary">Product name</h3>
-                        <p class="text-gray-800 font-secondary text-sm text-wrap">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua
-                        </p>
-                        <span class="font-bold text-lg text-secondary font-primary">$4.50</span>
-                    </div>
-                    <div class="bg-primary w-20 py-1 px-2 font-secondary font-bold absolute top-80 right-0">20%</div>
-                    <div class="flex justify-between items-center mt-auto">
-                        <a href=""
-                            class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                            <x-icon icon="shopping-cart" class="w-5 h-5 text-current" />
-                        </a>
-                        <a href=""
-                            class="px-5 py-3 font-primary rounded-xl bg-secondary text-white flex items-center justify-center">
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                        </a>
-                    </div>
-                </div>
-                <button>
-                    <x-icon icon="arrow-right" class="w-12 h-12 text-secondary" />
-                </button>
-            </div>
+            @endif
         </section>
         <section class="px-40">
             <div style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover; height: 600px; border-radius:70px"
@@ -206,26 +106,21 @@
                         El Salvador
                     </span>
                 </h2>
-                <button
-                    class="rounded-2xl bg-primary px-5 py-3 absolute  left-20 bottom-20 font-secondary text-secondary uppercase font-medium flex items-center gap-2 hover:bg-secondary hover:text-white">
-                    <x-icon icon="store" class="w-5 h-5 text-current" />
-                    Tienda
-                </button>
+
+                <x-button type="a" typeButton="store-gradient" text="Tienda" icon="store"
+                    class=" absolute  left-20 bottom-20 " />
             </div>
         </section>
         <section class="w-full bg-tertiary px-20 py-10 mt-8">
             <div class="flex gap-4 justify-center items-center w-3/4 mx-auto">
                 <div class="w-full flex items-center justify-center">
-                    <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-72 h-64">
+                    <img src="{{ asset('images/imagen2.png') }}" alt="" class="w-72 h-64">
                 </div>
                 <div class="flex flex-col gap-4 w-max justify-end">
                     <h2 class="font-bold text-white text-4xl font-primary uppercase text-end">
                         Conecta con tus raíces salvadoreñas los mejores productos auténticos y tradicionales a tu alcance
                     </h2>
-                    <button
-                        class="rounded-2xl bg-primary px-5 py-3 w-max font-secondary text-secondary uppercase font-medium border-secondary border-2 hover:bg-secondary hover:text-white ml-auto">
-                        Comprar ahora
-                    </button>
+                    <x-button type="a" typeButton="store-secondary" text="Comprar ahora" class="ml-auto" />
                 </div>
             </div>
         </section>
