@@ -144,7 +144,7 @@
                             <tbody id="tableProduct">
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)
-                                        <tr class="border-b dark:border-gray-700">
+                                        <tr class="border-b dark:border-zinc-900">
                                             <td class="px-4 py-3">
                                                 <input id="default-checkbox" type="checkbox" value=""
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-white dark:border-gray-600">

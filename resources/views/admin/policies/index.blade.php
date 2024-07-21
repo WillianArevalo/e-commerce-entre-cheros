@@ -3,7 +3,7 @@
 @section('title', 'Ajustes generales')
 
 @section('content')
-    <div class="rounded-lg dark:border-zinc-900 dark:bg-black mt-4">
+    <div class="dark:border-zinc-900 dark:bg-black mt-4">
         <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
             <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
                 Políticas

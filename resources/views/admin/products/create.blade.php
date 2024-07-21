@@ -144,8 +144,7 @@
                                                     </ul>
                                                 </div>
                                                 @error('categorie_id')
-                                                    <span
-                                                        class="text-red-500 text-subcategorie_idsm">{{ $message }}</span>
+                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="flex-1">
