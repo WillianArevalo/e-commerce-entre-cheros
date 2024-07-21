@@ -177,15 +177,21 @@
                 <ul id="dropdown-ecommerce" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('admin.categories.index') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">Categorías</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            {{ __('messages.categories') }}
+                        </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.brands.index') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">Marcas</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            {{ __('messages.brands') }}
+                        </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.products.index') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">Productos</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            {{ __('messages.products') }}
+                        </a>
                     </li>
                 </ul>
             </li>
@@ -195,20 +201,22 @@
                     aria-controls="dropdown-store" data-collapse-toggle="dropdown-store">
                     <x-icon icon="store"
                         class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Tienda</span>
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+                        {{ __('messages.store') }}
+                    </span>
                     <x-icon icon="arrow-down" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 </button>
                 <ul id="dropdown-store" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('admin.flash-offers.index') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
-                            Ofertas relámpago
+                            {{ __('messages.flash_offers') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.popups.index') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
-                            Anuncios
+                            {{ __('messages.popups') }}
                         </a>
                     </li>
                     <li>
@@ -322,7 +330,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('admin.faq.index') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
                             Preguntas frecuentes
                         </a>
