@@ -17,6 +17,7 @@ export default {
             fontFamily: {
                 primary: ["League Spartan", "sans-serif"],
                 secondary: ["Poppins", "sans-serif"],
+                tertiary: ["Mystical", "sans-serif"],
             },
             borderColor: {
                 primary: "var(--color-primary)",

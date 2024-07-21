@@ -11,6 +11,11 @@
     --color-quaternary: #f6f4f1;
 }
 
+@font-face {
+    font-family: "Mystical";
+    src: url("/public/fonts/MysticalWoodsRoughScript.woff") format("woff");
+}
+
 .is-invalid {
     border-color: #e3342f;
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
@@ -70,4 +75,12 @@ div[modal-backdrop] {
 
 .desactive > svg {
     display: none;
+}
+
+.bg-gradient {
+    background: linear-gradient(45deg, #011b4e, #0e4d92, #138fdc 100%);
+}
+
+.bg-gradient:hover {
+    background: linear-gradient(45deg, #011030, #0a396b, #0e70ad 100%);
 }
