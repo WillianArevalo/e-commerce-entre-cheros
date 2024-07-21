@@ -12,7 +12,8 @@ class PopupController extends Controller
      */
     public function index()
     {
-        return view("admin.popups.index");
+        $popups = Popup::all();
+        return view("admin.popups.index", compact("popups"));
     }
 
     /**
@@ -48,7 +49,11 @@ class PopupController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $popup = Popup::find($id);
+        if ($popup) {
+            return response()->json(["popup" => $popup]);
+        } else {
+        }
     }
 
     /**
