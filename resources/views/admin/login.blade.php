@@ -3,11 +3,11 @@
 @section('title', 'Login | Admin')
 
 @section('content')
-    <main class="w-full h-screen flex items-center justify-center font-secondary dark:bg-gray-900">
-        <section class="bg-gray-50 dark:bg-gray-900 w-full">
+    <main class="w-full h-screen flex items-center justify-center font-secondary dark:bg-black">
+        <section class="bg-gray-50 dark:bg-black w-full">
             <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <div
-                    class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-zinc-950 dark:border-zinc-900">
                     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1
                             class="text-center text-xl font-bold leading-tight tracking-tight text-secondary md:text-2xl dark:text-white">
