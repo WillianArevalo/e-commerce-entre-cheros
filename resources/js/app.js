@@ -12,3 +12,6 @@ import "./flash-offers";
 import "./popup";
 import "./user";
 import "./faq";
+import "./swiper";
+import "./product-view";
+import "./cart";

@@ -49,7 +49,6 @@ $(document).ready(function () {
         $("#categorieIdSearch").val(categorieId);
         const action = $("#formSearchSubcategorie").attr("action");
         const data = $("#formSearchSubcategorie").serialize();
-        console.log(data);
         $.ajax({
             type: "POST",
             url: action,
