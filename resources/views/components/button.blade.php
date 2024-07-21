@@ -9,6 +9,22 @@
         @endphp
     @break
 
+    @case('store-gradient')
+        @php
+            $classes =
+                'rounded-full bg-primary px-5 py-3 w-max font-secondary text-white uppercase font-medium  hover:bg-secondary bg-gradient flex items-center justify-center gap-2 ' .
+                $class;
+        @endphp
+    @break
+
+    @case('store-secondary')
+        @php
+            $classes =
+                'rounded-full bg-primary px-5 py-3 w-max font-secondary text-zinc-600 uppercase font-normal bg-white border border-zinc-300 flex items-center justify-center gap-2 hover:bg-zinc-100 ' .
+                $class;
+        @endphp
+    @break
+
     @case('secondary')
         @php
             $classes =
