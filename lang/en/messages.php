@@ -1,0 +1,25 @@
+<?php
+
+return [
+    "welcome" => "Welcome to our application",
+    "products" => "Products",
+    "categories" => "Categories",
+    "brands" => "Brands",
+    "flash_offers" => "Flash offers",
+    "popups" => "Ads",
+    "store" => "Store",
+    "sales_strategy" => "Sales strategy",
+    "manage_reviews" => "Manage reviews",
+    "orders" => "Orders",
+    "users" => "Users",
+    "customers" => "Customers",
+    "registered_customers" => "Registered customers",
+    "support_tickets" => "Support tickets",
+    "subscriptions" => "Subscriptions",
+    "settings" => "Settings",
+    "general_settings" => "General settings",
+    "policies" => "Policies",
+    "frequent_questions" => "Frequent questions",
+    "categorie_title" => "Manage categories",
+    "categorie_description" => "Manage your store categories",
+];
