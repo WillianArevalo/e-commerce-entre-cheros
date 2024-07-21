@@ -1,3 +1,47 @@
 .home__header {
     height: 600px;
 }
+
+.link-nav {
+    display: inline-block;
+    position: relative;
+}
+
+.link-nav::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: #011b4e;
+    transition: width 0.3s ease-in-out;
+}
+
+.link-nav:hover::after {
+    width: 100%;
+}
+
+.link-nav.active::after {
+    width: 100%;
+}
+
+.glass {
+    background: rgba(249, 249, 250, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.accordion-desactive {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+}
+
+.accordion-active {
+    overflow: hidden;
+    height: 190px;
+    transition: height 0.5s ease-in-out;
+}
