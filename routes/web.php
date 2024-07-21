@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FlashOfferController;
@@ -16,11 +17,10 @@ use App\Http\Controllers\PoliciesController;
 use App\Http\Controllers\PopupController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingsGeneralController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubCategorieController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UserController;
-use App\Models\SubCategorie;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,11 +30,23 @@ Route::controller(ProductController::class)->group(function () {
     Route::get("/products/{id}/details", "details")->name("products.details");
 });
 
-Route::get("/cart", [CartController::class, "index"])->name("cart");
+Route::controller(StoreController::class)->group(function () {
+    Route::get("/store", "index")->name("store");
+});
+
+Route::controller(CartController::class)->group(function () {
+    Route::get("/cart", "index")->name("cart");
+    Route::post("/cart/add/{id}", "add")->name("cart.add");
+    Route::post("/cart/remove/{id}", "remove")->name("cart.remove");
+    Route::post("/cart/plus/{id}", "plus")->name("cart.plus");
+    Route::post("/cart/minus/{id}", "minus")->name("cart.minus");
+});
+
 Route::get("/checkout", [CheckoutController::class, "index"])->name("checkout");
 Route::get("/categories", [CategorieController::class, "showCategoriesStore"])->name("categories");
 Route::get("/login", [AuthController::class, "showLoginForm"])->name("login");
-
+Route::post("/login/validate", [AuthController::class, "validate"])->name("login.validate");
+Route::get("/register", [AuthController::class, "showRegisterForm"])->name("register");
 
 /** Routes Admin */
 Route::get("/admin/login", [AdminController::class, "login"])->name("admin.login");
@@ -60,6 +72,7 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::get("/settings", [SettingsGeneralController::class, "index"])->name("settings");
     Route::resource("/policies", PoliciesController::class);
     Route::resource("/faq", FAQController::class);
+    Route::get("locale/{locale}", [ConfigurationController::class, "setLocale"])->name("locale");
 });
 
 Route::post("/logout", [AuthController::class, "logout"])->name("logout");
