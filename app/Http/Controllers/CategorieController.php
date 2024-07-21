@@ -114,7 +114,7 @@ class CategorieController extends Controller
             }
             $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
         } else {
-            return redirect()->back()->with("error", "No se pudo encontrar la imagen");
+            return redirect()->back()->with("error", "No se pudo encontrar la imagena");
         }
         $categorie->update($validated);
         return redirect()->route("admin.categories.index")->with("success", "Categoría actualizada correctamente");
