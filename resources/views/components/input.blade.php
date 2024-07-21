@@ -17,7 +17,7 @@
     $labelClass = $required ? " after:content-['*'] after:ml-0.5 after:text-red-500" : '';
 
     $classes =
-        'bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500' .
+        'bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500 ' .
         $class .
         ' ' .
         $errorClass;
