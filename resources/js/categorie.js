@@ -1,3 +1,5 @@
+import { showOverlay, hideOverlay } from "./drawer";
+
 $(document).ready(function () {
     $("#typeCategorie").on("Changed", function () {
         var typeCategorie = $(this).val();
@@ -35,7 +37,7 @@ $(document).ready(function () {
         showOverlay();
     });
 
-    $("#close-drawer-new-categorie").on("click", function () {
+    $(".close-drawer-new-categorie").on("click", function () {
         $("#drawer-new-categorie").addClass("translate-x-full");
         hideOverlay();
     });
@@ -62,18 +64,10 @@ $(document).ready(function () {
         });
     });
 
-    $("#close-drawer-edit-categorie").on("click", function () {
+    $(".close-drawer-edit-categorie").on("click", function () {
         $("#drawer-edit-categorie").addClass("translate-x-full");
         hideOverlay();
     });
-
-    function showOverlay() {
-        $("#overlay").removeClass("hidden");
-    }
-
-    function hideOverlay() {
-        $("#overlay").addClass("hidden");
-    }
 
     $(document).on("click", ".btnDropDown", function (e) {
         e.stopPropagation();
