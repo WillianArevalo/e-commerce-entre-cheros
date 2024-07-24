@@ -35,7 +35,7 @@
                             <div
                                 class="flex items-center justify-end p-4 h-full border-t dark:border-zinc-900 border-gray-200">
                                 <label for="profile"
-                                    class="text-sm bg-blue-600 text-white px-4 py-2 block rounded cursor-pointer hover:bg-blue-800 w-max">
+                                    class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5">
                                     Cambiar foto
                                 </label>
                                 <input type="file" name="profile" id="profile" class="hidden">
@@ -84,7 +84,6 @@
                                             :options="[
                                                 'admin' => 'Administrador',
                                                 'supervisor' => 'Supervisor',
-                                                'user' => 'Usuario',
                                                 'customer' => 'Cliente',
                                             ]" selected="{{ $user->role }}" value="{{ $user->role }}" />
                                     </div>
@@ -98,9 +97,9 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Editar usuario" icon="edit" typeButton="success" />
+                        <x-button type="submit" text="Editar usuario" icon="edit" typeButton="primary" />
                         <x-button type="a" href="{{ route('admin.users.index') }}" text="Cancelar" icon="cancel"
-                            typeButton="danger" />
+                            typeButton="secondary" />
                     </div>
                 </form>
             </div>

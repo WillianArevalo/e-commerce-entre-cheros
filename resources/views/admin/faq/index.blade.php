@@ -33,46 +33,7 @@
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                             <x-button id="new-faq" type="button" text="Nueva pregunta" icon="add-circle"
-                                typeClass="primary" />
-                            <div class="flex items-center space-x-3 w-full md:w-auto">
-                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
-                                    type="button">
-                                    <x-icon icon="filter" class="h-4 w-4 mr-2 text-gray-400" />
-                                    Filtros
-                                    <x-icon icon="arrow-down" class="-mr-1 ml-1.5 w-4 h-4 text-current" />
-                                </button>
-                                <div id="filterDropdown"
-                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
-                                    <form action="{{ route('admin.categories.search') }}" method="POST"
-                                        id="formSearchCategorieCheck">
-                                        @csrf
-                                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                                            Categorías:
-                                        </h6>
-                                        <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                            <li class="flex items-center">
-                                                <input id="no_subcategories" name="filter[]" type="checkbox"
-                                                    value="no_subcategories"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
-                                                <label for="no_subcategories"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    Sin subcategorías
-                                                </label>
-                                            </li>
-                                            <li class="flex items-center">
-                                                <input id="has_subcategories" name="filter[]" type="checkbox"
-                                                    value="has_subcategories"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
-                                                <label for="fitbit"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    Con subcategorías
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </div>
+                                typeButton="primary" />
                         </div>
                     </div>
                     <div>
@@ -103,12 +64,12 @@
                                                     <x-button type="button" class="editFaq"
                                                         data-href="{{ route('admin.faq.edit', $faq->id) }}"
                                                         data-action="{{ route('admin.faq.update', $faq->id) }}"
-                                                        text="Editar" icon="edit" typeButton="success" />
+                                                        onlyIcon="true" icon="edit" typeButton="success" />
                                                     <form action="{{ route('admin.faq.destroy', $faq->id) }}"
                                                         id="formDeleteFaq" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <x-button type="button" data-form="formDeleteFaq" text="Eliminar"
+                                                        <x-button type="button" data-form="formDeleteFaq" onlyIcon="true"
                                                             icon="delete" typeButton="danger" class="buttonDelete" />
                                                     </form>
                                                 </div>
@@ -163,8 +124,8 @@
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar pregunta" icon="add-circle" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.faq.index') }}" icon="cancel" text="Cancelar"
-                            typeButton="danger" />
+                        <x-button type="a" href="{{ route('admin.faq.index') }}" text="Cancelar"
+                            typeButton="secondary" />
                     </div>
                 </form>
             </div>
@@ -200,9 +161,9 @@
                             label="Respuesta" value="{{ old('answer') }}" />
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Editar" icon="edit" typeButton="success" />
+                        <x-button type="submit" text="Editar" icon="edit" typeButton="primary" />
                         <x-button type="a" href="{{ route('admin.faq.index') }}" icon="cancel" text="Cancelar"
-                            typeButton="danger" />
+                            typeButton="secondary" />
                     </div>
                 </form>
             </div>

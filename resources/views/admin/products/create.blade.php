@@ -103,49 +103,9 @@
                                     <div class="flex gap-4 flex-col">
                                         <div class="flex gap-4">
                                             <div class="flex-1">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                    Categoría del producto
-                                                </label>
-                                                <input type="hidden" name="categorie_id" id="categorie_id"
-                                                    value="{{ old('categorie_id') }}">
-                                                <div class="relative">
-                                                    <div
-                                                        class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('categorie_id') is-invalid @enderror">
-                                                        <span class="itemSelected">
-                                                            @if ($categories->count() > 0)
-                                                                @php
-                                                                    $selectedCategorie = $categories->firstWhere(
-                                                                        'id',
-                                                                        old('categorie_id'),
-                                                                    );
-                                                                @endphp
-                                                                @if ($selectedCategorie)
-                                                                    {{ $selectedCategorie->name }}
-                                                                @else
-                                                                    Selecciona una categoría
-                                                                @endif
-                                                            @endif
-                                                        </span>
-                                                        <x-icon icon="arrow-down"
-                                                            class="w-5 h-5 dark:text-white text-gray-500" />
-                                                    </div>
-                                                    <ul
-                                                        class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptions hidden">
-                                                        @if ($categories->count() > 0)
-                                                            @foreach ($categories as $categorie)
-                                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
-                                                                    data-value="{{ $categorie->id }}"
-                                                                    data-input="#categorie_id">
-                                                                    {{ $categorie->name }}
-                                                                </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                                @error('categorie_id')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
+                                                <x-select label="Categoría del producto" id="categorie_id"
+                                                    name="categorie_id" :options="$categories->pluck('name', 'id')->toArray()" value=""
+                                                    selected="" />
                                             </div>
                                             <div class="flex-1">
                                                 <label
@@ -156,16 +116,16 @@
                                                     value="{{ old('categorie_id') }}">
                                                 <div class="relative">
                                                     <div
-                                                        class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('subcategorie_id') is-invalid @enderror">
+                                                        class="selected border border-gray-300 bg-gray-50 dark:border-zinc-800 rounded py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('subcategorie_id') is-invalid @enderror">
                                                         <span class="itemSelected" id="selectedSubCategorie">
                                                             Selecciona una subcategoría
                                                         </span>
                                                         <x-icon icon="arrow-down"
                                                             class="w-5 h-5 dark:text-white text-gray-500" />
                                                     </div>
-                                                    <ul class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsSubCategories hidden"
+                                                    <ul class="absolute z-10 w-full mt-2 p-2 bg-white border border-gray-200 rounded shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsSubCategories hidden"
                                                         id="listSubcategories">
-                                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
+                                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded"
                                                             data-value="" data-input="#subcategorie_id">
                                                             Ninguna categoría principal seleccionada
                                                         </li>
@@ -177,48 +137,8 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                Marca del producto
-                                            </label>
-                                            <input type="hidden" name="brand_id" id="brand_id"
-                                                value="{{ old('brand_id') }}">
-                                            <div class="relative">
-                                                <div
-                                                    class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('brand_id') is-invalid @enderror">
-                                                    <span class="itemSelected">
-                                                        @if ($brands->count() > 0)
-                                                            @php
-                                                                $selectedBrand = $brands->firstWhere(
-                                                                    'id',
-                                                                    old('brand_id'),
-                                                                );
-                                                            @endphp
-                                                            @if ($selectedBrand)
-                                                                {{ $selectedBrand->name }}
-                                                            @else
-                                                                Selecciona una marca
-                                                            @endif
-                                                        @endif
-                                                    </span>
-                                                    <x-icon icon="arrow-down"
-                                                        class="w-5 h-5 dark:text-white text-gray-500" />
-                                                </div>
-                                                <ul
-                                                    class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptions hidden">
-                                                    @if ($brands->count() > 0)
-                                                        @foreach ($brands as $brand)
-                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
-                                                                data-value="{{ $brand->id }}" data-input="#brand_id">
-                                                                {{ $brand->name }}
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            @error('brand_id')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-select label="Marca del producto" id="brand_id" name="brand_id"
+                                                :options="$brands->pluck('name', 'id')->toArray()" value="" selected="" />
                                         </div>
                                     </div>
                                 </div>
@@ -273,7 +193,7 @@
                                                 </p>
                                                 <x-button type="button" id="showModalTax" data-modal-target="addTax"
                                                     data-modal-toggle="addTax" text="Nuevo impuesto" icon="add-circle"
-                                                    typeButton="success" />
+                                                    typeButton="secondary" />
                                             </div>
                                             <div class="flex flex-col mt-4">
                                                 <p for="price" class="block text-sm font-medium text-white">
@@ -311,7 +231,7 @@
                                             Imagen principal
                                         </p>
                                         <label for="main_image"
-                                            class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-zinc-950 @error('main_image') is-invalid  @enderror">
+                                            class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-zinc-900 dark:hover:border-zinc-800 dark:hover:bg-zinc-950 @error('main_image') is-invalid  @enderror">
                                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                                 <x-icon icon="cloud-upload"
                                                     class="w-12 h-12 text-gray-400 dark:text-gray-500" />
@@ -326,7 +246,7 @@
                                                 </p>
                                             </div>
                                             <input id="main_image" type="file" class="hidden" name="main_image" />
-                                            <img src="" alt="Preview Image" id="previewImage"
+                                            <img src="preview image" alt="Preview Image" id="previewImage"
                                                 class="w-56 h-64 object-cover hidden m-10">
                                         </label>
                                     </div>
@@ -340,19 +260,17 @@
                                             </div>
                                             <div class="text-sm text-gray-400 flex gap-2">
                                                 <label for="gallery_image"
-                                                    class="flex items-center justify-center gap-1 px-4 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-800 transition-colors">
+                                                    class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5">
                                                     <x-icon icon="image-add" class="w-4 h-4 text-current" />
                                                     Seleccionar imágenes
                                                 </label>
                                                 <input type="file" name="gallery_image[]" id="gallery_image" multiple
                                                     class="hidden">
-                                                <button type="button" id="reloadImages"
-                                                    class="dark:bg-white dark:text-gray-800 p-2 rounded dark:hover:bg-zinc-300 bg-gray-200 hover:bg-gray-300 text-gray-700">
-                                                    <x-icon icon="reload" class="w-5 h-5 text-current" />
-                                                </button>
+                                                <x-button type="button" id="reloadImages" typeButton="secondary"
+                                                    icon="reload" />
                                             </div>
                                         </div>
-                                        <div class="flex gap-2 h-24 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg mt-4 flex-wrap justify-start"
+                                        <div class="flex gap-2 h-24 border-2 border-dashed border-gray-300 dark:border-zinc-900 rounded-lg mt-4 flex-wrap justify-start"
                                             id="previewImagesContainer">
                                             <p class="m-auto text-sm dark:text-gray-400">Sin imágenes seleccionadas</p>
                                         </div>
@@ -386,7 +304,7 @@
                                         </h4>
                                         <x-button type="button" id="showModalLabel" data-modal-target="addLabel"
                                             data-modal-toggle="addLabel" text="Nueva etiqueta" icon="add-circle"
-                                            typeButton="success" />
+                                            typeButton="secondary" />
                                     </div>
                                     <div class="flex gap-4">
                                         <div class="w-full">
@@ -396,16 +314,16 @@
                                             <input type="hidden" name="label_id[]" id="label_id">
                                             <div class="relative">
                                                 <div
-                                                    class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between">
+                                                    class="selected border border-gray-300 bg-gray-50 dark:border-zinc-800 rounded py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between">
                                                     <span class="itemSelected">Seleccionar etiqueta</span>
                                                     <x-icon icon="arrow-down"
                                                         class="w-5 h-5 dark:text-white text-gray-500" />
                                                 </div>
-                                                <ul class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsLabels hidden"
+                                                <ul class="absolute z-10 w-full mt-2 p-2 bg-white border border-gray-200 rounded shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsLabels hidden"
                                                     id="labelsList">
                                                     @if ($labels->count() > 0)
                                                         @foreach ($labels as $label)
-                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
+                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded"
                                                                 data-value="{{ $label->name }}" data-input="#label_id">
                                                                 {{ $label->name }}
                                                             </li>
@@ -419,21 +337,23 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <x-button type="button" typeButton="primary" icon="arrow-right-02"
+                                        <x-button type="button" typeButton="secondary" icon="arrow-right-02"
                                             id="addLabelSelected" class="mt-7" />
                                     </div>
                                     <input type="hidden" name="labels_ids[]" id="labels_ids">
                                     <div id="hiddenLabelsContainer"></div>
-                                    <div class="mt-4 w-full h-20 border-2 border-gray-300 border-dashed rounded-lg bg-gray-50  dark:bg-transparent dark:border-gray-600 flex flex-wrap items-start p-2 gap-1"
+                                    <div class="mt-4 w-full h-auto border-2 border-gray-300 border-dashed rounded-lg bg-gray-50  dark:bg-transparent dark:border-zinc-900 flex flex-wrap items-start p-2 gap-1"
                                         id="previewLabelsContainer">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar producto" icon="add-circle" typeButton="primary"
                             id="addButtonProduct" />
+                        <x-button type="a" href="{{ route('admin.products.index') }}" text="Regresar"
+                            typeButton="secondary" />
                     </div>
                 </form>
                 <form action="{{ route('admin.subcategories.search') }}" id="formSearchSubcategorie" method="POST">
@@ -487,7 +407,8 @@
                         <div class="flex justify-end gap-2 mt-4">
                             <x-button type="button" id="addTaxButton" text="Agregar" icon="add-circle"
                                 typeButton="primary" />
-                            <x-button type="button" data-modal-toggle="addTax" text="Cancelar" typeButton="danger" />
+                            <x-button type="button" data-modal-toggle="addTax" text="Cancelar"
+                                typeButton="secondary" />
                         </div>
                     </form>
                 </div>
@@ -496,7 +417,7 @@
 
         <!-- Modal agregar etiqueta -->
         <div id="addLabel" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-40">
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-90">
             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative p-4 bg-white rounded-lg shadow dark:bg-zinc-950 sm:p-5">
@@ -531,7 +452,8 @@
                         <div class="flex justify-end gap-2 mt-4">
                             <x-button type="button" id="addLabelButton" text="Agregar" icon="add-circle"
                                 typeButton="primary" />
-                            <x-button type="button" data-modal-toggle="addLabel" text="Cancelar" typeButton="danger" />
+                            <x-button type="button" data-modal-toggle="addLabel" text="Cancelar"
+                                typeButton="secondary" />
                         </div>
                     </form>
                 </div>

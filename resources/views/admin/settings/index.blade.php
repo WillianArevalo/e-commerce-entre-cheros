@@ -66,7 +66,7 @@
                         <div class="flex gap-4 mt-2 items-center">
                             <x-button type="button" text="Ver cookies" icon="view" typeButton="secondary"
                                 class="w-max" />
-                            <x-button type="a" text="Editar cookies" icon="edit" typeButton="success"
+                            <x-button type="a" text="Editar cookies" icon="edit" typeButton="primary"
                                 class="w-max" />
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         </p>
                         @include('layouts.__partials.footer')
                     </div>
-                    <x-button type="a" text="Editar footer" icon="edit" typeButton="success" class="w-max mt-4" />
+                    <x-button type="a" text="Editar footer" icon="edit" typeButton="primary" class="w-max mt-4" />
                 </div>
                 <div class="p-4 border dark:border-zinc-900 border-gray-300 rounded-lg mt-4">
                     <h3 class="dark:text-gray-300 text-gray-700">
@@ -99,7 +99,7 @@
                         </p>
                         @include('layouts.__partials.navbar')
                     </div>
-                    <x-button type="a" text="Editar menú de navegación" icon="edit" typeButton="success"
+                    <x-button type="a" text="Editar menú de navegación" icon="edit" typeButton="primary"
                         class="w-max mt-4" />
                 </div>
             </div>

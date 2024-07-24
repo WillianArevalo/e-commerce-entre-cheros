@@ -21,16 +21,8 @@
                             <span class="dark:text-gray-200 font-secondary font-semibold text-base">100 productos</span>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <button id="importDropdownButton" data-dropdown-toggle="importDropdown"
-                                class="flex items-center border border-blue-600 hover:bg-blue-600 text-blue-600 hover:text-white px-4 py-2.5 rounded-lg text-sm">
-                                <x-icon icon="import" class="h-5 w-5 mr-2 text-current" />
-                                Importar
-                            </button>
-                            <button href=""
-                                class="flex items-center border border-blue-600 hover:bg-blue-600 text-blue-600 hover:text-white px-4 py-2.5 rounded-lg text-sm">
-                                <x-icon icon="export" class="h-5 w-5 mr-2 text-current" />
-                                Exportar
-                            </button>
+                            <x-button type="button" icon="import" typeButton="secondary" text="Importar" />
+                            <x-button type="button" icon="export" typeButton="secondary" text="Exportar" />
                         </div>
                     </div>
                     <div
@@ -45,19 +37,10 @@
                         </div>
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button
-                                class="w-full md:w-auto flex items-center justify-center py-3 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
-                                type="button">
-                                <x-icon icon="reload" class="h-4 w-4 text-current" />
-                            </button>
+                            <x-button type="button" icon="reload" typeButton="secondary" />
                             <div class="flex items-center space-x-3 w-full md:w-auto">
-                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
-                                    type="button">
-                                    <x-icon icon="filter" class="h-4 w-4 mr-2 text-current" />
-                                    Filtros
-                                    <x-icon icon="arrow-down" class="-mr-1 ml-1.5 w-4 h-4 text-current" />
-                                </button>
+                                <x-button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button"
+                                    icon="filter" typeButton="secondary" text="Filtros" />
                                 <div id="filterDropdown"
                                     class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
@@ -89,33 +72,24 @@
                                 </div>
                             </div>
                             <div>
-                                <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
-                                    class="flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded md:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
-                                    type="button">
-                                    <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path clip-rule="evenodd" fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                    Acciones
-                                </button>
-                                <div id="actionsDropdown"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-60 dark:bg-zinc-950 dark:divide-zinc-900">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                <x-button type="button" id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
+                                    typeButton="secondary" text="Acciones" icon="arrow-down" />
+                                <div id="actionsDropdown" class="z-10 hidden bg-white rounded shadow w-60 dark:bg-zinc-950">
+                                    <ul class="p-2 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="actionsDropdownButton">
                                         <li>
                                             <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-zinc-900 dark:hover:text-white">
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-zinc-900 dark:hover:text-white rounded">
                                                 Importar seleccionados
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-zinc-900 dark:text-gray-200 dark:hover:text-white rounded">
+                                                Eliminar seleccionados
+                                            </a>
+                                        </li>
                                     </ul>
-                                    <div class="py-1">
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-zinc-900 dark:text-gray-200 dark:hover:text-white">
-                                            Eliminar seleccionados
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -174,25 +148,29 @@
                                             <td class="px-4 py-3">
                                                 <div class="flex items-center space-x-2">
                                                     <x-button type="a" icon="edit" typeButton="success"
-                                                        href="{{ route('admin.products.edit', $product->id) }}" />
+                                                        href="{{ route('admin.products.edit', $product->id) }}"
+                                                        onlyIcon="true" />
                                                     <form action="{{ route('admin.products.destroy', $product->id) }}"
                                                         id="formDeleteCategorie" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <x-button type="button" data-form="formDeleteCategorie"
-                                                            icon="delete" typeButton="danger" class="buttonDelete" />
+                                                            icon="delete" typeButton="danger" class="buttonDelete"
+                                                            onlyIcon="true" />
                                                     </form>
                                                     <x-button type="a" icon="view" typeButton="secondary"
-                                                        href="{{ route('admin.products.show', $product->id) }}" />
+                                                        href="{{ route('admin.products.show', $product->id) }}"
+                                                        onlyIcon="true" />
                                                     <form action="{{ route('admin.flash-offers.add-flash-offer') }}"
                                                         method="POST">
                                                         @csrf
                                                         <input type="hidden" name="product_id"
                                                             value="{{ $product->id }}">
-                                                        <x-button type="submit" icon="flash" typeButton="tertiary"
-                                                            data-tooltip-target="tooltip-default-{{ $product->id }}" />
+                                                        <x-button type="submit" icon="flash" typeButton="secondary"
+                                                            data-tooltip-target="tooltip-default-{{ $product->id }}"
+                                                            onlyIcon="true" />
                                                         <div id="tooltip-default-{{ $product->id }}" role="tooltip"
-                                                            class="absolute z-10 invisible inline-block px-3 py-2 font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-xs">
+                                                            class="absolute z-10 invisible inline-block px-3 py-2 font-medium text-white transition-opacity duration-300 bg-violet-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-violet-700 text-xs">
                                                             Oferta flash
                                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                                         </div>

@@ -113,7 +113,7 @@
                                         </p>
                                         <div class="flex justify-end">
                                             <label for="profile"
-                                                class="flex items-center justify-center gap-2 text-sm bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-800 w-max m-4 hover:ring-4 hover:ring-blue-200 dark:ring-blue-900">
+                                                class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5 m-4">
                                                 <x-icon icon="image-add" class="w-5 h-5 text-current" />
                                                 Agregar foto
                                             </label>
@@ -160,8 +160,8 @@
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar cliente" icon="add-circle" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.customers.index') }}" text="Cancelar"
-                            icon="cancel" typeButton="danger" />
+                        <x-button type="a" href="{{ route('admin.customers.index') }}" text="Regresar"
+                            typeButton="secondary" />
                     </div>
                 </form>
                 <form action="{{ route('admin.subcategories.search') }}" id="formSearchSubcategorie" method="POST">

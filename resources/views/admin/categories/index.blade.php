@@ -33,15 +33,10 @@
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                             <x-button id="new-categorie" type="button" text="Nueva categoría" icon="add-circle"
-                                typeClass="primary" />
+                                typeButton="primary" />
                             <div class="flex items-center space-x-3 w-full md:w-auto">
-                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
-                                    type="button">
-                                    <x-icon icon="filter" class="h-4 w-4 mr-2 text-gray-400" />
-                                    Filtros
-                                    <x-icon icon="arrow-down" class="-mr-1 ml-1.5 w-4 h-4 text-current" />
-                                </button>
+                                <x-button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button"
+                                    typeButton="secondary" icon="filter" text="Filtros" />
                                 <div id="filterDropdown"
                                     class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
@@ -117,31 +112,31 @@
                                                                         class="w-5 h-5 text-current" />
                                                                 </button>
                                                                 <div
-                                                                    class="hidden absolute top-10 z-30 w-44 bg-white divide-y divide-gray-100 shadow dark:bg-zinc-950 dark:divide-zinc-800 dropDownContent rounded-lg overflow-hidden">
+                                                                    class="hidden absolute top-10 z-30 w-44 bg-white shadow dark:bg-zinc-950 dropDownContent rounded-lg overflow-hidden">
                                                                     <ul
-                                                                        class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                                                                        class="p-2 text-sm text-gray-700 dark:text-gray-200">
                                                                         <li>
                                                                             <button type="button"
                                                                                 data-href="{{ route('admin.subcategories.edit', $subcategorie->id) }}"
                                                                                 data-action="{{ route('admin.subcategories.update', $subcategorie->id) }}"
-                                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-zinc-900 dark:hover:text-white w-full text-start editCategorie">
+                                                                                class="block py-2 px-4 hover:bg-gray-100 rounded dark:hover:bg-zinc-900 dark:hover:text-white w-full text-start editCategorie">
                                                                                 Editar
                                                                             </button>
                                                                         </li>
+                                                                        <li>
+                                                                            <form
+                                                                                action="{{ route('admin.subcategories.destroy', $subcategorie->id) }}"
+                                                                                method="POST" id="formDeleteSubCategorie">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="button"
+                                                                                    data-form="formDeleteSubCategorie"
+                                                                                    class="block text-start w-full py-2 px-4 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 dark:text-white buttonDelete">
+                                                                                    Eliminar
+                                                                                </button>
+                                                                            </form>
+                                                                        </li>
                                                                     </ul>
-                                                                    <div class="py-1">
-                                                                        <form
-                                                                            action="{{ route('admin.subcategories.destroy', $subcategorie->id) }}"
-                                                                            method="POST" id="formDeleteSubCategorie">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="button"
-                                                                                data-form="formDeleteSubCategorie"
-                                                                                class="block text-start w-full py-2 px-4 hover:bg-gray-100 dark:hover:bg-zinc-900 dark:text-white buttonDelete">
-                                                                                Eliminar
-                                                                            </button>
-                                                                        </form>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         @endforeach
@@ -152,16 +147,16 @@
                                             </td>
                                             <td class="px-4 py-3">
                                                 <div class="flex gap-2">
-                                                    <x-button type="button" class="editCategorie"
+                                                    <x-button type="button" class="editCategorie" onlyIcon="true"
                                                         data-href="{{ route('admin.categories.edit', $category->id) }}"
                                                         data-action="{{ route('admin.categories.update', $category->id) }}"
-                                                        text="Editar" icon="edit" typeButton="success" />
+                                                        icon="edit" typeButton="success" />
                                                     <form action="{{ route('admin.categories.destroy', $category->id) }}"
                                                         id="formDeleteCategorie" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <x-button type="button" data-form="formDeleteCategorie"
-                                                            text="Eliminar" icon="delete" typeButton="danger"
+                                                            onlyIcon="true" icon="delete" typeButton="danger"
                                                             class="buttonDelete" />
                                                     </form>
                                                 </div>
@@ -186,8 +181,8 @@
                 class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
                 Nueva categoría
             </h5>
-            <button type="button" id="close-drawer-new-categorie"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <button type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-zinc-900 dark:hover:text-white close-drawer-new-categorie">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -240,8 +235,8 @@
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar categoría" icon="add-circle" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.categories.index') }}" icon="cancel"
-                            text="Cancelar" typeButton="danger" />
+                        <x-button type="button" class="close-drawer-new-categorie"
+                            href="{{ route('admin.categories.index') }}" text="Cancelar" typeButton="secondary" />
                     </div>
                 </form>
             </div>
@@ -254,8 +249,8 @@
                 class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
                 Editar categoría
             </h5>
-            <button type="button" id="close-drawer-edit-categorie"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <button type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-zinc-900 dark:hover:text-white close-drawer-edit-categorie">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -270,8 +265,7 @@
                     @method('PUT')
                     <div class="w-full">
                         <x-input type="text" name="name" id="edit_name_categorie"
-                            placeholder="Ingresa el nombre de la categoría" label="Nombre" icon="bookmark"
-                            value="" />
+                            placeholder="Ingresa el nombre de la categoría" label="Nombre" icon="bookmark" />
                     </div>
                     <div>
                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -296,9 +290,9 @@
                         @enderror
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Editar categoría" icon="edit" typeButton="success" />
-                        <x-button type="a" href="{{ route('admin.categories.index') }}" icon="cancel"
-                            text="Cancelar" typeButton="danger" />
+                        <x-button type="submit" text="Editar categoría" icon="edit" typeButton="primary" />
+                        <x-button type="button" class="close-drawer-edit-categorie" text="Cancelar"
+                            typeButton="secondary" />
                     </div>
                 </form>
             </div>

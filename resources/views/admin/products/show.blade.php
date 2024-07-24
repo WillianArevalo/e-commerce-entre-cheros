@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="dark:bg-black py-4 px-4 flex flex-col items-start border-y dark:border-zinc-900">
+        <div class="bg-white dark:bg-black py-4 px-4 flex flex-col items-start border-y dark:border-zinc-900">
             <a href="{{ route('admin.products.index') }}"
                 class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
                 <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
@@ -14,7 +14,7 @@
                 Detalles del producto
             </h1>
         </div>
-        <div class="flex p-4 gap-4 h-full bg-black">
+        <div class="bg-white flex p-4 gap-4 h-full dark:bg-black">
             <div class="w-1/2">
                 <div
                     class="dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg mb-4 flex justify-between">
@@ -123,16 +123,16 @@
                     @if ($product->offer_price)
                         <div class="flex flex-col gap-1 mt-2">
                             <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Precio de oferta:</h3>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">${{ $product->price }}</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">${{ $product->offer_price }}</p>
                         </div>
                         <div
-                            class="flex flex-col gap-1 mt-2 border-2 border-dashed dark:border-gray-700 border-gray-400 p-4 rounded-lg">
-                            <h3 class="text-gray-100 text-sm font-medium">Fecha de la oferta:</h3>
+                            class="flex flex-col gap-1 mt-2 border-2 border-dashed dark:border-zinc-900 border-gray-400 p-4 rounded-lg">
+                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Fecha de la oferta:</h3>
                             <div class="timeline-container">
                                 <div class="timeline">
                                     <div class="timeline-event start-date">
                                         <div
-                                            class="timeline-content p-4 dark:bg-gray-700 bg-gray-200 dark:text-gray-300 text-gray-700 rounded text-sm">
+                                            class="timeline-content p-4 dark:bg-black border dark:border-zinc-900 bg-white border-zinc-200dark:text-gray-300 text-gray-700 rounded text-sm">
                                             <h3 class="timeline-title">Fecha de inicio</h3>
                                             <p class="timeline-date dark:text-blue-500 text-secondary font-medium">
                                                 {{ $product->offer_start_date }}
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="timeline-event end-date">
                                         <div
-                                            class="timeline-content p-4 dark:bg-gray-700 bg-gray-200 dark:text-gray-300 text-gray-700 rounded text-sm">
+                                            class="timeline-content p-4 dark:bg-black border dark:border-zinc-900 bg-white border-zinc-200 dark:text-gray-300 text-gray-700 rounded text-sm">
                                             <h3 class="timeline-title">Fecha de fin</h3>
                                             <p class="timeline-date dark:text-blue-500 text-secondary font-medium">
                                                 {{ $product->offer_end_date }}
@@ -184,7 +184,7 @@
                         @else
                             @foreach ($product->labels as $label)
                                 <span
-                                    class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                                    class="bg-white text-zinc-600 border-zinc-300 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-900 rounded-full flex items-center justify-between gap-2">
                                     {{ $label->name }}
                                 </span>
                             @endforeach
@@ -193,18 +193,18 @@
                 </div>
             </div>
         </div>
-        <div class="px-4 pb-4 text-sm flex gap-2 items-center justify-between bg-black">
-            <x-button type="a" text="Regresar" icon="arrow-left-02" typeButton="danger"
+        <div class="px-4 pb-4 text-sm flex gap-2 items-center justify-between dark:bg-black">
+            <x-button type="a" text="Regresar" icon="arrow-left-02" typeButton="secondary"
                 href="{{ route('admin.products.index') }}" class="w-max" />
             <div class="flex gap-2 items-center">
                 @if ($previousProduct)
                     <x-button type="a" text="Anterior producto" icon="arrow-left" iconAlign="left"
-                        typeButton="primary" href="{{ route('admin.products.show', $previousProduct->id) }}"
+                        typeButton="secondary" href="{{ route('admin.products.show', $previousProduct->id) }}"
                         class="w-max" />
                 @endif
                 @if ($nextProduct)
                     <x-button type="a" text="Siguiente producto" icon="arrow-right" iconAlign="right"
-                        typeButton="primary" href="{{ route('admin.products.show', $nextProduct->id) }}"
+                        typeButton="secondary" href="{{ route('admin.products.show', $nextProduct->id) }}"
                         class="w-max" />
                 @endif
             </div>

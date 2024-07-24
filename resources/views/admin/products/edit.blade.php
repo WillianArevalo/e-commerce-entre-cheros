@@ -104,50 +104,10 @@
                                     <div class="flex gap-4 flex-col">
                                         <div class="flex gap-4">
                                             <div class="flex-1">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                    Categoría del producto
-                                                </label>
-                                                <input type="hidden" name="categorie_id" id="categorie_id"
-                                                    value="{{ $product->categorie_id }}">
-                                                <div class="relative">
-                                                    <div
-                                                        class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('categorie_id') is-invalid @enderror">
-                                                        <span class="itemSelected">
-                                                            @if ($categories->count() > 0)
-                                                                @php
-                                                                    $selectedCategorie = $categories->firstWhere(
-                                                                        'id',
-                                                                        $product->categorie_id,
-                                                                    );
-                                                                @endphp
-                                                                @if ($selectedCategorie)
-                                                                    {{ $selectedCategorie->name }}
-                                                                @else
-                                                                    Selecciona una categoría
-                                                                @endif
-                                                            @endif
-                                                        </span>
-                                                        <x-icon icon="arrow-down"
-                                                            class="w-5 h-5 dark:text-white text-gray-500" />
-                                                    </div>
-                                                    <ul
-                                                        class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptions hidden">
-                                                        @if ($categories->count() > 0)
-                                                            @foreach ($categories as $categorie)
-                                                                <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
-                                                                    data-value="{{ $categorie->id }}"
-                                                                    data-input="#categorie_id">
-                                                                    {{ $categorie->name }}
-                                                                </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                                @error('categorie_id')
-                                                    <span
-                                                        class="text-red-500 text-subcategorie_idsm">{{ $message }}</span>
-                                                @enderror
+                                                <x-select label="Categoría del producto" id="categorie_id"
+                                                    name="categorie_id" :options="$categories->pluck('name', 'id')->toArray()"
+                                                    value="{{ $product->categorie_id }}"
+                                                    selected="{{ $product->categorie_id }}" />
                                             </div>
                                             <div class="flex-1">
                                                 <label
@@ -155,19 +115,19 @@
                                                     Subcategoría del producto
                                                 </label>
                                                 <input type="hidden" name="subcategorie_id" id="subcategorie_id"
-                                                    value="{{ $product->subcategorie_id }}">
+                                                    value="{{ old('categorie_id') }}">
                                                 <div class="relative">
                                                     <div
-                                                        class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('subcategorie_id') is-invalid @enderror">
+                                                        class="selected border border-gray-300 bg-gray-50 dark:border-zinc-800 rounded py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('subcategorie_id') is-invalid @enderror">
                                                         <span class="itemSelected" id="selectedSubCategorie">
                                                             Selecciona una subcategoría
                                                         </span>
                                                         <x-icon icon="arrow-down"
                                                             class="w-5 h-5 dark:text-white text-gray-500" />
                                                     </div>
-                                                    <ul class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsSubCategories hidden"
+                                                    <ul class="absolute z-10 w-full mt-2 p-2 bg-white border border-gray-200 rounded shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsSubCategories hidden"
                                                         id="listSubcategories">
-                                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
+                                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded"
                                                             data-value="" data-input="#subcategorie_id">
                                                             Ninguna categoría principal seleccionada
                                                         </li>
@@ -179,48 +139,9 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
-                                                Marca del producto
-                                            </label>
-                                            <input type="hidden" name="brand_id" id="brand_id"
-                                                value="{{ $product->brand_id }}">
-                                            <div class="relative">
-                                                <div
-                                                    class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('brand_id') is-invalid @enderror">
-                                                    <span class="itemSelected">
-                                                        @if ($brands->count() > 0)
-                                                            @php
-                                                                $selectedBrand = $brands->firstWhere(
-                                                                    'id',
-                                                                    $product->brand_id,
-                                                                );
-                                                            @endphp
-                                                            @if ($selectedBrand)
-                                                                {{ $selectedBrand->name }}
-                                                            @else
-                                                                Selecciona una marca
-                                                            @endif
-                                                        @endif
-                                                    </span>
-                                                    <x-icon icon="arrow-down"
-                                                        class="w-5 h-5 dark:text-white text-gray-500" />
-                                                </div>
-                                                <ul
-                                                    class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptions hidden">
-                                                    @if ($brands->count() > 0)
-                                                        @foreach ($brands as $brand)
-                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
-                                                                data-value="{{ $brand->id }}" data-input="#brand_id">
-                                                                {{ $brand->name }}
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            @error('brand_id')
-                                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                            @enderror
+                                            <x-select label="Marca del producto" id="brand_id" name="brand_id"
+                                                :options="$brands->pluck('name', 'id')->toArray()" value="{{ $product->brand_id }}"
+                                                selected="{{ $product->brand_id }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +196,7 @@
                                                 </p>
                                                 <x-button type="button" id="showModalTax" data-modal-target="addTax"
                                                     data-modal-toggle="addTax" text="Nuevo impuesto" icon="add-circle"
-                                                    typeButton="success" />
+                                                    typeButton="secondary" />
                                             </div>
                                             <div class="flex flex-col mt-4">
                                                 <p for="price" class="block text-sm font-medium text-white">
@@ -298,8 +219,9 @@
                                                                 <label for="{{ $tax->name }}"
                                                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                                                     {{ $tax->name }}
-                                                                    <span
-                                                                        class="text-xs text-blue-700 dark:text-blue-400">({{ $tax->rate }}%)</span>
+                                                                    <span class="text-xs text-blue-700 dark:text-blue-400">
+                                                                        ({{ $tax->rate }}%)
+                                                                    </span>
                                                                 </label>
                                                             </div>
                                                         @endforeach
@@ -320,7 +242,7 @@
                                             Imagen principal
                                         </p>
                                         <label for="main_image"
-                                            class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-zinc-950 @error('main_image') is-invalid  @enderror">
+                                            class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-zinc-900 dark:hover:border-zinc-800 dark:hover:bg-zinc-950 @error('main_image') is-invalid  @enderror">
                                             <div class="flex-col items-center justify-center pt-5 pb-6 hidden">
                                                 <x-icon icon="cloud-upload"
                                                     class="w-12 h-12 text-gray-400 dark:text-gray-500" />
@@ -335,8 +257,9 @@
                                                 </p>
                                             </div>
                                             <input id="main_image" type="file" class="hidden" name="main_image" />
-                                            <img src="{{ Storage::url($product->main_image) }}" alt="Preview Image"
-                                                id="previewImage" class="w-56 h-64 object-cover m-10">
+                                            <img src="{{ Storage::url($product->main_image) }}"
+                                                alt="Preview Image {{ $product->name }}" id="previewImage"
+                                                class="w-56 h-64 object-cover m-10">
                                         </label>
                                     </div>
                                     <div class="mt-4">
@@ -349,19 +272,17 @@
                                             </div>
                                             <div class="text-sm text-gray-400 flex gap-2">
                                                 <label for="gallery_image"
-                                                    class="flex items-center justify-center gap-1 px-4 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-800 transition-colors">
+                                                    class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5">
                                                     <x-icon icon="image-add" class="w-4 h-4 text-current" />
                                                     Seleccionar imágenes
                                                 </label>
                                                 <input type="file" name="gallery_image[]" id="gallery_image" multiple
                                                     class="hidden">
-                                                <button type="button" id="reloadImages"
-                                                    class="dark:bg-white dark:text-gray-800 p-2 rounded dark:hover:bg-zinc-300 bg-gray-200 hover:bg-gray-300 text-gray-700">
-                                                    <x-icon icon="reload" class="w-5 h-5 text-current" />
-                                                </button>
+                                                <x-button type="button" id="reloadImages" typeButton="secondary"
+                                                    icon="reload" />
                                             </div>
                                         </div>
-                                        <div class="flex gap-2 @php $product->images->count()>0 ? "h-auto": "h-24" @endphp border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg mt-4 flex-wrap justify-start"
+                                        <div class="flex gap-2 @php $product->images->count()>0 ? "h-auto": "h-24" @endphp border-2 border-dashed border-gray-300 dark:border-zinc-900 rounded-lg mt-4 flex-wrap justify-start"
                                             id="previewImagesContainer">
                                             @if ($product->images->count() > 0)
                                                 @foreach ($product->images as $image)
@@ -403,7 +324,7 @@
                                         </h4>
                                         <x-button type="button" id="showModalLabel" data-modal-target="addLabel"
                                             data-modal-toggle="addLabel" text="Nueva etiqueta" icon="add-circle"
-                                            typeButton="success" />
+                                            typeButton="secondary" />
                                     </div>
                                     <div class="flex gap-4">
                                         <div class="w-full">
@@ -413,16 +334,16 @@
                                             <input type="hidden" name="label_id[]" id="label_id">
                                             <div class="relative">
                                                 <div
-                                                    class="selected border-2 border-gray-300 bg-gray-50 dark:border-zinc-800 rounded-lg py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between">
+                                                    class="selected border border-gray-300 bg-gray-50 dark:border-zinc-800 rounded py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between">
                                                     <span class="itemSelected">Seleccionar etiqueta</span>
                                                     <x-icon icon="arrow-down"
                                                         class="w-5 h-5 dark:text-white text-gray-500" />
                                                 </div>
-                                                <ul class="absolute z-10 w-full mt-2 py-1 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsLabels hidden"
+                                                <ul class="absolute z-10 w-full mt-2 p-2 bg-white border border-gray-200 rounded shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsLabels hidden"
                                                     id="labelsList">
                                                     @if ($labels->count() > 0)
                                                         @foreach ($labels as $label)
-                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900"
+                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded"
                                                                 data-value="{{ $label->name }}" data-input="#label_id">
                                                                 {{ $label->name }}
                                                             </li>
@@ -454,17 +375,18 @@
                                             @endforeach
                                         @endif
                                     </div>
-                                    <div class="mt-4 w-full h-20 border-2 border-gray-300 border-dashed rounded-lg bg-gray-50  dark:bg-transparent dark:border-gray-600 flex flex-wrap items-start p-2 gap-1"
+                                    <div class="mt-4 w-full h-auto border-2 border-gray-300 border-dashed rounded-lg bg-gray-50  dark:bg-transparent dark:border-zinc-900 flex flex-wrap items-start p-2 gap-1"
                                         id="previewLabelsContainer">
                                         @if ($product->labels->count() > 0)
                                             @foreach ($product->labels as $label)
                                                 <div
-                                                    class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 flex items-center justify-between gap-1">
+                                                    class="bg-white text-zinc-600 border-zinc-300 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-900 rounded-full flex items-center justify-between gap-2">
                                                     <span>{{ $label->name }}</span>
                                                     <button type="button" class="text-white removeLabelEdit"
-                                                        data-label="{{ $label->name }}">
+                                                        data-label="{{ $label->name }}"
+                                                        data-index="{{ $loop->iteration }}">
                                                         <x-icon icon="cancel"
-                                                            class="w-3 h-3 dark:text-white text-blue-800" />
+                                                            class="w-4 h-4 dark:text-white text-blue-800" />
                                                     </button>
                                                 </div>
                                             @endforeach
@@ -474,11 +396,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-4">
-                        <x-button type="submit" text="Editar producto" icon="edit" typeButton="success"
+                    <div class="flex items-center justify-center gap-2">
+                        <x-button type="submit" text="Editar producto" icon="edit" typeButton="primary"
                             id="addButtonProduct" />
                         <x-button type="a" href="{{ route('admin.products.index') }}" text="Cancelar"
-                            icon="cancel" typeButton="danger" iconAlign="left" />
+                            typeButton="secondary" />
                     </div>
                 </form>
                 <form action="{{ route('admin.subcategories.search') }}" id="formSearchSubcategorie" method="POST">
@@ -490,18 +412,18 @@
 
         <!-- Modal agregar impuesto -->
         <div id="addTax" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-40">
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-90">
             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                 <!-- Modal content -->
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
-                        class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                        class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-zinc-900">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Agregar impuesto
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-zinc-900 dark:hover:text-white"
                             data-modal-toggle="addTax">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -517,33 +439,23 @@
                         @csrf
                         <div class="flex flex-col gap-4">
                             <div>
-                                <label for="name_tax"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                <input type="text" name="name" id="name_tax"
-                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    data-message="#message-nameTax" placeholder="Escribe el nombre del impuesto">
+                                <x-input label="Nombre" type="text" name="name" id="name_tax"
+                                    placeholder="Escribe el nombre del impuesto" error="{{ false }}"
+                                    data-message="#message-nameTax" required="required" />
                                 <span class="text-red-500 text-sm hidden invalid-feedback" id="message-nameTax"></span>
                             </div>
                             <div class="flex flex-col gap-1">
-                                <label for="description"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Tasa de impuesto
-                                </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                        <x-icon icon="percent" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                    </div>
-                                    <input type="number" id="rate" name="rate" step="0.1" min="0.1"
-                                        class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        data-message="#message-rate" placeholder="0.00">
-                                </div>
+                                <x-input label="Tasa de impuesto" type="number" name="rate" id="rate"
+                                    placeholder="0" error="{{ false }}" step="0.1" min="0.1"
+                                    icon="percent" data-message="#message-rate" required="required" />
                                 <span class="text-red-500 text-sm hidden invalid-feedback" id="message-rate"></span>
                             </div>
                         </div>
                         <div class="flex justify-end gap-2 mt-4">
                             <x-button type="button" id="addTaxButton" text="Agregar" icon="add-circle"
                                 typeButton="primary" />
-                            <x-button type="button" data-modal-toggle="addTax" text="Cancelar" typeButton="danger" />
+                            <x-button type="button" data-modal-toggle="addTax" text="Cancelar"
+                                typeButton="secondary" />
                         </div>
                     </form>
                 </div>
@@ -552,18 +464,18 @@
 
         <!-- Modal agregar etiqueta -->
         <div id="addLabel" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-40">
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-90">
             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                 <!-- Modal content -->
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
-                        class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                        class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-zinc-900">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Agregar etiqueta
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-zinc-900 dark:hover:text-white"
                             data-modal-toggle="addLabel">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -579,18 +491,16 @@
                         @csrf
                         <div class="flex flex-col gap-4">
                             <div>
-                                <label for="name_label"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                <input type="text" name="name" id="name_label"
-                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    data-message="#message-nameLabel" placeholder="Escribe el nombre del impuesto">
+                                <x-input label="Nombre" id="name_label" name="name" data-message="#message-nameLabel"
+                                    placeholder="Escribe el nombre del impuesto" required="required" type="text" />
                                 <span class="text-red-500 text-sm hidden invalid-feedback" id="message-nameLabel"></span>
                             </div>
                         </div>
                         <div class="flex justify-end gap-2 mt-4">
                             <x-button type="button" id="addLabelButton" text="Agregar" icon="add-circle"
                                 typeButton="primary" />
-                            <x-button type="button" data-modal-toggle="addLabel" text="Cancelar" typeButton="danger" />
+                            <x-button type="button" data-modal-toggle="addLabel" text="Cancelar"
+                                typeButton="secondary" />
                         </div>
                     </form>
                 </div>

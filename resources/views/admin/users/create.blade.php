@@ -37,7 +37,7 @@
                             </div>
                             <div class="flex justify-end border-t dark:border-zinc-900 border-gray-200">
                                 <label for="profile"
-                                    class="flex items-center justify-center gap-2 text-sm bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-800 w-max m-4">
+                                    class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5 m-4">
                                     <x-icon icon="image-add" class="w-5 h-5 text-current" />
                                     Agregar foto
                                 </label>
@@ -81,15 +81,16 @@
                                     </div>
                                 </div>
                                 <div class="flex">
-                                    <div class="flex-1"></div>
+                                    <x-select label="Rol" id="role" name="role" value="principal"
+                                        :options="['admin' => 'Administrador', 'supervisor' => 'Supervisor']" selected="admin" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Ingresar usuario" icon="add-circle" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.users.index') }}" text="Cancelar" icon="cancel"
-                            typeButton="danger" />
+                        <x-button type="a" href="{{ route('admin.users.index') }}" text="Regresar"
+                            typeButton="secondary" />
                     </div>
                 </form>
             </div>

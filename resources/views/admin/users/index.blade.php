@@ -33,15 +33,10 @@
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                             <x-button type="a" href="{{ route('admin.users.create') }}" text="Nuevo usuario"
-                                icon="add-circle" typeClass="primary" />
+                                icon="add-circle" typeButton="primary" />
                             <div class="flex items-center space-x-3 w-full md:w-auto">
-                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-zinc-500"
-                                    type="button">
-                                    <x-icon icon="filter" class="h-4 w-4 mr-2 text-current" />
-                                    Filtros
-                                    <x-icon icon="arrow-down" class="-mr-1 ml-1.5 w-4 h-4 text-current" />
-                                </button>
+                                <x-button type="button" id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
+                                    typeButton="secondary" icon="filter" text="Filtros" />
                                 <div id="filterDropdown"
                                     class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
@@ -127,12 +122,12 @@
                                         <td class="px-4 py-3">
                                             <div class="flex gap-2">
                                                 <x-button type="a" href="{{ route('admin.users.edit', $user->id) }}"
-                                                    text="Editar" icon="edit" typeButton="success" />
+                                                    onlyIcon="true" icon="edit" typeButton="success" />
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}"
                                                     id="formDeleteUser" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <x-button type="button" data-form="formDeleteUser" text="Eliminar"
+                                                    <x-button type="button" data-form="formDeleteUser" onlyIcon="true"
                                                         icon="delete" typeButton="danger" class="buttonDelete" />
                                                 </form>
                                             </div>

@@ -9,7 +9,7 @@
                 <h1 class="text-4xl font-primary text-primary uppercase font-bold">Categorías</h1>
                 <ul class="flex gap-4 flex-col font-secondary text-white">
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between justify-between">
+                        <a href="" class="flex gap-2 items-center justify-between">
                             Nombre categoría
                             <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
                         </a>
