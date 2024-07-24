@@ -14,11 +14,12 @@ class Button extends Component
     public $typeButton;
     public $class;
     public $iconAlign;
+    public $onlyIcon;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($type = 'primary', $text = '', $icon = '', $typeButton = '', $class = '', $iconAlign = 'left')
+    public function __construct($type = 'primary', $text = '', $icon = '', $typeButton = '', $class = '', $iconAlign = 'left', $onlyIcon = false)
     {
         $this->type = $type;
         $this->text = $text;
@@ -26,6 +27,7 @@ class Button extends Component
         $this->typeButton = $typeButton;
         $this->class = $class;
         $this->iconAlign = $iconAlign;
+        $this->onlyIcon = $onlyIcon;
     }
 
 
