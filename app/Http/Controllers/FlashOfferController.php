@@ -14,7 +14,8 @@ class FlashOfferController extends Controller
     public function index()
     {
         $offers = FlashOffer::with("product")->get();
-        return view("admin.flash_offers.index", compact("offers"));
+        $products = Product::doesntHave("flash_offers")->get();
+        return view("admin.flash_offers.index", ["products" => $products, "offers" => $offers]);
     }
 
     /**
@@ -41,7 +42,7 @@ class FlashOfferController extends Controller
             $product->flash_offers()->create($validated);
             return redirect()->route("admin.products.index")->with("success", "Oferta relámpago creada con éxito");
         } else {
-            return redirect()->route("admin.flash-offers.create")->with("product", $product);
+            return redirect()->route("admin.flash-offers.index")->with("product", $product);
         }
     }
 
@@ -109,7 +110,7 @@ class FlashOfferController extends Controller
         $offer = FlashOffer::find($id);
         if ($offer) {
             $product = Product::find($offer->product_id);
-            return view("admin.flash_offers.edit", compact("offer", "product"));
+            return response()->json(["offer" => $offer, "product" => $product]);
         } else {
             return redirect()->route("admin.flash-offers.index")->with("error", "Oferta relámpago no encontrada");
         }
