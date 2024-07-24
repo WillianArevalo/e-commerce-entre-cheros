@@ -29,7 +29,8 @@
         },
         "files": [
             "app/Helpers/ImageHelper.php",
-            "app/Helpers/Cart.php"
+            "app/Helpers/Cart.php",
+            "app/Helpers/Favorites.php"
         ]
     },
     "autoload-dev": {
