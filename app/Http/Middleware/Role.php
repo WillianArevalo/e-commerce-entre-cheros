@@ -22,7 +22,6 @@ class Role
             if ($request->is("admin")) {
                 return redirect("/admin/login");
             }
-
             return redirect("/login");
         }
 
@@ -33,7 +32,7 @@ class Role
                 case "admin":
                     redirect("/admin");
                     break;
-                case "user":
+                case "customer":
                     redirect("/");
                     break;
             }
