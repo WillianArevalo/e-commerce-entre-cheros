@@ -32,8 +32,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        $categories = Categorie::all();
-        return view("admin.categories.create", compact("categories"));
+        return redirect()->route("admin.categories.index");
     }
 
     /**
@@ -114,7 +113,7 @@ class CategorieController extends Controller
             }
             $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
         } else {
-            return redirect()->back()->with("error", "No se pudo encontrar la imagena");
+            $validated["image"] = $categorie->image;
         }
         $categorie->update($validated);
         return redirect()->route("admin.categories.index")->with("success", "Categoría actualizada correctamente");
