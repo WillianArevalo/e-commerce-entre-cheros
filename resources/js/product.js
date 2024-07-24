@@ -1,47 +1,33 @@
 $(document).ready(function () {
-    /* Select custom de etiquetas */
-    $(document).on("click", ".selectOptionsLabels .itemOption", function () {
-        let item = $(this).text();
-        let value = $(this).data("value");
-        let input = $(this).data("input");
-        $(this)
-            .closest(".selectOptionsLabels")
-            .prev(".selected")
-            .find(".itemSelected")
-            .text(item);
-        $(input).val(value).trigger("Changed");
-        $(this).parent().addClass("hidden");
-    });
-
-    /** Select custom de las subcategorías  */
-    $(document).on(
-        "click",
-        ".selectOptionsSubCategories .itemOption",
-        function () {
+    function handleSelectOptions(containerClass, selectedClass, inputEvent) {
+        $(document).on("click", `${containerClass} .itemOption`, function () {
             let item = $(this).text();
             let value = $(this).data("value");
             let input = $(this).data("input");
             $(this)
-                .closest(".selectOptionsSubCategories")
-                .prev(".selected")
+                .closest(containerClass)
+                .prev(selectedClass)
                 .find(".itemSelected")
                 .text(item);
-            $(input).val(value).trigger("Changed");
+            $(input).val(value).trigger(inputEvent);
             $(this).parent().addClass("hidden");
-        }
-    );
+        });
+    }
+
+    handleSelectOptions(".selectOptionsSubCategories", ".selected", "Changed");
+    handleSelectOptions(".selectOptionsLabels", ".selected", "Changed");
 
     const $selectedSubCategory = $("#selectedSubCategorie");
     const $parentSubCategory = $selectedSubCategory.parent();
 
-    document.ready =
-        $("#categorie_od").val() != ""
-            ? getSubcategories($("#categorie_id").val())
-            : initalState();
+    if ($("#categorie_id").val() !== "") {
+        getSubcategories($("#categorie_id").val());
+    } else {
+        initialState();
+    }
 
     $("#categorie_id").on("Changed", function () {
-        const id = $(this).val();
-        getSubcategories(id);
+        getSubcategories($(this).val());
     });
 
     function getSubcategories(id) {
@@ -52,22 +38,10 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: action,
-            data: $("#formSearchSubcategorie").serialize(),
+            data: data,
             success: function (response) {
                 $("#listSubcategories").html(response.html);
-                if (response.subcategoria.name === "No tiene subcategorías") {
-                    $selectedSubCategory.text("No tiene subcategorías");
-                    $parentSubCategory.addClass("pointer-events-none");
-                    $parentSubCategory.find("svg").addClass("hidden");
-                    $("#subcategorie_id").val("").trigger("Changed");
-                } else {
-                    $selectedSubCategory.text(response.subcategoria.name);
-                    $parentSubCategory.removeClass("pointer-events-none");
-                    $parentSubCategory.find("svg").removeClass("hidden");
-                    $("#subcategorie_id")
-                        .val(response.subcategoria.id)
-                        .trigger("Changed");
-                }
+                updateSubCategoryUI(response.subcategoria);
             },
             error: function (error) {
                 console.log(error);
@@ -75,22 +49,39 @@ $(document).ready(function () {
         });
     }
 
-    function initalState() {
+    function updateSubCategoryUI(subcategoria) {
+        if (subcategoria.name === "No tiene subcategorías") {
+            $selectedSubCategory.text("No tiene subcategorías");
+            $parentSubCategory.addClass("pointer-events-none");
+            $parentSubCategory.find("svg").addClass("hidden");
+            $("#subcategorie_id").val("").trigger("Changed");
+        } else {
+            $selectedSubCategory.text(subcategoria.name);
+            $parentSubCategory.removeClass("pointer-events-none");
+            $parentSubCategory.find("svg").removeClass("hidden");
+            $("#subcategorie_id").val(subcategoria.id).trigger("Changed");
+        }
+    }
+
+    function initialState() {
         $selectedSubCategory.text("Selecciona una categoría");
         $parentSubCategory.addClass("pointer-events-none");
         $parentSubCategory.find("svg").addClass("hidden");
     }
 
-    if ($("#offer_price").val() != 0) {
-        $("#dateOffer").removeClass("hidden");
+    function toggleElementVisibility(element, condition) {
+        if (condition) {
+            element.removeClass("hidden");
+        } else {
+            element.addClass("hidden");
+        }
     }
 
+    const $dateOffer = $("#dateOffer");
+    toggleElementVisibility($dateOffer, $("#offer_price").val() != 0);
+
     $("#offer_price").on("keyup", function () {
-        if ($(this).val() != 0) {
-            $("#dateOffer").removeClass("hidden");
-        } else {
-            $("#dateOffer").addClass("hidden");
-        }
+        toggleElementVisibility($dateOffer, $(this).val() != 0);
     });
 
     $("#main_image").on("change", function () {
@@ -110,6 +101,7 @@ $(document).ready(function () {
     $("#gallery_image").on("change", imageUpload);
     const $previewImagesContainer = $("#previewImagesContainer");
     let images = [];
+
     function imageUpload(e) {
         $previewImagesContainer.html("");
         $previewImagesContainer.removeClass("h-auto").addClass("h-20");
@@ -133,9 +125,9 @@ $(document).ready(function () {
         images.forEach((imageUrl, index) => {
             const previewDiv = $("<div></div>");
             previewDiv.addClass("inline-block m-2");
-            const imageElement = $("<img />");
-            imageElement.addClass("w-20 h-20 object-cover rounded-lg");
-            imageElement.attr("src", imageUrl);
+            const imageElement = $("<img />")
+                .addClass("w-20 h-20 object-cover rounded-lg")
+                .attr("src", imageUrl);
             previewDiv.append(imageElement);
             $previewImagesContainer.append(previewDiv);
         });
@@ -143,46 +135,38 @@ $(document).ready(function () {
 
     $("#reloadImages").on("click", function () {
         $("#gallery_image").val("");
-        $previewImagesContainer.html(
-            '<p class="m-auto text-sm dark:text-gray-400">Sin imágenes seleccionadas</p>'
-        );
-        $previewImagesContainer.removeClass("h-auto").addClass("h-20");
+        $previewImagesContainer
+            .html(
+                '<p class="m-auto text-sm dark:text-gray-400">Sin imágenes seleccionadas</p>'
+            )
+            .removeClass("h-auto")
+            .addClass("h-20");
     });
 
-    $("#addLabelSelected").on("click", addLabel);
-    let labels = [];
     let inputLabelsIds = $("#labels_ids");
-
-    if (inputLabelsIds.val() && inputLabelsIds.val() != "") {
-        labels = inputLabelsIds.val().split(",");
-    }
+    let labels = inputLabelsIds.val() ? inputLabelsIds.val().split(",") : [];
 
     function addLabel() {
         let labelValue = $("#label_id").val();
-        if (labelValue === "") {
-            console.log("Selecciona una etiqueta");
-            return false;
-        }
-        if (!labels.includes(labelValue)) {
+        if (labelValue && !labels.includes(labelValue)) {
             labels.push(labelValue);
             inputLabelsIds.val(labels);
             updateHiddenLabels();
+            updatePreviewLabels();
         } else {
             console.log("Ese valor ya existe");
         }
-        updatePreviewLabels();
     }
 
     function updateHiddenLabels() {
         const hiddenLabelsContainer = $("#hiddenLabelsContainer");
         hiddenLabelsContainer.html("");
-
         labels.forEach((labelValue) => {
-            const input = $("<input>")
-                .attr("type", "hidden")
-                .attr("name", "labels[]")
-                .val(labelValue);
-            hiddenLabelsContainer.append(input);
+            hiddenLabelsContainer.append(
+                $("<input>")
+                    .attr({ type: "hidden", name: "labels[]" })
+                    .val(labelValue)
+            );
         });
     }
 
@@ -190,30 +174,23 @@ $(document).ready(function () {
         const $previewLabelsContainer = $("#previewLabelsContainer");
         $previewLabelsContainer.html("");
         labels.forEach((labelValue, index) => {
-            console.log(index, labelValue);
-            const previewDiv = $("<div></div>");
-            previewDiv.addClass(
-                "bg-blue-100 text-blue-800 text-sm font-medium me-2 px-3 py-2 rounded dark:bg-blue-900 dark:text-blue-300 flex items-center justify-between gap-2"
+            const previewDiv = $("<div></div>").addClass(
+                "bg-white text-zinc-600 border-zinc-300 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-900 rounded-full flex items-center justify-between gap-2"
             );
-            const labelElement = $("<span></span>");
-            labelElement.text(labelValue);
-
-            const removeBtn = $("<button></button>");
-            removeBtn.html(
-                '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-current" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none"><path d="M15 9L9 14.9996M15 15L9 9.00039" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" stroke-width="1.5" /></svg>'
-            );
-            removeBtn.attr("type", "button");
-            removeBtn.addClass(
-                "text-current dark:hover:text-blue-500 hover:text-blue-500"
-            );
-            removeBtn.on("click", () => {
-                removeLabel(index);
-            });
-
-            previewDiv.append(labelElement);
-            previewDiv.append(removeBtn);
+            const labelElement = $("<span></span>").text(labelValue);
+            const removeBtn = $("<button></button>")
+                .html(
+                    '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-current" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none"> <path d="M19.0005 4.99988L5.00049 18.9999M5.00049 4.99988L19.0005 18.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
+                )
+                .attr("type", "button")
+                .addClass(
+                    "text-current dark:hover:text-blue-500 hover:text-blue-500"
+                );
+            removeBtn.on("click", () => removeLabel(index));
+            previewDiv.append(labelElement).append(removeBtn);
             $previewLabelsContainer.append(previewDiv);
         });
+        labelTextHide();
     }
 
     function removeLabel(index) {
@@ -221,23 +198,31 @@ $(document).ready(function () {
         inputLabelsIds.val(labels);
         updateHiddenLabels();
         updatePreviewLabels();
-        labelTextHide();
     }
 
     function labelTextHide() {
         if (labels.length === 0) {
             $("#previewLabelsContainer").html(
-                '<p class="m-auto text-sm dark:text-gray-400">Sin etiquetas seleccionadas</p>'
+                '<p class="m-auto text-sm dark:text-white p-4">Sin etiquetas seleccionadas</p>'
             );
         }
     }
 
+    $("#addLabelSelected").on("click", addLabel);
+    $(".removeLabelEdit").on("click", function () {
+        removeLabel($(this).data("index"));
+    });
+
     labelTextHide();
 
+    function resetFormAndHideInvalidFeedback(formId) {
+        $(formId)[0].reset();
+        $(formId).find("input").removeClass("is-invalid");
+        $(formId).find(".invalid-feedback").addClass("hidden");
+    }
+
     $("#showModalTax").on("click", function () {
-        $("#formAddTax")[0].reset();
-        $("#formAddTax").find("input").removeClass("is-invalid");
-        $("#formAddTax").find(".invalid-feedback").addClass("hidden");
+        resetFormAndHideInvalidFeedback("#formAddTax");
     });
 
     $("#addTaxButton").on("click", function () {
@@ -246,55 +231,45 @@ $(document).ready(function () {
         const messageName = taxName.data("message");
         const messageRate = rate.data("message");
 
-        if (taxName.val() === "" && rate.val() === "") {
-            taxName.addClass("is-invalid");
-            $(messageName).removeClass("hidden").text("El nombre es requerido");
-            rate.addClass("is-invalid");
-            $(messageRate)
-                .removeClass("hidden")
-                .text("La tasa de impuesto es requerida");
-        }
+        let isValid = true;
 
-        if (taxName.val() === "") {
+        if (!taxName.val()) {
             taxName.addClass("is-invalid");
             $(messageName).removeClass("hidden").text("El nombre es requerido");
-            taxName.focus();
-            return false;
+            isValid = false;
         } else {
             taxName.removeClass("is-invalid");
         }
 
-        if (rate.val() === "") {
+        if (!rate.val()) {
             rate.addClass("is-invalid");
             $(messageRate)
                 .removeClass("hidden")
                 .text("La tasa de impuesto es requerida");
-            rate.focus();
-            return false;
+            isValid = false;
         } else {
             rate.removeClass("is-invalid");
         }
 
-        $.ajax({
-            url: $("#formAddTax").attr("action"),
-            method: "POST",
-            data: $("#formAddTax").serialize(),
-            success: function (response) {
-                console.log(response);
-                $("#checkBoxTaxes").html(response.html);
-                $("#addTax").addClass("hidden");
-                $("body").removeClass("overflow-hidden");
-            },
-            error: function (error) {
-                console.log(error);
-            },
-        });
+        if (isValid) {
+            $.ajax({
+                url: $("#formAddTax").attr("action"),
+                method: "POST",
+                data: $("#formAddTax").serialize(),
+                success: function (response) {
+                    $("#checkBoxTaxes").html(response.html);
+                    $("#addTax").addClass("hidden");
+                    $("body").removeClass("overflow-hidden");
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }
     });
 
     $("#showModalLabel").on("click", function () {
-        $("#formAddLabel")[0].reset();
-        $("#formAddLabel").find("input").removeClass("is-invalid");
-        $("#formAddLabel").find(".invalid-feedback").addClass("hidden");
+        resetFormAndHideInvalidFeedback("#formAddLabel");
     });
 
     $("#addLabelButton").on("click", function () {
@@ -304,25 +279,21 @@ $(document).ready(function () {
         if (labelName.val() === "") {
             labelName.addClass("is-invalid");
             $(messageName).removeClass("hidden").text("El nombre es requerido");
-            labelName.focus();
-            return false;
         } else {
             labelName.removeClass("is-invalid");
+            $.ajax({
+                url: $("#formAddLabel").attr("action"),
+                method: "POST",
+                data: $("#formAddLabel").serialize(),
+                success: function (response) {
+                    $("#labelsList").html(response.html);
+                    $("#addLabel").addClass("hidden");
+                    $("body").removeClass("overflow-hidden");
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
         }
-
-        $.ajax({
-            url: $("#formAddLabel").attr("action"),
-            method: "POST",
-            data: $("#formAddLabel").serialize(),
-            success: function (response) {
-                console.log(response);
-                $("#labelsList").html(response.html);
-                $("#addLabel").addClass("hidden");
-                $("body").removeClass("overflow-hidden");
-            },
-            error: function (error) {
-                console.log(error);
-            },
-        });
     });
 });
