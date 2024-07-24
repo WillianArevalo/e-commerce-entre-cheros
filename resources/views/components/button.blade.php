@@ -1,10 +1,68 @@
-@props(['type', 'text', 'icon', 'typeButton', 'class', 'icon-align' => 'left'])
+@props(['type', 'text', 'icon', 'typeButton', 'class', 'icon-align' => 'left', 'onlyIcon' => false])
+
+@php
+    if ($onlyIcon) {
+        $padding = 'p-2';
+    } else {
+        $padding = 'px-3.5 py-2.5';
+    }
+
+    $classGeneral = 'font-medium rounded flex items-center gap-2 transition-colors text-sm ' . $padding;
+@endphp
 
 @switch($typeButton)
     @case('primary')
         @php
             $classes =
-                'text-blue-800 font-medium bg-blue-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-blue-200 dark:text-blue-300 dark:bg-blue-900 dark:hover:bg-blue-950 dark:bg-opacity-30 focus:ring-blue-300 focus:ring-4 dark:focus:ring-blue-800 ' .
+                'bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200 ' .
+                $classGeneral .
+                ' ' .
+                $class;
+        @endphp
+    @break
+
+    @case('secondary')
+        @php
+            $classes =
+                'border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
+                $classGeneral .
+                ' ' .
+                $class;
+        @endphp
+    @break
+
+    @case('success')
+        @php
+            $classes =
+                'border-2 border-green-500 text-green-500 hover:text-white hover:bg-green-500 dark:bg-green-800 dark:hover:bg-green-900 dark:text-white ' .
+                $classGeneral .
+                ' ' .
+                $class;
+        @endphp
+    @break
+
+    @case('danger')
+        @php
+            $classes =
+                'border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-500 dark:bg-red-800 dark:hover:bg-red-900 dark:text-white  ' .
+                $classGeneral .
+                ' ' .
+                $class;
+        @endphp
+    @break
+
+    @case('info')
+        @php
+            $classes = 'border-2 border-sky-500 text-white bg-sky-800 border-sky-500 ' . $classGeneral . ' ' . $class;
+        @endphp
+    @break
+
+    @case('info')
+        @php
+            $classes =
+                'border-2 border-sky-500 text-sky-500 hover:bg-sky-800 hover:text-white hover:border-sky-500 ' .
+                $classGeneral .
+                ' ' .
                 $class;
         @endphp
     @break
@@ -25,42 +83,12 @@
         @endphp
     @break
 
-    @case('secondary')
-        @php
-            $classes =
-                'text-teal-800 font-medium bg-teal-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-teal-200 dark:text-teal-300 dark:bg-teal-900 dark:hover:bg-teal-950 dark:bg-opacity-30 focus:ring-teal-300 focus:ring-4 dark:focus:ring-teal-800 ' .
-                $class;
-        @endphp
-    @break
-
-    @case('success')
-        @php
-            $classes =
-                'text-emerald-800 font-medium bg-emerald-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-emerald-200 dark:text-emerald-300 dark:bg-emerald-900 dark:bg-opacity-30 dark:hover:bg-emerald-950  focus:ring-emerald-300 focus:ring-4 dark:focus:ring-emerald-800 ' .
-                $class;
-        @endphp
-    @break
-
-    @case('danger')
-        @php
-            $classes =
-                'text-red-800 font-medium bg-red-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-red-200 dark:text-red-300 dark:bg-red-900 dark:hover:bg-red-950 dark:bg-opacity-30 focus:ring-red-300 focus:ring-4 dark:focus:ring-red-800 ' .
-                $class;
-        @endphp
-    @break
-
-    @case('tertiary')
-        @php
-            $classes =
-                'text-purple-800 font-medium bg-purple-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-purple-200 dark:text-purple-300 dark:bg-purple-900 dark:hover:bg-purple-950 dark:bg-opacity-30 focus:ring-purple-300 focus:ring-4 dark:focus:ring-purple-800 ' .
-                $class;
-        @endphp
-    @break
-
     @default
         @php
             $classes =
-                'text-blue-800 font-medium bg-blue-100 p-2.5 rounded flex items-center gap-2 transition-colors text-sm hover:bg-blue-200 dark:text-blue-300 dark:bg-blue-900 dark:hover:bg-blue-950 dark:bg-opacity-30 focus:ring-blue-300 focus:ring-4 dark:focus:ring-blue-800 ' .
+                'bg-black border border-white dark:text-white dark:hover:bg-white dark:hover:text-black  ' .
+                $classGeneral .
+                ' ' .
                 $class;
         @endphp
     @break
@@ -81,6 +109,7 @@
     @else
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
             {{ $text }}
+        </a>
     @endif
 @else
     <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
