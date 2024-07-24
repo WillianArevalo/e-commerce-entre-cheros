@@ -11,13 +11,15 @@ class CardProduct extends Component
 
     public $product;
     public $slide;
+    public $width;
     /**
      * Create a new component instance.
      */
-    public function __construct($product, $slide = false)
+    public function __construct($product, $slide = false, $width = "")
     {
         $this->product = $product;
         $this->slide = $slide;
+        $this->width = $width;
     }
 
     /**
