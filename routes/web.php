@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FlashOfferController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LabelController;
@@ -32,6 +33,14 @@ Route::controller(ProductController::class)->group(function () {
 
 Route::controller(StoreController::class)->group(function () {
     Route::get("/store", "index")->name("store");
+    Route::get("/store/products", "products")->name("store.products");
+    Route::get("/store/products/search/{search}/{value}", "search")->name("store.search");
+});
+
+Route::controller(FavoriteController::class)->group(function () {
+    Route::get("/favorites", "index")->name("favorites");
+    Route::post("/favorites/add/{id}", "addFavorite")->name("favorites.add");
+    Route::post("/favorites/remove/{id}", "addFavorite")->name("favorites.remove");
 });
 
 Route::controller(CartController::class)->group(function () {
