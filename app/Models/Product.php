@@ -44,6 +44,11 @@ class Product extends Model
         return $this->hasOne(FlashOffer::class);
     }
 
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
     protected $fillable = [
         "name",
         "short_description",
