@@ -32,12 +32,13 @@
             <div class="flex justify-center gap-2">
                 @if ($categories->count() > 0)
                     @foreach ($categories as $category)
-                        <x-button type="a" typeButton="store-secondary" text="{{ $category->name }}" href="" />
+                        <x-button type="a" typeButton="store-secondary" text="{{ $category->name }}"
+                            href="{{ route('store.search', ['search' => 'categorie_id', 'value' => $category->id]) }}" />
                     @endforeach
                 @endif
             </div>
         </section>
-        <section class="home__body px-20 py-4">
+        <section class="px-20 py-4">
             <div class="flex flex-col gap-4 justify-center w-full text-center">
                 <h2 class="uppercase text-3xl font-primary text-secondary font-bold p-4">
                     Ofertas relampago
@@ -49,7 +50,7 @@
                 @else
                     <div class="flex gap-4 items-center justify-center">
                         @foreach ($flashOffers as $product)
-                            <x-card-product :product="$product" :slide="false" />
+                            <x-card-product :product="$product" :slide="false" width="w-96" />
                         @endforeach
                     </div>
                 @endif
@@ -83,17 +84,14 @@
                     ex ea commodo consequat.
                 </p>
             </div>
-            @if ($products->count() > 3)
-                @include('layouts.__partials.slider', [
-                    'products' => $products,
-                ])
-            @else
-                <div class="flex gap-4 items-center justify-center mt-4">
-                    @foreach ($products as $product)
-                        <x-card-product :product="$product" :slide="false" />
-                    @endforeach
+            @if ($products)
+                <div id="slider">
+                    @include('layouts.__partials.slider', [
+                        'products' => $products,
+                    ])
                 </div>
             @endif
+            <div id="productCard"></div>
         </section>
         <section class="px-40">
             <div style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover; height: 600px; border-radius:70px"
@@ -106,7 +104,6 @@
                         El Salvador
                     </span>
                 </h2>
-
                 <x-button type="a" typeButton="store-gradient" text="Tienda" icon="store"
                     class=" absolute  left-20 bottom-20 " />
             </div>
