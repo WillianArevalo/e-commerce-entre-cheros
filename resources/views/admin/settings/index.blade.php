@@ -1,108 +1,65 @@
 @extends('layouts.admin-template')
 
-@section('title', 'Ajustes generales')
+@section('title', 'Configuración')
 
 @section('content')
-    <div class="dark:border-zinc-900 mt-4 dark:bg-black">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
-                Ajustes generales
-            </h1>
-            <p class="text-sm text-gray-400">
-                Configura los ajustes generales de la aplicación
-            </p>
-        </div>
-        <div class="p-4 dark:bg-black m-4">
-            <h2 class="text-secondary dark:text-blue-400 font-semibold text-xl">Configuraciones</h2>
-            <div class="flex gap-4">
-                <div class="flex gap-4 flex-col mt-4 border dark:border-zinc-900 border-gray-300 rounded-lg p-4 w-max h-max">
-                    <div>
-                        <h3 class="dark:text-gray-300 text-gray-700">Modo mantenimiento</h3>
-                        <p class="dark:text-gray-400 text-gray-600 text-sm">Activa o desactiva el modo mantenimiento</p>
-                        <label class="inline-flex items-center cursor-pointer mt-2">
-                            <input type="checkbox" value="" class="sr-only peer">
-                            <div
-                                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+    <main>
+        <section class="dark:bg-black p-4">
+            <div class="flex px-4 py-2 border dark:border-zinc-900 border-gray-300 rounded-lg items-center">
+                <img src="{{ Storage::url($user->profile_photo_path) }}" alt=""
+                    class="w-20 h-20 rounded-full object-cover">
+                <div class="p-4 flex flex-col justify-center gap-2">
+                    <h1 class="text-2xl font-bold dark:text-white">{{ $user->username }}</h1>
+                    <p class="text-zinc-400 text-sm">{{ $user->email }}</p>
+                    <span
+                        class="text-blue-500 p-2 rounded-full text-center text-sm border border-blue-800">{{ $user->role === 'admin' ? 'Administrador' : $user->role }}
+                    </span>
+                </div>
+            </div>
+            <div class="p-4 border border-gray-300 dark:border-zinc-900 rounded-lg mt-4">
+                <h1 class="text-2xl font-bold dark:text-white">Configuración</h1>
+                <form action="" method="POST">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div class="rounded-lg">
+                            <h2 class="text-xl font-bold dark:text-white">Información de la cuenta</h2>
+                            @csrf
+                            @method('PUT')
+                            <div class="mt-4">
+                                <x-input type="text" label="Nombre de usuario" name="username"
+                                    value="{{ $user->username }}" placeholder="Nombre del usuario" icon="user" />
                             </div>
-                            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Activado
-                            </span>
-                        </label>
-                        <x-button type="a" text="Ver página en mantimiento" icon="view" typeButton="secondary"
-                            class="w-max mt-2" />
-                    </div>
-                </div>
-                <div
-                    class="flex gap-4 flex-col mt-4 border dark:border-zinc-900 border-gray-300 rounded-lg p-4 w-max h-max">
-                    <div>
-                        <h3 class="dark:text-gray-300 text-gray-700">Idiomas</h3>
-                        <p class="dark:text-gray-400 text-gray-600 text-sm">
-                            Configura los idiomas disponibles en la aplicación
-                        </p>
-                        <p class="dark:text-gray-400 text-gray-600 text-sm">
-                            Idiomas agregados:
-                        </p>
-                        <div class="flex gap-2 mt-2">
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                                Español
-                            </span>
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                                Inglés
-                            </span>
+                            <div class="mt-4">
+                                <x-input type="password" label="Contraseña" placeholder="Cambiar contraseña"
+                                    icon="password" />
+                            </div>
+                            <div class="mt-4">
+                                <x-input type="password" label="Confirmar contraseña" placeholder="Confirmar contraseña"
+                                    icon="password" />
+                            </div>
                         </div>
-                        <x-button type="a" text="Agregar idioma" icon="plus" typeButton="primary"
-                            class="w-max mt-4" />
-                    </div>
-                </div>
-                <div
-                    class="flex gap-4 flex-col mt-4 border dark:border-zinc-900 border-gray-300 rounded-lg p-4 w-max h-max">
-                    <div>
-                        <h3 class="dark:text-gray-300 text-gray-700">Cookies</h3>
-                        <p class="dark:text-gray-400 text-gray-600 text-sm">
-                            Configura las cookies de la aplicación
-                        </p>
-                        <div class="flex gap-4 mt-2 items-center">
-                            <x-button type="button" text="Ver cookies" icon="view" typeButton="secondary"
-                                class="w-max" />
-                            <x-button type="a" text="Editar cookies" icon="edit" typeButton="primary"
-                                class="w-max" />
+                        <div class="rounded-lg">
+                            <h2 class="text-xl font-bold dark:text-white">Foto de perfil</h2>
+                            <div class="mt-4">
+                                <label for="imageCategorie"
+                                    class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-zinc-950 @error('image') is-invalid  @enderror">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <x-icon icon="cloud-upload" class="w-12 h-12 text-gray-400 dark:text-gray-500" />
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                                class="font-semibold">Clic para agregar </span> o desliza la imagen</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, WEBP</p>
+                                    </div>
+                                    <input id="imageCategorie" type="file" class="hidden" name="image" />
+                                    <img src="" alt="Preview Image" id="previewImage"
+                                        class="w-56 h-64 object-cover hidden m-10">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="mt-4">
-                <div class="p-4 border dark:border-zinc-900 border-gray-300 rounded-lg">
-                    <h3 class="dark:text-gray-300 text-gray-700">Footer</h3>
-                    <p class="dark:text-gray-400 text-gray-600 text-sm">
-                        Configura el contenido del footer de la aplicación
-                    </p>
                     <div class="mt-4">
-                        <p class="dark:text-gray-400 text-gray-600 text-sm">
-                            Contenido actual:
-                        </p>
-                        @include('layouts.__partials.footer')
+                        <x-button type="submit" typeButton="primary" text="Guardar cambios" />
                     </div>
-                    <x-button type="a" text="Editar footer" icon="edit" typeButton="primary" class="w-max mt-4" />
-                </div>
-                <div class="p-4 border dark:border-zinc-900 border-gray-300 rounded-lg mt-4">
-                    <h3 class="dark:text-gray-300 text-gray-700">
-                        Menú de navegación
-                    </h3>
-                    <p class="dark:text-gray-400 text-gray-600 text-sm">
-                        Configura el contenido del menú de navegación de la aplicación
-                    </p>
-                    <div class="mt-4">
-                        <p class="dark:text-gray-400 text-gray-600 text-sm mb-2">
-                            Contenido actual:
-                        </p>
-                        @include('layouts.__partials.navbar')
-                    </div>
-                    <x-button type="a" text="Editar menú de navegación" icon="edit" typeButton="primary"
-                        class="w-max mt-4" />
-                </div>
+                </form>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 @endsection

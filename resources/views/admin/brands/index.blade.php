@@ -3,21 +3,21 @@
 @section('title', 'Marcas')
 
 @section('content')
-    <div class=" rounded-lg dark:border-gray-700 mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
+    <div class="mt-4 rounded-lg dark:border-gray-700">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Administrar marcas
             </h1>
             <p class="text-sm text-gray-400">
                 Administra las marcas de los productos de tu tienda
             </p>
         </div>
-        <div class="bg-gray-50 dark:bg-black p-4">
+        <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div
-                    class="bg-white dark:bg-black dark:border dark:border-zinc-900 relative shadow-md rounded-lg overflow-hidden">
+                    class="relative overflow-hidden rounded-lg bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black">
                     <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                        class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center" action="{{ route('admin.brands.search') }}" id="formSearchBrand">
                                 @csrf
@@ -26,14 +26,14 @@
                             </form>
                         </div>
                         <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <x-button type="button" id="new-brand" typeButton="primary" text="Agregar marca"
-                                icon="add-circle" />
+                            class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+                            <x-button type="button" class="open-drawer" data-drawer="#drawer-new-brand"
+                                typeButton="primary" text="Agregar marca" icon="add-circle" />
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-auto">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
+                        <table class="w-full overflow-x-auto text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">#</th>
                                     <th scope="col" class="px-4 py-3">Nombre</th>
@@ -53,7 +53,7 @@
                                     @foreach ($brands as $brand)
                                         <tr class="border-b dark:border-zinc-900">
                                             <th scope="row"
-                                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 {{ $loop->iteration }}
                                             </th>
                                             <td class="px-4 py-3">
@@ -100,15 +100,15 @@
             message="No podrás recuperar este registro" action="" />
 
         <div id="drawer-new-brand"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[500px] dark:bg-black"
+            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
                 Nueva marca
             </h5>
-            <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-zinc-900 dark:hover:text-white close-drawer-brand">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" data-drawer="#drawer-new-brand"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -128,25 +128,25 @@
                                 placeholder="Ingresa la descripción de la marca" value="{{ old('description') }}" />
                         </div>
                     </div>
-                    <div class="flex justify-end gap-2 mt-4">
+                    <div class="mt-4 flex justify-end gap-2">
                         <x-button type="submit" typeButton="primary" text="Agregar" icon="add-circle" />
-                        <x-button type="button" data-modal-toggle="addBrandModal" typeButton="secondary"
-                            text="Cancelar" />
+                        <x-button type="button" data-drawer="#drawer-new-brand" class="close-drawer"
+                            typeButton="secondary" text="Cancelar" />
                     </div>
                 </form>
             </div>
         </div>
 
         <div id="drawer-edit-brand"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[500px] dark:bg-black"
+            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
                 Editar marca
             </h5>
-            <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-zinc-900 dark:hover:text-white close-drawer-brand">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" data-drawer="#drawer-edit-brand"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -167,10 +167,10 @@
                                 placeholder="Ingresa la descripción de la marca" value="{{ old('description') }}" />
                         </div>
                     </div>
-                    <div class="flex justify-end gap-2 mt-4">
+                    <div class="mt-4 flex justify-end gap-2">
                         <x-button type="submit" typeButton="primary" text="Editar" icon="edit" />
-                        <x-button type="button" data-modal-toggle="addBrandModal" typeButton="secondary"
-                            text="Cancelar" />
+                        <x-button type="button" data-drawer="#drawer-edit-brand" class="close-drawer"
+                            typeButton="secondary" text="Cancelar" />
                     </div>
                 </form>
             </div>

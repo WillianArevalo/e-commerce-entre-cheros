@@ -3,25 +3,25 @@
 @section('title', 'Categorías')
 
 @section('content')
-    <div class="rounded-lg dark:border-gray-700 mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
+    <div class="mt-4 rounded-lg dark:border-gray-700">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Administrar categorías
             </h1>
             <p class="text-sm text-gray-400">
                 Administra las categorías de tu tienda
             </p>
         </div>
-        <div class="bg-gray-50 dark:bg-black p-4">
+        <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-black relative shadow-md rounded-lg dark:border dark:border-zinc-900 ">
-                    <div class="p-4 border-b dark:border-zinc-900 border-gray-200">
-                        <h2 class="dark:text-gray-200 text-base font-semibold text-gray-700">
+                <div class="relative rounded-lg bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black">
+                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
+                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
                             Lista de categorías
                         </h2>
                     </div>
                     <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                        class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center" action="{{ route('admin.categories.search') }}"
                                 id="formSearchCategorie">
@@ -31,14 +31,14 @@
                             </form>
                         </div>
                         <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <x-button id="new-categorie" type="button" text="Nueva categoría" icon="add-circle"
-                                typeButton="primary" />
-                            <div class="flex items-center space-x-3 w-full md:w-auto">
+                            class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+                            <x-button data-drawer="#drawer-new-categorie" class="open-drawer" type="button"
+                                text="Nueva categoría" icon="add-circle" typeButton="primary" />
+                            <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button"
                                     typeButton="secondary" icon="filter" text="Filtros" />
                                 <div id="filterDropdown"
-                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
+                                    class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-zinc-950">
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
                                         id="formSearchCategorieCheck">
                                         @csrf
@@ -49,7 +49,7 @@
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                                     Sin subcategorías
@@ -58,7 +58,7 @@
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700">
                                                 <label for="fitbit"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                                     Con subcategorías
@@ -71,8 +71,8 @@
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
+                        <table class="bg- w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">Imagen</th>
                                     <th scope="col" class="px-4 py-3">Nombre</th>
@@ -92,9 +92,9 @@
                                     @foreach ($categories as $category)
                                         <tr class="border-b dark:border-zinc-900">
                                             <th scope="row"
-                                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 <img src="{{ Storage::url($category->image) }}" alt="Product 1"
-                                                    class="w-16 h-16 object-cover rounded-lg">
+                                                    class="h-16 w-16 rounded-lg object-cover">
                                             </th>
                                             <td class="px-4 py-3">
                                                 <span>{{ $category->name }}</span>
@@ -104,22 +104,24 @@
                                                     <div class="flex flex-col gap-2">
                                                         @foreach ($category->subcategories as $subcategorie)
                                                             <div
-                                                                class="relative flex items-center gap-2 px-3 py-2 rounded-2xl bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-300 dark:bg-opacity-30 w-max">
+                                                                class="relative flex w-max items-center gap-2 rounded-2xl bg-blue-100 px-3 py-2 text-blue-900 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300">
                                                                 {{ $subcategorie->name }}
-                                                                <button class="dark:text-white text-gray-600 btnDropDown"
+                                                                <button class="btnDropDown text-gray-600 dark:text-white"
                                                                     type="button">
                                                                     <x-icon icon="more-hortizontal"
-                                                                        class="w-5 h-5 text-current" />
+                                                                        class="h-5 w-5 text-current" />
                                                                 </button>
                                                                 <div
-                                                                    class="hidden absolute top-10 z-30 w-44 bg-white shadow dark:bg-zinc-950 dropDownContent rounded-lg overflow-hidden">
+                                                                    class="dropDownContent absolute top-10 z-30 hidden w-44 overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-950">
                                                                     <ul
                                                                         class="p-2 text-sm text-gray-700 dark:text-gray-200">
                                                                         <li>
                                                                             <button type="button"
                                                                                 data-href="{{ route('admin.subcategories.edit', $subcategorie->id) }}"
                                                                                 data-action="{{ route('admin.subcategories.update', $subcategorie->id) }}"
-                                                                                class="block py-2 px-4 hover:bg-gray-100 rounded dark:hover:bg-zinc-900 dark:hover:text-white w-full text-start editCategorie">
+                                                                                class="editCategorie flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:hover:bg-zinc-900 dark:hover:text-white">
+                                                                                <x-icon icon="edit"
+                                                                                    class="h-4 w-4 text-current" />
                                                                                 Editar
                                                                             </button>
                                                                         </li>
@@ -131,7 +133,9 @@
                                                                                 @method('DELETE')
                                                                                 <button type="button"
                                                                                     data-form="formDeleteSubCategorie"
-                                                                                    class="block text-start w-full py-2 px-4 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 dark:text-white buttonDelete">
+                                                                                    class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900">
+                                                                                    <x-icon icon="delete"
+                                                                                        class="h-4 w-4 text-current" />
                                                                                     Eliminar
                                                                                 </button>
                                                                             </form>
@@ -175,15 +179,15 @@
             message="No podrás recuperar este registro" action="" />
 
         <div id="drawer-new-categorie"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[500px] dark:bg-black"
+            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
                 Nueva categoría
             </h5>
-            <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-zinc-900 dark:hover:text-white close-drawer-new-categorie">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" data-drawer="#drawer-new-categorie"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -200,7 +204,7 @@
                                 value="principal" :options="['principal' => 'Principal', 'secundaria' => 'Secundaria']" selected="principal" />
                         </div>
                         <div class="flex-[2]">
-                            <div class="w-full hidden" id="categorieParentSelect">
+                            <div class="hidden w-full" id="categorieParentSelect">
                                 <x-select label="Categoría padre" id="categorieParent" name="categorie_id"
                                     :options="$categories->pluck('name', 'id')->toArray()" value="" selected="" />
                             </div>
@@ -212,46 +216,46 @@
                             value="{{ old('name') }}" />
                     </div>
                     <div>
-                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="image" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                             Imagen
                         </label>
-                        <div class="flex items-center justify-center w-full">
+                        <div class="flex w-full items-center justify-center">
                             <label for="imageCategorie"
-                                class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-zinc-950 @error('image') is-invalid  @enderror">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <x-icon icon="cloud-upload" class="w-12 h-12 text-gray-400 dark:text-gray-500" />
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-transparent dark:hover:border-gray-500 dark:hover:bg-zinc-950">
+                                <div class="flex flex-col items-center justify-center pb-6 pt-5">
+                                    <x-icon icon="cloud-upload" class="h-12 w-12 text-gray-400 dark:text-gray-500" />
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                             class="font-semibold">Clic para agregar </span> o desliza la imagen</p>
                                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, WEBP</p>
                                 </div>
                                 <input id="imageCategorie" type="file" class="hidden" name="image" />
                                 <img src="" alt="Preview Image" id="previewImage"
-                                    class="w-56 h-64 object-cover hidden m-10">
+                                    class="m-10 hidden h-64 w-56 object-cover">
                             </label>
                         </div>
                         @error('image')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar categoría" icon="add-circle" typeButton="primary" />
-                        <x-button type="button" class="close-drawer-new-categorie"
-                            href="{{ route('admin.categories.index') }}" text="Cancelar" typeButton="secondary" />
+                        <x-button type="button" data-drawer="#drawer-new-categorie" class="close-drawer"
+                            text="Cancelar" typeButton="secondary" />
                     </div>
                 </form>
             </div>
         </div>
 
         <div id="drawer-edit-categorie"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[500px] dark:bg-black"
+            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-edit-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
                 Editar categoría
             </h5>
-            <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-zinc-900 dark:hover:text-white close-drawer-edit-categorie">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" data-drawer="#drawer-edit-categorie"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -268,31 +272,31 @@
                             placeholder="Ingresa el nombre de la categoría" label="Nombre" icon="bookmark" />
                     </div>
                     <div>
-                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="image" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                             Imagen
                         </label>
-                        <div class="flex items-center justify-center w-full">
+                        <div class="flex w-full items-center justify-center">
                             <label for="edit-image-categorie"
-                                class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-zinc-950 @error('image') is-invalid  @enderror">
-                                <div class="flex-col items-center justify-center pt-5 pb-6 hidden">
-                                    <x-icon icon="cloud-upload" class="w-12 h-12 text-gray-400 dark:text-gray-500" />
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-transparent dark:hover:border-gray-500 dark:hover:bg-zinc-950">
+                                <div class="hidden flex-col items-center justify-center pb-6 pt-5">
+                                    <x-icon icon="cloud-upload" class="h-12 w-12 text-gray-400 dark:text-gray-500" />
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                             class="font-semibold">Clic para agregar </span> o desliza la imagen</p>
                                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, WEBP</p>
                                 </div>
                                 <input id="edit-image-categorie" type="file" class="hidden" name="image" />
                                 <img src="" alt="Preview Image" id="previewImageEdit"
-                                    class="w-56 h-64 object-cover  m-10">
+                                    class="m-10 h-64 w-56 object-cover">
                             </label>
                         </div>
                         @error('image')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Editar categoría" icon="edit" typeButton="primary" />
-                        <x-button type="button" class="close-drawer-edit-categorie" text="Cancelar"
-                            typeButton="secondary" />
+                        <x-button type="button" class="close-drawer" data-drawer="#drawer-edit-categorie"
+                            text="Cancelar" typeButton="secondary" />
                     </div>
                 </form>
             </div>

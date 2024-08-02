@@ -4,17 +4,17 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
             <a href="{{ route('admin.products.index') }}"
-                class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
-                <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
+                class="flex items-center justify-center gap-1 text-sm text-gray-500 hover:text-gray-600 hover:underline dark:text-gray-400">
+                <x-icon icon="arrow-left-02" class="h-4 w-4 text-current" />
                 Regresar a productos
             </a>
-            <h1 class="text-3xl dark:text-blue-400 font-secondary text-secondary font-bold">
+            <h1 class="font-secondary text-3xl font-bold text-secondary dark:text-blue-400">
                 Editar producto
             </h1>
         </div>
-        <div class="bg-white dark:bg-black p-4">
+        <div class="bg-white p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <form action="{{ route('admin.products.update', $product->id) }}"" class="flex flex-col gap-4"
                     enctype="multipart/form-data" method="POST" id="formEditProduct">
@@ -22,17 +22,17 @@
                     @method('PUT')
                     <div>
                         <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-700 dark:text-gray-300 text-lg uppercase">Información del producto</h2>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">
+                            <h2 class="text-lg uppercase text-gray-700 dark:text-gray-300">Información del producto</h2>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
                                 Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                             </p>
                         </div>
-                        <div class="flex gap-4 mt-4 flex-col lg:flex-row">
-                            <div class="flex-1 flex flex-col gap-4">
+                        <div class="mt-4 flex flex-col gap-4 lg:flex-row">
+                            <div class="flex flex-1 flex-col gap-4">
                                 <div
-                                    class="p-4 dark:bg-black bg-transparent border border-gray-300 dark:border-zinc-900 rounded-lg h-max">
-                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">General</h4>
-                                    <div class="flex gap-4 flex-col">
+                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">General</h4>
+                                    <div class="flex flex-col gap-4">
                                         <div>
                                             <x-input label="Nombre" type="text" id="name" name="name"
                                                 placeholder="Escribe el nombre del producto aquí" required="required"
@@ -50,7 +50,7 @@
                                                 placeholder="Escribe la descripción larga del producto aquí"
                                                 value="{{ $product->long_description }}" />
                                         </div>
-                                        <div class="flex gap-4 flex-col">
+                                        <div class="flex flex-col gap-4">
                                             <div class="flex-1">
                                                 <x-input label="Peso(KG)" required="required" name="weight" id="weight"
                                                     type="number" step="0.1" min="1" placeholder="0.00"
@@ -58,18 +58,18 @@
                                             </div>
                                             <div class="flex-[4]">
                                                 <p
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
+                                                    class="mb-2 block text-sm font-medium text-gray-900 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
                                                     Dimensiones (cm)
                                                 </p>
-                                                <div class="flex gap-2 items-center">
+                                                <div class="flex items-center gap-2">
                                                     <div>
                                                         <x-input type="number" label="Largo" id="long" name="long"
                                                             value="{{ $product->length }}" placeholder="10" min="1"
                                                             required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
-                                                        class="p-2 dark:bg-black bg-gray-100 dark:text-white text-gray-900 rounded-lg border-2 mt-7 dark:border-zinc-900 border-gray-300">
-                                                        <x-icon icon="cancel" class="w-4 h-4 text-current" />
+                                                        class="mt-7 rounded-lg border-2 border-gray-300 bg-gray-100 p-2 text-gray-900 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                        <x-icon icon="cancel" class="h-4 w-4 text-current" />
                                                     </span>
                                                     <div>
                                                         <x-input type="number" label="Ancho" id="width" name="width"
@@ -77,8 +77,8 @@
                                                             required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
-                                                        class="p-2 dark:bg-black bg-gray-100 dark:text-white text-gray-900 rounded-lg border-2 mt-7 dark:border-zinc-900 border-gray-300">
-                                                        <x-icon icon="cancel" class="w-4 h-4 text-current" />
+                                                        class="mt-7 rounded-lg border-2 border-gray-300 bg-gray-100 p-2 text-gray-900 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                        <x-icon icon="cancel" class="h-4 w-4 text-current" />
                                                     </span>
                                                     <div>
                                                         <x-input type="number" label="Alto" id="height" name="height"
@@ -88,7 +88,7 @@
                                                     </div>
                                                 </div>
                                                 @if ($errors->has('long') || $errors->has('width') || $errors->has('height'))
-                                                    <span class="text-red-500 text-sm">
+                                                    <span class="text-sm text-red-500">
                                                         Las dimensions son obligatorias
                                                     </span>
                                                 @endif
@@ -97,11 +97,11 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-black bg-transparent border border-gray-300 dark:border-zinc-900 rounded-lg h-max">
-                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Categoría y marca
                                     </h4>
-                                    <div class="flex gap-4 flex-col">
+                                    <div class="flex flex-col gap-4">
                                         <div class="flex gap-4">
                                             <div class="flex-1">
                                                 <x-select label="Categoría del producto" id="categorie_id"
@@ -111,30 +111,30 @@
                                             </div>
                                             <div class="flex-1">
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white after:content-['*'] after:ml-0.5 after:text-red-500">
+                                                    class="mb-2 block text-sm font-medium text-gray-900 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
                                                     Subcategoría del producto
                                                 </label>
                                                 <input type="hidden" name="subcategorie_id" id="subcategorie_id"
                                                     value="{{ old('categorie_id') }}">
                                                 <div class="relative">
                                                     <div
-                                                        class="selected border border-gray-300 bg-gray-50 dark:border-zinc-800 rounded py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between @error('subcategorie_id') is-invalid @enderror">
+                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                         <span class="itemSelected" id="selectedSubCategorie">
                                                             Selecciona una subcategoría
                                                         </span>
                                                         <x-icon icon="arrow-down"
-                                                            class="w-5 h-5 dark:text-white text-gray-500" />
+                                                            class="h-5 w-5 text-gray-500 dark:text-white" />
                                                     </div>
-                                                    <ul class="absolute z-10 w-full mt-2 p-2 bg-white border border-gray-200 rounded shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsSubCategories hidden"
+                                                    <ul class="selectOptionsSubCategories absolute z-10 mt-2 hidden w-full rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
                                                         id="listSubcategories">
-                                                        <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded"
+                                                        <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900"
                                                             data-value="" data-input="#subcategorie_id">
                                                             Ninguna categoría principal seleccionada
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 @error('subcategorie_id')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                    <span class="text-sm text-red-500">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -146,8 +146,8 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-black bg-transparent border border-gray-300 dark:border-zinc-900 rounded-lg h-max">
-                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Información de venta
                                     </h4>
                                     <div class="flex flex-col">
@@ -163,8 +163,8 @@
                                                     placeholder="0.00" value="{{ $product->offer_price }}" />
                                             </div>
                                         </div>
-                                        <div class="hidden mt-4" id="dateOffer">
-                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        <div class="mt-4 hidden" id="dateOffer">
+                                            <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                                 Fecha de la oferta
                                             </label>
                                             <div class="flex items-center">
@@ -182,23 +182,23 @@
                                             </div>
                                             <div class="flex flex-col gap-1">
                                                 @error('offer_start_date')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                    <span class="text-sm text-red-500">{{ $message }}</span>
                                                 @enderror
                                                 @error('offer_end_date')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                    <span class="text-sm text-red-500">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                            <div class="flex justify-between items-center">
-                                                <p class="block text-base dark:text-blue-400 text-blue-700 font-semibold">
+                                            <div class="flex items-center justify-between">
+                                                <p class="block text-base font-semibold text-blue-700 dark:text-blue-400">
                                                     Impuestos
                                                 </p>
                                                 <x-button type="button" id="showModalTax" data-modal-target="addTax"
                                                     data-modal-toggle="addTax" text="Nuevo impuesto" icon="add-circle"
                                                     typeButton="secondary" />
                                             </div>
-                                            <div class="flex flex-col mt-4">
+                                            <div class="mt-4 flex flex-col">
                                                 <p for="price" class="block text-sm font-medium text-white">
                                                     Lista de impuestos asignados al producto
                                                 </p>
@@ -208,7 +208,7 @@
                                                             <div>
                                                                 <input id="{{ $tax->name }}" type="checkbox"
                                                                     value="{{ $tax->id }}" name="tax_id[]"
-                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-white dark:border-gray-600"
+                                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white dark:ring-offset-gray-800 dark:focus:ring-blue-600"
                                                                     @php if($product->taxes->count()>0){
                                                                     foreach($product->taxes as $taxProduct){
                                                                         if($taxProduct->id ==$tax->id){
@@ -232,20 +232,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex-1 flex flex-col gap-4">
+                            <div class="flex flex-1 flex-col gap-4">
                                 <div
-                                    class="p-4 dark:bg-black bg-transparent border border-gray-300 dark:border-zinc-900 rounded-lg h-max">
-                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">Imágenes</h4>
+                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">Imágenes</h4>
                                     <div>
                                         <p
-                                            class="dark:text-gray-400 text-black text-sm mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+                                            class="mb-2 text-sm text-black after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-gray-400">
                                             Imagen principal
                                         </p>
                                         <label for="main_image"
-                                            class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-zinc-900 dark:hover:border-zinc-800 dark:hover:bg-zinc-950 @error('main_image') is-invalid  @enderror">
-                                            <div class="flex-col items-center justify-center pt-5 pb-6 hidden">
+                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-zinc-900 dark:bg-transparent dark:hover:border-zinc-800 dark:hover:bg-zinc-950">
+                                            <div class="hidden flex-col items-center justify-center pb-6 pt-5">
                                                 <x-icon icon="cloud-upload"
-                                                    class="w-12 h-12 text-gray-400 dark:text-gray-500" />
+                                                    class="h-12 w-12 text-gray-400 dark:text-gray-500" />
                                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                                     <span class="font-semibold">
                                                         Clic para agregar
@@ -259,21 +259,21 @@
                                             <input id="main_image" type="file" class="hidden" name="main_image" />
                                             <img src="{{ Storage::url($product->main_image) }}"
                                                 alt="Preview Image {{ $product->name }}" id="previewImage"
-                                                class="w-56 h-64 object-cover m-10">
+                                                class="m-10 h-64 w-56 object-cover">
                                         </label>
                                     </div>
                                     <div class="mt-4">
-                                        <div class="flex justify-between items-center mb-2">
+                                        <div class="mb-2 flex items-center justify-between">
                                             <div>
-                                                <p class="dark:text-gray-400  text-black text-sm">Galería de imágenes</p>
-                                                <p class="dark:text-gray-400  text-black text-xs w-64">
+                                                <p class="text-sm text-black dark:text-gray-400">Galería de imágenes</p>
+                                                <p class="w-64 text-xs text-black dark:text-gray-400">
                                                     Nota: Selecciona todas las imáges de una sola vez.
                                                 </p>
                                             </div>
-                                            <div class="text-sm text-gray-400 flex gap-2">
+                                            <div class="flex gap-2 text-sm text-gray-400">
                                                 <label for="gallery_image"
-                                                    class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5">
-                                                    <x-icon icon="image-add" class="w-4 h-4 text-current" />
+                                                    class="flex cursor-pointer items-center gap-2 rounded-lg border-2 border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
+                                                    <x-icon icon="image-add" class="h-4 w-4 text-current" />
                                                     Seleccionar imágenes
                                                 </label>
                                                 <input type="file" name="gallery_image[]" id="gallery_image" multiple
@@ -282,14 +282,14 @@
                                                     icon="reload" />
                                             </div>
                                         </div>
-                                        <div class="flex gap-2 @php $product->images->count()>0 ? "h-auto": "h-24" @endphp border-2 border-dashed border-gray-300 dark:border-zinc-900 rounded-lg mt-4 flex-wrap justify-start"
+                                        <div class="@php $product->images->count()>0 ? "h-auto": "h-24" @endphp mt-4 flex flex-wrap justify-start gap-2 rounded-lg border-2 border-dashed border-gray-300 dark:border-zinc-900"
                                             id="previewImagesContainer">
                                             @if ($product->images->count() > 0)
                                                 @foreach ($product->images as $image)
-                                                    <div class="inline-block m-2">
+                                                    <div class="m-2 inline-block">
                                                         <img src="{{ Storage::url($image->image) }}"
                                                             alt="Galería de imágenes {{ $product->name }}"
-                                                            class="w-20 h-20 object-cover rounded-lg">
+                                                            class="h-20 w-20 rounded-lg object-cover">
                                                     </div>
                                                 @endforeach
                                             @endif
@@ -297,8 +297,8 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-black bg-transparent border border-gray-300 dark:border-zinc-900 rounded-lg h-max">
-                                    <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">Inventario
+                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">Inventario
                                     </h4>
                                     <div class="flex gap-4">
                                         <div class="flex-1">
@@ -317,9 +317,9 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="p-4 dark:bg-black bg-transparent border border-gray-300 dark:border-zinc-900 rounded-lg h-max">
-                                    <div class="flex justify-between items-center">
-                                        <h4 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                             Etiquetas
                                         </h4>
                                         <x-button type="button" id="showModalLabel" data-modal-target="addLabel"
@@ -328,36 +328,36 @@
                                     </div>
                                     <div class="flex gap-4">
                                         <div class="w-full">
-                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                                 Seleccionar etiquetas para el producto
                                             </label>
                                             <input type="hidden" name="label_id[]" id="label_id">
                                             <div class="relative">
                                                 <div
-                                                    class="selected border border-gray-300 bg-gray-50 dark:border-zinc-800 rounded py-2.5 dark:bg-zinc-950 w-full px-4 dark:text-white text-sm flex items-center justify-between">
+                                                    class="selected flex w-full items-center justify-between rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                     <span class="itemSelected">Seleccionar etiqueta</span>
                                                     <x-icon icon="arrow-down"
-                                                        class="w-5 h-5 dark:text-white text-gray-500" />
+                                                        class="h-5 w-5 text-gray-500 dark:text-white" />
                                                 </div>
-                                                <ul class="absolute z-10 w-full mt-2 p-2 bg-white border border-gray-200 rounded shadow-lg dark:bg-zinc-950 dark:border-zinc-900 selectOptionsLabels hidden"
+                                                <ul class="selectOptionsLabels absolute z-10 mt-2 hidden w-full rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
                                                     id="labelsList">
                                                     @if ($labels->count() > 0)
                                                         @foreach ($labels as $label)
-                                                            <li class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded"
+                                                            <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900"
                                                                 data-value="{{ $label->name }}" data-input="#label_id">
                                                                 {{ $label->name }}
                                                             </li>
                                                         @endforeach
                                                     @else
                                                         <li
-                                                            class="itemOption text-sm text-gray-900 dark:text-white px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                            class="itemOption px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                                                             Sin etiquetas registradas
                                                         </li>
                                                     @endif
                                                 </ul>
                                             </div>
                                         </div>
-                                        <x-button type="button" typeButton="primary" icon="arrow-right-02"
+                                        <x-button type="button" typeButton="secondary" icon="arrow-right-02"
                                             id="addLabelSelected" class="mt-7" />
                                     </div>
                                     <input type="hidden" name="labels_ids[]" id="labels_ids"
@@ -375,18 +375,18 @@
                                             @endforeach
                                         @endif
                                     </div>
-                                    <div class="mt-4 w-full h-auto border-2 border-gray-300 border-dashed rounded-lg bg-gray-50  dark:bg-transparent dark:border-zinc-900 flex flex-wrap items-start p-2 gap-1"
+                                    <div class="mt-4 flex h-auto w-full flex-wrap items-start gap-1 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-2 dark:border-zinc-900 dark:bg-transparent"
                                         id="previewLabelsContainer">
                                         @if ($product->labels->count() > 0)
                                             @foreach ($product->labels as $label)
                                                 <div
-                                                    class="bg-white text-zinc-600 border-zinc-300 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-900 rounded-full flex items-center justify-between gap-2">
+                                                    class="me-2 flex items-center justify-between gap-2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:bg-black dark:text-white">
                                                     <span>{{ $label->name }}</span>
-                                                    <button type="button" class="text-white removeLabelEdit"
+                                                    <button type="button" class="removeLabelEdit text-white"
                                                         data-label="{{ $label->name }}"
                                                         data-index="{{ $loop->iteration }}">
                                                         <x-icon icon="cancel"
-                                                            class="w-4 h-4 dark:text-white text-blue-800" />
+                                                            class="h-4 w-4 text-blue-800 dark:text-white" />
                                                     </button>
                                                 </div>
                                             @endforeach
@@ -412,20 +412,20 @@
 
         <!-- Modal agregar impuesto -->
         <div id="addTax" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-90">
-            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-90 md:inset-0 md:h-full">
+            <div class="relative h-full w-full max-w-md p-4 md:h-auto">
                 <!-- Modal content -->
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-zinc-950 sm:p-5">
+                <div class="relative rounded-lg bg-white p-4 shadow dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
-                        class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-zinc-900">
+                        class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-900 sm:mb-5">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Agregar impuesto
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-zinc-900 dark:hover:text-white"
+                            class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white"
                             data-modal-toggle="addTax">
-                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -442,16 +442,16 @@
                                 <x-input label="Nombre" type="text" name="name" id="name_tax"
                                     placeholder="Escribe el nombre del impuesto" error="{{ false }}"
                                     data-message="#message-nameTax" required="required" />
-                                <span class="text-red-500 text-sm hidden invalid-feedback" id="message-nameTax"></span>
+                                <span class="invalid-feedback hidden text-sm text-red-500" id="message-nameTax"></span>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <x-input label="Tasa de impuesto" type="number" name="rate" id="rate"
                                     placeholder="0" error="{{ false }}" step="0.1" min="0.1"
                                     icon="percent" data-message="#message-rate" required="required" />
-                                <span class="text-red-500 text-sm hidden invalid-feedback" id="message-rate"></span>
+                                <span class="invalid-feedback hidden text-sm text-red-500" id="message-rate"></span>
                             </div>
                         </div>
-                        <div class="flex justify-end gap-2 mt-4">
+                        <div class="mt-4 flex justify-end gap-2">
                             <x-button type="button" id="addTaxButton" text="Agregar" icon="add-circle"
                                 typeButton="primary" />
                             <x-button type="button" data-modal-toggle="addTax" text="Cancelar"
@@ -464,20 +464,20 @@
 
         <!-- Modal agregar etiqueta -->
         <div id="addLabel" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-90">
-            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-90 md:inset-0 md:h-full">
+            <div class="relative h-full w-full max-w-md p-4 md:h-auto">
                 <!-- Modal content -->
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-zinc-950 sm:p-5">
+                <div class="relative rounded-lg bg-white p-4 shadow dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
-                        class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-zinc-900">
+                        class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-900 sm:mb-5">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Agregar etiqueta
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-zinc-900 dark:hover:text-white"
+                            class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white"
                             data-modal-toggle="addLabel">
-                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -493,10 +493,10 @@
                             <div>
                                 <x-input label="Nombre" id="name_label" name="name" data-message="#message-nameLabel"
                                     placeholder="Escribe el nombre del impuesto" required="required" type="text" />
-                                <span class="text-red-500 text-sm hidden invalid-feedback" id="message-nameLabel"></span>
+                                <span class="invalid-feedback hidden text-sm text-red-500" id="message-nameLabel"></span>
                             </div>
                         </div>
-                        <div class="flex justify-end gap-2 mt-4">
+                        <div class="mt-4 flex justify-end gap-2">
                             <x-button type="button" id="addLabelButton" text="Agregar" icon="add-circle"
                                 typeButton="primary" />
                             <x-button type="button" data-modal-toggle="addLabel" text="Cancelar"

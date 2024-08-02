@@ -3,25 +3,25 @@
 @section('title', 'Categorías')
 
 @section('content')
-    <div class="rounded-lg dark:border-zinc-900 mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
+    <div class="mt-4 rounded-lg dark:border-zinc-900">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Preguntas frecuentes
             </h1>
             <p class="text-sm text-gray-400">
                 Administra las preguntas frecuentes de la aplicación
             </p>
         </div>
-        <div class="bg-gray-50 dark:bg-black p-4">
+        <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-black relative shadow-md sm:rounded-lg dark:border dark:border-zinc-900">
-                    <div class="p-4 border-b dark:border-zinc-900 border-gray-200">
-                        <h2 class="dark:text-gray-200 text-base font-semibold text-gray-700">
+                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
+                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
+                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
                             Lista de preguntas
                         </h2>
                     </div>
                     <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                        class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center" action="{{ route('admin.categories.search') }}"
                                 id="formSearchCategorie">
@@ -31,14 +31,14 @@
                             </form>
                         </div>
                         <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <x-button id="new-faq" type="button" text="Nueva pregunta" icon="add-circle"
-                                typeButton="primary" />
+                            class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+                            <x-button data-drawer="#drawer-new-faq" class="open-drawer" type="button" text="Nueva pregunta"
+                                icon="add-circle" typeButton="primary" />
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
+                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">#</th>
                                     <th scope="col" class="px-4 py-3">Pregunta</th>
@@ -95,15 +95,15 @@
             message="No podrás recuperar este registro" action="" />
 
         <div id="drawer-new-faq"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[500px] dark:bg-black"
+            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-faq">
             <h5 id="drawer-new-faq-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
                 Nueva pregunta
             </h5>
-            <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white close-drawer-faq">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" data-drawer="#drawer-new-faq"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -124,7 +124,7 @@
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Agregar pregunta" icon="add-circle" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.faq.index') }}" text="Cancelar"
+                        <x-button type="button" class="close-drawer" data-drawer="#drawer-new-faq" text="Cancelar"
                             typeButton="secondary" />
                     </div>
                 </form>
@@ -132,15 +132,15 @@
         </div>
 
         <div id="drawer-edit-faq"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[500px] dark:bg-black"
+            class="fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-edit-faq">
             <h5 id="drawer-edit-faq-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
                 Editar pregunta
             </h5>
-            <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white close-drawer-faq">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <button type="button" data-drawer="#drawer-edit-faq"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -162,8 +162,8 @@
                     </div>
                     <div class="flex items-center justify-center gap-2">
                         <x-button type="submit" text="Editar" icon="edit" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.faq.index') }}" icon="cancel" text="Cancelar"
-                            typeButton="secondary" />
+                        <x-button type="button" class="close-drawer" data-drawer="#drawer-edit-faq" icon="cancel"
+                            text="Cancelar" typeButton="secondary" />
                     </div>
                 </form>
             </div>
