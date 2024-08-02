@@ -4,13 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --color-primary: #bcddf1;
-    --color-secondary: #011b4e;
-    --color-tertiary: #138fdc;
-    --color-quaternary: #f6f4f1;
-}
-
 @font-face {
     font-family: "Mystical";
     src: url("/public/fonts/MysticalWoodsRoughScript.woff") format("woff");
