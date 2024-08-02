@@ -1,12 +1,34 @@
-export function showOverlay() {
-    $("#overlay").removeClass("hidden");
+export { openDrawer };
+
+function openDrawer(drawerId) {
+    $(drawerId).removeClass("translate-x-full");
+    showOverlay();
 }
 
-export function hideOverlay() {
-    $("#overlay").addClass("hidden");
-}
-
-export function closeDrawer(drawerId) {
+function closeDrawer(drawerId) {
     $(drawerId).addClass("translate-x-full");
     hideOverlay();
 }
+
+function showOverlay() {
+    $("#overlay").removeClass("hidden");
+}
+
+function hideOverlay() {
+    $("#overlay").addClass("hidden");
+}
+
+$("#overlay").on("click", function () {
+    closeDrawer(".drawer");
+    hideOverlay();
+});
+
+$(".open-drawer").on("click", function () {
+    const drawer = $(this).data("drawer");
+    openDrawer(drawer);
+});
+
+$(".close-drawer").on("click", function () {
+    const drawer = $(this).data("drawer");
+    closeDrawer(drawer);
+});
