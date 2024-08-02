@@ -7,7 +7,7 @@
         $padding = 'px-3.5 py-2.5';
     }
 
-    $classGeneral = 'font-medium rounded flex items-center gap-2 transition-colors text-sm ' . $padding;
+    $classGeneral = 'font-medium rounded-lg flex items-center gap-2 transition-colors text-sm ' . $padding;
 @endphp
 
 @switch($typeButton)
@@ -98,13 +98,13 @@
 @if ($type === 'a')
     @if ($iconAlign === 'left')
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-            <x-icon :icon="$icon" class="w-5 h-5 text-current" />
+            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
             {{ $text }}
         </a>
     @elseif ($iconAlign === 'right')
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
             {{ $text }}
-            <x-icon :icon="$icon" class="w-5 h-5 text-current" />
+            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
         </a>
     @else
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
@@ -113,7 +113,7 @@
     @endif
 @else
     <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
-        <x-icon :icon="$icon" class="w-5 h-5 text-current" />
+        <x-icon :icon="$icon" class="h-5 w-5 text-current" />
         {{ $text }}
     </button>
 @endif
