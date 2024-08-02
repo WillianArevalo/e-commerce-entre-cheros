@@ -1,5 +1,4 @@
-import { showOverlay, hideOverlay } from "./drawer";
-
+import { openDrawer } from "./drawer.js";
 $(document).ready(function () {
     $("#typeCategorie").on("Changed", function () {
         var typeCategorie = $(this).val();
@@ -32,22 +31,6 @@ $(document).ready(function () {
         }
     }
 
-    $("#new-categorie").on("click", function () {
-        $("#drawer-new-categorie").removeClass("translate-x-full");
-        showOverlay();
-    });
-
-    $(".close-drawer-new-categorie").on("click", function () {
-        $("#drawer-new-categorie").addClass("translate-x-full");
-        hideOverlay();
-    });
-
-    $("#overlay").on("click", function () {
-        $("#drawer-new-categorie").addClass("translate-x-full");
-        $("#drawer-edit-categorie").addClass("translate-x-full");
-        hideOverlay();
-    });
-
     $(document).on("click", ".editCategorie", function () {
         const href = $(this).data("href");
         const action = $(this).data("action");
@@ -55,18 +38,12 @@ $(document).ready(function () {
             type: "GET",
             url: href,
             success: function (response) {
-                $("#drawer-edit-categorie").removeClass("translate-x-full");
-                showOverlay();
+                openDrawer("#drawer-edit-categorie");
                 $("#edit_name_categorie").val(response.categorie.name);
                 $("#previewImageEdit").attr("src", response.categorie.image);
                 $("#formEditCategorie").attr("action", action);
             },
         });
-    });
-
-    $(".close-drawer-edit-categorie").on("click", function () {
-        $("#drawer-edit-categorie").addClass("translate-x-full");
-        hideOverlay();
     });
 
     $(document).on("click", ".btnDropDown", function (e) {

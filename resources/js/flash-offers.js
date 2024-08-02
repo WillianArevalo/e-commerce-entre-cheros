@@ -1,24 +1,6 @@
-import { showOverlay, hideOverlay, closeDrawer } from "./drawer";
+import { openDrawer } from "./drawer";
 
 $(document).ready(function () {
-    $("#new-flash-offer").on("click", function () {
-        $("#drawer-new-flash-offer").removeClass("translate-x-full");
-        showOverlay();
-    });
-
-    function closeDrawers() {
-        closeDrawer("#drawer-new-flash-offer");
-        closeDrawer("#drawer-edit-flash-offer");
-    }
-
-    $(".close-drawer-offer").on("click", function () {
-        closeDrawers();
-    });
-
-    $("#overlay").on("click", function () {
-        closeDrawers();
-    });
-
     $(document).on("click", ".editFlashOffer", function () {
         const href = $(this).data("href");
         const action = $(this).data("action");
@@ -26,8 +8,8 @@ $(document).ready(function () {
             type: "GET",
             url: href,
             success: function (response) {
-                showOverlay();
-                $("#drawer-edit-flash-offer").removeClass("translate-x-full");
+                openDrawer("#drawer-edit-flash-offer");
+
                 $("#formEditFlashOffer").attr("action", action);
                 $("#product_id").val(response.product.id);
                 $("#product_name").val(response.product.name);
@@ -57,7 +39,7 @@ $(document).ready(function () {
         if (!isChecked) {
             if (changeType === "show") {
                 form.append(
-                    '<input type="hidden" name="is_showing" value="0">'
+                    '<input type="hidden" name="is_showing" value="0">',
                 );
             } else {
                 form.append('<input type="hidden" name="is_active" value="0">');
