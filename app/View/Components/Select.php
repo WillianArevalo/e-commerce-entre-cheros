@@ -15,11 +15,14 @@ class Select extends Component
     public $value;
     public $options;
     public $selected;
+    public $text;
+    public $required;
+
 
     /**
      * Create a new component instance.
      */
-    public function __construct($label = "", $id, $name, $value, $options = [], $selected)
+    public function __construct($label = "", $id, $name, $value = "", $options = [], $selected = "", $text = "", $required = "")
     {
         $this->label = $label;
         $this->id = $id;
@@ -27,6 +30,8 @@ class Select extends Component
         $this->value = $value;
         $this->options = $options;
         $this->selected = $selected;
+        $this->text = $text;
+        $this->required = $required;
     }
 
     /**
