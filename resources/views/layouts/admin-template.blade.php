@@ -26,11 +26,11 @@
 
 <body class="font-secondary dark:bg-black">
     @include('layouts.__partials.navbar-admin')
-    @include('layouts.__partials.toast')
-    <div id="overlay" class="bg-gray-900/80 dark:bg-zinc-900/90 fixed inset-0 z-30 hidden"></div>
-    <main class="bg-gray-50 dark:bg-gray-900 h-full">
-        <div class="xl:ml-72 mt-16">
-            <div class="pt-4 px-4 xl:hidden">
+    <main class="h-full bg-gray-50 dark:bg-black">
+        @include('layouts.__partials.toast')
+        <div id="overlay" class="fixed inset-0 z-30 hidden bg-gray-900/80 dark:bg-zinc-900/90"></div>
+        <div class="mt-16 xl:ml-72">
+            <div class="px-4 pt-4 xl:hidden">
                 @include('layouts.__partials.breadcrumb')
             </div>
             @yield('content')
