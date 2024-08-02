@@ -8,6 +8,7 @@ $(document).ready(function () {
             var selectedItems = $(this).next();
             if (selectedItems) {
                 selectedItems.toggleClass("hidden");
+                adjustDropdownPosition(selectedItems, $(this));
             }
         });
     });
@@ -29,6 +30,29 @@ $(document).ready(function () {
 
     function closeSelects(thisSelect) {
         $(".selectOptions").not($(thisSelect).next()).addClass("hidden");
+    }
+
+    function adjustDropdownPosition(dropdown, select) {
+        const rect = select[0].getBoundingClientRect();
+        const dropdownHeight = dropdown[0].scrollHeight;
+        const viewportHeight = window.innerHeight;
+
+        // Añade un margen inferior para asegurar que no quede pegado al borde inferior
+        const marginBottom = 16; // Puedes ajustar este valor según sea necesario
+
+        if (rect.bottom + dropdownHeight + marginBottom > viewportHeight) {
+            dropdown.css({
+                top: "auto",
+                bottom: "100%",
+                "margin-bottom": marginBottom + "px",
+            });
+        } else {
+            dropdown.css({
+                top: "100%",
+                bottom: "auto",
+                "margin-bottom": "0px",
+            });
+        }
     }
 
     $(document).on("click", function (e) {
