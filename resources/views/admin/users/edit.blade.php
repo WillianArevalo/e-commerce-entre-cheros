@@ -4,47 +4,41 @@
 
 @section('content')
     <div class="mt-4 dark:bg-black">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <a href="{{ route('admin.users.index') }}"
-                class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
-                <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
-                Regresar a usuarios
-            </a>
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
-                Editar usuario
-            </h1>
-        </div>
-        <div class="bg-white dark:bg-black px-4 mt-4">
-            <div class="mx-auto w-full mt-4">
+        @include('layouts.__partials.admin.header-crud-page', [
+            'title' => 'Editar usuario',
+            'text' => 'Regresar a la lista de usuarios',
+            'url' => route('admin.users.index'),
+        ])
+        <div class="mt-4 bg-white px-4 dark:bg-black">
+            <div class="mx-auto mt-4 w-full">
                 <form action="{{ route('admin.users.update', $user->id) }}" class="flex flex-col gap-4"
                     enctype="multipart/form-data" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="flex gap-4">
                         <div
-                            class="h-max flex flex-col flex-1 dark:bg-black bg-white rounded-lg border border-gray-300 dark:border-zinc-900">
+                            class="flex h-max flex-1 flex-col rounded-lg border border-gray-300 bg-white dark:border-zinc-900 dark:bg-black">
                             <p
-                                class="text-sm dark:text-gray-400 text-gray-600 font-medium p-4 border-b dark:border-zinc-900 border-gray-200">
+                                class="border-b border-gray-200 p-4 text-sm font-medium text-gray-600 dark:border-zinc-900 dark:text-gray-400">
                                 Foto de perfil
                             </p>
-                            <div class="flex items-center justify-center flex-col py-4">
+                            <div class="flex flex-col items-center justify-center py-4">
                                 <img src="{{ Storage::url($user->profile_photo_path) }}"
                                     alt="Foto de perfil {{ $user->username }}" id="previewImage"
-                                    class="rounded-full w-60 h-60 object-cover">
+                                    class="h-60 w-60 rounded-full object-cover">
                             </div>
                             <div
-                                class="flex items-center justify-end p-4 h-full border-t dark:border-zinc-900 border-gray-200">
+                                class="flex h-full items-center justify-end border-t border-gray-200 p-4 dark:border-zinc-900">
                                 <label for="profile"
-                                    class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5">
+                                    class="flex cursor-pointer items-center gap-2 rounded border-2 border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                     Cambiar foto
                                 </label>
                                 <input type="file" name="profile" id="profile" class="hidden">
                             </div>
                         </div>
-                        <div
-                            class="flex-[2] dark:bg-black bg-white  rounded-lg border border-gray-300 dark:border-zinc-900">
+                        <div class="flex-[2] rounded-lg border border-gray-300 bg-white dark:border-zinc-900 dark:bg-black">
                             <p
-                                class="text-sm dark:text-gray-400 text-gray-600 font-medium p-4 border-b dark:border-gray-700 border-gray-200">
+                                class="border-b border-gray-200 p-4 text-sm font-medium text-gray-600 dark:border-gray-700 dark:text-gray-400">
                                 Información del usuario
                             </p>
                             <div class="flex flex-col gap-4 p-4">
@@ -58,7 +52,7 @@
                                             label="Correo electrónico" readonly />
                                     </div>
                                 </div>
-                                <div class="flex gap-4 items-center">
+                                <div class="flex items-center gap-4">
                                     <div class="flex-1">
                                         <x-input type="text" name="name" id="name" label="Nombre"
                                             value="{{ $user->name }}" />
@@ -68,7 +62,7 @@
                                             value="{{ $user->last_name }}" />
                                     </div>
                                 </div>
-                                <div class="flex gap-4 items-center">
+                                <div class="flex items-center gap-4">
                                     <div class="flex-1">
                                         <x-input type="password" name="password" id="password_user" label="Contraseña"
                                             placeholder="Editar contraseña" />
@@ -88,9 +82,9 @@
                                             ]" selected="{{ $user->role }}" value="{{ $user->role }}" />
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-2 ms-2">
-                                    <span class="block w-2 h-2 ring-2 ring-green-300 bg-green-600 rounded-full"></span>
-                                    <span class="dark:text-white text-black text-sm">{{ Str::ucfirst($user->status) }}
+                                <div class="ms-2 flex items-center gap-2">
+                                    <span class="block h-2 w-2 rounded-full bg-green-600 ring-2 ring-green-300"></span>
+                                    <span class="text-sm text-black dark:text-white">{{ Str::ucfirst($user->status) }}
                                     </span>
                                 </div>
                             </div>

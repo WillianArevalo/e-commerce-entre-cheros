@@ -4,14 +4,10 @@
 
 @section('content')
     <div class="mt-4 rounded-lg dark:border-gray-700">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
-                Administrar marcas
-            </h1>
-            <p class="text-sm text-gray-400">
-                Administra las marcas de los productos de tu tienda
-            </p>
-        </div>
+        @include('layouts.__partials.admin.header-page', [
+            'title' => 'Marcas',
+            'description' => 'Administrar marcas registradas.',
+        ])
         <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div
@@ -77,12 +73,14 @@
                                                         class="editBrand" />
 
                                                     <form action="{{ route('admin.brands.destroy', $brand->id) }}"
-                                                        id="formDeleteCategorie" method="POST">
+                                                        id="formDeleteBrand-{{ $brand->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <x-button type="button" data-form="formDeleteCategorie"
+                                                        <x-button type="button"
+                                                            data-form="formDeleteBrand-{{ $brand->id }}"
                                                             class="buttonDelete" onlyIcon="true" icon="delete"
-                                                            typeButton="danger" />
+                                                            typeButton="danger" data-modal-target="deleteModal"
+                                                            data-modal-toggle="deleteModal" />
                                                     </form>
                                                 </div>
                                             </td>

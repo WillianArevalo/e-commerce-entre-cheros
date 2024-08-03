@@ -4,14 +4,10 @@
 
 @section('content')
     <div class="mt-4 rounded-lg dark:border-zinc-900">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
-                Preguntas frecuentes
-            </h1>
-            <p class="text-sm text-gray-400">
-                Administra las preguntas frecuentes de la aplicación
-            </p>
-        </div>
+        @include('layouts.__partials.admin.header-page', [
+            'title' => 'Preguntas frecuentes',
+            'description' => 'Administra las preguntas frecuentes de tu aplicación',
+        ])
         <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
@@ -66,11 +62,14 @@
                                                         data-action="{{ route('admin.faq.update', $faq->id) }}"
                                                         onlyIcon="true" icon="edit" typeButton="success" />
                                                     <form action="{{ route('admin.faq.destroy', $faq->id) }}"
-                                                        id="formDeleteFaq" method="POST">
+                                                        id="formDeleteFaq-{{ $faq->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <x-button type="button" data-form="formDeleteFaq" onlyIcon="true"
-                                                            icon="delete" typeButton="danger" class="buttonDelete" />
+                                                        <x-button type="button"
+                                                            data-form="formDeleteFaq-{{ $faq->id }}" onlyIcon="true"
+                                                            icon="delete" typeButton="danger" class="buttonDelete"
+                                                            data-modal-target="deleteModal"
+                                                            data-modal-toggle="deleteModal" />
                                                     </form>
                                                 </div>
                                             </td>

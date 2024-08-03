@@ -3,25 +3,21 @@
 @section('title', 'Categorías')
 
 @section('content')
-    <div class="rounded-lg  mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
-                Administrar usuarios
-            </h1>
-            <p class="text-sm text-gray-400">
-                Administra los usuarios de tu sistema
-            </p>
-        </div>
-        <div class="bg-gray-50 dark:bg-black p-4">
+    <div class="mt-4 rounded-lg">
+        @include('layouts.__partials.admin.header-page', [
+            'title' => 'Usuarios',
+            'description' => 'Administrar los usuarios registrados en la plataforma',
+        ])
+        <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-black dark:border dark:border-zinc-900 relative shadow-md sm:rounded-lg">
-                    <div class="p-4 border-b dark:border-zinc-900 border-gray-200">
-                        <h2 class="dark:text-gray-200 text-base font-semibold text-gray-700">
+                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
+                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
+                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
                             Lista de usuarios registrados
                         </h2>
                     </div>
                     <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                        class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
                             <form class="flex items-center" action="{{ route('admin.categories.search') }}"
                                 id="formSearchProduct">
@@ -31,14 +27,14 @@
                             </form>
                         </div>
                         <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                            class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button type="a" href="{{ route('admin.users.create') }}" text="Nuevo usuario"
                                 icon="add-circle" typeButton="primary" />
-                            <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button type="button" id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
                                     typeButton="secondary" icon="filter" text="Filtros" />
                                 <div id="filterDropdown"
-                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-zinc-950">
+                                    class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-zinc-950">
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
                                         id="formSearchCategorieCheck">
                                         @csrf
@@ -48,7 +44,7 @@
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
                                                 <input id="offers" name="filter[]" type="checkbox" value="offers"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
+                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700 dark:focus:ring-blue-600">
                                                 <label for="offers"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                                     Con ofertas
@@ -57,7 +53,7 @@
                                             <li class="flex items-center">
                                                 <input id="flash_offers" name="filter[]" type="checkbox"
                                                     value="flash_offers"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-white dark:border-gray-500">
+                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700 dark:focus:ring-blue-600">
                                                 <label for="flash_offers"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                                     Con ofertas flash
@@ -70,8 +66,8 @@
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
+                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">ID</th>
                                     <th scope="col" class="px-4 py-3">Foto</th>
@@ -93,7 +89,7 @@
                                         <td class="px-4 py-3">
                                             <img src="{{ Storage::url($user->profile_photo_path) }}"
                                                 alt="Foto de perfil del usuario {{ $user->username }}"
-                                                class="w-10 h-10 rounded-full object-cover">
+                                                class="h-10 w-10 rounded-full object-cover">
                                         </td>
                                         <td class="px-4 py-3">
                                             <span>{{ $user->name }}</span>
@@ -109,13 +105,13 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <span
-                                                class="bg-blue-100 text-blue-800 font-medium me-2 px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                                                class="me-2 rounded-full bg-blue-100 px-3 py-1 font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
                                                 {{ Str::ucfirst($user->role) }}
                                             </span>
                                         </td>
                                         <td class="px-4 py-3">
                                             <span
-                                                class="bg-green-100 text-green-800 font-medium me-2 px-3 py-1 rounded-full dark:bg-green-900 dark:text-green-300">
+                                                class="me-2 rounded-full bg-green-100 px-3 py-1 font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
                                                 {{ Str::ucfirst($user->status) }}
                                             </span>
                                         </td>

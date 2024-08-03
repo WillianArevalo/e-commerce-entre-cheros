@@ -4,14 +4,10 @@
 
 @section('content')
     <div class="mt-4 rounded-lg">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
-                Administrar ofertas relámpago
-            </h1>
-            <p class="text-sm text-gray-400">
-                Desde aquí puedes administrar ofertas relámpago que se muestran en la página de inicio
-            </p>
-        </div>
+        @include('layouts.__partials.admin.header-page', [
+            'title' => '    Ofertas relámpago',
+            'description' => 'Administra las ofertas relámpago que se muestran en la página de inicio.',
+        ])
         <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div

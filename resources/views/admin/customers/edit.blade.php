@@ -4,35 +4,30 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="py-4 px-4 shadow-sm flex flex-col items-start border-y dark:bg-black dark:border-zinc-900">
-            <a href="{{ route('admin.products.index') }}"
-                class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
-                <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
-                Regresar a clientes
-            </a>
-            <h1 class="text-3xl dark:text-blue-400 font-secondary text-secondary font-bold">
-                Editar cliente
-            </h1>
-        </div>
-        <div class="bg-white dark:bg-black p-4">
+        @include('layouts.__partials.admin.header-crud-page', [
+            'title' => 'Editar cliente',
+            'text' => 'Regresar a la lista de clientes',
+            'url' => route('admin.customers.index'),
+        ])
+        <div class="bg-white p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <form action="{{ route('admin.customers.update', $customer->id) }}" class="flex flex-col gap-4"
                     enctype="multipart/form-data" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="flex flex-col gap-1">
-                        <h2 class="text-gray-700 dark:text-gray-300 text-lg uppercase">Información del cliente</h2>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">
+                        <h2 class="text-lg uppercase text-gray-700 dark:text-gray-300">Información del cliente</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                             Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                         </p>
                     </div>
                     <div class="flex gap-4">
-                        <div class="flex-[2] flex flex-col gap-4">
-                            <div class="bg-white border border-gray-200 p-4 rounded-lg dark:bg-black dark:border-zinc-900">
-                                <h2 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                        <div class="flex flex-[2] flex-col gap-4">
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                                <h2 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                     Información general
                                 </h2>
-                                <div class="flex gap-4 flex-col">
+                                <div class="flex flex-col gap-4">
                                     <div class="flex-1">
                                         <x-input label="Nombre" type="text" id="name" name="name"
                                             placeholder="Ingresa el nombre del cliente" value="{{ $customer->user->name }}"
@@ -44,7 +39,7 @@
                                             value="{{ $customer->user->last_name }}" required />
                                     </div>
                                 </div>
-                                <div class="flex gap-4 mt-4">
+                                <div class="mt-4 flex gap-4">
                                     <div class="flex-1">
                                         <x-input label="Fecha de nacimiento" type="date" id="birthdate" name="birthdate"
                                             value="{{ $customer->birthdate }}" required />
@@ -60,11 +55,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-white border border-gray-200 p-4 rounded-lg dark:bg-black dark:border-zinc-900">
-                                <h2 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                                <h2 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                     Información de contacto
                                 </h2>
-                                <div class="flex gap-4 flex-col">
+                                <div class="flex flex-col gap-4">
                                     <div class="flex-1">
                                         <x-input label="Dirección (línea 1)" type="text" id="address_line_1"
                                             name="address_line_1" placeholder="Ingresa la primera línea de la dirección"
@@ -76,7 +71,7 @@
                                             required />
                                     </div>
                                 </div>
-                                <div class="flex gap-4 mt-4">
+                                <div class="mt-4 flex gap-4">
                                     <div class="flex-[2]">
                                         <x-input type="text" label="País" id="country" name="country"
                                             placeholder="Ingresa el país" required />
@@ -90,7 +85,7 @@
                                             placeholder="####" required />
                                     </div>
                                 </div>
-                                <div class="flex gap-4 mt-4">
+                                <div class="mt-4 flex gap-4">
                                     <div class="w-max flex-1">
                                         <x-input type="text" label="Ciudad" id="city" name="city"
                                             placeholder="Ingresa la ciudad del país" required />
@@ -103,35 +98,35 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <div class="bg-white border border-gray-200 p-4 rounded-lg dark:bg-black dark:border-zinc-900">
-                                <h2 class="text-base mb-2 dark:text-blue-400 text-blue-700 font-semibold">
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                                <h2 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                     Datos de usuario
                                 </h2>
                                 <div>
                                     <div class="flex items-center justify-between">
-                                        <p class="text-sm dark:text-gray-400 text-gray-600 font-medium p-4">
+                                        <p class="p-4 text-sm font-medium text-gray-600 dark:text-gray-400">
                                             Foto de perfil
                                         </p>
                                         <div class="flex justify-end">
                                             <label for="profile"
-                                                class="font-medium rounded cursor-pointer flex items-center gap-2 transition-colors text-sm border-2 text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900 px-3.5 py-2.5 m-4">
-                                                <x-icon icon="image-add" class="w-5 h-5 text-current" />
+                                                class="m-4 flex cursor-pointer items-center gap-2 rounded border-2 border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
+                                                <x-icon icon="image-add" class="h-5 w-5 text-current" />
                                                 Cambiar foto
                                             </label>
                                             <input type="file" name="profile" id="profile" class="hidden">
                                         </div>
                                     </div>
-                                    <div class="flex items-center justify-center flex-col py-4">
+                                    <div class="flex flex-col items-center justify-center py-4">
                                         <img src="{{ Storage::url($customer->user->profile_photo_path) }}"
                                             alt="Foto de perfil" id="previewImage"
-                                            class="rounded-full w-40 h-40 object-cover @error('profile') is-invalid @enderror">
+                                            class="@error('profile') is-invalid @enderror h-40 w-40 rounded-full object-cover">
                                         @error('profile')
-                                            <span class="text-red-500 text-sm mt-4">
+                                            <span class="mt-4 text-sm text-red-500">
                                                 {{ $message }}
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="flex gap-4 flex-col">
+                                    <div class="flex flex-col gap-4">
                                         <div class="flex-1">
                                             <x-input label="Nombre de usuario" type="text" id="username"
                                                 name="username" placeholder="Ingresa el nombre del usuario"
@@ -143,8 +138,8 @@
                                                 value="{{ $customer->user->email }}" required />
                                         </div>
                                     </div>
-                                    <div class="flex gap-4 mt-4 flex-col">
-                                        <div class="flex-1 ">
+                                    <div class="mt-4 flex flex-col gap-4">
+                                        <div class="flex-1">
                                             <x-input label="Contraseña" type="password" id="password_customer"
                                                 name="password" placeholder="Ingresa la contraseña del cliente"
                                                 required />

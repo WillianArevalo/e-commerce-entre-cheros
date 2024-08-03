@@ -4,16 +4,11 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
-            <a href="{{ route('admin.products.index') }}"
-                class="flex items-center justify-center gap-1 text-sm text-gray-500 hover:text-gray-600 hover:underline dark:text-gray-400">
-                <x-icon icon="arrow-left-02" class="h-4 w-4 text-current" />
-                Regresar a productos
-            </a>
-            <h1 class="font-secondary text-3xl font-bold text-secondary dark:text-blue-400">
-                Nuevo producto
-            </h1>
-        </div>
+        @include('layouts.__partials.admin.header-crud-page', [
+            'title' => 'Nuevo producto',
+            'text' => 'Regresar a la lista de productos',
+            'url' => route('admin.products.index'),
+        ])
         <div class="bg-white p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <form action="{{ route('admin.products.store') }}" class="flex flex-col gap-4" enctype="multipart/form-data"
@@ -104,8 +99,7 @@
                                         <div class="flex gap-4">
                                             <div class="flex-1">
                                                 <x-select label="Categoría del producto" id="categorie_id"
-                                                    name="categorie_id" :options="$categories->pluck('name', 'id')->toArray()" value=""
-                                                    selected="" />
+                                                    name="categorie_id" :options="$categories->pluck('name', 'id')->toArray()" value="" selected="" />
                                             </div>
                                             <div class="flex-1">
                                                 <label

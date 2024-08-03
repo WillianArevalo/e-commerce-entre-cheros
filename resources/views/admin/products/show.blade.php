@@ -4,92 +4,87 @@
 
 @section('content')
     <div class="mt-4">
-        <div class="bg-white dark:bg-black py-4 px-4 flex flex-col items-start border-y dark:border-zinc-900">
-            <a href="{{ route('admin.products.index') }}"
-                class="text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 text-sm hover:underline hover:text-gray-600">
-                <x-icon icon="arrow-left-02" class="w-4 h-4 text-current" />
-                Regresar a productos
-            </a>
-            <h1 class="text-3xl dark:text-blue-400 font-secondary text-secondary font-bold">
-                Detalles del producto
-            </h1>
-        </div>
-        <div class="bg-white flex p-4 gap-4 h-full dark:bg-black">
+        @include('layouts.__partials.admin.header-crud-page', [
+            'title' => 'Detalles del producto',
+            'text' => 'Regresar a la lista de productos',
+            'url' => route('admin.products.index'),
+        ])
+        <div class="flex h-full gap-4 bg-white p-4 dark:bg-black">
             <div class="w-1/2">
                 <div
-                    class="dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg mb-4 flex justify-between">
-                    <h2 class="text-2xl font-bold dark:text-blue-200 text-secondary  uppercase">
+                    class="mb-4 flex justify-between rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    <h2 class="text-2xl font-bold uppercase text-secondary dark:text-blue-200">
                         {{ $product->name }}
                     </h2>
                     <span
-                        class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 flex items-center">
+                        class="me-2 flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
                         {{ Str::ucfirst($product->status) }}
                     </span>
                 </div>
                 <div
-                    class="flex flex-col gap-2 dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg">
-                    <div class="flex flex-col gap-1 mt-2">
-                        <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Descripción corta:</h3>
-                        <p class="dark:text-gray-400 text-gray-500 text-sm">
+                    class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    <div class="mt-2 flex flex-col gap-1">
+                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Descripción corta:</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                             {{ $product->short_description }}
                         </p>
                     </div>
-                    <div class="flex flex-col gap-1 mt-2">
-                        <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Descripción larga:</h3>
-                        <p class="dark:text-gray-400 text-gray-500 text-sm">
+                    <div class="mt-2 flex flex-col gap-1">
+                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Descripción larga:</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                             {{ $product->long_description ?? 'No hay descripción larga' }}
                         </p>
                     </div>
                 </div>
-                <div class="dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg mt-4">
-                    <h2 class="text-xl font-bold dark:text-blue-200 text-secondary">Imágenes del producto</h2>
-                    <div class="flex gap-4 mt-2 flex-col">
-                        <div class="flex gap-2 flex-1 flex-col">
-                            <p class="dark:text-gray-100 text-gray-700 text-sm">
+                <div class="mt-4 rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    <h2 class="text-xl font-bold text-secondary dark:text-blue-200">Imágenes del producto</h2>
+                    <div class="mt-2 flex flex-col gap-4">
+                        <div class="flex flex-1 flex-col gap-2">
+                            <p class="text-sm text-gray-700 dark:text-gray-100">
                                 Imágen principal
                             </p>
                             <img src="{{ Storage::url($product->main_image) }}" alt="product-image"
-                                class="w-full h-full rounded-lg object-cover main-image cursor-pointer" />
+                                class="main-image h-full w-full cursor-pointer rounded-lg object-cover" />
                         </div>
                         <div class="flex-1">
-                            <p class="mb-2 dark:text-gray-100 text-gray-700  text-sm">Galería de imágenes</p>
-                            <div class="flex gap-2 flex-wrap">
+                            <p class="mb-2 text-sm text-gray-700 dark:text-gray-100">Galería de imágenes</p>
+                            <div class="flex flex-wrap gap-2">
                                 @foreach ($product->images as $image)
                                     <img src="{{ Storage::url($image->image) }}" alt="product-image"
-                                        class="w-28 h-28 rounded-lg object-cover main-image cursor-pointer" />
+                                        class="main-image h-28 w-28 cursor-pointer rounded-lg object-cover" />
                                 @endforeach
                             </div>
                         </div>
                     </div>
                     <h2
-                        class="text-xl font-bold dark:text-blue-200 text-secondary mt-4 border-t dark:border-zinc-900 border-gray-200 pt-2">
+                        class="mt-4 border-t border-gray-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
                         Inventario
                     </h2>
                     <div class="flex gap-4">
-                        <div class="flex gap-1 mt-2">
-                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">SKU:</h3>
-                            <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->sku }}</p>
+                        <div class="mt-2 flex gap-1">
+                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">SKU:</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->sku }}</p>
                         </div>
-                        <div class="flex gap-1 mt-2 mb-2">
-                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Código de barras:</h3>
-                            <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->barcode }}</p>
+                        <div class="mb-2 mt-2 flex gap-1">
+                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Código de barras:</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->barcode }}</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex gap-1">
-                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Peso:</h3>
-                            <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->weight }} KG</p>
+                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Peso:</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->weight }} KG</p>
                         </div>
                         <div class="flex gap-1">
-                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Cantidad:</h3>
-                            <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->stock }}</p>
+                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Cantidad:</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->stock }}</p>
                         </div>
                     </div>
-                    <div class="flex gap-1 mt-2">
-                        <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Dimensiones:</h3>
-                        <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->dimensions }}</p>
+                    <div class="mt-2 flex gap-1">
+                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Dimensiones:</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->dimensions }}</p>
                     </div>
-                    <div class="p-4 mt-2">
+                    <div class="mt-2 p-4">
                         <div class="dimension-box">
                             <div class="face front">{{ $product->width }}</div>
                             <div class="face back"></div>
@@ -101,49 +96,49 @@
                     </div>
                 </div>
             </div>
-            <div class="w-1/2 flex flex-col">
-                <div class="categorie dark:bg-black bg-white border border-gray-300 dark:border-zinc-900 p-4 rounded-lg">
-                    <h2 class="text-xl font-bold dark:text-blue-200 text-secondary">Categoría</h2>
-                    <div class="flex flex-col gap-1 mt-2">
-                        <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Categoría principal:</h3>
-                        <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->categories->name }}</p>
+            <div class="flex w-1/2 flex-col">
+                <div class="categorie rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    <h2 class="text-xl font-bold text-secondary dark:text-blue-200">Categoría</h2>
+                    <div class="mt-2 flex flex-col gap-1">
+                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Categoría principal:</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->categories->name }}</p>
                     </div>
-                    <div class="flex flex-col gap-1 mt-2 mb-2">
-                        <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Subcategoría:</h3>
-                        <p class="dark:text-gray-400 text-gray-500 text-sm">{{ $product->subcategories->name }}</p>
+                    <div class="mb-2 mt-2 flex flex-col gap-1">
+                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Subcategoría:</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->subcategories->name }}</p>
                     </div>
                     <h2
-                        class="text-xl font-bold dark:text-blue-200 text-secondary border-t dark:border-zinc-900 border-gray-200 pt-2">
+                        class="border-t border-gray-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
                         Precio
                     </h2>
-                    <div class="flex flex-col gap-1 mt-">
-                        <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Precio normal:</h3>
-                        <p class="dark:text-gray-400 text-gray-500 text-sm">${{ $product->price }}</p>
+                    <div class="mt- flex flex-col gap-1">
+                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Precio normal:</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${{ $product->price }}</p>
                     </div>
                     @if ($product->offer_price)
-                        <div class="flex flex-col gap-1 mt-2">
-                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Precio de oferta:</h3>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">${{ $product->offer_price }}</p>
+                        <div class="mt-2 flex flex-col gap-1">
+                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Precio de oferta:</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">${{ $product->offer_price }}</p>
                         </div>
                         <div
-                            class="flex flex-col gap-1 mt-2 border-2 border-dashed dark:border-zinc-900 border-gray-400 p-4 rounded-lg">
-                            <h3 class="dark:text-gray-100 text-gray-700 text-sm font-medium">Fecha de la oferta:</h3>
+                            class="mt-2 flex flex-col gap-1 rounded-lg border-2 border-dashed border-gray-400 p-4 dark:border-zinc-900">
+                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Fecha de la oferta:</h3>
                             <div class="timeline-container">
                                 <div class="timeline">
                                     <div class="timeline-event start-date">
                                         <div
-                                            class="timeline-content p-4 dark:bg-black border dark:border-zinc-900 bg-white border-zinc-200dark:text-gray-300 text-gray-700 rounded text-sm">
+                                            class="timeline-content border-zinc-200dark:text-gray-300 rounded border bg-white p-4 text-sm text-gray-700 dark:border-zinc-900 dark:bg-black">
                                             <h3 class="timeline-title">Fecha de inicio</h3>
-                                            <p class="timeline-date dark:text-blue-500 text-secondary font-medium">
+                                            <p class="timeline-date font-medium text-secondary dark:text-blue-500">
                                                 {{ $product->offer_start_date }}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="timeline-event end-date">
                                         <div
-                                            class="timeline-content p-4 dark:bg-black border dark:border-zinc-900 bg-white border-zinc-200 dark:text-gray-300 text-gray-700 rounded text-sm">
+                                            class="timeline-content rounded border border-zinc-200 bg-white p-4 text-sm text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
                                             <h3 class="timeline-title">Fecha de fin</h3>
-                                            <p class="timeline-date dark:text-blue-500 text-secondary font-medium">
+                                            <p class="timeline-date font-medium text-secondary dark:text-blue-500">
                                                 {{ $product->offer_end_date }}
                                             </p>
                                         </div>
@@ -153,18 +148,18 @@
                         </div>
                     @endif
                     <h2
-                        class="text-xl font-bold dark:text-blue-200 text-secondary mt-4 border-t dark:border-zinc-900 border-gray-200 pt-2">
+                        class="mt-4 border-t border-gray-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
                         Impuestos
                     </h2>
                     <div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
                             <tbody>
                                 @if ($product->taxes->count() > 0)
                                     @foreach ($product->taxes as $tax)
-                                        <tr class="border-b dark:border-zinc-900 border-gray-200">
+                                        <tr class="border-b border-gray-200 dark:border-zinc-900">
                                             <td class="py-2">
                                                 <span
-                                                    class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                                                    class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
                                                     {{ $tax->name }}
                                                 </span>
                                             </td>
@@ -175,16 +170,16 @@
                             </tbody>
                         </table>
                     </div>
-                    <h2 class="text-xl font-bold dark:text-blue-200 text-secondary mt-4">
+                    <h2 class="mt-4 text-xl font-bold text-secondary dark:text-blue-200">
                         Etiquetas
                     </h2>
                     <div class="mt-2 flex gap-2">
                         @if ($product->labels->count() == 0)
-                            <p class="dark:text-gray-400 text-gray-500 text-sm">No hay etiquetas</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">No hay etiquetas</p>
                         @else
                             @foreach ($product->labels as $label)
                                 <span
-                                    class="bg-white text-zinc-600 border-zinc-300 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-900 rounded-full flex items-center justify-between gap-2">
+                                    class="me-2 flex items-center justify-between gap-2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:bg-black dark:text-white">
                                     {{ $label->name }}
                                 </span>
                             @endforeach
@@ -193,10 +188,10 @@
                 </div>
             </div>
         </div>
-        <div class="px-4 pb-4 text-sm flex gap-2 items-center justify-between dark:bg-black">
+        <div class="flex items-center justify-between gap-2 px-4 pb-4 text-sm dark:bg-black">
             <x-button type="a" text="Regresar" icon="arrow-left-02" typeButton="secondary"
                 href="{{ route('admin.products.index') }}" class="w-max" />
-            <div class="flex gap-2 items-center">
+            <div class="flex items-center gap-2">
                 @if ($previousProduct)
                     <x-button type="a" text="Anterior producto" icon="arrow-left" iconAlign="left"
                         typeButton="secondary" href="{{ route('admin.products.show', $previousProduct->id) }}"
@@ -213,11 +208,11 @@
 
     <div id="modal-image" class="relative">
         <button type="button"
-            class="close absolute right-0 dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-800 p-2 m-10 rounded-lg"
+            class="close absolute right-0 m-10 rounded-lg bg-gray-200 p-2 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-800"
             id="close-modal">
-            <x-icon icon="cancel" class="w-5 h-5 text-black dark:text-white" />
+            <x-icon icon="cancel" class="h-5 w-5 text-black dark:text-white" />
         </button>
-        <div class="flex items-center justify-center h-full" id="container-modal-image">
+        <div class="flex h-full items-center justify-center" id="container-modal-image">
             <img class="h-4/5 w-4/5 object-contain" id="image-modal" src="{{ asset('images/photo.jpg') }}" />
         </div>
     </div>

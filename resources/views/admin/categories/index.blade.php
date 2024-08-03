@@ -4,14 +4,10 @@
 
 @section('content')
     <div class="mt-4 rounded-lg dark:border-gray-700">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
-                Administrar categorías
-            </h1>
-            <p class="text-sm text-gray-400">
-                Administra las categorías de tu tienda
-            </p>
-        </div>
+        @include('layouts.__partials.admin.header-page', [
+            'title' => 'Categorías',
+            'description' => 'Administrar categorías y subcategorías registradas.',
+        ])
         <div class="bg-gray-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative rounded-lg bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black">
@@ -82,7 +78,7 @@
                             </thead>
                             <tbody id="tableCategorie">
                                 @if ($categories->count() == 0)
-                                    <tr class="border-b dark:border-gray-700">
+                                    <tr class="border-b dark:border-zinc-900">
                                         <td colspan="4"
                                             class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
                                             No hay categorías
@@ -128,11 +124,14 @@
                                                                         <li>
                                                                             <form
                                                                                 action="{{ route('admin.subcategories.destroy', $subcategorie->id) }}"
-                                                                                method="POST" id="formDeleteSubCategorie">
+                                                                                method="POST"
+                                                                                id="formDeleteSubCategorie-{{ $subcategorie->id }}">
                                                                                 @csrf
                                                                                 @method('DELETE')
                                                                                 <button type="button"
-                                                                                    data-form="formDeleteSubCategorie"
+                                                                                    data-form="formDeleteSubCategorie-{{ $subcategorie->id }}"
+                                                                                    data-modal-target="deleteModal"
+                                                                                    data-modal-toggle="deleteModal"
                                                                                     class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900">
                                                                                     <x-icon icon="delete"
                                                                                         class="h-4 w-4 text-current" />
@@ -156,12 +155,14 @@
                                                         data-action="{{ route('admin.categories.update', $category->id) }}"
                                                         icon="edit" typeButton="success" />
                                                     <form action="{{ route('admin.categories.destroy', $category->id) }}"
-                                                        id="formDeleteCategorie" method="POST">
+                                                        id="formDeleteCategorie-{{ $category->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <x-button type="button" data-form="formDeleteCategorie"
+                                                        <x-button type="button"
+                                                            data-form="formDeleteCategorie-{{ $category->id }}"
                                                             onlyIcon="true" icon="delete" typeButton="danger"
-                                                            class="buttonDelete" />
+                                                            data-modal-target="deleteModal"
+                                                            data-modal-toggle="deleteModal" class="buttonDelete" />
                                                     </form>
                                                 </div>
                                             </td>
@@ -175,6 +176,7 @@
                 </div>
             </div>
         </div>
+
         <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar la categoría/subcategoría?"
             message="No podrás recuperar este registro" action="" />
 
