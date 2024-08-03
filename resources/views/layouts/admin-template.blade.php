@@ -25,13 +25,13 @@
 </head>
 
 <body class="font-secondary dark:bg-black">
-    @include('layouts.__partials.navbar-admin')
+    @include('layouts.__partials.admin.navbar')
     <main class="h-full bg-gray-50 dark:bg-black">
-        @include('layouts.__partials.toast')
+        @include('layouts.__partials.admin.toast')
         <div id="overlay" class="fixed inset-0 z-30 hidden bg-gray-900/80 dark:bg-zinc-900/90"></div>
         <div class="mt-16 xl:ml-72">
             <div class="px-4 pt-4 xl:hidden">
-                @include('layouts.__partials.breadcrumb')
+                @include('layouts.__partials.admin.breadcrumb')
             </div>
             @yield('content')
         </div>
