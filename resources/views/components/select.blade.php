@@ -1,9 +1,3 @@
-<style>
-    .selectOptions {
-        margin-bottom: 16px;
-        /* Ajusta este valor según sea necesario */
-    }
-</style>
 <div class="w-full">
     @if ($label)
         <label for="{{ $id }}"
@@ -16,7 +10,7 @@
         <div
             class="selected @error($name) is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
             <span class="itemSelected" id="{{ $id }}_selected">
-                {{ ($selected ? $options[$selected] : $text == '') ? 'Seleccionar' : $text }}
+                {{ $selected && isset($options[$selected]) ? $options[$selected] : ($text ?: 'Seleccionar') }}
             </span>
             <x-icon icon="arrow-down" class="h-5 w-5 text-gray-500 dark:text-white" />
         </div>
