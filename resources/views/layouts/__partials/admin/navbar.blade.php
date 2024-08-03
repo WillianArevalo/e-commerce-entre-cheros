@@ -26,7 +26,7 @@
                 </div>
                 <div class="flex w-auto items-center justify-end pe-4 md:w-full xl:justify-between">
                     <div class="hidden text-gray-500 xl:block">
-                        @include('layouts.__partials.breadcrumb')
+                        @include('layouts.__partials.admin.breadcrumb')
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="flex items-center justify-center">
@@ -212,7 +212,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.sales-strategies') }}"
+                        <a href="{{ route('admin.sales-strategies.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
                             Estrategia de ventas
                         </a>
