@@ -28,7 +28,7 @@ $(".open-drawer").on("click", function () {
     openDrawer(drawer);
 });
 
-$(".close-drawer").on("click", function () {
+$(document).on("click", ".close-drawer", function () {
     const drawer = $(this).data("drawer");
     closeDrawer(drawer);
 });
