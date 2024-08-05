@@ -4,29 +4,29 @@
 
 @section('content')
     <main>
-        <section class="home__header text-white w-full relative"
+        <section class="home__header relative w-full text-white"
             style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
-            <div class="relative top-32 w-2/3 flex gap-4 flex-col left-20">
-                <h1 class="text-6xl font-primary font-bold uppercase text-start">
+            <div class="relative left-20 top-32 flex w-2/3 flex-col gap-4">
+                <h1 class="text-start font-primary text-6xl font-bold uppercase">
                     ¡Bienvenido a tu <span class="block">rincón salvadoreño!</span>
                 </h1>
-                <p class="text-start font-semibold font-secondary w-2/4 text-lg">
+                <p class="w-2/4 text-start font-secondary text-lg font-semibold">
                     Explora una selcción de productos auténticos que te harán sentir más cerca de El Salvador.
                 </p>
             </div>
             <button
-                class="rounded-full font-medium bg-primary px-5 py-3 absolute bottom-14 z-20 left-52 font-secondary text-white uppercase hover:bg-secondary flex items-center justify-center gap-2 bg-gradient">
-                <x-icon icon="store" class="w-5 h-5 text-current" />
+                class="bg-gradient absolute bottom-14 left-52 z-20 flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 font-secondary font-medium uppercase text-white hover:bg-secondary">
+                <x-icon-store icon="store" class="h-5 w-5 text-current" />
                 Comprar ahora
             </button>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 290" class="w-full absolute bottom-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 290" class="absolute bottom-0 w-full">
                 <path fill="#ffffff" fill-opacity="1"
                     d="M0,192L60,170.7C120,149,240,107,360,128C480,149,600,235,720,266.7C840,299,960,277,1080,240C1200,203,1320,149,1380,122.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
                 </path>
             </svg>
         </section>
         <section class="mt-4">
-            <h2 class="text-center text-3xl font-primary text-secondary font-bold p-4">
+            <h2 class="p-4 text-center font-primary text-3xl font-bold text-secondary">
                 Categorías
             </h2>
             <div class="flex justify-center gap-2">
@@ -39,43 +39,43 @@
             </div>
         </section>
         <section class="px-20 py-4">
-            <div class="flex flex-col gap-4 justify-center w-full text-center">
-                <h2 class="uppercase text-3xl font-primary text-secondary font-bold p-4">
+            <div class="flex w-full flex-col justify-center gap-4 text-center">
+                <h2 class="p-4 font-primary text-3xl font-bold uppercase text-secondary">
                     Ofertas relampago
                 </h2>
                 @if ($flashOffers->count() > 3)
-                    @include('layouts.__partials.slider', [
+                    @include('layouts.__partials.store.slider', [
                         'products' => $flashOffers,
                     ])
                 @else
-                    <div class="flex gap-4 items-center justify-center">
+                    <div class="flex items-center justify-center gap-4">
                         @foreach ($flashOffers as $product)
                             <x-card-product :product="$product" :slide="false" width="w-96" />
                         @endforeach
                     </div>
                 @endif
                 <a href=""
-                    class="rounded-full bg-primary px-5 py-3 mx-auto w-max font-secondary text-white uppercase font-medium  hover:bg-secondary bg-gradient">
+                    class="bg-gradient mx-auto w-max rounded-full bg-primary px-5 py-3 font-secondary font-medium uppercase text-white hover:bg-secondary">
                     Ver más
                 </a>
             </div>
         </section>
-        <section class="w-full bg-tertiary px-20 py-10 mt-8">
-            <div class="flex gap-4 justify-center items-center w-full mx-auto">
-                <div class="flex flex-col gap-4 flex-1">
-                    <h2 class="font-bold text-white text-4xl font-primary uppercase">
+        <section class="mt-8 w-full bg-tertiary px-20 py-10">
+            <div class="mx-auto flex w-full items-center justify-center gap-4">
+                <div class="flex flex-1 flex-col gap-4">
+                    <h2 class="font-primary text-4xl font-bold uppercase text-white">
                         Descubre el sabor y la tradición de El Salvador con nuestra variedad de productos únicos
                     </h2>
                     <x-button type="button" typeButton="store-secondary" text="Comprar ahora" />
                 </div>
-                <div class="w-full flex items-center justify-center  flex-1">
-                    <img src="{{ asset('images/imagen1.png') }}" alt="" class="w-72 h-64">
+                <div class="flex w-full flex-1 items-center justify-center">
+                    <img src="{{ asset('images/imagen1.png') }}" alt="" class="h-64 w-72">
                 </div>
             </div>
         </section>
         <section class="p-20">
-            <div class="flex flex-col gap-4 justify-center text-center items-center">
-                <h2 class="font-primary text-secondary text-5xl w-2/3 uppercase font-bold">
+            <div class="flex flex-col items-center justify-center gap-4 text-center">
+                <h2 class="w-2/3 font-primary text-5xl font-bold uppercase text-secondary">
                     Descubre todo lo que traemos de El Salvador para ti
                 </h2>
                 <p class="w-1/2 text-gray-600">
@@ -86,7 +86,7 @@
             </div>
             @if ($products)
                 <div id="slider">
-                    @include('layouts.__partials.slider', [
+                    @include('layouts.__partials.store.slider', [
                         'products' => $products,
                     ])
                 </div>
@@ -95,9 +95,9 @@
         </section>
         <section class="px-40">
             <div style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover; height: 600px; border-radius:70px"
-                class="w-full relative">
+                class="relative w-full">
                 <h2
-                    class="absolute right-20 top-20 uppercase w-3/6 text-wrap text-end text-4xl text-secondary font-semibold font-primary">
+                    class="text-wrap absolute right-20 top-20 w-3/6 text-end font-primary text-4xl font-semibold uppercase text-secondary">
                     Disfruta de un pedacito de
                     <br>
                     <span class="text-6xl font-bold">
@@ -105,16 +105,16 @@
                     </span>
                 </h2>
                 <x-button type="a" typeButton="store-gradient" text="Tienda" icon="store"
-                    class=" absolute  left-20 bottom-20 " />
+                    class="absolute bottom-20 left-20" />
             </div>
         </section>
-        <section class="w-full bg-tertiary px-20 py-10 mt-8">
-            <div class="flex gap-4 justify-center items-center w-3/4 mx-auto">
-                <div class="w-full flex items-center justify-center">
-                    <img src="{{ asset('images/imagen2.png') }}" alt="" class="w-72 h-64">
+        <section class="mt-8 w-full bg-tertiary px-20 py-10">
+            <div class="mx-auto flex w-3/4 items-center justify-center gap-4">
+                <div class="flex w-full items-center justify-center">
+                    <img src="{{ asset('images/imagen2.png') }}" alt="" class="h-64 w-72">
                 </div>
-                <div class="flex flex-col gap-4 w-max justify-end">
-                    <h2 class="font-bold text-white text-4xl font-primary uppercase text-end">
+                <div class="flex w-max flex-col justify-end gap-4">
+                    <h2 class="text-end font-primary text-4xl font-bold uppercase text-white">
                         Conecta con tus raíces salvadoreñas los mejores productos auténticos y tradicionales a tu alcance
                     </h2>
                     <x-button type="a" typeButton="store-secondary" text="Comprar ahora" class="ml-auto" />

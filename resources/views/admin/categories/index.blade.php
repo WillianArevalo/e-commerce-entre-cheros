@@ -3,19 +3,14 @@
 @section('title', 'Categorías')
 
 @section('content')
-    <div class="mt-4 rounded-lg dark:border-gray-700">
+    <div>
         @include('layouts.__partials.admin.header-page', [
             'title' => 'Categorías',
             'description' => 'Administrar categorías y subcategorías registradas.',
         ])
-        <div class="bg-gray-50 p-4 dark:bg-black">
+        <div class="bg-gray-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative rounded-lg bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black">
-                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
-                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
-                            Lista de categorías
-                        </h2>
-                    </div>
+                <div class="relative bg-white dark:bg-black">
                     <div
                         class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
@@ -66,14 +61,19 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <table class="bg- w-full text-left text-sm text-gray-500 dark:text-gray-400">
-                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-900">
+                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="border-b border-zinc-200 bg-gray-50 text-xs uppercase text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">Imagen</th>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Subcategorías</th>
-                                    <th scope="col" class="px-4 py-3">Acciones</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Imagen</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Nombre</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Subcategorías</th>
+                                    <th scope="col" class="px-4 py-3">
+                                        Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tableCategorie">
@@ -86,7 +86,7 @@
                                     </tr>
                                 @else
                                     @foreach ($categories as $category)
-                                        <tr class="border-b dark:border-zinc-900">
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
                                             <th scope="row"
                                                 class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 <img src="{{ Storage::url($category->image) }}" alt="Product 1"
@@ -100,7 +100,7 @@
                                                     <div class="flex flex-col gap-2">
                                                         @foreach ($category->subcategories as $subcategorie)
                                                             <div
-                                                                class="relative flex w-max items-center gap-2 rounded-2xl bg-blue-100 px-3 py-2 text-blue-900 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300">
+                                                                class="relative flex w-max items-center gap-2 rounded-lg border px-4 py-2 dark:border-zinc-900">
                                                                 {{ $subcategorie->name }}
                                                                 <button class="btnDropDown text-gray-600 dark:text-white"
                                                                     type="button">
@@ -108,14 +108,14 @@
                                                                         class="h-5 w-5 text-current" />
                                                                 </button>
                                                                 <div
-                                                                    class="dropDownContent absolute top-10 z-30 hidden w-44 overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-950">
+                                                                    class="dropDownContent absolute top-10 z-30 hidden w-44 overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-900">
                                                                     <ul
                                                                         class="p-2 text-sm text-gray-700 dark:text-gray-200">
                                                                         <li>
                                                                             <button type="button"
                                                                                 data-href="{{ route('admin.subcategories.edit', $subcategorie->id) }}"
                                                                                 data-action="{{ route('admin.subcategories.update', $subcategorie->id) }}"
-                                                                                class="editCategorie flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:hover:bg-zinc-900 dark:hover:text-white">
+                                                                                class="editCategorie flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:hover:bg-zinc-800 dark:hover:text-white">
                                                                                 <x-icon icon="edit"
                                                                                     class="h-4 w-4 text-current" />
                                                                                 Editar
@@ -132,7 +132,7 @@
                                                                                     data-form="formDeleteSubCategorie-{{ $subcategorie->id }}"
                                                                                     data-modal-target="deleteModal"
                                                                                     data-modal-toggle="deleteModal"
-                                                                                    class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900">
+                                                                                    class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-800">
                                                                                     <x-icon icon="delete"
                                                                                         class="h-4 w-4 text-current" />
                                                                                     Eliminar

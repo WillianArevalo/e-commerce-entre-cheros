@@ -3,15 +3,14 @@
 @section('title', 'Marcas')
 
 @section('content')
-    <div class="mt-4 rounded-lg dark:border-gray-700">
+    <div>
         @include('layouts.__partials.admin.header-page', [
             'title' => 'Marcas',
             'description' => 'Administrar marcas registradas.',
         ])
-        <div class="bg-gray-50 p-4 dark:bg-black">
+        <div class="bg-gray-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div
-                    class="relative overflow-hidden rounded-lg bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black">
+                <div class="relative overflow-hidden bg-white dark:bg-black">
                     <div
                         class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
@@ -27,13 +26,17 @@
                                 typeButton="primary" text="Agregar marca" icon="add-circle" />
                         </div>
                     </div>
-                    <div>
-                        <table class="w-full overflow-x-auto text-left text-sm text-gray-500 dark:text-gray-400">
-                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-900">
+                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="border-b border-zinc-200 bg-gray-50 text-xs uppercase text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">#</th>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Descripción</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">#
+                                    </th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Nombre</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Descripción</th>
                                     <th scope="col" class="px-4 py-3">Acciones</th>
                                 </tr>
                             </thead>
@@ -47,7 +50,7 @@
                                     </tr>
                                 @else
                                     @foreach ($brands as $brand)
-                                        <tr class="border-b dark:border-zinc-900">
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
                                             <th scope="row"
                                                 class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 {{ $loop->iteration }}

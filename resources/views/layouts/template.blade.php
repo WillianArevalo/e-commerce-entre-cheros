@@ -15,15 +15,15 @@
 </head>
 
 <body>
-    @include('layouts.__partials.toast-store', ['top' => 'top-28'])
+    @include('layouts.__partials.store.toast-store', ['top' => 'top-28'])
 
-    <div id="toast-container" class="flex flex-col fixed top-28 right-5 gap-2 z-40"></div>
-    @include('layouts.__partials.navbar', [
+    <div id="toast-container" class="fixed right-5 top-28 z-40 flex flex-col gap-2"></div>
+    @include('layouts.__partials.store.navbar', [
         'classHead' => 'z-50 fixed top-0',
         'classNav' => ' w-9/12 mx-auto',
     ])
     @yield('content')
-    @include('layouts.__partials.footer')
+    @include('layouts.__partials.store.footer')
 </body>
 
 

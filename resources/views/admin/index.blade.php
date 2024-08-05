@@ -4,8 +4,8 @@
 
 @section('content')
     <div
-        class="dark:text-white text-gray-400 p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-4">
-        <h1 class="font-bold text-primary text-3xl">
+        class="m-4 rounded-lg border-2 border-dashed border-gray-200 p-4 text-gray-400 dark:border-gray-700 dark:text-white">
+        <h1 class="text-3xl font-bold text-primary">
             {{ __('messages.welcome') }}
         </h1>
     </div>

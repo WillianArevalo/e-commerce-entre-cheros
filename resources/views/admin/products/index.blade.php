@@ -3,18 +3,19 @@
 @section('title', 'Brands')
 
 @section('content')
-    <div class="rounded-lg dark:border-gray-700">
+    <div>
         @include('layouts.__partials.admin.header-page', [
             'title' => 'Productos',
             'description' => 'Administrar los productos registrados.',
         ])
-        <div class="bg-gray-50 p-4 dark:bg-black">
+        <div class="bg-gray-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div
-                    class="relative overflow-hidden rounded-lg bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black">
+                <div class="relative overflow-hidden bg-white dark:bg-black">
                     <div class="mt-4 flex w-full items-center justify-between gap-2 px-4">
                         <div class="flex items-center gap-10">
-                            <span class="font-secondary text-base font-semibold dark:text-gray-200">100 productos</span>
+                            <span class="font-secondary text-base font-semibold dark:text-gray-200">
+                                {{ $count }} producto
+                            </span>
                         </div>
                         <div class="flex items-center gap-2">
                             <x-button type="button" icon="import" typeButton="secondary" text="Importar" />
@@ -94,30 +95,37 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <table class="w-full overflow-x-auto text-left text-sm text-gray-500 dark:text-gray-400">
-                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-900">
+                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="border-b border-zinc-200 bg-gray-50 text-xs uppercase text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="w-10 border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
                                         <input id="default-checkbox" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                            class="h-4 w-4 rounded border-2 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
                                     </th>
-                                    <th scope="col" class="px-4 py-3">Producto</th>
-                                    <th scope="col" class="px-4 py-3">Imagen</th>
-                                    <th scope="col" class="px-4 py-3">Precio</th>
-                                    <th scope="col" class="px-4 py-3">SKU</th>
-                                    <th scope="col" class="px-4 py-3">Inventario</th>
-                                    <th scope="col" class="px-4 py-3">Categoría</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Producto</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Imagen</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Precio</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">SKU
+                                    </th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Inventario</th>
+                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        Categoría</th>
                                     <th scope="col" class="px-4 py-3">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tableProduct">
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)
-                                        <tr class="border-b dark:border-zinc-900">
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
                                             <td class="px-4 py-3">
                                                 <input id="default-checkbox" type="checkbox" value=""
-                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-2 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
                                             </td>
                                             <td class="px-4 py-3">
                                                 <span>{{ $product->name }}</span>
