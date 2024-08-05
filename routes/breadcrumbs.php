@@ -13,7 +13,7 @@ Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail) {
     $trail->push('Admin', route('admin.index'));
 });
 
-// Admin > Categories
+// Admin => Categories
 Breadcrumbs::for('admin.categories.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
     $trail->push('Categorías', route('admin.categories.index'));
@@ -133,6 +133,13 @@ Breadcrumbs::for('admin.customers.edit', function (BreadcrumbTrail $trail, $cust
     $trail->push('Editar', route('admin.customers.edit', $customer));
 });
 
+//Admin > General Settings
+Breadcrumbs::for('admin.general-settings', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Ajustes generales', route('admin.general-settings'));
+});
+
+
 //Admin > Settings
 Breadcrumbs::for('admin.settings', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
@@ -149,4 +156,55 @@ Breadcrumbs::for('admin.policies.index', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('admin.faq.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
     $trail->push('Preguntas frecuentes', route('admin.faq.index'));
+});
+
+//Admin > Support Tickets
+Breadcrumbs::for('admin.support-tickets.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Tickets de soporte', route('admin.support-tickets.index'));
+});
+
+//Admin > Support Tickets > Show
+Breadcrumbs::for('admin.support-tickets.show', function (BreadcrumbTrail $trail, $supportTicket) {
+    $trail->parent('admin.support-tickets.index');
+    $trail->push('Detalles', route('admin.support-tickets.show', $supportTicket));
+});
+
+//Admin > Orders
+Breadcrumbs::for('admin.orders.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Pedidos', route('admin.orders.index'));
+});
+
+//Admin > Sales Strategies
+Breadcrumbs::for('admin.sales-strategies.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.index');
+    $trail->push('Estrategias de venta', route('admin.sales-strategies.index'));
+});
+
+//Admin > Sales Strategies > New Coupon
+Breadcrumbs::for('admin.sales-strategies.coupon.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.sales-strategies.index');
+    $trail->push("Cupón", route('admin.sales-strategies.index'));
+    $trail->push('Nuevo', route('admin.sales-strategies.coupon.create'));
+});
+
+//Admin > Sales Strategies > Show Coupon > {coupon}
+Breadcrumbs::for('admin.sales-strategies.coupon.show', function (BreadcrumbTrail $trail, $coupon) {
+    $trail->parent('admin.sales-strategies.index');
+    $trail->push("Cupón", route('admin.sales-strategies.index'));
+    $trail->push('Detalles', route('admin.sales-strategies.coupon.show', $coupon));
+});
+
+//Admin > Sales Strategies > Edit Coupon > {coupon}
+Breadcrumbs::for('admin.sales-strategies.coupon.edit', function (BreadcrumbTrail $trail, $coupon) {
+    $trail->parent('admin.sales-strategies.index');
+    $trail->push("Cupón", route('admin.sales-strategies.index'));
+    $trail->push('Editar', route('admin.sales-strategies.coupon.edit', $coupon));
+});
+
+//Admin > Sales Strategies > Shipping Methods
+Breadcrumbs::for('admin.sales-strategies.shipping-methods.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.sales-strategies.index');
+    $trail->push('Métodos de envío', route('admin.sales-strategies.shipping-methods.index'));
 });
