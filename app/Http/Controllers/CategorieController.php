@@ -162,7 +162,7 @@ class CategorieController extends Controller
 
         $categories = $query->get();
         if ($request->ajax()) {
-            return view("layouts.__partials.ajax.row-categorie", compact("categories"))->render();
+            return view("layouts.__partials.ajax.admin.categorie.row-categorie", compact("categories"))->render();
         }
     }
 }

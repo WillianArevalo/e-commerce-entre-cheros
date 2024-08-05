@@ -102,7 +102,7 @@ class BrandController extends Controller
 
         $brands = $query->get();
         if ($request->ajax()) {
-            return view("layouts.__partials.ajax.row-brand", compact("brands"))->render();
+            return view("layouts.__partials.ajax.admin.brand.row-brand", compact("brands"))->render();
         }
     }
 }

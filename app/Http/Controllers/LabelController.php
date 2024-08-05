@@ -16,7 +16,7 @@ class LabelController extends Controller
         $label = Label::create($request->all());
         if ($label) {
             $labels = Label::all();
-            $html = view("layouts.__partials.ajax.option-label", compact("labels"))->render();
+            $html = view("layouts.__partials.ajax.admin.label.option-label", compact("labels"))->render();
             return response()->json(["message" => "Impuesto creado correctamente", "html" => $html], 201);
         } else {
             return response()->json(["message" => "Error al crear el impuesto"], 400);

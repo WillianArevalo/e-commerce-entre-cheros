@@ -68,8 +68,7 @@ class SubCategorieController extends Controller
             if ($subcategories->first()) {
                 $subcategorieSelected = $subcategories->first();
             }
-            $html = view("layouts.__partials.ajax.option-subcategorie", compact("subcategories"))->render();
-            return response()->json(["message" => "Encontrado", "html" => $html, "subcategoria" => $subcategorieSelected], 201);
+            return response()->json(["message" => "Encontrado", "html" => view("layouts.__partials.ajax.admin.categorie.option-subcategorie", compact("subcategories"))->render(), "subcategoria" => $subcategorieSelected], 201);
         } else {
             return response()->json(["message" => "No encontrado"], 400);
         }

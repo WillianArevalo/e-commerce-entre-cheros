@@ -21,7 +21,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with("categories", "subcategories", "brands", "taxes", "labels", "images")->paginate(10);
-        return view("admin.products.index", ["products" => $products]);
+        $count = Product::count();
+        return view("admin.products.index", ["products" => $products, "count" => $count]);
     }
 
     public function details(string $id)
