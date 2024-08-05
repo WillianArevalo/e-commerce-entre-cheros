@@ -1,27 +1,27 @@
   <div
-      class="{{ $slide ? 'swiper-slide' : '' }} bg-white border border-zinc-300 flex flex-col text-start rounded-lg overflow-hidden h-max {{ $width }}">
+      class="{{ $slide ? 'swiper-slide' : '' }} {{ $width }} flex h-max flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white text-start">
       <div>
-          <img src="{{ Storage::url($product->main_image) }}" alt="" class="w-full h-72 object-cover">
+          <img src="{{ Storage::url($product->main_image) }}" alt="" class="h-72 w-full object-cover">
           <div class="p-4">
-              <h3 class="text-secondary font-bold text-xl font-primary">
+              <h3 class="font-primary text-xl font-bold text-secondary">
                   {{ $product->name }}
               </h3>
-              <p class="text-gray-800 font-secondary text-sm text-wrap">
+              <p class="text-wrap font-secondary text-sm text-gray-800">
                   {{ $product->short_description }}
               </p>
               <div class="mt-2">
                   @if ($product->offer_price)
-                      <span class="text-secondary font-semibold font-secondary text-xl">${{ $product->offer_price }}
+                      <span class="font-secondary text-xl font-semibold text-secondary">${{ $product->offer_price }}
                       </span>
-                      <span class="text-gray-400 font-secondary line-through text-sm">${{ $product->price }}
+                      <span class="font-secondary text-sm text-gray-400 line-through">${{ $product->price }}
                       </span>
                   @else
-                      <span class="text-secondary font-semibold font-secondary text-xl">${{ $product->price }}
+                      <span class="font-secondary text-xl font-semibold text-secondary">${{ $product->price }}
                       </span>
                   @endif
               </div>
           </div>
-          <div class="p-4 flex justify-between items-end mt-auto" id="{{ $product->id }}">
+          <div class="mt-auto flex items-end justify-between p-4" id="{{ $product->id }}">
               <div class="flex items-center gap-2">
                   <form action="{{ route('favorites.add', $product->id) }}" method="POST"
                       id="form-add-favorite-{{ $product->id }}">
@@ -31,13 +31,13 @@
                               class="btn-add-favorite {{ $product->is_favorite ? 'favourite' : '' }}"
                               data-form="#form-add-favorite-{{ $product->id }}" data-card="#{{ $product->id }}">
                           <div class="like">
-                              <x-icon icon="favourite" class="text-rose-600" fill="" />
+                              <x-icon-store icon="favourite" class="text-rose-600" fill="" />
                           </div>
                       </label>
                   </form>
                   <a href="{{ route('products.details', $product->id) }}"
-                      class="px-5 py-3 font-primary rounded-lg bg-white text-secondary flex items-center justify-center border border-zinc-300 hover:bg-zinc-100 transition-colors">
-                      <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                      class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
+                      <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                   </a>
               </div>
               <form action="{{ route('cart.add', $product->id) }}" method="POST"
@@ -45,8 +45,8 @@
                   @csrf
                   <input type="hidden" name="quantity" value="1">
                   <button type="button" data-form="#form-add-cart-{{ $product->id }}"
-                      class="px-5 py-3 font-primary rounded-lg bg-secondary text-white flex items-center justify-center add-to-cart">
-                      <x-icon icon="shopping-cart-add" class="w-5 h-5 text-current" />
+                      class="add-to-cart flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-primary text-white">
+                      <x-icon-store icon="shopping-cart-add" class="h-5 w-5 text-current" />
                   </button>
               </form>
           </div>

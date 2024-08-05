@@ -34,7 +34,7 @@
     @case('success')
         @php
             $classes =
-                'border-2 border-green-500 text-green-500 hover:text-white hover:bg-green-500 dark:bg-green-800 dark:hover:bg-green-900 dark:text-white ' .
+                'border-2 border-green-500 text-green-500 hover:text-white hover:bg-green-500 ' .
                 $classGeneral .
                 ' ' .
                 $class;
@@ -44,7 +44,7 @@
     @case('danger')
         @php
             $classes =
-                'border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-500 dark:bg-red-800 dark:hover:bg-red-900 dark:text-white  ' .
+                'border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-500 ' .
                 $classGeneral .
                 ' ' .
                 $class;
@@ -98,13 +98,13 @@
 @if ($type === 'a')
     @if ($iconAlign === 'left')
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
+            <x-icon :icon="$icon" class="h-4 w-4 text-current" />
             {{ $text }}
         </a>
     @elseif ($iconAlign === 'right')
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
             {{ $text }}
-            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
+            <x-icon :icon="$icon" class="h-4 w-4 text-current" />
         </a>
     @else
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
@@ -113,7 +113,7 @@
     @endif
 @else
     <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
-        <x-icon :icon="$icon" class="h-5 w-5 text-current" />
+        <x-icon :icon="$icon" class="h-4 w-4 text-current" />
         {{ $text }}
     </button>
 @endif
