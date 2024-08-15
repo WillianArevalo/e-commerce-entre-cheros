@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Select extends Component
+class SelectStore extends Component
 {
     public  $label;
     public  $id;
@@ -37,6 +37,6 @@ class Select extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.select');
+        return view('components.select-store');
     }
 }

@@ -1,0 +1,49 @@
+@props([
+    'type' => 'text',
+    'name',
+    'id' => null,
+    'label' => '',
+    'placeholder' => '',
+    'value' => '',
+    'class' => '',
+    'required' => false,
+    'icon' => '',
+    'error' => true,
+])
+
+@php
+    $errorClass = $errors->has($name) ? 'is-invalid' : '';
+    $labelClass = $required ? "after:content-['*'] after:ml-0.5 after:text-red-500" : '';
+    $inputBaseClasses =
+        'text-sm w-full px-6 py-3 border border-zinc-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition duration-300';
+    $classes = "{$inputBaseClasses} {$class} {$errorClass}";
+
+    $id = $id ?? $name;
+@endphp
+
+<label for="{{ $id }}" class="{{ $labelClass }} text-start text-sm text-zinc-600">
+    {{ $label }}
+</label>
+
+@if ($icon)
+    <div class="relative w-full">
+        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+            <x-icon-store icon="{{ $icon }}" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
+        </div>
+        <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}"
+            placeholder="{{ $placeholder }}" value="{{ $value }}" class="{{ $classes }} pl-12"
+            {{ $attributes }}>
+    </div>
+@elseif ($type !== 'textarea')
+    <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}"
+        placeholder="{{ $placeholder }}" value="{{ $value }}" class="{{ $classes }}"
+        {{ $attributes }}>
+@else
+    <textarea id="{{ $id }}" name="{{ $name }}" rows="4"
+        class="{{ $inputBaseClasses }} {{ $errorClass }} {{ $class }} w-full border border-zinc-300 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
+        placeholder="{{ $placeholder }}">{{ $value }}</textarea>
+@endif
+
+@if ($error && $errors->has($name))
+    <span class="error-msg text-sm text-red-500">{{ $errors->first($name) }}</span>
+@endif
