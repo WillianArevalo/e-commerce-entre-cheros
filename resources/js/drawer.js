@@ -2,11 +2,13 @@ export { openDrawer };
 
 function openDrawer(drawerId) {
     $(drawerId).removeClass("translate-x-full");
+    $("body").addClass("overflow-hidden");
     showOverlay();
 }
 
 function closeDrawer(drawerId) {
     $(drawerId).addClass("translate-x-full");
+    $("body").removeClass("overflow-hidden");
     hideOverlay();
 }
 
