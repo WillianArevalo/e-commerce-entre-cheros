@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
@@ -7,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FAQController;
@@ -32,6 +35,24 @@ use Illuminate\Support\Facades\Route;
 
 /** Routes Store */
 Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/login", [AuthController::class, "showLoginForm"])->name("login");
+Route::post("/login/validate", [AuthController::class, "validate"])->name("login.validate");
+Route::get("/register", [AuthController::class, "showRegisterForm"])->name("register");
+
+Route::get("/about", [AboutController::class, "index"])->name("about");
+Route::get("/faq", [FAQController::class, "showFaqsStore"])->name("faq");
+Route::get("/contact", [ContactController::class, "index"])->name("contact");
+
+Route::middleware("auth")->group(function () {
+    Route::get("/account", [AccountController::class, "index"])->name("account");
+    Route::get("/account/settings", [AccountController::class, "settings"])->name("account.settings");
+    Route::post("/account/update", [AccountController::class, "update"])->name("account.update");
+    Route::get("/account/change-password", [AccountController::class, "changePassword"])->name("account.change-password");
+    Route::post("/account/edit-password", [AccountController::class, "editPassword"])->name("account.edit-password");
+});
+
+Route::get("/orders", [OrderController::class, "showOrdersStore"])->name("orders");
+
 Route::controller(ProductController::class)->group(function () {
     Route::get("/products/{id}/details", "details")->name("products.details");
 });
@@ -58,9 +79,6 @@ Route::controller(CartController::class)->group(function () {
 
 Route::get("/checkout", [CheckoutController::class, "index"])->name("checkout");
 Route::get("/categories", [CategorieController::class, "showCategoriesStore"])->name("categories");
-Route::get("/login", [AuthController::class, "showLoginForm"])->name("login");
-Route::post("/login/validate", [AuthController::class, "validate"])->name("login.validate");
-Route::get("/register", [AuthController::class, "showRegisterForm"])->name("register");
 
 /** Routes Admin */
 Route::get("/admin/login", [AdminController::class, "login"])->name("admin.login");
