@@ -94,20 +94,25 @@ class CouponController extends Controller
     {
         try {
             $coupon = Coupon::with("rule")->find($id);
+            $paramsJson = json_decode($coupon->rule->parameters);
+            $params = $this->getParameters($coupon->rule->predefined_rule, $paramsJson);
 
-            if ($coupon && $coupon->rule) {
-                $parameters = json_decode($coupon->rule->parameters);
-                $rule = $coupon->rule->predefined_rule;
-                if (is_array($parameters)) {
-                    $coupon->rule->parameters =  $this->getParameters($rule, $coupon, $parameters);
-                } else {
-                    $coupon->rule->parameters = $parameters;
-                }
+            if (!$params) {
+                $parameters = $paramsJson[0] ?? "";
+                $type = "data";
+            } else {
+                $type = "model";
+                $parameters = $params;
             }
+
             return response()->json([
                 "html" => view(
                     "layouts.__partials.ajax.admin.coupon.show-coupon",
-                    ["coupon" => $coupon]
+                    [
+                        "coupon" => $coupon,
+                        "type" => $type,
+                        "parameters" => $parameters
+                    ]
                 )->render()
             ]);
         } catch (\Exception $e) {
@@ -115,7 +120,42 @@ class CouponController extends Controller
         }
     }
 
-    public function getParameters($rule, $coupon, $parameters)
+    public function edit(string $id)
+    {
+        try {
+            $coupon = Coupon::with("rule")->find($id);
+            $paramsJson = json_decode($coupon->rule->parameters);
+            $rule = $coupon->rule->predefined_rule;
+            $data = $this->getDataModel($rule);
+            $params = $this->getParameters($rule, $paramsJson);
+            $type = "";
+
+            if (!$params) {
+                //*No son datos de modelo
+                $parameters = $paramsJson[0] ?? "";
+                $type = "data";
+            } else {
+                //* Son datos del modelo
+                $type = "model";
+                $parameters = $params;
+                $ids = implode(",", $parameters->pluck('id')->toArray());
+                $names = implode(",", $parameters->pluck('name')->toArray());
+            }
+
+            return view("admin.sales_strategies.coupon.edit-coupon", [
+                "coupon" => $coupon,
+                "data" => $data,
+                "parameters" => $parameters,
+                "type" => $type,
+                "ids" => $ids ?? "",
+                "names" => $names ?? ""
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("admin.sales-strategies.index")->with("error", "Error: " . $e->getMessage());
+        }
+    }
+
+    public function getParameters($rule, $parameters)
     {
         $params = [];
         switch ($rule) {
@@ -134,10 +174,35 @@ class CouponController extends Controller
                 $params = Brand::whereIn('id', $parameters)->get();
                 break;
             default:
-                $params = $parameters;
+                $params = null;
                 break;
         }
         return $params;
+    }
+
+    public function getDataModel($rule)
+    {
+        $data = [];
+        switch ($rule) {
+            case "combination_of_products":
+            case "specific_products":
+                $data = Product::all();
+                break;
+            case "specific_categories":
+            case "specific_category":
+                $data = Categorie::all();
+                break;
+            case "specific_labels":
+                $data = Label::all();
+                break;
+            case "specific_brands":
+                $data = Brand::all();
+                break;
+            default:
+                $data = null;
+                break;
+        }
+        return $data;
     }
 
     public function update(CouponRequest $request, string $id)
@@ -168,54 +233,6 @@ class CouponController extends Controller
                 DB::rollBack();
                 return redirect()->route("admin.sales-strategies.index")->with("error", "Error al actualizar el cupón");
             }
-        }
-    }
-
-    public function edit(string $id)
-    {
-        try {
-            $coupon = Coupon::with("rule")->find($id);
-            $products = Product::all();
-            $categories = Categorie::all();
-            $labels = Label::all();
-            $rules = CouponRules::getPredefinedRules();
-            $brands = Brand::all();
-
-            $params = json_decode($coupon->rule->parameters); // 15
-            $rule = $coupon->rule->predefined_rule; // minimum_amount
-
-            $parameters_ids = "";
-            $parameters_names = "";
-            $parameter = "";
-            $parameters = "";
-
-            if (is_array($parameters) && count($parameters) > 0) {
-                $paramsRules =  $this->getParameters($rule, $coupon, $params);
-                if (count($parameters) === 1 && count($paramsRules) === 1) {
-                    $parameter = $parameters[0];
-                    $parameters = null;
-                    $parameters_ids = null;
-                    $parameters_names = null;
-                } else {
-                    $parameters_ids = implode(",", $paramsRules->pluck('id')->toArray());
-                    $parameters_names = implode(",", $paramsRules->pluck('name')->toArray());
-                }
-            }
-
-            return view("admin.sales_strategies.coupon.edit-coupon", [
-                "coupon" => $coupon,
-                "products" => $products,
-                "categories" => $categories,
-                "labels" => $labels,
-                "rules" => $rules,
-                "brands" => $brands,
-                "parameters_ids" => $parameters_ids,
-                "parameters_names" => $parameters_names,
-                "parameters" => $parameters,
-                "parameter" => $parameter
-            ]);
-        } catch (\Exception $e) {
-            return redirect()->route("admin.sales-strategies.index")->with("error", "Error: " . $e->getMessage());
         }
     }
 
