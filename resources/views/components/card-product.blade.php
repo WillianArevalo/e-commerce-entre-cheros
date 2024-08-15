@@ -3,17 +3,17 @@
       <div>
           <img src="{{ Storage::url($product->main_image) }}" alt="" class="h-72 w-full object-cover">
           <div class="p-4">
-              <h3 class="font-primary text-xl font-bold text-secondary">
+              <h3 class="font-primary text-2xl font-bold text-secondary">
                   {{ $product->name }}
               </h3>
-              <p class="text-wrap font-secondary text-sm text-gray-800">
+              <p class="text-wrap font-secondary text-sm text-zinc-800">
                   {{ $product->short_description }}
               </p>
               <div class="mt-2">
                   @if ($product->offer_price)
                       <span class="font-secondary text-xl font-semibold text-secondary">${{ $product->offer_price }}
                       </span>
-                      <span class="font-secondary text-sm text-gray-400 line-through">${{ $product->price }}
+                      <span class="font-secondary text-sm text-zinc-400 line-through">${{ $product->price }}
                       </span>
                   @else
                       <span class="font-secondary text-xl font-semibold text-secondary">${{ $product->price }}
@@ -37,7 +37,7 @@
                   </form>
                   <a href="{{ route('products.details', $product->id) }}"
                       class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
-                      <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
+                      <x-icon-store icon="arrow-right" class="h-5 w-5 text-current" />
                   </a>
               </div>
               <form action="{{ route('cart.add', $product->id) }}" method="POST"

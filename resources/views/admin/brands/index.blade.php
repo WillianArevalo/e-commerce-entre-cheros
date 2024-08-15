@@ -8,7 +8,7 @@
             'title' => 'Marcas',
             'description' => 'Administrar marcas registradas.',
         ])
-        <div class="bg-gray-50 dark:bg-black">
+        <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative overflow-hidden bg-white dark:bg-black">
                     <div
@@ -26,33 +26,38 @@
                                 typeButton="primary" text="Agregar marca" icon="add-circle" />
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-900">
-                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
-                                class="border-b border-zinc-200 bg-gray-50 text-xs uppercase text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
+                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">#
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        #
                                     </th>
-                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
-                                        Nombre</th>
-                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
-                                        Descripción</th>
-                                    <th scope="col" class="px-4 py-3">Acciones</th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Nombre
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Descripción
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        Acciones
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="tableBrand">
                                 @if ($brands->count() == 0)
                                     <tr>
                                         <td colspan="4"
-                                            class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
+                                            class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
                                             No hay marcas
                                         </td>
                                     </tr>
                                 @else
                                     @foreach ($brands as $brand)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
+                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                             <th scope="row"
-                                                class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                                                class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
                                                 {{ $loop->iteration }}
                                             </th>
                                             <td class="px-4 py-3">
@@ -63,7 +68,7 @@
                                                     @if ($brand->description != null)
                                                         {{ $brand->description }}
                                                     @else
-                                                        <span class="text-gray-500">No hay descripción</span>
+                                                        <span class="text-zinc-500">No hay descripción</span>
                                                     @endif
                                                 </span>
                                             </td>
@@ -104,11 +109,11 @@
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Nueva marca
             </h5>
             <button type="button" data-drawer="#drawer-new-brand"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -142,11 +147,11 @@
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Editar marca
             </h5>
             <button type="button" data-drawer="#drawer-edit-brand"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

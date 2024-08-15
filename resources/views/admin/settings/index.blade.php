@@ -4,22 +4,22 @@
 
 @section('content')
     <main>
-        <section class="dark:bg-black p-4">
-            <div class="flex px-4 py-2 border dark:border-zinc-900 border-gray-300 rounded-lg items-center">
+        <section class="p-4 dark:bg-black">
+            <div class="flex items-center rounded-lg border border-zinc-300 px-4 py-2 dark:border-zinc-900">
                 <img src="{{ Storage::url($user->profile_photo_path) }}" alt=""
-                    class="w-20 h-20 rounded-full object-cover">
-                <div class="p-4 flex flex-col justify-center gap-2">
+                    class="h-20 w-20 rounded-full object-cover">
+                <div class="flex flex-col justify-center gap-2 p-4">
                     <h1 class="text-2xl font-bold dark:text-white">{{ $user->username }}</h1>
-                    <p class="text-zinc-400 text-sm">{{ $user->email }}</p>
+                    <p class="text-sm text-zinc-400">{{ $user->email }}</p>
                     <span
-                        class="text-blue-500 p-2 rounded-full text-center text-sm border border-blue-800">{{ $user->role === 'admin' ? 'Administrador' : $user->role }}
+                        class="rounded-full border border-blue-800 p-2 text-center text-sm text-blue-500">{{ $user->role === 'admin' ? 'Administrador' : $user->role }}
                     </span>
                 </div>
             </div>
-            <div class="p-4 border border-gray-300 dark:border-zinc-900 rounded-lg mt-4">
+            <div class="mt-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-900">
                 <h1 class="text-2xl font-bold dark:text-white">Configuración</h1>
                 <form action="" method="POST">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="rounded-lg">
                             <h2 class="text-xl font-bold dark:text-white">Información de la cuenta</h2>
                             @csrf
@@ -41,16 +41,16 @@
                             <h2 class="text-xl font-bold dark:text-white">Foto de perfil</h2>
                             <div class="mt-4">
                                 <label for="imageCategorie"
-                                    class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-zinc-950 @error('image') is-invalid  @enderror">
-                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <x-icon icon="cloud-upload" class="w-12 h-12 text-gray-400 dark:text-gray-500" />
-                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                    class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                    <div class="flex flex-col items-center justify-center pb-6 pt-5">
+                                        <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
+                                        <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
                                                 class="font-semibold">Clic para agregar </span> o desliza la imagen</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, WEBP</p>
+                                        <p class="text-xs text-zinc-500 dark:text-zinc-400">PNG, JPG, WEBP</p>
                                     </div>
                                     <input id="imageCategorie" type="file" class="hidden" name="image" />
                                     <img src="" alt="Preview Image" id="previewImage"
-                                        class="w-56 h-64 object-cover hidden m-10">
+                                        class="m-10 hidden h-64 w-56 object-cover">
                                 </label>
                             </div>
                         </div>

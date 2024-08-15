@@ -1,13 +1,13 @@
 @if ($brands->count() == 0)
     <tr>
-        <td colspan="4" class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
+        <td colspan="4" class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
             No hay marcas
         </td>
     </tr>
 @else
     @foreach ($brands as $brand)
-        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
-            <th scope="row" class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
+            <th scope="row" class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
                 {{ $loop->iteration }}
             </th>
             <td class="px-4 py-3">
@@ -18,7 +18,7 @@
                     @if ($brand->description != null)
                         {{ $brand->description }}
                     @else
-                        <span class="text-gray-500">No hay descripción</span>
+                        <span class="text-zinc-500">No hay descripción</span>
                     @endif
                 </span>
             </td>

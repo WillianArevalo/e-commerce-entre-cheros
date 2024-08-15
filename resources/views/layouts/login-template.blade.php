@@ -11,9 +11,12 @@
     @vite('resources/css/home.css')
 </head>
 
-<body>
-    @include('layouts.__partials.toast-store', ['top' => 'top-5'])
-    @yield('content')
+<body class="store">
+    <main>
+        @include('layouts.__partials.store.toast-store', ['top' => 'top-5'])
+        @include('layouts.__partials.store.toast-container')
+        @yield('content')
+    </main>
 </body>
 @vite('resources/js/app.js')
 

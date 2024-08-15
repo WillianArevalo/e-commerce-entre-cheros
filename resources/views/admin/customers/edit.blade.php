@@ -16,14 +16,14 @@
                     @csrf
                     @method('PUT')
                     <div class="flex flex-col gap-1">
-                        <h2 class="text-lg uppercase text-gray-700 dark:text-gray-300">Información del cliente</h2>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <h2 class="text-lg uppercase text-zinc-700 dark:text-zinc-300">Información del cliente</h2>
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400">
                             Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                         </p>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-[2] flex-col gap-4">
-                            <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                            <div class="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                                 <h2 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                     Información general
                                 </h2>
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                            <div class="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                                 <h2 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                     Información de contacto
                                 </h2>
@@ -98,13 +98,13 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                            <div class="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                                 <h2 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                     Datos de usuario
                                 </h2>
                                 <div>
                                     <div class="flex items-center justify-between">
-                                        <p class="p-4 text-sm font-medium text-gray-600 dark:text-gray-400">
+                                        <p class="p-4 text-sm font-medium text-zinc-600 dark:text-zinc-400">
                                             Foto de perfil
                                         </p>
                                         <div class="flex justify-end">

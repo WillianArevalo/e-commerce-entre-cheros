@@ -8,11 +8,11 @@
             'title' => 'Clientes',
             'description' => 'Administrar clientes registrados.',
         ])
-        <div class="bg-gray-50 p-4 dark:bg-black">
+        <div class="bg-zinc-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
-                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
-                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
+                    <div class="border-b border-zinc-200 p-4 dark:border-zinc-900">
+                        <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de clientes registrados
                         </h2>
                     </div>
@@ -38,25 +38,25 @@
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
                                         id="formSearchCategorieCheck">
                                         @csrf
-                                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                        <h6 class="mb-3 text-sm font-medium text-zinc-900 dark:text-white">
                                             Categorías:
                                         </h6>
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="no_subcategories"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
                                                 </label>
                                             </li>
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="fitbit"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías
                                                 </label>
                                             </li>
@@ -67,8 +67,8 @@
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
+                            <thead class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">Foto</th>
                                     <th scope="col" class="px-4 py-3">Nombre</th>

@@ -3,30 +3,30 @@
 @section('title', 'Tickets de soporte')
 
 @section('content')
-    <div class="rounded-lg  mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
+    <div class="mt-4 rounded-lg">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Tickets de soporte
             </h1>
-            <p class="text-sm text-gray-400">
+            <p class="text-sm text-zinc-400">
                 Administra los tickets de soporte de los usuarios
             </p>
         </div>
-        <div class="bg-gray-50 dark:bg-black p-4">
+        <div class="bg-zinc-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="bg-white dark:bg-black dark:border dark:border-zinc-900 relative shadow-md sm:rounded-lg">
-                    <div class="mb-4 border-b border-gray-200 dark:border-zinc-900">
-                        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
+                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
+                    <div class="mb-4 border-b border-zinc-200 dark:border-zinc-900">
+                        <ul class="-mb-px flex flex-wrap text-center text-sm font-medium" id="default-tab"
                             data-tabs-toggle="#default-tab-content" role="tablist">
                             <li class="me-2" role="presentation">
-                                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab"
+                                <button class="inline-block rounded-t-lg border-b-2 p-4" id="profile-tab"
                                     data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
                                     aria-selected="false">
                                     <div
-                                        class="flex items-center gap-2 justify-center bg-black text-white px-3 py-2 rounded-full dark:bg-white dark:text-black">
+                                        class="flex items-center justify-center gap-2 rounded-full bg-black px-3 py-2 text-white dark:bg-white dark:text-black">
                                         Todos los tickets
                                         <span
-                                            class="flex items-center justify-center bg-red-500 text-white rounded-full  w-6 h-6">
+                                            class="flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white">
                                             2
                                         </span>
                                     </div>
@@ -34,14 +34,14 @@
                             </li>
                             <li class="me-2" role="presentation">
                                 <button
-                                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                    class="inline-block rounded-t-lg border-b-2 p-4 hover:border-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-300"
                                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
                                     aria-controls="dashboard" aria-selected="false">
                                     <div
-                                        class="flex items-center gap-2 justify-center bg-white text-black px-3 py-2 rounded-full dark:bg-black dark:text-white border border-gray-300 dark:border-zinc-800">
+                                        class="flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-3 py-2 text-black dark:border-zinc-800 dark:bg-black dark:text-white">
                                         Asignados a mí
                                         <span
-                                            class="flex items-center justify-center bg-blue-500 text-white rounded-full  w-6 h-6">
+                                            class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-white">
                                             0
                                         </span>
                                     </div>
@@ -52,7 +52,7 @@
                     <div id="default-tab-content">
                         <div class="hidden" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div
-                                class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                                class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                                 <div class="w-full md:w-1/2">
                                     <form class="flex items-center" action="{{ route('admin.categories.search') }}"
                                         id="formSearchProduct">
@@ -63,8 +63,8 @@
                                     </form>
                                 </div>
                                 <div
-                                    class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                    <div class="flex items-center space-x-3 w-full md:w-auto">
+                                    class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+                                    <div class="flex w-full items-center space-x-3 md:w-auto">
                                         <div class="w-32">
                                             <x-select label="" id="priority" name="priority" selected=""
                                                 text="Prioridad" value="" :options="[
@@ -99,9 +99,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                                 <thead
-                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
+                                    class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
                                     <tr>
                                         <th scope="col" class="px-4 py-3">#</th>
                                         <th scope="col" class="px-4 py-3">Asunto</th>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="hidden" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                             <div
-                                class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                                class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                                 <div class="w-full md:w-1/2">
                                     <form class="flex items-center" action="{{ route('admin.categories.search') }}"
                                         id="formSearchProduct">
@@ -168,8 +168,8 @@
                                     </form>
                                 </div>
                                 <div
-                                    class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                    <div class="flex items-center space-x-3 w-full md:w-auto">
+                                    class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+                                    <div class="flex w-full items-center space-x-3 md:w-auto">
                                         <div class="w-32">
                                             <x-select label="" id="priority" name="priority" selected=""
                                                 text="Prioridad" value="" :options="[
@@ -200,9 +200,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                                 <thead
-                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-300">
+                                    class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
                                     <tr>
                                         <th scope="col" class="px-4 py-3">#</th>
                                         <th scope="col" class="px-4 py-3">Asunto</th>

@@ -4,15 +4,17 @@
 
 @section('content')
     <div class="mt-4 rounded-lg">
-        @include('layouts.__partials.admin.header-page', [
-            'title' => 'Estrategias de venta',
-            'description' =>
-                'Administrar los cupones de descuento, métodos de envío, método de pagos y cambio de divisas',
-        ])
-        <div class="flex bg-gray-50 dark:bg-black">
+        <div class="ms-60">
+            @include('layouts.__partials.admin.header-page', [
+                'title' => 'Estrategias de venta',
+                'description' =>
+                    'Administrar los cupones de descuento, métodos de envío, método de pagos y cambio de divisas',
+            ])
+        </div>
+        <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
             <div class="mx-auto ms-60 w-full">
-                <h2 class="px-4 pt-4 font-secondary text-xl font-medium text-gray-600 dark:text-gray-200">
+                <h2 class="px-4 pt-4 font-secondary text-xl font-medium text-zinc-600 dark:text-zinc-200">
                     Cupones de descuento
                 </h2>
                 <div class="mx-auto w-full">
@@ -33,23 +35,23 @@
                                     typeButton="primary" text="Agregar cupon" icon="add-circle" />
                             </div>
                         </div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-900">
-                            <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                                 <thead
-                                    class="border-b border-zinc-200 bg-gray-50 text-xs uppercase text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
+                                    class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
                                     <tr>
                                         <th scope="col"
-                                            class="w-10 border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                            class="w-10 border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
                                             <input id="default-checkbox" type="checkbox" value=""
-                                                class="h-4 w-4 rounded border-2 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                         </th>
-                                        <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
                                             Código</th>
-                                        <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
                                             Tipo de descuento</th>
-                                        <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
                                             Valor de descuento</th>
-                                        <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
                                             Regla</th>
                                         <th scope="col" class="px-4 py-3">Acciones</th>
                                     </tr>
@@ -58,19 +60,19 @@
                                     @if ($coupons->count() == 0)
                                         <tr>
                                             <td colspan="4"
-                                                class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
+                                                class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
                                                 No hay cupones registrados
                                             </td>
                                         </tr>
                                     @else
                                         @foreach ($coupons as $coupon)
-                                            <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
+                                            <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                                 <td class="px-4 py-3">
                                                     <input id="default-checkbox" type="checkbox" value=""
-                                                        class="h-4 w-4 rounded border-2 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                        class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                                 </td>
                                                 <th scope="row"
-                                                    class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                                                    class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
                                                     {{ $coupon->code }}
                                                 </th>
                                                 <td class="px-4 py-3">
@@ -81,12 +83,12 @@
                                                 <td class="px-4 py-3">
                                                     @if ($coupon->discount_type === 'percentage')
                                                         <span class="flex items-center gap-1">
-                                                            <x-icon icon="percent" class="h-4 w-4 text-gray-500" />
+                                                            <x-icon icon="percent" class="h-4 w-4 text-zinc-500" />
                                                             {{ $coupon->discount_value }}
                                                         </span>
                                                     @else
                                                         <span class="flex items-center gap-1">
-                                                            <x-icon icon="dollar" class="h-4 w-4 text-gray-500" />
+                                                            <x-icon icon="dollar" class="h-4 w-4 text-zinc-500" />
                                                             {{ $coupon->discount_value }}
                                                         </span>
                                                     @endif
@@ -136,11 +138,11 @@
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-show-coupon">
             <h5 id="drawer-show-coupon-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Detalles del cupón
             </h5>
             <button type="button" data-drawer="#drawer-show-coupon"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -1,103 +1,131 @@
 @extends('layouts.template')
-
 @section('title', 'Cart')
-
 @section('content')
-    <main>
-        <section class="mt-32">
-            <div class="px-20 mb-20">
-                <h1 class="text-start font-bold text-3xl font-primary text-secondary uppercase">Carrito de compras</h1>
-                <div class="flex gap-20">
-                    <div class="flex-[2] relative">
-                        <div class="border-2 border-tertiary p-4 rounded-xl mt-4 z-10 bg-white min-h-96">
+    <div>
+        <section class="relative h-[450px] w-full text-white"
+            style="background-image:url('{{ asset('images/fondo6.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute bottom-0 w-full">
+                <path fill="#ffffff" fill-opacity="1"
+                    d="M0,96L60,106.7C120,117,240,139,360,144C480,149,600,139,720,122.7C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
+                </path>
+            </svg>
+        </section>
+        <section class="relative -top-24">
+            <div class="px-20">
+                <h1 class="text-start font-tertiary text-5xl font-normal uppercase text-secondary" data-aos="fade-right">
+                    Carrito de compras
+                </h1>
+                <div class="mt-4 flex gap-10">
+                    <div class="relative flex-[2]" data-aos="fade-right">
+                        <div class="min-h-96 z-10 mt-4 rounded-xl border border-zinc-300 bg-white p-4">
                             <table class="min-w-full font-primary">
                                 <thead>
                                     <tr>
                                         <th scope="col"
-                                            class="font-primary px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Producto
                                         </th>
 
                                         <th scope="col"
-                                            class="font-primary px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Cantidad
                                         </th>
                                         <th scope="col"
-                                            class="font-primary px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Total
                                         </th>
                                         <th scope="col"
-                                            class="font-primary px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200" id="tableCart">
+                                <tbody class="divide-y divide-zinc-200 bg-white" id="tableCart">
                                     @if ($cart)
                                         @foreach ($cart as $product)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="flex items-start">
-                                                        <div class="flex-shrink-0 h-14 w-14">
-                                                            <img class="h-full w-full rounded-lg object-cover"
+                                                <td class="whitespace-nowrap px-6 py-4">
+                                                    <div class="flex items-center">
+                                                        <div
+                                                            class="flex h-16 w-16 flex-shrink-0 items-center justify-center">
+                                                            <img class="h-full w-full rounded-lg border border-zinc-100 object-cover"
                                                                 src="{{ Storage::url($product['image']) }}"
                                                                 alt="{{ $product['name'] }}">
                                                         </div>
                                                         <div class="ml-4">
                                                             <div
-                                                                class="text-sm text-secondary font-semibold font-secondary">
+                                                                class="font-secondary text-base font-semibold text-secondary">
                                                                 {{ $product['name'] }}
                                                             </div>
-                                                            <div class="text-sm text-gray-500 font-secondary">
-                                                                ${{ $product['price'] }}
+                                                            <div class="font-secondary text-sm text-zinc-500">
+                                                                @if ($product['offer_price'])
+                                                                    <div>
+                                                                        <div>
+                                                                            <span class="text-sm text-zinc-700">
+                                                                                ${{ $product['offer_price'] }}
+                                                                            </span>
+                                                                            <span class="text-xs line-through">
+                                                                                ${{ $product['price'] }}
+                                                                            </span>
+                                                                        </div>
+                                                                        <span
+                                                                            class="me-2 mt-1 block rounded-full bg-purple-100 px-2.5 py-0.5 font-secondary text-xs font-medium text-purple-800">
+                                                                            En oferta
+                                                                        </span>
+                                                                    </div>
+                                                                @else
+                                                                    <span class="text-sm text-zinc-700">
+                                                                        ${{ $product['price'] }}
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500">
                                                     <div class="flex items-center">
                                                         <form action="{{ route('cart.minus', $product['id']) }}"
                                                             method="POST" id="form-minus-cart-{{ $product['id'] }}">
                                                             @csrf
                                                             <button type="button"
                                                                 data-form="#form-minus-cart-{{ $product['id'] }}"
-                                                                class="flex items-center justify-center hover:bg-zinc-100 border border-zinc-300 rounded-full w-8 h-8 btnMinusCart">
-                                                                <x-icon icon="minus" class="w-4 h-4 text-secondary" />
+                                                                class="btnMinusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
+                                                                <x-icon icon="minus" class="h-4 w-4 text-secondary" />
                                                             </button>
                                                         </form>
                                                         <input type="text" name="quantity" id="quantity"
-                                                            class="w-16 h-12 text-center font-secondary border-none rounded-lg focus:outline-none focus:border-none text-sm"
+                                                            class="h-12 w-16 rounded-lg border-none text-center font-secondary text-sm focus:border-none focus:outline-none"
                                                             readonly value="{{ $product['quantity'] }}" min="1">
                                                         <form action="{{ route('cart.plus', $product['id']) }}"
                                                             method="POST" id="form-plus-cart-{{ $product['id'] }}">
                                                             @csrf
                                                             <button type="button"
                                                                 data-form="#form-plus-cart-{{ $product['id'] }}"
-                                                                class="flex items-center justify-center hover:bg-zinc-100 border border-zinc-300 rounded-full w-8 h-8 btnPlusCart">
-                                                                <x-icon icon="plus" class="w-4 h-4 text-secondary" />
+                                                                class="btnPlusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
+                                                                <x-icon icon="plus" class="h-4 w-4 text-secondary" />
                                                             </button>
                                                         </form>
                                                     </div>
                                                 </td>
                                                 <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-secondary">
-                                                    ${{ $product['subtotal'] }}
+                                                    class="whitespace-nowrap px-6 py-4 font-secondary text-sm text-zinc-500">
+                                                    ${{ number_format($product['subtotal'], 2) }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-start text-sm font-medium">
+                                                <td class="whitespace-nowrap px-6 py-4 text-start text-sm font-medium">
                                                     <form action="{{ route('cart.remove', $product['id']) }}"
                                                         method="POST" id="form-remove-cart-{{ $product['id'] }}">
                                                         @csrf
                                                         <button type="button"
                                                             data-form="#form-remove-cart-{{ $product['id'] }}"
-                                                            class="p-2 rounded-lg bg-red-100 text-red-800 hover:bg-red-200 btnRemoveCart">
-                                                            <x-icon icon="delete" class="w-5 h-5 text-current" />
+                                                            class="btnRemoveCart rounded-lg bg-red-100 p-2 text-red-800 hover:bg-red-200">
+                                                            <x-icon icon="delete" class="h-5 w-5 text-current" />
                                                         </button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @else
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap text-center" colspan="4">
+                                        <tr class="border-t border-zinc-100">
+                                            <td class="whitespace-nowrap px-6 py-4 text-center font-primary" colspan="4">
                                                 Carrito vacío
                                             </td>
                                         </tr>
@@ -105,108 +133,116 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="absolute h-full w-full top-5 -left-5 bg-tertiary -z-10 rounded-xl"></div>
                     </div>
-                    <div class="flex-1 relative">
-                        <div class="border-2 border-tertiary p-4 rounded-xl mt-4 z-10 bg-white h-96 w-96">
-                            <h2 class="text-secondary text-lg font-secondary font-bold border-b-2 border-tertiary pb-2">
+                    <div class="relative flex-1" data-aos="fade-left">
+                        <div class="z-10 mt-4 h-max w-96 rounded-xl border border-zinc-300 bg-white p-4">
+                            <h2 class="pb-2 font-primary text-xl font-bold text-secondary">
                                 Resumen pedido
                             </h2>
-                            <div class="h-96 font-secondary">
-                                <div class="flex justify-between mt-4">
-                                    <p class="text-secondary">Subtotal</p>
-                                    <p class="text-secondary" id="totalPriceCart">${{ $totalCart }}</p>
+                            <div class="h-full border-t border-zinc-300 font-secondary">
+                                <div class="mt-4 flex justify-between">
+                                    <p class="text-secondary">Importe</p>
+                                    <p class="font-medium text-tertiary" id="totalPriceCart">
+                                        ${{ number_format($totalCart, 2) }}
+                                    </p>
                                 </div>
-                                <div class="flex justify-between mt-4">
+                                <div class="mt-2 flex justify-between">
                                     <p class="text-secondary">Impuesto</p>
-                                    <p class="text-secondary">$4.50</p>
+                                    <p class="id= font-medium text-tertiary"totalTaxes">
+                                        ${{ number_format($totalTaxes, 2) }}
+                                    </p>
                                 </div>
-                                <div class="flex justify-between mt-4">
-                                    <p class="text-secondary">Envió</p>
-                                    <p class="text-secondary">$4.50</p>
+                                <div class="mt-10 flex items-center justify-between border-y border-zinc-300 py-4">
+                                    <p class="text-secondary">Total con impuestos</p>
+                                    <p class="font-medium text-tertiary" id="totalWithTaxes">
+                                        ${{ number_format($totalWithTaxes, 2) }}
+                                    </p>
                                 </div>
-                                <div class="flex justify-between border-t-2 border-tertiary pt-4 mt-10">
-                                    <p class="text-secondary">Total pedido</p>
-                                    <p class="text-secondary">$4.50</p>
+                                <div class="mt-2 flex flex-col gap-2">
+                                    <x-input-store type="text" name="coupon" placeholder="Código de cupón"
+                                        class="w-full" />
+                                    <x-button type="button" text="Aplicar cupón" typeButton="store-secondary"
+                                        class="w-max text-sm" />
                                 </div>
-                                <div class="mt-16">
-                                    <a href="{{ route('checkout') }}"
-                                        class="block w-full text-center bg-secondary text-white font-secondary font-medium px-3 py-2 rounded-xl hover:bg-tertiary">
-                                        Finalizar compra
-                                    </a>
+                                <div class="mt-4 flex flex-col gap-2 border-y py-4">
+                                    <div class="flex justify-between">
+                                        <p class="text-secondary">Descuento</p>
+                                        <p class="text-red-500" id="discount"> - ${{ number_format($totalDiscount, 2) }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class= "mt-4 flex justify-between text-lg font-bold text-secondary">
+                                    <p>Subtotal</p>
+                                    <p id="subtotal">${{ $subtotal }}</p>
+                                </div>
+                                <div>
+                                    <x-button type="a" text="Finalizar compra" typeButton="store-gradient"
+                                        class="mt-10 w-full" />
                                 </div>
                             </div>
                         </div>
-                        <div class="absolute h-96 w-96 top-10 -left-5 bg-tertiary -z-10 rounded-xl"></div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="px-20 py-4 mt-10 mb-10">
-            <div class="flex flex-col gap-4 justify-center w-full text-start">
-                <h2 class="uppercase text-3xl font-primary text-secondary font-bold ml-16 border-b-2 pb-4 border-tertiary">
+        <section class="mx-20 border-t border-zinc-300">
+            <div class="mt-10 flex items-center justify-center">
+                <h2 class="font-primary text-4xl font-bold text-secondary">Método de envío</h2>
+            </div>
+            <div class="mt-8 flex">
+                <div class="flex-1">
+                    Recoger en tienda
+                </div>
+                <div class="flex-1">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid grid-cols-3 gap-8 rounded-2xl bg-zinc-50 p-4">
+                            <div class="flex items-center justify-start gap-4">
+                                <input type="radio" name="send" />
+                                <p class="font-bold text-secondary">Recoger en tienda</p>
+                            </div>
+                            <div class="flex items-center justify-start">
+                                <p class="text-zinc-600">En 2 - 5 días laborales</p>
+                            </div>
+                            <div class="flex items-center justify-end">
+                                <span class="uppercase text-zinc-600">
+                                    Gratuito
+                                </span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-8 rounded-2xl bg-zinc-50 p-4">
+                            <div class="flex items-center justify-start gap-4">
+                                <input type="radio" name="send" />
+                                <p class="font-bold text-secondary">Estándar a domicilio</p>
+                            </div>
+                            <div class="flex items-center justify-start">
+                                <p class="text-zinc-600">En 2 - 3 días laborales</p>
+                            </div>
+                            <div class="flex items-center justify-end">
+                                <span class="uppercase text-zinc-600">
+                                    $2.00
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="mb-10 px-20 py-4">
+            <div class="flex w-full flex-col justify-center gap-4 text-start">
+                <h2 class="border-b-2 border-zinc-300 pb-4 font-primary text-3xl font-bold uppercase text-secondary">
                     No te quedes con las ganas
                 </h2>
-                <div class="flex justify-center gap-6">
-                    <button>
-                        <x-icon icon="arrow-left" class="w-12 h-12 text-secondary" />
-                    </button>
-                    <div class="card bg-primary flex flex-col text-start rounded-2xl overflow-hidden w-96">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-full h-72 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-secondary font-bold text-xl font-primary">Product name</h3>
-                            <p class="text-gray-800 font-secondary text-sm text-wrap">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua
-                            </p>
+                <div>
+                    @if ($products)
+                        <div id="slider">
+                            @include('layouts.__partials.store.slider', [
+                                'products' => $products,
+                            ])
                         </div>
-                        <div class="p-4 flex justify-between items-end mt-auto">
-                            <a href=""
-                                class="px-5 py-3 rounded-xl bg-secondary text-white flex items-center justify-center">
-                                <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                            </a>
-                            <span class="font-bold text-lg text-secondary font-secondary">$4.50</span>
-                        </div>
-                    </div>
-                    <div class="card bg-primary flex flex-col text-start rounded-2xl overflow-hidden w-96">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-full h-72 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-secondary font-bold text-xl font-primary">Product name</h3>
-                            <p class="text-gray-800 font-secondary text-sm text-wrap">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua
-                            </p>
-                        </div>
-                        <div class="p-4 flex justify-between items-end mt-auto">
-                            <a href=""
-                                class="px-5 py-3 rounded-xl bg-secondary text-white flex items-center justify-center">
-                                <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                            </a>
-                            <span class="font-bold text-lg text-secondary font-secondary">$4.50</span>
-                        </div>
-                    </div>
-                    <div class="card bg-primary flex flex-col text-start rounded-2xl overflow-hidden w-96">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="" class="w-full h-72 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-secondary font-bold text-xl font-primary">Product name</h3>
-                            <p class="text-gray-800 font-secondary text-sm text-wrap">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua
-                            </p>
-                        </div>
-                        <div class="p-4 flex justify-between items-end mt-auto">
-                            <a href="{{ route('products.details', 12) }}"
-                                class="px-5 py-3 rounded-xl bg-secondary text-white flex items-center justify-center">
-                                <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
-                            </a>
-                            <span class="font-bold text-lg text-secondary font-secondary">$4.50</span>
-                        </div>
-                    </div>
-                    <button>
-                        <x-icon icon="arrow-right" class="w-12 h-12 text-secondary" />
-                    </button>
+                    @endif
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 @endsection

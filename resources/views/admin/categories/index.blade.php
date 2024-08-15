@@ -8,7 +8,7 @@
             'title' => 'Categorías',
             'description' => 'Administrar categorías y subcategorías registradas.',
         ])
-        <div class="bg-gray-50 dark:bg-black">
+        <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative bg-white dark:bg-black">
                     <div
@@ -33,25 +33,25 @@
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
                                         id="formSearchCategorieCheck">
                                         @csrf
-                                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                        <h6 class="mb-3 text-sm font-medium text-zinc-900 dark:text-white">
                                             Categorías:
                                         </h6>
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="no_subcategories"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
                                                 </label>
                                             </li>
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="fitbit"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías
                                                 </label>
                                             </li>
@@ -61,34 +61,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-900">
-                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
-                                class="border-b border-zinc-200 bg-gray-50 text-xs uppercase text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
+                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
-                                        Imagen</th>
-                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
-                                        Nombre</th>
-                                    <th scope="col" class="border-e border-gray-200 px-4 py-3 dark:border-zinc-900">
-                                        Subcategorías</th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Imagen
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Nombre
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Subcategorías
+                                    </th>
                                     <th scope="col" class="px-4 py-3">
-                                        Acciones</th>
+                                        Acciones
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="tableCategorie">
                                 @if ($categories->count() == 0)
-                                    <tr class="border-b dark:border-zinc-900">
+                                    <tr class="border-b dark:border-zinc-950">
                                         <td colspan="4"
-                                            class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
+                                            class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
                                             No hay categorías
                                         </td>
                                     </tr>
                                 @else
                                     @foreach ($categories as $category)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-950">
+                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                             <th scope="row"
-                                                class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                                                class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
                                                 <img src="{{ Storage::url($category->image) }}" alt="Product 1"
                                                     class="h-16 w-16 rounded-lg object-cover">
                                             </th>
@@ -102,7 +106,7 @@
                                                             <div
                                                                 class="relative flex w-max items-center gap-2 rounded-lg border px-4 py-2 dark:border-zinc-900">
                                                                 {{ $subcategorie->name }}
-                                                                <button class="btnDropDown text-gray-600 dark:text-white"
+                                                                <button class="btnDropDown text-zinc-600 dark:text-white"
                                                                     type="button">
                                                                     <x-icon icon="more-hortizontal"
                                                                         class="h-5 w-5 text-current" />
@@ -110,12 +114,12 @@
                                                                 <div
                                                                     class="dropDownContent absolute top-10 z-30 hidden w-44 overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-900">
                                                                     <ul
-                                                                        class="p-2 text-sm text-gray-700 dark:text-gray-200">
+                                                                        class="p-2 text-sm text-zinc-700 dark:text-zinc-200">
                                                                         <li>
                                                                             <button type="button"
                                                                                 data-href="{{ route('admin.subcategories.edit', $subcategorie->id) }}"
                                                                                 data-action="{{ route('admin.subcategories.update', $subcategorie->id) }}"
-                                                                                class="editCategorie flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:hover:bg-zinc-800 dark:hover:text-white">
+                                                                                class="editCategorie flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:hover:text-white">
                                                                                 <x-icon icon="edit"
                                                                                     class="h-4 w-4 text-current" />
                                                                                 Editar
@@ -132,7 +136,7 @@
                                                                                     data-form="formDeleteSubCategorie-{{ $subcategorie->id }}"
                                                                                     data-modal-target="deleteModal"
                                                                                     data-modal-toggle="deleteModal"
-                                                                                    class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-800">
+                                                                                    class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800">
                                                                                     <x-icon icon="delete"
                                                                                         class="h-4 w-4 text-current" />
                                                                                     Eliminar
@@ -184,11 +188,11 @@
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Nueva categoría
             </h5>
             <button type="button" data-drawer="#drawer-new-categorie"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -218,17 +222,17 @@
                             value="{{ old('name') }}" />
                     </div>
                     <div>
-                        <label for="image" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="image" class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
                             Imagen
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="imageCategorie"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-transparent dark:hover:border-gray-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <div class="flex flex-col items-center justify-center pb-6 pt-5">
-                                    <x-icon icon="cloud-upload" class="h-12 w-12 text-gray-400 dark:text-gray-500" />
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                    <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
+                                    <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
                                             class="font-semibold">Clic para agregar </span> o desliza la imagen</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, WEBP</p>
+                                    <p class="text-xs text-zinc-500 dark:text-zinc-400">PNG, JPG, WEBP</p>
                                 </div>
                                 <input id="imageCategorie" type="file" class="hidden" name="image" />
                                 <img src="" alt="Preview Image" id="previewImage"
@@ -252,11 +256,11 @@
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-edit-categorie">
             <h5 id="drawer-new-categorie-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Editar categoría
             </h5>
             <button type="button" data-drawer="#drawer-edit-categorie"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -274,17 +278,17 @@
                             placeholder="Ingresa el nombre de la categoría" label="Nombre" icon="bookmark" />
                     </div>
                     <div>
-                        <label for="image" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="image" class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
                             Imagen
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="edit-image-categorie"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-transparent dark:hover:border-gray-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <div class="hidden flex-col items-center justify-center pb-6 pt-5">
-                                    <x-icon icon="cloud-upload" class="h-12 w-12 text-gray-400 dark:text-gray-500" />
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                    <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
+                                    <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
                                             class="font-semibold">Clic para agregar </span> o desliza la imagen</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, WEBP</p>
+                                    <p class="text-xs text-zinc-500 dark:text-zinc-400">PNG, JPG, WEBP</p>
                                 </div>
                                 <input id="edit-image-categorie" type="file" class="hidden" name="image" />
                                 <img src="" alt="Preview Image" id="previewImageEdit"

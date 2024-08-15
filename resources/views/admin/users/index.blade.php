@@ -8,11 +8,11 @@
             'title' => 'Usuarios',
             'description' => 'Administrar los usuarios registrados en la plataforma',
         ])
-        <div class="bg-gray-50 p-4 dark:bg-black">
+        <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
-                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
-                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
+                <div class="relative bg-white shadow-md dark:bg-black">
+                    <div class="border-b border-zinc-200 p-4 dark:border-zinc-900">
+                        <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de usuarios registrados
                         </h2>
                     </div>
@@ -38,24 +38,24 @@
                                     <form action="{{ route('admin.categories.search') }}" method="POST"
                                         id="formSearchCategorieCheck">
                                         @csrf
-                                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                        <h6 class="mb-3 text-sm font-medium text-zinc-900 dark:text-white">
                                             Filtros
                                         </h6>
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
                                                 <input id="offers" name="filter[]" type="checkbox" value="offers"
-                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                                 <label for="offers"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con ofertas
                                                 </label>
                                             </li>
                                             <li class="flex items-center">
                                                 <input id="flash_offers" name="filter[]" type="checkbox"
                                                     value="flash_offers"
-                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-white dark:ring-offset-gray-700 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                                 <label for="flash_offers"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con ofertas flash
                                                 </label>
                                             </li>
@@ -65,26 +65,47 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
+                            <thead
+                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">ID</th>
-                                    <th scope="col" class="px-4 py-3">Foto</th>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Apellido</th>
-                                    <th scope="col" class="px-4 py-3">Usuario</th>
-                                    <th scope="col" class="px-4 py-3">Correo</th>
-                                    <th scope="col" class="px-4 py-3">Rol</th>
-                                    <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Acciones</th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <input id="default-checkbox" type="checkbox" value=""
+                                            class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Foto
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Nombre
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Apellido
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Usuario
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Correo
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Rol
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Estado
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
+                                        Acciones
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
-                                    <tr>
+                                    <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                         <td class="px-4 py-3">
-                                            <span>{{ $user->id }}</span>
+                                            <input id="default-checkbox" type="checkbox" value="{{ $user->id }}"
+                                                class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                         </td>
                                         <td class="px-4 py-3">
                                             <img src="{{ Storage::url($user->profile_photo_path) }}"
@@ -117,8 +138,9 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <div class="flex gap-2">
-                                                <x-button type="a" href="{{ route('admin.users.edit', $user->id) }}"
-                                                    onlyIcon="true" icon="edit" typeButton="success" />
+                                                <x-button type="a"
+                                                    href="{{ route('admin.users.edit', $user->id) }}" onlyIcon="true"
+                                                    icon="edit" typeButton="success" />
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}"
                                                     id="formDeleteUser" method="POST">
                                                     @csrf

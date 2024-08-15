@@ -3,8 +3,8 @@
 @section('title', 'Login | Admin')
 
 @section('content')
-    <main class="flex h-screen w-full items-center justify-center font-secondary dark:bg-black">
-        <section class="w-full bg-gray-50 dark:bg-black">
+    <section class="flex h-screen w-full items-center justify-center font-secondary dark:bg-black">
+        <div class="w-full bg-zinc-50 dark:bg-black">
             <div class="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
                 <div
                     class="w-full rounded-lg bg-white shadow dark:border dark:border-zinc-900 dark:bg-zinc-950 sm:max-w-md md:mt-0 xl:p-0">
@@ -30,6 +30,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 @endsection

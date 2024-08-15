@@ -1,12 +1,12 @@
 <header>
-    <nav class="fixed top-0 z-30 w-full border-b border-gray-200 bg-white dark:border-zinc-900 dark:bg-black">
+    <nav class="fixed top-0 z-30 w-full border-b border-zinc-200 bg-white dark:border-zinc-900 dark:bg-black">
         <div class="py-3">
             <div class="flex items-center justify-between">
                 <div class="md:min-w-72 flex items-center justify-start ps-4 rtl:justify-end">
                     <button data-drawer-target="sidebar-multi-level-sidebar"
                         data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar"
                         type="button"
-                        class="inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-zinc-950 dark:focus:ring-gray-600 xl:hidden">
+                        class="inline-flex items-center rounded-lg p-2 text-sm text-zinc-500 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:text-zinc-400 dark:hover:bg-zinc-950 dark:focus:ring-zinc-600 xl:hidden">
                         <span class="sr-only">Open sidebar</span>
                         <svg class="h-6 w-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -25,29 +25,29 @@
                     </a>
                 </div>
                 <div class="flex w-auto items-center justify-end pe-4 md:w-full xl:justify-between">
-                    <div class="hidden text-gray-500 xl:block">
+                    <div class="hidden text-zinc-500 xl:block">
                         @include('layouts.__partials.admin.breadcrumb')
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="flex items-center justify-center">
                             <button type="button" data-dropdown-toggle="dropdown-alerts"
-                                class="relative inline-flex items-center rounded-lg p-2 text-center text-sm font-medium text-white hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
-                                <x-icon icon="notification" class="h-6 w-6 text-gray-700 dark:text-white" />
+                                class="relative inline-flex items-center rounded-lg p-2 text-center text-sm font-medium text-white hover:bg-zinc-100 focus:outline-none focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
+                                <x-icon icon="notification" class="h-6 w-6 text-zinc-700 dark:text-white" />
                                 <span class="sr-only">Notifications</span>
                                 <div
                                     class="absolute -end-1 -top-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-red-500 text-xs font-bold text-white dark:border-black">
                                     3
                                 </div>
                             </button>
-                            <div class="z-50 my-4 hidden w-full list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:divide-zinc-900 dark:bg-zinc-950 sm:w-80"
+                            <div class="z-50 my-4 hidden w-full list-none divide-y divide-zinc-100 rounded-lg bg-white text-base shadow dark:divide-zinc-900 dark:bg-zinc-950 sm:w-80"
                                 id="dropdown-alerts">
-                                <span class="block p-3 text-center text-gray-700 dark:text-gray-300">
+                                <span class="block p-3 text-center text-zinc-700 dark:text-zinc-300">
                                     Notificaciones
                                 </span>
                                 <ul role="none" class="p-2">
                                     <li>
                                         <a href="#"
-                                            class="flex items-start gap-4 rounded-lg px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                            class="flex items-start gap-4 rounded-lg px-4 py-3 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
                                             <img src="{{ asset('images/photo.jpg') }}"
                                                 class="h-10 w-10 rounded-full object-cover" alt="">
@@ -59,7 +59,7 @@
                                     </li>
                                     <li>
                                         <a href="#"
-                                            class="flex items-start gap-4 rounded-lg px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                            class="flex items-start gap-4 rounded-lg px-4 py-3 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
                                             <img src="{{ asset('images/photo.jpg') }}"
                                                 class="h-10 w-10 rounded-full object-cover" alt="">
@@ -69,9 +69,9 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="mt-2 border-t border-gray-100 pt-2 dark:border-zinc-900">
+                                    <li class="mt-2 border-t border-zinc-100 pt-2 dark:border-zinc-900">
                                         <a href="#"
-                                            class="flex items-center justify-center gap-2 rounded-lg p-3 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                            class="flex items-center justify-center gap-2 rounded-lg p-3 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
                                             <x-icon icon="view" class="h-5 w-5 text-current" />
                                             Ver todas
@@ -82,26 +82,30 @@
                         </div>
                         <div class="flex items-center justify-center">
                             <button id="toggleTheme"
-                                class="rounded-lg p-2 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
-                                <x-icon icon="moon"
-                                    class="icon-moon h-6 w-6 text-gray-700 dark:hidden dark:text-white" />
-                                <x-icon icon="sun"
-                                    class="hidden h-6 w-6 text-gray-700 dark:block dark:text-white" />
+                                class="relative flex h-10 w-10 items-center justify-center rounded-lg p-3 hover:bg-zinc-100 focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
+                                <span
+                                    class="sun-icon pointer-events-none absolute opacity-0 dark:pointer-events-auto dark:opacity-100">
+                                    <x-icon icon="sun" class="h-6 w-6 text-zinc-700 dark:text-white" />
+                                </span>
+                                <span
+                                    class="moon-icon pointer-events-auto absolute opacity-100 dark:pointer-events-none dark:opacity-0">
+                                    <x-icon icon="moon" class="icon-moon h-6 w-6 text-zinc-700 dark:text-white" />
+                                </span>
                             </button>
                         </div>
                         <div class="ms-2">
                             <button type="button"
-                                class="flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-zinc-800"
+                                class="flex rounded-full bg-zinc-800 text-sm focus:ring-4 focus:ring-zinc-300 dark:focus:ring-zinc-800"
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
                                 <img class="h-8 w-8 rounded-full object-cover"
                                     src="{{ Storage::url(auth()->user()->profile_photo_path) }}" alt="user photo">
                             </button>
                         </div>
-                        <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-900 dark:bg-zinc-950"
+                        <div class="z-50 my-4 hidden list-none divide-y divide-zinc-100 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-900 dark:bg-zinc-950"
                             id="dropdown-user">
                             <div class="px-4 py-3" role="none">
-                                <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                <p class="text-sm text-zinc-900 dark:text-white" role="none">
                                     {{ auth()->user()->username }}
                                 </p>
                                 <p class="truncate text-sm font-bold text-blue-500" role="none">
@@ -111,7 +115,7 @@
                             <ul role="none">
                                 <li class="mt-2">
                                     <a href="{{ route('admin.index') }}"
-                                        class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                        class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                         role="menuitem">
                                         <x-icon icon="dashboard-square" class="h-4 w-4 text-current" />
                                         Dashboard
@@ -119,17 +123,17 @@
                                 </li>
                                 <li class="mb-2">
                                     <a href="{{ route('admin.settings') }}"
-                                        class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                        class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                         role="menuitem">
                                         <x-icon icon="settings" class="h-4 w-4 text-current" />
                                         Configuración
                                     </a>
                                 </li>
-                                <li class="border-t border-gray-100 pt-2 dark:border-zinc-900">
+                                <li class="border-t border-zinc-100 pt-2 dark:border-zinc-900">
                                     <form action="{{ route('logout') }}" method="POST" class="w-full">
                                         @csrf
                                         <button type="submit"
-                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-1.5 text-start text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-1.5 text-start text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
                                             <x-icon icon="logout" class="h-4 w-4 text-current" />
                                             Cerrar sesión
@@ -147,79 +151,95 @@
 <aside id="sidebar-multi-level-sidebar"
     class="fixed left-0 top-0 z-20 mt-2 h-screen w-72 -translate-x-full border-e border-zinc-200 pt-12 transition-transform dark:border-zinc-900 xl:translate-x-0"
     aria-label="Sidebar">
-    <div class="mt-2 h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-black">
+    <div class="mt-2 h-full overflow-y-auto bg-white px-3 py-4 dark:bg-black">
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="{{ route('admin.index') }}"
-                    class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="{{ \App\Helpers\RouteHelper::isActive('admin/') }} group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                     <x-icon icon="dashboard-square"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li
+                class="{{ \App\Helpers\RouteHelper::isActive([
+                    'admin.categories',
+                    'admin.brands',
+                    'admin.products.index',
+                    'admin.products.create',
+                    'admin.products.edit',
+                    'admin.products.show',
+                ]) }} rounded-lg dark:text-white">
                 <button type="button"
-                    class="group flex w-full items-center rounded-lg p-2 text-base text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950"
+                    class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current"
                     aria-controls="dropdown-example" data-collapse-toggle="dropdown-ecommerce">
                     <x-icon icon="shopping-cart"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap text-left rtl:text-right">E-commerce</span>
-                    <x-icon icon="arrow-down" class="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                 </button>
                 <ul id="dropdown-ecommerce" class="hidden space-y-2 py-2">
                     <li>
                         <a href="{{ route('admin.categories.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             {{ __('messages.categories') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.brands.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             {{ __('messages.brands') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.products.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             {{ __('messages.products') }}
                         </a>
                     </li>
                 </ul>
             </li>
-            <li>
+            <li
+                class="{{ \App\Helpers\RouteHelper::isActive([
+                    'admin.popups.index',
+                    'admin.flash-offers.index',
+                    'admin.sales-strategies.index',
+                    'admin.sales-strategies.coupon.create',
+                    'admin.sales-strategies.coupon.edit',
+                    'admin.sales-strategies.shipping-methods.index',
+                ]) }} rounded-lg dark:text-white">
                 <button type="button"
-                    class="group flex w-full items-center rounded-lg p-2 text-base text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950"
+                    class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current"
                     aria-controls="dropdown-store" data-collapse-toggle="dropdown-store">
                     <x-icon icon="store"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap text-left rtl:text-right">
                         {{ __('messages.store') }}
                     </span>
-                    <x-icon icon="arrow-down" class="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                 </button>
                 <ul id="dropdown-store" class="hidden space-y-2 py-2">
                     <li>
-                        <a href="{{ route('admin.flash-offers.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
-                            {{ __('messages.flash_offers') }}
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ route('admin.popups.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             {{ __('messages.popups') }}
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('admin.flash-offers.index') }}"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
+                            {{ __('messages.flash_offers') }}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.sales-strategies.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Estrategia de ventas
                         </a>
                     </li>
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Administrar reseñas
                         </a>
                     </li>
@@ -227,16 +247,16 @@
             </li>
             <li>
                 <a href="#"
-                    class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                     <x-icon icon="orders"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap">Pedidos</span>
                 </a>
             </li>
             {{-- <li>
                 <a href="#"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-950 group">
-                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    class="flex items-center p-2 text-zinc-900 rounded-lg dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-950 group">
+                    <svg class="flex-shrink-0 w-5 h-5 text-zinc-500 transition duration-75 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 18 18">
                         <path
@@ -244,14 +264,14 @@
                     </svg>
                     <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
                     <span
-                        class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
+                        class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-zinc-800 bg-zinc-100 rounded-full dark:bg-zinc-700 dark:text-zinc-300">Pro</span>
                 </a>
             </li> --}}
             <li>
                 <a href="#"
-                    class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                     <x-icon icon="wechat"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap">
                         Live chat
                     </span>
@@ -261,37 +281,37 @@
             </li>
             <li>
                 <a href="{{ route('admin.users.index') }}"
-                    class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                     <x-icon icon="user"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap">Usuarios</span>
                 </a>
             </li>
             <li>
                 <button type="button"
-                    class="group flex w-full items-center rounded-lg p-2 text-base text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950"
+                    class="group flex w-full items-center rounded-lg p-2 text-base text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950"
                     aria-controls="dropdown-customers" data-collapse-toggle="dropdown-customers">
                     <x-icon icon="user-group"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap text-left rtl:text-right">Clientes</span>
-                    <x-icon icon="arrow-down" class="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                 </button>
                 <ul id="dropdown-customers" class="hidden space-y-2 py-2">
                     <li>
                         <a href="{{ route('admin.customers.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Clientes registrados
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.support-tickets.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Tickets de soporte
                         </a>
                     </li>
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Suscripciones
                         </a>
                     </li>
@@ -299,37 +319,37 @@
             </li>
             <li>
                 <button type="button"
-                    class="group flex w-full items-center rounded-lg p-2 text-base text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950"
+                    class="group flex w-full items-center rounded-lg p-2 text-base text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950"
                     aria-controls="dropdown-settings" data-collapse-toggle="dropdown-settings">
                     <x-icon icon="settings"
-                        class="h-5 w-5 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+                        class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap text-left rtl:text-right">
                         Configuración
                     </span>
-                    <x-icon icon="arrow-down" class="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                 </button>
                 <ul id="dropdown-settings" class="hidden space-y-2 py-2">
                     <li>
                         <a href="{{ route('admin.general-settings') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Ajustes generales
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.policies.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Políticas
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.faq.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Preguntas frecuentes
                         </a>
                     </li>
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                             Crear páginas
                         </a>
                     </li>

@@ -2,8 +2,8 @@
     @foreach ($taxes as $tax)
         <div>
             <input id="{{ $tax->name }}" type="checkbox" value="{{ $tax->id }}" name="tax_id[]"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-white dark:border-gray-600">
-            <label for="{{ $tax->name }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+            <label for="{{ $tax->name }}" class="ms-2 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                 {{ $tax->name }}
                 <span class="text-xs text-blue-700 dark:text-blue-400">({{ $tax->rate }}%)</span>
             </label>

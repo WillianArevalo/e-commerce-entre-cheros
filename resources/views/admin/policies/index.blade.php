@@ -3,106 +3,106 @@
 @section('title', 'Ajustes generales')
 
 @section('content')
-    <div class="dark:border-zinc-900 dark:bg-black mt-4">
-        <div class="dark:bg-black py-4 px-4 shadow-sm flex flex-col items-start border-y dark:border-zinc-900">
-            <h1 class="text-2xl dark:text-blue-400 font-secondary text-secondary font-bold">
+    <div class="mt-4 dark:border-zinc-900 dark:bg-black">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Políticas
             </h1>
-            <p class="text-sm dark:text-gray-400 text-gray-700">
+            <p class="text-sm text-zinc-700 dark:text-zinc-400">
                 Administra:
             </p>
-            <ul class="flex flex-col gap-2 dark:text-gray-400 text-gray-700 text-sm mt-2">
-                <li class="flex gap-2 items-center">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full block"></span>
+            <ul class="mt-2 flex flex-col gap-2 text-sm text-zinc-700 dark:text-zinc-400">
+                <li class="flex items-center gap-2">
+                    <span class="block h-2 w-2 rounded-full bg-blue-500"></span>
                     Políticas de privacidad
                 </li>
-                <li class="flex gap-2 items-center">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full block"></span>
+                <li class="flex items-center gap-2">
+                    <span class="block h-2 w-2 rounded-full bg-blue-500"></span>
                     Políticas de compra
                 </li>
-                <li class="flex gap-2 items-center">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full block"></span>
+                <li class="flex items-center gap-2">
+                    <span class="block h-2 w-2 rounded-full bg-blue-500"></span>
                     Políticas de pago con tarjeta
                 </li>
-                <li class="flex gap-2 items-center">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full block"></span>
+                <li class="flex items-center gap-2">
+                    <span class="block h-2 w-2 rounded-full bg-blue-500"></span>
                     Políticas de envío
                 </li>
-                <li class="flex gap-2 items-center">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full block"></span>
+                <li class="flex items-center gap-2">
+                    <span class="block h-2 w-2 rounded-full bg-blue-500"></span>
                     Términos y condiciones
                 </li>
             </ul>
         </div>
-        <div class="p-4 rounded-lg dark:bg-black m-4">
-            <p class="text-sm dark:text-gray-400 text-gray-700 mb-4">Carga los archivos con las políticas correspondientes
+        <div class="m-4 rounded-lg p-4 dark:bg-black">
+            <p class="mb-4 text-sm text-zinc-700 dark:text-zinc-400">Carga los archivos con las políticas correspondientes
             </p>
             <div class="grid grid-cols-3 gap-4">
                 <div
-                    class="border border-gray-300 dark:border-zinc-900 rounded-lg flex items-center justify-center flex-col">
-                    <h4 class="text-sm text-gray-700 dark:text-gray-300 p-4 border-b border-gray-700 w-full text-center">
+                    class="flex flex-col items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-900">
+                    <h4 class="w-full border-b border-zinc-700 p-4 text-center text-sm text-zinc-700 dark:text-zinc-300">
                         Políticas de privacidad
                     </h4>
                     <div class="p-2">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="w-full object-cover h-full">
+                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="h-full w-full object-cover">
                     </div>
-                    <div class="flex gap-2 items-center justify-end w-full p-2 border-t border-gray-700">
+                    <div class="flex w-full items-center justify-end gap-2 border-t border-zinc-700 p-2">
                         <x-button type="a" text="Agregar PDF" typeButton="primary" icon="pdf" />
                         <x-button type="a" typeButton="secondary" icon="view" />
                         <x-button type="a" typeButton="danger" icon="delete" />
                         <x-button type="button" typeButton="success" icon="import" />
                     </div>
                 </div>
-                <div class="border border-gray-700 rounded-lg flex items-center justify-center flex-col">
-                    <h4 class="text-sm text-gray-700 dark:text-gray-300 p-4 border-b border-gray-700 w-full text-center">
+                <div class="flex flex-col items-center justify-center rounded-lg border border-zinc-700">
+                    <h4 class="w-full border-b border-zinc-700 p-4 text-center text-sm text-zinc-700 dark:text-zinc-300">
                         Políticas de privacidad
                     </h4>
                     <div class="p-2">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="w-full object-cover h-full">
+                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="h-full w-full object-cover">
                     </div>
-                    <div class="flex gap-2 items-center justify-end w-full p-2 border-t border-gray-700">
+                    <div class="flex w-full items-center justify-end gap-2 border-t border-zinc-700 p-2">
                         <x-button type="a" text="Agregar PDF" typeButton="primary" icon="pdf" />
                         <x-button type="a" typeButton="secondary" icon="view" />
                         <x-button type="a" typeButton="danger" icon="delete" />
                         <x-button type="button" typeButton="success" icon="import" />
                     </div>
                 </div>
-                <div class="border border-gray-700 rounded-lg flex items-center justify-center flex-col">
-                    <h4 class="text-sm text-gray-700 dark:text-gray-300 p-4 border-b border-gray-700 w-full text-center">
+                <div class="flex flex-col items-center justify-center rounded-lg border border-zinc-700">
+                    <h4 class="w-full border-b border-zinc-700 p-4 text-center text-sm text-zinc-700 dark:text-zinc-300">
                         Políticas de privacidad
                     </h4>
                     <div class="p-2">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="w-full object-cover h-full">
+                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="h-full w-full object-cover">
                     </div>
-                    <div class="flex gap-2 items-center justify-end w-full p-2 border-t border-gray-700">
+                    <div class="flex w-full items-center justify-end gap-2 border-t border-zinc-700 p-2">
                         <x-button type="a" text="Agregar PDF" typeButton="primary" icon="pdf" />
                         <x-button type="a" typeButton="secondary" icon="view" />
                         <x-button type="a" typeButton="danger" icon="delete" />
                         <x-button type="button" typeButton="success" icon="import" />
                     </div>
                 </div>
-                <div class="border border-gray-700 rounded-lg flex items-center justify-center flex-col">
-                    <h4 class="text-sm text-gray-700 dark:text-gray-300 p-4 border-b border-gray-700 w-full text-center">
+                <div class="flex flex-col items-center justify-center rounded-lg border border-zinc-700">
+                    <h4 class="w-full border-b border-zinc-700 p-4 text-center text-sm text-zinc-700 dark:text-zinc-300">
                         Políticas de privacidad
                     </h4>
                     <div class="p-2">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="w-full object-cover h-full">
+                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="h-full w-full object-cover">
                     </div>
-                    <div class="flex gap-2 items-center justify-end w-full p-2 border-t border-gray-700">
+                    <div class="flex w-full items-center justify-end gap-2 border-t border-zinc-700 p-2">
                         <x-button type="a" text="Agregar PDF" typeButton="primary" icon="pdf" />
                         <x-button type="a" typeButton="secondary" icon="view" />
                         <x-button type="a" typeButton="danger" icon="delete" />
                         <x-button type="button" typeButton="success" icon="import" />
                     </div>
                 </div>
-                <div class="border border-gray-700 rounded-lg flex items-center justify-center flex-col">
-                    <h4 class="text-sm text-gray-700 dark:text-gray-300 p-4 border-b border-gray-700 w-full text-center">
+                <div class="flex flex-col items-center justify-center rounded-lg border border-zinc-700">
+                    <h4 class="w-full border-b border-zinc-700 p-4 text-center text-sm text-zinc-700 dark:text-zinc-300">
                         Políticas de privacidad
                     </h4>
                     <div class="p-2">
-                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="w-full object-cover h-full">
+                        <img src="{{ asset('images/photo.jpg') }}" alt="Imagen" class="h-full w-full object-cover">
                     </div>
-                    <div class="flex gap-2 items-center justify-end w-full p-2 border-t border-gray-700">
+                    <div class="flex w-full items-center justify-end gap-2 border-t border-zinc-700 p-2">
                         <x-button type="a" text="Agregar PDF" typeButton="primary" icon="pdf" />
                         <x-button type="a" typeButton="secondary" icon="view" />
                         <x-button type="a" typeButton="danger" icon="delete" />

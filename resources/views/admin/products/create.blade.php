@@ -16,15 +16,15 @@
                     @csrf
                     <div>
                         <div class="flex flex-col gap-1">
-                            <h2 class="text-lg uppercase text-gray-700 dark:text-gray-300">Información del producto</h2>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                            <h2 class="text-lg uppercase text-zinc-700 dark:text-zinc-300">Información del producto</h2>
+                            <x-paragraph>
                                 Los campos marcados con <span class="text-red-500">*</span> son obligatorios
-                            </p>
+                            </x-paragraph>
                         </div>
                         <div class="mt-4 flex flex-col gap-4 lg:flex-row">
                             <div class="flex flex-1 flex-col gap-4">
                                 <div
-                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">General</h4>
                                     <div class="flex flex-col gap-4">
                                         <div>
@@ -52,7 +52,7 @@
                                             </div>
                                             <div class="flex-[4]">
                                                 <p
-                                                    class="mb-2 block text-sm font-medium text-gray-900 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
+                                                    class="mb-2 block text-sm font-medium text-zinc-900 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
                                                     Dimensiones (cm)
                                                 </p>
                                                 <div class="flex items-center gap-2">
@@ -62,8 +62,8 @@
                                                             required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
-                                                        class="mt-7 rounded-lg border-2 border-gray-300 bg-gray-100 p-2 text-gray-900 dark:border-zinc-900 dark:bg-black dark:text-white">
-                                                        <x-icon icon="cancel" class="h-4 w-4 text-current" />
+                                                        class="mt-7 rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                        <x-icon icon="x" class="h-4 w-4 text-current" />
                                                     </span>
                                                     <div>
                                                         <x-input type="number" label="Ancho" id="width" name="width"
@@ -71,8 +71,8 @@
                                                             required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
-                                                        class="mt-7 rounded-lg border-2 border-gray-300 bg-gray-100 p-2 text-gray-900 dark:border-zinc-900 dark:bg-black dark:text-white">
-                                                        <x-icon icon="cancel" class="h-4 w-4 text-current" />
+                                                        class="mt-7 rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                        <x-icon icon="x" class="h-4 w-4 text-current" />
                                                     </span>
                                                     <div>
                                                         <x-input type="number" label="Alto" id="height" name="height"
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Categoría y marca
                                     </h4>
@@ -103,23 +103,23 @@
                                             </div>
                                             <div class="flex-1">
                                                 <label
-                                                    class="mb-2 block text-sm font-medium text-gray-900 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
+                                                    class="mb-2 block text-sm font-medium text-zinc-900 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
                                                     Subcategoría del producto
                                                 </label>
                                                 <input type="hidden" name="subcategorie_id" id="subcategorie_id"
                                                     value="{{ old('categorie_id') }}">
                                                 <div class="relative">
                                                     <div
-                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                         <span class="itemSelected" id="selectedSubCategorie">
                                                             Selecciona una subcategoría
                                                         </span>
                                                         <x-icon icon="arrow-down"
-                                                            class="h-5 w-5 text-gray-500 dark:text-white" />
+                                                            class="h-5 w-5 text-zinc-500 dark:text-white" />
                                                     </div>
-                                                    <ul class="selectOptionsSubCategories absolute z-10 mt-2 hidden w-full rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
+                                                    <ul class="selectOptionsSubCategories absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
                                                         id="listSubcategories">
-                                                        <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900"
+                                                        <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                                                             data-value="" data-input="#subcategorie_id">
                                                             Ninguna categoría principal seleccionada
                                                         </li>
@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Información de venta
                                     </h4>
@@ -155,7 +155,7 @@
                                             </div>
                                         </div>
                                         <div class="mt-4 hidden" id="dateOffer">
-                                            <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                            <label class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
                                                 Fecha de la oferta
                                             </label>
                                             <div class="flex items-center">
@@ -164,7 +164,7 @@
                                                         value="{{ old('offer_start_date') }}"
                                                         placeholder="Seleccionar fecha de inicio" />
                                                 </div>
-                                                <span class="mx-4 text-gray-500">a</span>
+                                                <span class="mx-4 text-zinc-500">a</span>
                                                 <div class="flex-1">
                                                     <x-input type="date" name="offer_end_date" icon="calendar"
                                                         value="{{ old('offer_end_date') }}"
@@ -190,18 +190,18 @@
                                                     typeButton="secondary" />
                                             </div>
                                             <div class="mt-4 flex flex-col">
-                                                <p for="price" class="block text-sm font-medium text-white">
+                                                <x-paragraph>
                                                     Lista de impuestos asignados al producto
-                                                </p>
+                                                </x-paragraph>
                                                 <div class="flex flex-col" id="checkBoxTaxes">
                                                     @if ($taxes->count() > 0)
                                                         @foreach ($taxes as $tax)
                                                             <div>
                                                                 <input id="{{ $tax->name }}" type="checkbox"
                                                                     value="{{ $tax->id }}" name="tax_id[]"
-                                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                                    class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                                                 <label for="{{ $tax->name }}"
-                                                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="ms-2 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                                                     {{ $tax->name }}
                                                                     <span
                                                                         class="text-xs text-blue-700 dark:text-blue-400">({{ $tax->rate }}%)</span>
@@ -217,25 +217,24 @@
                             </div>
                             <div class="flex flex-1 flex-col gap-4">
                                 <div
-                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">Imágenes</h4>
                                     <div>
-                                        <p
-                                            class="mb-2 text-sm text-black after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-gray-400">
+                                        <x-paragraph class="mb-2 after:ml-0.5 after:text-red-500 after:content-['*']">
                                             Imagen principal
-                                        </p>
+                                        </x-paragraph>
                                         <label for="main_image"
-                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-zinc-900 dark:bg-transparent dark:hover:border-zinc-800 dark:hover:bg-zinc-950">
+                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-900 dark:bg-transparent dark:hover:border-zinc-800 dark:hover:bg-zinc-950">
                                             <div class="flex flex-col items-center justify-center pb-6 pt-5">
                                                 <x-icon icon="cloud-upload"
-                                                    class="h-12 w-12 text-gray-400 dark:text-gray-500" />
-                                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                    class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
+                                                <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400">
                                                     <span class="font-semibold">
                                                         Clic para agregar
                                                     </span>
                                                     o desliza la imagen
                                                 </p>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">
+                                                <p class="text-xs text-zinc-500 dark:text-zinc-400">
                                                     PNG, JPG, WEBP
                                                 </p>
                                             </div>
@@ -247,14 +246,16 @@
                                     <div class="mt-4">
                                         <div class="mb-2 flex items-center justify-between">
                                             <div>
-                                                <p class="text-sm text-black dark:text-gray-400">Galería de imágenes</p>
-                                                <p class="w-64 text-xs text-black dark:text-gray-400">
+                                                <x-paragraph>
+                                                    Galería de imágenes
+                                                </x-paragraph>
+                                                <x-paragraph class="w-64 text-xs">
                                                     Nota: Selecciona todas las imáges de una sola vez.
-                                                </p>
+                                                </x-paragraph>
                                             </div>
-                                            <div class="flex gap-2 text-sm text-gray-400">
+                                            <div class="flex gap-2 text-sm text-zinc-400">
                                                 <label for="gallery_image"
-                                                    class="flex cursor-pointer items-center gap-2 rounded-lg border-2 border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
+                                                    class="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                                     <x-icon icon="image-add" class="h-4 w-4 text-current" />
                                                     Seleccionar imágenes
                                                 </label>
@@ -264,15 +265,16 @@
                                                     icon="reload" />
                                             </div>
                                         </div>
-                                        <div class="mt-4 flex h-24 flex-wrap justify-start gap-2 rounded-lg border-2 border-dashed border-gray-300 dark:border-zinc-900"
+                                        <div class="mt-4 flex h-24 flex-wrap justify-start gap-2 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-900"
                                             id="previewImagesContainer">
-                                            <p class="m-auto text-sm dark:text-gray-400">Sin imágenes seleccionadas</p>
+                                            <x-paragraph class="m-auto">Sin imágenes seleccionadas</x-paragraph>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
-                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">Inventario
+                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
+                                        Inventario
                                     </h4>
                                     <div class="flex gap-4">
                                         <div class="flex-1">
@@ -291,7 +293,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-gray-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
                                     <div class="flex items-center justify-between">
                                         <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                             Etiquetas
@@ -302,29 +304,29 @@
                                     </div>
                                     <div class="flex gap-4">
                                         <div class="w-full">
-                                            <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                            <label class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
                                                 Seleccionar etiquetas para el producto
                                             </label>
                                             <input type="hidden" name="label_id[]" id="label_id">
                                             <div class="relative">
                                                 <div
-                                                    class="selected flex w-full items-center justify-between rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                    class="selected flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                     <span class="itemSelected">Seleccionar etiqueta</span>
                                                     <x-icon icon="arrow-down"
-                                                        class="h-5 w-5 text-gray-500 dark:text-white" />
+                                                        class="h-5 w-5 text-zinc-500 dark:text-white" />
                                                 </div>
-                                                <ul class="selectOptionsLabels absolute z-10 mt-2 hidden w-full rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
+                                                <ul class="selectOptionsLabels absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
                                                     id="labelsList">
                                                     @if ($labels->count() > 0)
                                                         @foreach ($labels as $label)
-                                                            <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-900"
+                                                            <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                                                                 data-value="{{ $label->name }}" data-input="#label_id">
                                                                 {{ $label->name }}
                                                             </li>
                                                         @endforeach
                                                     @else
                                                         <li
-                                                            class="itemOption px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                                            class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-700">
                                                             Sin etiquetas registradas
                                                         </li>
                                                     @endif
@@ -336,7 +338,7 @@
                                     </div>
                                     <input type="hidden" name="labels_ids[]" id="labels_ids">
                                     <div id="hiddenLabelsContainer"></div>
-                                    <div class="mt-4 flex h-auto w-full flex-wrap items-start gap-1 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-2 dark:border-zinc-900 dark:bg-transparent"
+                                    <div class="mt-4 flex h-auto w-full flex-wrap items-start gap-1 rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 p-2 dark:border-zinc-900 dark:bg-transparent"
                                         id="previewLabelsContainer">
                                     </div>
                                 </div>
@@ -366,11 +368,11 @@
                     <!-- Modal header -->
                     <div
                         class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-900 sm:mb-5">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">
                             Agregar impuesto
                         </h3>
                         <button type="button"
-                            class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white"
+                            class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white"
                             data-modal-toggle="addTax">
                             <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -418,11 +420,11 @@
                     <!-- Modal header -->
                     <div
                         class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-900 sm:mb-5">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">
                             Agregar etiqueta
                         </h3>
                         <button type="button"
-                            class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white"
+                            class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white"
                             data-modal-toggle="addLabel">
                             <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">

@@ -8,11 +8,11 @@
             'title' => 'Preguntas frecuentes',
             'description' => 'Administra las preguntas frecuentes de tu aplicación',
         ])
-        <div class="bg-gray-50 p-4 dark:bg-black">
+        <div class="bg-zinc-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
-                    <div class="border-b border-gray-200 p-4 dark:border-zinc-900">
-                        <h2 class="text-base font-semibold text-gray-700 dark:text-gray-200">
+                    <div class="border-b border-zinc-200 p-4 dark:border-zinc-900">
+                        <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de preguntas
                         </h2>
                     </div>
@@ -33,8 +33,8 @@
                         </div>
                     </div>
                     <div>
-                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-                            <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-zinc-900 dark:text-gray-300">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
+                            <thead class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">#</th>
                                     <th scope="col" class="px-4 py-3">Pregunta</th>
@@ -46,16 +46,16 @@
                                 @if ($faqs->count() > 0)
                                     @foreach ($faqs as $faq)
                                         <tr class="border-b dark:border-zinc-900">
-                                            <td class="px-4 py-3 text-start font-medium text-gray-900 dark:text-white">
+                                            <td class="px-4 py-3 text-start font-medium text-zinc-900 dark:text-white">
                                                 {{ $faq->id }}
                                             </td>
-                                            <td class="px-4 py-3 text-start font-medium text-gray-900 dark:text-white">
+                                            <td class="px-4 py-3 text-start font-medium text-zinc-900 dark:text-white">
                                                 {{ $faq->question }}
                                             </td>
-                                            <td class="px-4 py-3 text-start font-medium text-gray-900 dark:text-white">
+                                            <td class="px-4 py-3 text-start font-medium text-zinc-900 dark:text-white">
                                                 {{ $faq->answer }}
                                             </td>
-                                            <td class="px-4 py-3 text-start font-medium text-gray-900 dark:text-white">
+                                            <td class="px-4 py-3 text-start font-medium text-zinc-900 dark:text-white">
                                                 <div class="flex gap-2">
                                                     <x-button type="button" class="editFaq"
                                                         data-href="{{ route('admin.faq.edit', $faq->id) }}"
@@ -78,7 +78,7 @@
                                 @else
                                     <tr class="border-b dark:border-zinc-900">
                                         <td colspan="4"
-                                            class="px-4 py-3 text-center font-medium text-gray-900 dark:text-white">
+                                            class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
                                             No hay preguntas registradas
                                         </td>
                                     </tr>
@@ -97,11 +97,11 @@
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-faq">
             <h5 id="drawer-new-faq-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Nueva pregunta
             </h5>
             <button type="button" data-drawer="#drawer-new-faq"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -134,11 +134,11 @@
             class="fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-edit-faq">
             <h5 id="drawer-edit-faq-label"
-                class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
                 Editar pregunta
             </h5>
             <button type="button" data-drawer="#drawer-edit-faq"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
                 <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

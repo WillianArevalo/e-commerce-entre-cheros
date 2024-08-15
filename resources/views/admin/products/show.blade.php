@@ -12,7 +12,7 @@
         <div class="flex h-full gap-4 bg-white p-4 dark:bg-black">
             <div class="w-1/2">
                 <div
-                    class="mb-4 flex justify-between rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    class="mb-4 flex justify-between rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                     <h2 class="text-2xl font-bold uppercase text-secondary dark:text-blue-200">
                         {{ $product->name }}
                     </h2>
@@ -22,32 +22,34 @@
                     </span>
                 </div>
                 <div
-                    class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    class="flex flex-col gap-2 rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                     <div class="mt-2 flex flex-col gap-1">
-                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Descripción corta:</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Descripción corta:</h3>
+                        <x-paragraph>
                             {{ $product->short_description }}
-                        </p>
+                        </x-paragraph>
                     </div>
                     <div class="mt-2 flex flex-col gap-1">
-                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Descripción larga:</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Descripción larga:</h3>
+                        <x-paragraph>
                             {{ $product->long_description ?? 'No hay descripción larga' }}
-                        </p>
+                        </x-paragraph>
                     </div>
                 </div>
-                <div class="mt-4 rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                <div class="mt-4 rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                     <h2 class="text-xl font-bold text-secondary dark:text-blue-200">Imágenes del producto</h2>
                     <div class="mt-2 flex flex-col gap-4">
                         <div class="flex flex-1 flex-col gap-2">
-                            <p class="text-sm text-gray-700 dark:text-gray-100">
+                            <x-paragraph>
                                 Imágen principal
-                            </p>
+                            </x-paragraph>
                             <img src="{{ Storage::url($product->main_image) }}" alt="product-image"
                                 class="main-image h-full w-full cursor-pointer rounded-lg object-cover" />
                         </div>
                         <div class="flex-1">
-                            <p class="mb-2 text-sm text-gray-700 dark:text-gray-100">Galería de imágenes</p>
+                            <x-paragraph class="mb-2">
+                                Galería de imágenes
+                            </x-paragraph>
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($product->images as $image)
                                     <img src="{{ Storage::url($image->image) }}" alt="product-image"
@@ -57,32 +59,39 @@
                         </div>
                     </div>
                     <h2
-                        class="mt-4 border-t border-gray-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
+                        class="mt-4 border-t border-zinc-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
                         Inventario
                     </h2>
                     <div class="flex gap-4">
                         <div class="mt-2 flex gap-1">
-                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">SKU:</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->sku }}</p>
+                            <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">SKU:</h3>
+                            <x-paragraph>
+                                {{ $product->sku }}</x-paragraph>
                         </div>
                         <div class="mb-2 mt-2 flex gap-1">
-                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Código de barras:</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->barcode }}</p>
+                            <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Código de barras:</h3>
+                            <x-paragraph>
+                                {{ $product->barcode }}
+                            </x-paragraph>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex gap-1">
-                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Peso:</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->weight }} KG</p>
+                            <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Peso:</h3>
+                            <x-paragraph>
+                                {{ $product->weight }} KG
+                            </x-paragraph>
                         </div>
                         <div class="flex gap-1">
-                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Cantidad:</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->stock }}</p>
+                            <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Cantidad:</h3>
+                            <x-paragraph>
+                                {{ $product->stock }}
+                            </x-paragraph>
                         </div>
                     </div>
                     <div class="mt-2 flex gap-1">
-                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Dimensiones:</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->dimensions }}</p>
+                        <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Dimensiones:</h3>
+                        <x-paragraph>{{ $product->dimensions }}</x-paragraph>
                     </div>
                     <div class="mt-2 p-4">
                         <div class="dimension-box">
@@ -97,50 +106,56 @@
                 </div>
             </div>
             <div class="flex w-1/2 flex-col">
-                <div class="categorie rounded-lg border border-gray-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                <div class="categorie rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
                     <h2 class="text-xl font-bold text-secondary dark:text-blue-200">Categoría</h2>
                     <div class="mt-2 flex flex-col gap-1">
-                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Categoría principal:</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->categories->name }}</p>
+                        <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Categoría principal:</h3>
+                        <x-paragraph>
+                            {{ $product->categories->name }}
+                        </x-paragraph>
                     </div>
                     <div class="mb-2 mt-2 flex flex-col gap-1">
-                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Subcategoría:</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $product->subcategories->name }}</p>
+                        <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Subcategoría:</h3>
+                        <x-paragraph>
+                            {{ $product->subcategories->name }}
+                        </x-paragraph>
                     </div>
                     <h2
-                        class="border-t border-gray-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
+                        class="border-t border-zinc-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
                         Precio
                     </h2>
                     <div class="mt- flex flex-col gap-1">
-                        <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Precio normal:</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">${{ $product->price }}</p>
+                        <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Precio normal:</h3>
+                        <x-paragraph>
+                            ${{ $product->price }}
+                        </x-paragraph>
                     </div>
                     @if ($product->offer_price)
                         <div class="mt-2 flex flex-col gap-1">
-                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Precio de oferta:</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">${{ $product->offer_price }}</p>
+                            <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Precio de oferta:</h3>
+                            <x-paragraph>${{ $product->offer_price }}</x-paragraph>
                         </div>
                         <div
-                            class="mt-2 flex flex-col gap-1 rounded-lg border-2 border-dashed border-gray-400 p-4 dark:border-zinc-900">
-                            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-100">Fecha de la oferta:</h3>
+                            class="mt-2 flex flex-col gap-1 rounded-lg border-2 border-dashed border-zinc-400 p-4 dark:border-zinc-900">
+                            <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Fecha de la oferta:</h3>
                             <div class="timeline-container">
                                 <div class="timeline">
                                     <div class="timeline-event start-date">
                                         <div
-                                            class="timeline-content border-zinc-200dark:text-gray-300 rounded border bg-white p-4 text-sm text-gray-700 dark:border-zinc-900 dark:bg-black">
-                                            <h3 class="timeline-title">Fecha de inicio</h3>
-                                            <p class="timeline-date font-medium text-secondary dark:text-blue-500">
-                                                {{ $product->offer_start_date }}
-                                            </p>
+                                            class="timeline-content border-zinc-200dark:text-zinc-300 rounded border bg-white p-4 text-sm text-zinc-700 dark:border-zinc-900 dark:bg-black">
+                                            <h3 class="timeline-title text-zinc-700 dark:text-zinc-300">Fecha de inicio</h3>
+                                            <x-paragraph class="timeline-date">
+                                                {{ \Carbon\Carbon::parse($product->offer_start_date)->format('d M, Y') }}
+                                            </x-paragraph>
                                         </div>
                                     </div>
                                     <div class="timeline-event end-date">
                                         <div
-                                            class="timeline-content rounded border border-zinc-200 bg-white p-4 text-sm text-gray-700 dark:border-zinc-900 dark:bg-black dark:text-gray-300">
-                                            <h3 class="timeline-title">Fecha de fin</h3>
-                                            <p class="timeline-date font-medium text-secondary dark:text-blue-500">
-                                                {{ $product->offer_end_date }}
-                                            </p>
+                                            class="timeline-content rounded border border-zinc-200 bg-white p-4 text-sm text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                            <h3 class="timeline-title text-zinc-700 dark:text-zinc-300">Fecha de fin</h3>
+                                            <x-paragraph class="timeline-date">
+                                                {{ \Carbon\Carbon::parse($product->offer_end_date)->format('d M, Y') }}
+                                            </x-paragraph>
                                         </div>
                                     </div>
                                 </div>
@@ -148,15 +163,15 @@
                         </div>
                     @endif
                     <h2
-                        class="mt-4 border-t border-gray-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
+                        class="mt-4 border-t border-zinc-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
                         Impuestos
                     </h2>
                     <div>
-                        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <tbody>
                                 @if ($product->taxes->count() > 0)
                                     @foreach ($product->taxes as $tax)
-                                        <tr class="border-b border-gray-200 dark:border-zinc-900">
+                                        <tr class="border-b border-zinc-200 dark:border-zinc-900">
                                             <td class="py-2">
                                                 <span
                                                     class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
@@ -175,7 +190,7 @@
                     </h2>
                     <div class="mt-2 flex gap-2">
                         @if ($product->labels->count() == 0)
-                            <p class="text-sm text-gray-500 dark:text-gray-400">No hay etiquetas</p>
+                            <x-paragraph>No hay etiquetas</x-paragraph>
                         @else
                             @foreach ($product->labels as $label)
                                 <span
@@ -208,9 +223,9 @@
 
     <div id="modal-image" class="relative">
         <button type="button"
-            class="close absolute right-0 m-10 rounded-lg bg-gray-200 p-2 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-800"
+            class="close absolute right-0 m-10 rounded-lg bg-zinc-200 p-2 hover:bg-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-800"
             id="close-modal">
-            <x-icon icon="cancel" class="h-5 w-5 text-black dark:text-white" />
+            <x-icon icon="x" class="h-5 w-5 text-black dark:text-white" />
         </button>
         <div class="flex h-full items-center justify-center" id="container-modal-image">
             <img class="h-4/5 w-4/5 object-contain" id="image-modal" src="{{ asset('images/photo.jpg') }}" />

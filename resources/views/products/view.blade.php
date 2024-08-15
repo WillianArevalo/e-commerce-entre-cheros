@@ -3,95 +3,95 @@
 @section('title', 'Details product')
 
 @section('content')
-    <main class="mb-10 w-4/5 mx-auto">
+    <main class="mx-auto mb-10 w-4/5">
         <section class="mt-32 flex gap-8">
-            <div class="flex-1 flex flex-col gap-2 items-center justify-center h-max">
+            <div class="flex h-max flex-1 flex-col items-center justify-center gap-2">
                 <img src="{{ Storage::url($product->main_image) }}" alt="Imagen principal del {{ $product->name }}"
-                    class="w-full h-96 rounded-xl object-cover">
-                <div class="flex gap-2 items-center justify-center">
+                    class="h-96 w-full rounded-xl object-cover">
+                <div class="flex items-center justify-center gap-2">
                     @if ($product->images->count() > 4)
                         <button>
-                            <x-icon icon="arrow-left" class="w-5 h-5" />
+                            <x-icon icon="arrow-left" class="h-5 w-5" />
                         </button>
                     @endif
                     @if ($product->images->count() > 0)
                         @foreach ($product->images as $image)
                             <img src="{{ Storage::url($image->image) }}" alt="Imagen secundaria"
-                                class="w-24 h-16 object-cover border border-tertiary rounded-lg">
+                                class="h-16 w-24 rounded-lg border border-tertiary object-cover">
                         @endforeach
                     @endif
                     @if ($product->images->count() > 4)
                         <button>
-                            <x-icon icon="arrow-right" class="w-5 h-5" />
+                            <x-icon icon="arrow-right" class="h-5 w-5" />
                         </button>
                     @endif
                 </div>
-                <div class="flex gap-2 mt-4 font-secondary">
+                <div class="mt-4 flex gap-2 font-secondary">
                     @if ($product->labels->count() > 0)
                         @foreach ($product->labels as $label)
                             <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-1 rounded-full flex items-center justify-center">
+                                class="flex items-center justify-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-800">
                                 {{ $label->name }}
                             </span>
                         @endforeach
                     @endif
                 </div>
             </div>
-            <div class="flex-1 flex flex-col gap-3">
+            <div class="flex flex-1 flex-col gap-3">
                 <div class="flex justify-between">
-                    <h1 class="font-bold text-secondary text-4xl font-primary">{{ $product->name }}</h1>
+                    <h1 class="font-primary text-4xl font-bold text-secondary">{{ $product->name }}</h1>
                     <div class="flex gap-2">
                         <button
-                            class="group hover:bg-zinc-100 p-2 rounded-lg text-rose-500 flex items-center gap-2 font-secondary bg-zinc-50 text-sm">
+                            class="group flex items-center gap-2 rounded-lg bg-zinc-50 p-2 font-secondary text-sm text-rose-500 hover:bg-zinc-100">
                             Guardar
-                            <x-icon icon="favourite" class="w-5 h-5 text-current group-hover:fill-rose-500" />
+                            <x-icon-store icon="favourite" class="h-5 w-5 text-current group-hover:fill-rose-500" />
                         </button>
                         <button
-                            class="hover:bg-zinc-100 p-2 rounded-lg text-green-500 text-secondary flex items-center gap-2 font-secondary bg-zinc-50 text-sm">
+                            class="flex items-center gap-2 rounded-lg bg-zinc-50 p-2 font-secondary text-sm text-green-500 hover:bg-zinc-100">
                             Compartir
-                            <x-icon icon="share" class="w-6 h-6 text-current" />
+                            <x-icon-store icon="share" class="h-6 w-6 text-current" />
                         </button>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <x-icon icon="start" class="w-5 h-5 text-secondary" />
-                    <x-icon icon="start" class="w-5 h-5 text-secondary" />
-                    <x-icon icon="start" class="w-5 h-5 text-secondary" />
-                    <x-icon icon="start" class="w-5 h-5 text-secondary" />
-                    <x-icon icon="start" class="w-5 h-5 text-secondary" />
-                    <p class="font-secondary text-tertiary font-semibold">En stock</p>
+                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
+                    <p class="font-secondary font-semibold text-tertiary">En stock</p>
                 </div>
-                <div class="flex gap-2 items-end">
+                <div class="flex items-end gap-2">
                     @if ($product->offer_price)
                         <span
-                            class="text-secondary font-semibold font-secondary text-5xl">${{ $product->offer_price }}</span>
-                        <span class="text-gray-400 font-secondary line-through text-2xl">${{ $product->price }}</span>
+                            class="font-secondary text-5xl font-semibold text-secondary">${{ $product->offer_price }}</span>
+                        <span class="font-secondary text-2xl text-zinc-400 line-through">${{ $product->price }}</span>
                         <span
-                            class="bg-purple-100 text-purple-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full  font-secondary">
+                            class="me-2 rounded-full bg-purple-100 px-2.5 py-0.5 font-secondary text-sm font-medium text-purple-800">
                             En oferta
                         </span>
                     @else
-                        <span class="text-secondary font-semibold font-secondary text-5xl">${{ $product->price }}</span>
+                        <span class="font-secondary text-5xl font-semibold text-secondary">${{ $product->price }}</span>
                     @endif
                 </div>
-                <p class="font-secondary text-secondary w-2/3">
+                <p class="w-2/3 font-secondary text-secondary">
                     {{ $product->long_description }}
                 </p>
-                <div class="flex gap-4 flex-col">
-                    <div class="flex gap-4 items-center">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-4">
                         <div class="flex items-center gap-1">
                             <button
-                                class="flex items-center justify-center hover:bg-zinc-100 border border-zinc-300 rounded-full w-10 h-10"
+                                class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
                                 id="btn-minus">
-                                <x-icon icon="minus" class="w-4 h-4 text-secondary" />
+                                <x-icon icon="minus" class="h-4 w-4 text-secondary" />
                             </button>
                             <input type="text" name="quantity" id="quantity"
-                                class="w-16 h-12 text-center font-secondary border-none rounded-lg focus:outline-none focus:border-none"
+                                class="h-12 w-16 rounded-lg border-none text-center font-secondary focus:border-none focus:outline-none"
                                 readonly value="1" min="1" max="{{ $product->stock }}">
                             <button
-                                class="flex items-center justify-center hover:bg-zinc-100 border border-zinc-300 rounded-full w-10 h-10"
+                                class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
                                 id="btn-plus">
-                                <x-icon icon="plus" class="w-4 h-4 text-secondary" />
+                                <x-icon icon="plus" class="h-4 w-4 text-secondary" />
                             </button>
                         </div>
                     </div>
@@ -100,46 +100,46 @@
                             icon="shopping-cart-add" />
                         <x-button type="button" typeButton="store-gradient" text="Comprar" />
                     </div>
-                    <div class="font-secondary flex flex-col">
+                    <div class="flex flex-col font-secondary">
                         <div class="mb-2">
                             <button
-                                class="flex justify-between items-center bg-zinc-100 py-3 px-6 rounded-lg w-full hover:bg-zinc-200 accordion-inventario"
+                                class="accordion-inventario flex w-full items-center justify-between rounded-lg bg-zinc-100 px-6 py-3 hover:bg-zinc-200"
                                 data-show="#inventario-accordion">
                                 Inventario
-                                <x-icon icon="plus" class="w-5 h-5 text-current" />
+                                <x-icon icon="plus" class="h-5 w-5 text-current" />
                             </button>
-                            <div class="flex flex-col gap-2 accordion-desactive bg-zinc-100 rounded-lg mt-2"
+                            <div class="accordion-desactive mt-2 flex flex-col gap-2 rounded-lg bg-zinc-100"
                                 id="inventario-accordion">
                                 <div class="px-6 pt-4">
                                     <p class="font-bold text-secondary">Stock</p>
-                                    <p class="font-secondary text-gray-600 text-sm">{{ $product->stock }} disponible</p>
+                                    <p class="font-secondary text-sm text-zinc-600">{{ $product->stock }} disponible</p>
                                 </div>
                                 <div class="px-6">
                                     <p class="font-bold text-secondary">Peso</p>
-                                    <p class="font-secondary text-gray-600 text-sm">{{ $product->weight }} KG</p>
+                                    <p class="font-secondary text-sm text-zinc-600">{{ $product->weight }} KG</p>
                                 </div>
                                 <div class="px-6">
                                     <p class="font-bold text-secondary">Dimensiones</p>
-                                    <p class="font-secondary text-gray-600 text-sm">{{ $product->dimensions }}</p>
+                                    <p class="font-secondary text-sm text-zinc-600">{{ $product->dimensions }}</p>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <button
-                                class="flex justify-between items-center bg-zinc-100 py-3 px-6 rounded-lg w-full hover:bg-zinc-200 accordion-inventario"
+                                class="accordion-inventario flex w-full items-center justify-between rounded-lg bg-zinc-100 px-6 py-3 hover:bg-zinc-200"
                                 data-show="#inventario-impuestos">
                                 Impuestos
-                                <x-icon icon="plus" class="w-5 h-5 text-current" />
+                                <x-icon icon="plus" class="h-5 w-5 text-current" />
                             </button>
-                            <div class="flex flex-col gap-2 accordion-desactive bg-zinc-100 rounded-lg mt-2"
+                            <div class="accordion-desactive mt-2 flex flex-col gap-2 rounded-lg bg-zinc-100"
                                 id="inventario-impuestos">
                                 @if ($product->taxes->count() > 0)
                                     @foreach ($product->taxes as $tax)
-                                        <div class="px-6 @if ($loop->iteration === 1) pt-4 @endif">
+                                        <div class="@if ($loop->iteration === 1) pt-4 @endif px-6">
                                             <p class="font-bold text-secondary">
                                                 {{ $tax->name }}
                                             </p>
-                                            <p class="font-secondary text-gray-600 text-sm">
+                                            <p class="font-secondary text-sm text-zinc-600">
                                                 {{ $tax->rate }}%
                                             </p>
                                         </div>
@@ -153,58 +153,58 @@
         </section>
         <section class="mt-4">
             <div>
-                <div class="flex font-primary gap-2 text-xl items-center mt-4">
-                    <x-icon icon="start" class="w-6 h-6 text-yellow-400 fill-yellow-400" />
+                <div class="mt-4 flex items-center gap-2 font-primary text-xl">
+                    <x-icon icon="start" class="h-6 w-6 fill-yellow-400 text-yellow-400" />
                     <p class="font-bold">4.87</p>
                     <span class="flex items-center">
-                        <x-icon icon="minus" class="w-5 h-5" />
+                        <x-icon icon="minus" class="h-5 w-5" />
                     </span>
                     <p>145 reseñas</p>
                 </div>
-                <div class="flex flex-col gap-6 mt-6 mb-6">
+                <div class="mb-6 mt-6 flex flex-col gap-6">
                     <div class="flex flex-col gap-2">
-                        <div class="flex gap-2 items-center">
+                        <div class="flex items-center gap-2">
                             <img src="{{ asset('images/photo.jpg') }}" alt="Imagen de perfil"
-                                class="w-12 h-12 rounded-full">
-                            <div class="flex justify-between w-full">
+                                class="h-12 w-12 rounded-full">
+                            <div class="flex w-full justify-between">
                                 <div class="flex flex-col">
-                                    <p class="font-bold font-primary text-lg">Nombre de usuario</p>
-                                    <p class="font-secondary text-sm text-gray-600">21/6/2024</p>
+                                    <p class="font-primary text-lg font-bold">Nombre de usuario</p>
+                                    <p class="font-secondary text-sm text-zinc-600">21/6/2024</p>
                                 </div>
-                                <div class="flex gap-2 items-center">
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                                <div class="flex items-center gap-2">
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
                                 </div>
                             </div>
                         </div>
-                        <p class="font-secondary text-secondary text-sm">
+                        <p class="font-secondary text-sm text-secondary">
                             LLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <div class="flex gap-2 items-center">
+                        <div class="flex items-center gap-2">
                             <img src="{{ asset('images/photo.jpg') }}" alt="Imagen de perfil"
-                                class="w-12 h-12 rounded-full">
-                            <div class="flex justify-between w-full">
+                                class="h-12 w-12 rounded-full">
+                            <div class="flex w-full justify-between">
                                 <div class="flex flex-col">
-                                    <p class="font-bold font-primary text-lg">Nombre de usuario</p>
-                                    <p class="font-secondary text-sm text-gray-600">21/6/2024</p>
+                                    <p class="font-primary text-lg font-bold">Nombre de usuario</p>
+                                    <p class="font-secondary text-sm text-zinc-600">21/6/2024</p>
                                 </div>
-                                <div class="flex gap-2 items-center">
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                                    <x-icon icon="start" class="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                                <div class="flex items-center gap-2">
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                    <x-icon icon="start" class="h-5 w-5 fill-yellow-400 text-yellow-400" />
                                 </div>
                             </div>
                         </div>
-                        <p class="font-secondary text-secondary text-sm">
+                        <p class="font-secondary text-sm text-secondary">
                             LLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat.
@@ -213,51 +213,51 @@
                 </div>
                 <x-button type="button" typeButton="store-secondary" text="Ver más reseñas" />
             </div>
-            <div class="flex flex-col gap-2 mt-4">
-                <label for="" class="font-secondary text-gray-800 font-medium">Reseña:</label>
+            <div class="mt-4 flex flex-col gap-2">
+                <label for="" class="font-secondary font-medium text-zinc-800">Reseña:</label>
                 <textarea name="review" id="review" cols="30" rows="5" placeholder="Escribe tu reseña"
-                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 font-secondary"></textarea>
+                    class="block w-full rounded-lg border-2 border-zinc-300 bg-zinc-50 p-2.5 font-secondary text-sm text-zinc-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"></textarea>
                 <x-button type="button" typeButton="store-secondary" text="Agregar reseña" class="ml-auto" />
             </div>
         </section>
         <section class="py-4">
-            <div class="flex flex-col gap-4 justify-center w-full text-center">
-                <h2 class="uppercase text-3xl font-primary text-secondary font-bold p-4">
+            <div class="flex w-full flex-col justify-center gap-4 text-center">
+                <h2 class="p-4 font-primary text-3xl font-bold uppercase text-secondary">
                     Tambien te puede interesar
                 </h2>
-                <div class="flex flex-wrap justify-center items-center w-4/5 mx-auto relative">
-                    <button class="button-prev absolute z-40 -left-14 hover:bg-zinc-100 rounded-lg cursor-pointer">
-                        <x-icon icon="arrow-left" class="w-12 h-12 text-secondary" />
+                <div class="relative mx-auto flex w-4/5 flex-wrap items-center justify-center">
+                    <button class="button-prev absolute -left-14 z-40 cursor-pointer rounded-lg hover:bg-zinc-100">
+                        <x-icon icon="arrow-left" class="h-12 w-12 text-secondary" />
                     </button>
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             @if ($products->count() > 0)
                                 @foreach ($products as $product)
                                     <div
-                                        class="swiper-slide bg-white border border-zinc-300 flex flex-col text-start rounded-lg overflow-hidden w-96 h-max">
+                                        class="swiper-slide flex h-max w-96 flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white text-start">
                                         <img src="{{ Storage::url($product->main_image) }}" alt=""
-                                            class="w-full h-72 object-cover">
+                                            class="h-72 w-full object-cover">
                                         <div class="p-4">
-                                            <h3 class="text-secondary font-bold text-xl font-primary">
+                                            <h3 class="font-primary text-xl font-bold text-secondary">
                                                 {{ $product->name }}
                                             </h3>
-                                            <p class="text-gray-800 font-secondary text-sm text-wrap">
+                                            <p class="text-wrap font-secondary text-sm text-zinc-800">
                                                 {{ $product->short_description }}
                                             </p>
                                         </div>
-                                        <div class="p-4 flex justify-between items-end mt-auto">
+                                        <div class="mt-auto flex items-end justify-between p-4">
                                             <div class="flex items-center gap-2">
                                                 <a href="{{ route('products.details', $product->id) }}"
-                                                    class="px-5 py-3 font-primary rounded-lg bg-secondary text-white flex items-center justify-center">
-                                                    <x-icon icon="shopping-cart-add" class="w-5 h-5 text-current" />
+                                                    class="flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-primary text-white">
+                                                    <x-icon icon="shopping-cart-add" class="h-5 w-5 text-current" />
                                                 </a>
                                                 <a href="{{ route('products.details', $product->id) }}"
-                                                    class="px-5 py-3 font-primary rounded-lg bg-white text-secondary flex items-center justify-center border border-zinc-300 hover:bg-zinc-100 transition-colors">
-                                                    <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                                                    class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
+                                                    <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                                                 </a>
                                             </div>
                                             <span
-                                                class="font-bold text-lg text-secondary font-secondary">${{ $product->price }}</span>
+                                                class="font-secondary text-lg font-bold text-secondary">${{ $product->price }}</span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -265,12 +265,12 @@
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
-                    <button class="button-next absolute -right-14 z-40 hover:bg-zinc-100 rounded-lg cursor-pointer">
-                        <x-icon icon="arrow-right" class="w-12 h-12 text-secondary" />
+                    <button class="button-next absolute -right-14 z-40 cursor-pointer rounded-lg hover:bg-zinc-100">
+                        <x-icon icon="arrow-right" class="h-12 w-12 text-secondary" />
                     </button>
                 </div>
                 <a href=""
-                    class="rounded-full bg-primary px-5 py-3 mx-auto w-max font-secondary text-white uppercase font-medium  hover:bg-secondary bg-gradient">
+                    class="bg-gradient mx-auto w-max rounded-full bg-primary px-5 py-3 font-secondary font-medium uppercase text-white hover:bg-secondary">
                     Ver más
                 </a>
             </div>

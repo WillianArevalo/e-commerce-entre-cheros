@@ -16,9 +16,9 @@
                     @csrf
                     <div class="flex gap-4">
                         <div
-                            class="bg-whtie flex h-max flex-1 flex-col rounded-lg border border-gray-300 dark:border-zinc-900 dark:bg-black">
+                            class="bg-whtie flex h-max flex-1 flex-col rounded-lg border border-zinc-300 dark:border-zinc-900 dark:bg-black">
                             <p
-                                class="border-b border-gray-200 p-4 text-sm font-medium text-gray-600 dark:border-zinc-900 dark:text-gray-400">
+                                class="border-b border-zinc-200 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:text-zinc-400">
                                 Foto de perfil
                             </p>
                             <div class="flex flex-col items-center justify-center py-4">
@@ -30,7 +30,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="flex justify-end border-t border-gray-200 dark:border-zinc-900">
+                            <div class="flex justify-end border-t border-zinc-200 dark:border-zinc-900">
                                 <label for="profile"
                                     class="m-4 flex cursor-pointer items-center gap-2 rounded border-2 border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                     <x-icon icon="image-add" class="h-5 w-5 text-current" />
@@ -39,9 +39,9 @@
                                 <input type="file" name="profile" id="profile" class="hidden">
                             </div>
                         </div>
-                        <div class="flex-[2] rounded-lg border border-gray-300 bg-white dark:border-zinc-900 dark:bg-black">
+                        <div class="flex-[2] rounded-lg border border-zinc-300 bg-white dark:border-zinc-900 dark:bg-black">
                             <p
-                                class="border-b border-gray-200 p-4 text-sm font-medium text-gray-600 dark:border-zinc-900 dark:text-gray-400">
+                                class="border-b border-zinc-200 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:text-zinc-400">
                                 Información del usuario
                             </p>
                             <div class="flex flex-col gap-4 p-4">
