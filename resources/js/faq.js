@@ -15,4 +15,9 @@ $(document).ready(function () {
             },
         });
     });
+
+    $(".show-question").on("click", function () {
+        const $next = $(this).next();
+        $next.toggleClass("hidden");
+    });
 });

@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class FAQController extends Controller
 {
+
+    public function showFaqsStore()
+    {
+        $faqs = Faq::all();
+        return view("faq.index", compact("faqs"));
+    }
+
+
     /**
      * Display a listing of the resource.
      */
