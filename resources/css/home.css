@@ -2,9 +2,11 @@
     height: 600px;
 }
 
-.link-nav {
+.link-nav,
+.link-foot {
     display: inline-block;
     position: relative;
+    width: max-content;
 }
 
 .link-nav::after {
@@ -18,17 +20,30 @@
     transition: width 0.3s ease-in-out;
 }
 
-.link-nav:hover::after {
+.link-foot::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: #bcddf1;
+    transition: width 0.3s ease-in-out;
+}
+
+.link-nav:hover::after,
+.link-foot:hover::after {
     width: 100%;
 }
 
-.link-nav.active::after {
+.link-nav.active::after,
+.link-foot.active::after {
     width: 100%;
 }
 
 .glass {
     background: rgba(249, 249, 250, 0.7);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    box-shadow: 0 1px 25px 0 rgba(31, 38, 135, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -91,7 +106,8 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    -webkit-box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+    -webkit-box-shadow:
+        0 30px 0 -4px var(--icon-primary-color),
         30px 0 0 -4px var(--icon-primary-color),
         0 -30px 0 -4px var(--icon-primary-color),
         -30px 0 0 -4px var(--icon-primary-color),
@@ -99,7 +115,8 @@
         -22px -22px 0 -4px var(--icon-primary-color),
         22px -22px 0 -4px var(--icon-primary-color),
         22px 22px 0 -4px var(--icon-primary-color);
-    box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+    box-shadow:
+        0 30px 0 -4px var(--icon-primary-color),
         30px 0 0 -4px var(--icon-primary-color),
         0 -30px 0 -4px var(--icon-primary-color),
         -30px 0 0 -4px var(--icon-primary-color),
@@ -203,4 +220,59 @@
         transform: scale(0.8);
         opacity: 0;
     }
+}
+
+.footer-item {
+    position: relative;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-left: 0px;
+    text-decoration: none;
+    color: #bcddf1;
+    transition: padding-left 0.3s ease;
+}
+
+.arrow-icon {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.footer-link:hover {
+    padding-left: 30px;
+    text-decoration: underline;
+}
+
+.footer-item:hover .arrow-icon {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.footer {
+    position: relative;
+    background-image: url("/public/images/fondo4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1; /* Asegura que el contenido del footer esté por encima de la máscara */
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #011b4e; /* Usando bg-secondary de Tailwind */
+    opacity: 0.9; /* Ajusta la opacidad según el efecto que desees */
+    z-index: -1; /* Coloca la máscara debajo del contenido del footer */
 }
