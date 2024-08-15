@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->longText("content");
+            $table->enum("type", ["redirect", "store"])->default("redirect");
+            $table->boolean("active")->default(true);
+            $table->string("link")->nullable();
             $table->timestamps();
         });
     }
