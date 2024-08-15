@@ -14,7 +14,7 @@ class FavoriteController extends Controller
     public function index()
     {
         if (!Auth::user()) {
-            return redirect()->back()->with("info", "Inicia sesión para guardar tus favoritos");
+            return redirect("/login");
         }
         $favorites = User::findOrFail(Auth::id())->favorites;
         Favorites::get(Auth::user(), $favorites);
