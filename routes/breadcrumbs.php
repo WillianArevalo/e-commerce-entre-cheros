@@ -208,3 +208,8 @@ Breadcrumbs::for('admin.sales-strategies.shipping-methods.index', function (Brea
     $trail->parent('admin.sales-strategies.index');
     $trail->push('Métodos de envío', route('admin.sales-strategies.shipping-methods.index'));
 });
+
+/*  Breadcrumbs Store  */
+Breadcrumbs::for("faq", function (BreadcrumbTrail $trail) {
+    $trail->push("Preguntas frecuentes", route("faq"));
+});
