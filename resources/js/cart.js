@@ -29,7 +29,7 @@ $(document).ready(function () {
             const data = $(form).serialize();
             const url = $(form).attr("action");
             handleAjaxRequest(url, data);
-        }
+        },
     );
 
     $(document).on("change", ".btn-add-favorite", function () {
@@ -64,10 +64,21 @@ $(document).ready(function () {
             method: "POST",
             data: data,
             success: function (response) {
-                console.log(response);
-                $("#tableCart").html(response.html);
-                $("#cart-count").text(response.total);
-                $("#totalPriceCart").text("$" + response.totalPrice);
+                if (response.status === "success") {
+                    $("#tableCart").html(response.html);
+                    $("#cart-count").text(response.total);
+                    $("#totalPriceCart").text(
+                        "$" + response.totalPrice.toFixed(2),
+                    );
+                    $("#totalTaxes").text("$" + response.totalTaxes.toFixed(2));
+                    $("#totalWithTaxes").text(
+                        "$" + response.totalWithTaxes.toFixed(2),
+                    );
+                    $("#discount").text(
+                        "- $" + response.totalDiscount.toFixed(2),
+                    );
+                    $("#subtotal").text("$" + response.subtotal.toFixed(2));
+                }
                 if (response.message) {
                     showToast(response.message, response.status);
                 }
