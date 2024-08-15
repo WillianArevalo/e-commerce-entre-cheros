@@ -18,8 +18,7 @@ class Role
     {
 
         if (!Auth::check()) {
-
-            if ($request->is("admin")) {
+            if ($request->is("admin/*") || $request->is("admin")) {
                 return redirect("/admin/login");
             }
             return redirect("/login");
@@ -28,13 +27,8 @@ class Role
         $user = Auth::user();
 
         if ($user->role != $role) {
-            switch ($user->role) {
-                case "admin":
-                    redirect("/admin");
-                    break;
-                case "customer":
-                    redirect("/");
-                    break;
+            if ($role === "admin") {
+                return redirect("/");
             }
         }
         return $next($request);
