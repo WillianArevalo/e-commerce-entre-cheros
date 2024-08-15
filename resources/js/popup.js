@@ -25,13 +25,13 @@ $(document).ready(function () {
 
     function addStyleFocus(element) {
         element.addClass(
-            "border border-dashed border-blue-600 ring-4 ring-blue-200"
+            "border border-dashed border-blue-600 ring-4 ring-blue-200 rounded-lg p-2",
         );
     }
 
     function removeStyleFocus(element) {
         element.removeClass(
-            "border border-dashed border-blue-600 ring-4 ring-blue-200"
+            "border border-dashed border-blue-600 ring-4 ring-blue-200 rounded-lg p-2",
         );
     }
 
@@ -58,10 +58,6 @@ $(document).ready(function () {
         $("#optionsInput").removeClass("hidden");
     });
 
-    $("#nameInput").on("keyup", function () {
-        $inputPopup.attr("name", $(this).val());
-    });
-
     $("#placeholderInput").on("keyup", function () {
         $inputPopup.attr("placeholder", $(this).val());
     });
@@ -79,10 +75,38 @@ $(document).ready(function () {
         $("#buttonPopupSecondary").text($(this).val());
     });
 
+    $("#ff").on("Changed", function () {
+        $(".headingPopup")
+            .removeClass("font-primary font-secondary font-tertiary")
+            .addClass("font-" + $(this).val());
+    });
+
+    $("#ffText").on("Changed", function () {
+        $("#descriptionPoupText")
+            .removeClass("font-primary font-secondary font-tertiary")
+            .addClass("font-" + $(this).val());
+    });
+
     $("#fw").on("Changed", function () {
         $(".headingPopup")
             .removeClass("font-bold font-semibold font-medium font-normal")
             .addClass("font-" + $(this).val());
+    });
+
+    $("#fwText").on("Changed", function () {
+        $("#descriptionPoupText")
+            .removeClass("font-bold font-semibold font-medium font-normal")
+            .addClass("font-" + $(this).val());
+    });
+
+    $("#fsText").on("Changed", function () {
+        $("#descriptionPoupText")
+            .removeClass("text-xs text-sm text-base text-lg text-xl")
+            .addClass("text-" + $(this).val());
+    });
+
+    $("#colorText").on("input", function () {
+        $("#descriptionPoupText").css("color", $(this).val());
     });
 
     $("#fs").on("Changed", function () {
@@ -93,10 +117,6 @@ $(document).ready(function () {
 
     $("#color").on("input", function () {
         $(".headingPopup").css("color", $(this).val());
-    });
-
-    $("#colorButton").on("input", function () {
-        $("#buttonPopupPrimary").css("background", $(this).val());
     });
 
     $("#width").on("input", function () {
@@ -129,7 +149,11 @@ $(document).ready(function () {
         $("#previewPopup").removeClass("flex").addClass("hidden");
     });
 
-    $("#previewPopup").on("click", function () {
-        $("#previewPopup").removeClass("flex").addClass("hidden");
+    $("#type").on("Changed", function () {
+        if ($(this).val() === "redirect") {
+            $("#redirect-link").removeClass("hidden");
+        } else {
+            $("#redirect-link").addClass("hidden");
+        }
     });
 });
