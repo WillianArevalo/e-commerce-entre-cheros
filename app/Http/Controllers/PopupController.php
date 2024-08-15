@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RouteHelper;
+use App\Http\Requests\PopupRequest;
 use App\Models\Popup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PopupController extends Controller
 {
@@ -21,28 +24,30 @@ class PopupController extends Controller
      */
     public function create()
     {
-        return view("admin.popups.create");
+        $routes = RouteHelper::getRoutes();
+        return view("admin.popups.create", compact("routes"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PopupRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'content' => 'required',
-        ]);
-
-        $popup = Popup::create($request->all());
-
-        if ($popup) {
-            return redirect()->route('admin.popups.index')->with('success', 'Popup creado correctamente');
-        } else {
-            return redirect()->route('admin.popups.index')->with('error', 'Error al crear el popup');
+        DB::beginTransaction();
+        try {
+            $validated = $request->validated();
+            $popup = Popup::create($validated);
+            if ($popup) {
+                DB::commit();
+                return redirect()->route('admin.popups.index')->with('success', 'Popup creado correctamente');
+            } else {
+                return redirect()->route('admin.popups.index')->with('error', 'Error al crear el popup');
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.popups.index')->with('error', 'Error: ' . $e->getMessage());
         }
     }
-
 
     /**
      * Display the specified resource.
@@ -53,6 +58,7 @@ class PopupController extends Controller
         if ($popup) {
             return response()->json(["popup" => $popup]);
         } else {
+            return response()->json(["error" => "Popup no encontrado"], 404);
         }
     }
 
@@ -77,6 +83,19 @@ class PopupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $popup = Popup::find($id);
+            if ($popup) {
+                $popup->delete();
+                DB::commit();
+                return redirect()->route('admin.popups.index')->with('success', 'Anuncio eliminado correctamente');
+            } else {
+                return redirect()->route('admin.popups.index')->with('error', 'Error al eliminar el anuncio');
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.popups.index')->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 }
