@@ -42,9 +42,11 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
-                                            Estado</th>
+                                            Estado
+                                        </th>
                                         <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
-                                            Costo</th>
+                                            Costo
+                                        </th>
                                         <th scope="col" class="px-4 py-3">Acciones</th>
                                     </tr>
                                 </thead>
@@ -64,9 +66,17 @@
                                                     {{ $method->name }}
                                                 </th>
                                                 <td class="px-4 py-3">
-                                                    <span>
-                                                        {{ $method->is_active === 1 ? 'Active' : 'Desactive' }}
-                                                    </span>
+                                                    @if ($method->is_active === 1)
+                                                        <span
+                                                            class="rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 font-secondary text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">
+                                                            Activo
+                                                        </span>
+                                                    @else
+                                                        <span
+                                                            class="rounded-full border-2 border-red-300 bg-red-200 px-4 py-1 font-secondary text-xs font-medium text-red-800 dark:border-red-400 dark:bg-red-800 dark:text-red-100">
+                                                            Inactivo
+                                                        </span>
+                                                    @endif
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     <span>
@@ -77,6 +87,7 @@
                                                     <div class="flex gap-2">
                                                         <x-button type="button" class="btnEditShippingMethod"
                                                             data-href="{{ route('admin.sales-strategies.shipping-methods.edit', $method->id) }}"
+                                                            data-action="{{ route('admin.sales-strategies.shipping-methods.update', $method->id) }}"
                                                             typeButton="success" icon="edit" onlyIcon="true" />
                                                         <form
                                                             action="{{ route('admin.sales-strategies.shipping-methods.destroy', $method->id) }}"
@@ -90,10 +101,9 @@
                                                                 typeButton="danger" data-modal-target="deleteModal"
                                                                 data-modal-toggle="deleteModal" />
                                                         </form>
-                                                        <x-button type="button" class="showCoupon"
-                                                            data-href="{{ route('admin.sales-strategies.coupon.show', $method->id) }}"
-                                                            typeButton="secondary" icon="view" onlyIcon="true"
-                                                            data-drawer="#drawer-details-coupon" />
+                                                        <x-button type="button" class="showMethod"
+                                                            data-href="{{ route('admin.sales-strategies.shipping-methods.show', $method->id) }}"
+                                                            typeButton="secondary" icon="view" onlyIcon="true" />
                                                     </div>
                                                 </td>
                                             </tr>
@@ -131,49 +141,47 @@
             </button>
             <div>
                 <form action="{{ route('admin.sales-strategies.shipping-methods.store') }}" class="flex flex-col gap-4"
-                    method="POST" id="formAddMethod">
+                    method="POST">
                     @csrf
                     <div class="w-full">
                         <input type="hidden" name="method" value="POST">
-                        <x-input type="text" name="name" id="name_method" required
-                            placeholder="Ingresa el nombre del método" label="Nombre" value="{{ old('name') }}" />
+                        <x-input type="text" name="name" required placeholder="Ingresa el nombre del método"
+                            label="Nombre" value="{{ old('name') }}" />
                     </div>
                     <div class="w-full">
-                        <x-input type="text" name="time" id="time" required placeholder="3 - 5 días hábiles"
+                        <x-input type="text" name="time" required placeholder="3 - 5 días hábiles"
                             label="Tiempo de entrega" value="{{ old('time') }}" />
                     </div>
                     <div class="w-full">
-                        <x-input type="textarea" name="description" id="description_method" required
+                        <x-input type="textarea" name="description" required
                             placeholder="Ingresa la descripción del método" label="Descripción"
                             value="{{ old('description') }}" />
                     </div>
                     <div class="w-full">
-                        <input id="is_active" type="checkbox" value="0" name="is_active"
+                        <input type="checkbox" value="10" name="is_active"
                             class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                         <label for="is_active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex-1">
-                            <x-input type="number" step="0.01" name="min_weight" id="min_weight" required
-                                placeholder="KG" icon="weight-scale" label="Peso mínimo"
-                                value="{{ old('description') }}" />
+                            <x-input type="number" step="0.01" name="min_weight" required placeholder="KG"
+                                icon="weight-scale" label="Peso mínimo" value="{{ old('description') }}" />
                         </div>
                         <div class="flex-1">
-                            <x-input type="number" step="0.01" name="max_weight" id="max_weight" required
-                                icon="weight-scale" placeholder="KG" label="Peso máximo"
-                                value="{{ old('description') }}" />
+                            <x-input type="number" step="0.01" name="max_weight" required icon="weight-scale"
+                                placeholder="KG" label="Peso máximo" value="{{ old('description') }}" />
                         </div>
                     </div>
                     <div>
                         <div class="flex-1">
-                            <x-input type="text" name="location" id="location" required icon="location"
-                                label="Locación" value="{{ old('city') }}" />
+                            <x-input type="text" name="location" required icon="location" label="Locación"
+                                value="{{ old('city') }}" />
                         </div>
                     </div>
                     <div>
                         <div class="flex-1">
-                            <x-input type="number" step="0.01" name="cost" id="cost" required
-                                icon="dollar" placeholder="0.00" label="Costo" value="{{ old('cost') }}" />
+                            <x-input type="number" step="0.01" name="cost" required icon="dollar"
+                                placeholder="0.00" label="Costo" value="{{ old('cost') }}" />
                         </div>
                     </div>
                     <div class="flex items-center justify-center gap-2">
@@ -192,7 +200,7 @@
             tabindex="-1" aria-labelledby="drawer-edit-method">
             <h5 id="drawer-edit-method-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
-                Nuevo método de envío
+                Editar método de envío
             </h5>
             <button type="button" data-drawer="#drawer-edit-method"
                 class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
@@ -203,12 +211,81 @@
                 </svg>
                 <span class="sr-only">Close menu</span>
             </button>
-            <div id="edit-method-form">
-
+            <div>
+                <form action="" class="flex flex-col gap-4" method="POST" id="formEditMethod">
+                    @csrf
+                    @method('PUT')
+                    <div class="w-full">
+                        <input type="hidden" name="method" value="UPDATE">
+                        <x-input type="text" name="name" id="name" required
+                            placeholder="Ingresa el nombre del método" label="Nombre" />
+                    </div>
+                    <div class="w-full">
+                        <x-input type="text" name="time" id="time" required placeholder="3 - 5 días hábiles"
+                            label="Tiempo de entrega" />
+                    </div>
+                    <div class="w-full">
+                        <x-input type="textarea" name="description" id="description" required
+                            placeholder="Ingresa la descripción del método" label="Descripción" />
+                    </div>
+                    <div class="w-full">
+                        <input type="checkbox" value="0" name="is_active" id="is_active"
+                            class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                        <label for="is_active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <x-input type="number" step="0.01" name="min_weight" id="min_weight" required
+                                placeholder="KG" icon="weight-scale" label="Peso mínimo" />
+                        </div>
+                        <div class="flex-1">
+                            <x-input type="number" step="0.01" name="max_weight" id="max_weight" required
+                                icon="weight-scale" placeholder="KG" label="Peso máximo" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex-1">
+                            <x-input type="text" name="location" id="location" required icon="location"
+                                label="Locación" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex-1">
+                            <x-input type="number" step="0.01" name="cost" id="cost" required
+                                icon="dollar" placeholder="0.00" label="Costo" />
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <x-button type="submit" text="Editar método" icon="edit" typeButton="primary" />
+                        <x-button type="button" data-drawer="#drawer-edit-method" class="close-drawer" text="Cancelar"
+                            typeButton="secondary" icon="cancel" />
+                    </div>
+                </form>
             </div>
         </div>
         <!-- End Drawer edit shipping method -->
 
+        <!-- Drawer details shipping method -->
+        <div id="drawer-details-method"
+            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            tabindex="-1" aria-labelledby="drawer-details-method">
+            <h5 id="drawer-details-method-label"
+                class="ms-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
+                Detalles del método de envío
+            </h5>
+            <button type="button" data-drawer="#drawer-details-method"
+                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
+                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span class="sr-only">Close menu</span>
+            </button>
+            <div class="font-secondary text-sm" id="show-method-content">
+            </div>
+        </div>
+        <!-- End Drawer details shipping method -->
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -216,10 +293,11 @@
             @if ($errors->any())
                 @if (old('method') === 'POST')
                     $("#drawer-new-method").removeClass("translate-x-full");
-                    $("#overlay").removeClass("hidden");
+                @elseif (old('method') === 'UPDATE')
+                    $("#drawer-edit-method").removeClass("translate-x-full");
                 @endif
+                $("#overlay").removeClass("hidden");
             @endif
-
         });
     </script>
 @endsection
