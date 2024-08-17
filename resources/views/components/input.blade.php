@@ -17,7 +17,7 @@
     $labelClass = $required ? " after:content-['*'] after:ml-0.5 after:text-red-500" : '';
 
     $classes =
-        'bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 px-4 dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500 ' .
+        'bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 px-4 dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500 transition duration-300 ' .
         $class .
         ' ' .
         $errorClass;
@@ -33,14 +33,14 @@
                 <x-icon icon="{{ $icon }}" class="h-5 w-5 text-current" />
             </span>
         </div>
-        <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}"
+        <input type="{{ $type }}" name="{{ $name }}" {{ $id !== '' ? 'id=' . $id : '' }}
             placeholder="{{ $placeholder }}" value="{{ $value }}" class="{{ $classes }} ps-10"
             {{ $attributes }}>
     </div>
 @endif
 
 @if ($type != 'textarea' && !$icon)
-    <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}"
+    <input type="{{ $type }}" name="{{ $name }}" {{ $id !== '' ? 'id=' . $id : '' }}
         placeholder="{{ $placeholder }}" value="{{ $value }}" class="{{ $classes }}"
         {{ $attributes }}>
 @endif

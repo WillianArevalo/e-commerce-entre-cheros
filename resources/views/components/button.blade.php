@@ -7,7 +7,8 @@
         $padding = 'px-3.5 py-2.5';
     }
 
-    $classGeneral = 'font-medium rounded-lg flex items-center gap-2 transition-colors text-sm ' . $padding;
+    $classGeneral =
+        'font-medium rounded-lg flex items-center gap-2 transition-colors text-sm transition duration-300 ' . $padding;
 @endphp
 
 @switch($typeButton)
@@ -34,7 +35,7 @@
     @case('success')
         @php
             $classes =
-                'border border-green-500 text-green-500 hover:text-white hover:bg-green-500 ' .
+                'border border-green-500 border-opacity-30 text-green-500 hover:text-white hover:bg-green-500 ' .
                 $classGeneral .
                 ' ' .
                 $class;
@@ -44,28 +45,19 @@
     @case('danger')
         @php
             $classes =
-                'border border-red-500 text-red-500 hover:text-white hover:bg-red-500 ' . $classGeneral . ' ' . $class;
+                'border border-red-500 border-opacity-30 text-red-500 hover:text-white hover:bg-red-500 ' .
+                $classGeneral .
+                ' ' .
+                $class;
         @endphp
     @break
 
     @case('info')
         @php
-            $classes = 'border border-sky-500 text-white bg-sky-800 border-sky-500 ' . $classGeneral . ' ' . $class;
-        @endphp
-    @break
-
-    @case('store-gradient')
-        @php
             $classes =
-                'rounded-full bg-primary px-5 py-3 text-white uppercase hover:bg-secondary bg-gradient flex items-center justify-center gap-2 ' .
-                $class;
-        @endphp
-    @break
-
-    @case('store-secondary')
-        @php
-            $classes =
-                'rounded-full bg-primary px-5 py-3 font-secondary text-zinc-600 uppercase font-normal bg-white border border-zinc-300 flex items-center justify-center gap-2 hover:bg-zinc-100 ' .
+                'border border-sky-500 border-opacity-30 text-sky-500 hover:text-white hover:bg-sky-500 ' .
+                $classGeneral .
+                ' ' .
                 $class;
         @endphp
     @break
@@ -73,7 +65,7 @@
     @default
         @php
             $classes =
-                'bg-black border border-white dark:text-white dark:hover:bg-white dark:hover:text-black  ' .
+                'border text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
                 $classGeneral .
                 ' ' .
                 $class;
