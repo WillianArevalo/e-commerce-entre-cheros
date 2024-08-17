@@ -102,6 +102,7 @@ $(document).ready(function () {
     $(".remove-parameter").on("click", function () {
         let id = $(this).data("parameter");
         let parameters_ids = $("#parameters_ids").val().split(",");
+        console.info(parameters_ids);
         if (parameters_ids.includes(id.toString())) {
             const index = parameters_ids.indexOf(id.toString());
             removeParameter(index);
@@ -110,5 +111,48 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on("change", "input[name='is_active']", function () {
+        if ($(this).is(":checked")) {
+            $(this).val(1);
+        } else {
+            $(this).val(0);
+        }
+    });
+
     toggleElementVisibility($("." + $("#predefined_rule").val()), true);
+
+    $(".btnEditShippingMethod").on("click", function () {
+        var action = $(this).data("action");
+        var href = $(this).data("href");
+
+        $.ajax({
+            url: href,
+            type: "GET",
+            success: function (data) {
+                openDrawer("#drawer-edit-method");
+                data.method.is_active === 1
+                    ? $("#is_active").prop("checked", true)
+                    : $("#is_active").prop("checked", false);
+
+                $.each(data.method, function (key, value) {
+                    $("[id='" + key + "']").val(value);
+                });
+                $("#formEditMethod").attr("action", action);
+            },
+        });
+    });
+
+    $(document).on("click", ".showMethod", function () {
+        $("#show-method-content").html("");
+        var href = $(this).data("href");
+        $.ajax({
+            url: href,
+            type: "GET",
+            success: function (response) {
+                console.log(response.coupon);
+                $("#show-method-content").html(response.html);
+                openDrawer("#drawer-details-method");
+            },
+        });
+    });
 });
