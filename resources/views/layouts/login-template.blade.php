@@ -13,7 +13,11 @@
 
 <body class="store">
     <main>
-        @include('layouts.__partials.store.toast-store', ['top' => 'top-5'])
+        @if (Route::is('admin.login'))
+            @include('layouts.__partials.admin.toast')
+        @else
+            @include('layouts.__partials.store.toast-store', ['top' => 'top-5'])
+        @endif
         @include('layouts.__partials.store.toast-container')
         @yield('content')
     </main>
