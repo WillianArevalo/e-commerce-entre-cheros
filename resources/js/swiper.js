@@ -24,6 +24,31 @@ export function initSwiper() {
         });
     }
 
+    if (document.querySelector(".swiper-images-secondarys")) {
+        new Swiper(".swiper-images-secondarys", {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: ".button-next-images",
+                prevEl: ".button-prev-images",
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+            },
+        });
+    }
+
     if (document.querySelector(".swiper-home")) {
         new Swiper(".swiper-home", {
             slidesPerView: 1,
