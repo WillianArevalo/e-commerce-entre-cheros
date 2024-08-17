@@ -45,12 +45,17 @@ $(document).ready(function () {
             url: url,
             method: "POST",
             data: data,
-            success: function (response) {
-                if (response.message) {
-                    showToast(response.message, response.status);
+            success: function (data) {
+                if (data.status === "auth") window.location.href = "/login";
+
+                if (data.status === "success" || data.status === "info") {
+                    if (data.message) {
+                        showToast(data.message, data.status);
+                    }
+                    input.removeClass("checked");
+                    $(card).html(data.html);
+                    $("#favorite-count").text(data.count);
                 }
-                input.removeClass("checked");
-                $(card).html(response.html);
             },
             error: function (error) {
                 console.log(error);
