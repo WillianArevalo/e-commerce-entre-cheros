@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class FavoriteController extends Controller
 {
@@ -23,29 +24,44 @@ class FavoriteController extends Controller
 
     public function addFavorite(Request $request, string $id)
     {
-        if (!Auth::user()) {
-            return response()->json(['message' => 'Inicia sesión para guardar tus favoritos', "status" => "info"]);
-        }
-        $user = User::findOrFail(Auth::id());
-        $product = Product::findOrFail($id);
-        if ($user && $product) {
-            if (!$user->favorites()->where('product_id', $product->id)->exists()) {
+        try {
+
+            if (!Auth::check()) {
+                return response()->json([
+                    'message' => 'Inicia sesión para guardar tus favoritos',
+                    'status' => 'auth',
+                    'redirect'
+                ]);
+            }
+
+            $auth = Auth::user();
+            $user = User::find($auth->id);
+            $product = Product::findOrFail($id);
+            $isFavorite = $user->favorites()->where('product_id', $product->id)->exists();
+
+            if (!$isFavorite) {
                 $user->favorites()->attach($product);
                 $product->is_favorite = true;
-                return response()->json([
-                    "message" => "Agregado a favoritos",
-                    "status" => "success",
-                    "html" => view("layouts.__partials.ajax.card-footer", compact("product"))->render()
-                ]);
+                $message = "Agregado a favoritos";
+                $status = "success";
             } else {
                 $user->favorites()->detach($product);
                 $product->is_favorite = false;
-                return response()->json([
-                    "message" => "Removido de favorito",
-                    "status" => "info",
-                    "html" => view("layouts.__partials.ajax.card-footer", compact("product"))->render()
-                ]);
+                $message = "Removido de favorito";
+                $status = "info";
             }
+            return response()->json([
+                'message' => $message,
+                'status' => $status,
+                'html' => view("layouts.__partials.ajax.store.card-footer", compact("product"))->render(),
+                "count" => Favorites::count()
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error al agregar o remover de favoritos: ' . $e->getMessage());
+            return response()->json([
+                'message' => 'Error al agregar el producto a favoritos',
+                'status' => 'error'
+            ], 500);
         }
     }
 }
