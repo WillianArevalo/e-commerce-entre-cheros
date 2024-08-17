@@ -26,14 +26,18 @@
         </div>
         <ul class="flex items-center gap-6">
             <li>
-                <a href="{{ Route('favorites') }}" class="text-secondary hover:text-rose-500">
+                <a href="{{ Route('favorites') }}" class="relative text-rose-500 hover:text-rose-500">
                     <x-icon-store icon="favourite" class="h-6 w-6 text-current hover:fill-rose-500" />
+                    <div class="y absolute -end-2.5 -top-2.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-rose-600 font-secondary text-xs font-bold text-white"
+                        id="favorite-count">
+                        {{ \App\Helpers\Favorites::count() }}
+                    </div>
                 </a>
             </li>
             <li>
-                <a href="{{ Route('cart') }}" class="relative">
+                <a href="{{ Route('cart') }}" class="group relative">
                     <x-icon-store icon="shopping-cart" class="h-6 w-6 text-secondary" />
-                    <div class="absolute -end-2 -top-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-secondary font-secondary text-xs font-bold text-white"
+                    <div class="absolute -end-2.5 -top-2.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-secondary font-secondary text-xs font-bold text-white"
                         id="cart-count">
                         {{ \App\Helpers\Cart::count() }}
                     </div>

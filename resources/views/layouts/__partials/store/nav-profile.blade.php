@@ -1,6 +1,6 @@
 <div class="flex flex-col">
-    <h2 class="px-4 pt-4 font-primary text-xl font-bold text-secondary">Mi cuenta</h2>
-    <div class="mb-4 flex flex-col text-sm">
+    <h2 class="px-4 pt-4 font-primary text-2xl font-bold text-secondary">Mi cuenta</h2>
+    <div class="mb-4 flex flex-col">
         <a href="{{ Route('account') }}"
             class="link-profile {{ Route::is('account') ? 'active' : '' }} relative flex items-center p-2 ps-4 text-secondary">
             General

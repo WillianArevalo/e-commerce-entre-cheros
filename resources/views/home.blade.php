@@ -27,7 +27,7 @@
             <div class="flex justify-center gap-2">
                 @if ($categories->count() > 0)
                     @foreach ($categories as $category)
-                        <x-button type="a" typeButton="store-secondary" text="{{ $category->name }}"
+                        <x-button-store type="a" typeButton="secondary" text="{{ $category->name }}"
                             href="{{ route('store.search', ['search' => 'categorie_id', 'value' => $category->id]) }}" />
                     @endforeach
                 @endif
@@ -63,7 +63,7 @@
                     <h2 class="font-primary text-4xl font-bold uppercase text-white">
                         Descubre el sabor y la tradición de El Salvador con nuestra variedad de productos únicos
                     </h2>
-                    <x-button type="button" typeButton="store-secondary" text="Comprar ahora" class="w-max" />
+                    <x-button-store type="button" typeButton="secondary" text="Comprar ahora" class="w-max" />
                 </div>
                 <div class="flex w-full flex-1 items-center justify-center" data-aos="zoom-in-left">
                     <img src="{{ asset('images/imagen1.png') }}" alt="" class="h-64 w-72">
@@ -88,7 +88,6 @@
                     ])
                 </div>
             @endif
-
         </section>
         <section class="px-40" data-aos="zoom-in">
             <div style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover; height: 600px; border-radius:70px"
@@ -101,7 +100,7 @@
                         El Salvador
                     </span>
                 </h2>
-                <x-button type="a" typeButton="store-gradient" text="Tienda" icon="store"
+                <x-button-store type="a" typeButton="primary" text="Tienda" icon="store"
                     class="absolute bottom-20 left-20" />
             </div>
         </section>
@@ -114,7 +113,7 @@
                     <h2 class="text-end font-primary text-4xl font-bold uppercase text-white">
                         Conecta con tus raíces salvadoreñas los mejores productos auténticos y tradicionales a tu alcance
                     </h2>
-                    <x-button type="a" typeButton="store-secondary" text="Comprar ahora" class="ml-auto" />
+                    <x-button-store type="a" typeButton="secondary" text="Comprar ahora" class="ml-auto" />
                 </div>
             </div>
         </section>

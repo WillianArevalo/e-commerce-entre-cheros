@@ -5,20 +5,20 @@
              <input type="checkbox" class="btn-add-favorite {{ $product->is_favorite ? 'favourite' : '' }}"
                  data-form="#form-add-favorite-{{ $product->id }}" data-card="#{{ $product->id }}">
              <div class="like">
-                 <x-icon icon="favourite" class="text-rose-600" fill="" />
+                 <x-icon-store icon="favourite" class="text-rose-600" fill="" />
              </div>
          </label>
      </form>
      <a href="{{ route('products.details', $product->id) }}"
-         class="px-5 py-3 font-primary rounded-lg bg-white text-secondary flex items-center justify-center border border-zinc-300 hover:bg-zinc-100 transition-colors">
-         <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+         class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
+         <x-icon-store icon="arrow-right" class="h-5 w-5 text-current" />
      </a>
  </div>
  <form action="{{ route('cart.add', $product->id) }}" method="POST" id="form-add-cart-{{ $product->id }}">
      @csrf
      <input type="hidden" name="quantity" value="1">
      <button type="button" data-form="#form-add-cart-{{ $product->id }}"
-         class="px-5 py-3 font-primary rounded-lg bg-secondary text-white flex items-center justify-center add-to-cart">
-         <x-icon icon="shopping-cart-add" class="w-5 h-5 text-current" />
+         class="add-to-cart flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-primary text-white">
+         <x-icon-store icon="shopping-cart-add" class="h-5 w-5 text-current" />
      </button>
  </form>

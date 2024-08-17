@@ -1,7 +1,7 @@
 @extends('layouts.__partials.store.template-profile')
 @section('profile-content')
     <div class="flex items-center justify-between">
-        <h2 class="font-primary text-2xl font-bold text-secondary">
+        <h2 class="font-primary text-3xl font-bold text-secondary">
             Pedidos
         </h2>
         <a href="{{ Route('orders') }}"

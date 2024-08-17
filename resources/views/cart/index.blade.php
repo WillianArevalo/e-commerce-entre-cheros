@@ -89,7 +89,8 @@
                                                             <button type="button"
                                                                 data-form="#form-minus-cart-{{ $product['id'] }}"
                                                                 class="btnMinusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
-                                                                <x-icon icon="minus" class="h-4 w-4 text-secondary" />
+                                                                <x-icon-store icon="minus"
+                                                                    class="h-4 w-4 text-secondary" />
                                                             </button>
                                                         </form>
                                                         <input type="text" name="quantity" id="quantity"
@@ -101,7 +102,8 @@
                                                             <button type="button"
                                                                 data-form="#form-plus-cart-{{ $product['id'] }}"
                                                                 class="btnPlusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
-                                                                <x-icon icon="plus" class="h-4 w-4 text-secondary" />
+                                                                <x-icon-store icon="plus"
+                                                                    class="h-4 w-4 text-secondary" />
                                                             </button>
                                                         </form>
                                                     </div>
@@ -117,7 +119,7 @@
                                                         <button type="button"
                                                             data-form="#form-remove-cart-{{ $product['id'] }}"
                                                             class="btnRemoveCart rounded-lg bg-red-100 p-2 text-red-800 hover:bg-red-200">
-                                                            <x-icon icon="delete" class="h-5 w-5 text-current" />
+                                                            <x-icon-store icon="delete" class="h-5 w-5 text-current" />
                                                         </button>
                                                     </form>
                                                 </td>
@@ -161,7 +163,7 @@
                                 <div class="mt-2 flex flex-col gap-2">
                                     <x-input-store type="text" name="coupon" placeholder="Código de cupón"
                                         class="w-full" />
-                                    <x-button type="button" text="Aplicar cupón" typeButton="store-secondary"
+                                    <x-button-store type="button" text="Aplicar cupón" typeButton="secondary"
                                         class="w-max text-sm" />
                                 </div>
                                 <div class="mt-4 flex flex-col gap-2 border-y py-4">
@@ -176,7 +178,7 @@
                                     <p id="subtotal">${{ $subtotal }}</p>
                                 </div>
                                 <div>
-                                    <x-button type="a" text="Finalizar compra" typeButton="store-gradient"
+                                    <x-button-store type="a" text="Finalizar compra" typeButton="primary"
                                         class="mt-10 w-full" />
                                 </div>
                             </div>

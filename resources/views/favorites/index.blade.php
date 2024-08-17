@@ -1,7 +1,5 @@
 @extends('layouts.template')
-
 @section('title', 'Home')
-
 @section('content')
     <main>
         <section class="relative h-[300px] w-full text-white"
@@ -18,7 +16,7 @@
                     Favoritos
                 </h2>
                 @if ($favorites->count() > 0)
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="mx-auto flex flex-wrap justify-center gap-4">
                         @foreach ($favorites as $product)
                             <x-card-product :product="$product" :slide="false" width="w-auto" />
                         @endforeach
@@ -26,10 +24,10 @@
                 @else
                     <p class="p-20 text-center font-secondary text-lg font-medium">No hay productos favoritos</p>
                 @endif
-                <a href="{{ route('store.products') }}"
-                    class="bg-gradient mx-auto w-max rounded-full bg-primary px-5 py-3 font-secondary font-medium uppercase text-white hover:bg-secondary">
-                    Ver más productos
-                </a>
+                <div class="mt-8 flex w-full items-center justify-center">
+                    <x-button-store type="a" href="{{ route('store.products') }}" text="Ver más productos"
+                        typeButton="primary" />
+                </div>
             </div>
         </section>
     </main>

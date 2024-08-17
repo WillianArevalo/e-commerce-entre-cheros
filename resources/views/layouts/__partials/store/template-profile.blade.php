@@ -27,7 +27,7 @@
                 <a href="{{ Route('cart') }}"
                     class="flex flex-col items-center justify-center gap-1 text-sm text-tertiary hover:scale-105">
                     <x-icon-store icon="shopping-cart" class="h-8 w-8 text-current" />
-                    Carrito de compras
+                    Carrito
                 </a>
                 <a href="{{ Route('favorites') }}"
                     class="flex flex-col items-center justify-center gap-1 text-sm text-secondary hover:scale-105">
