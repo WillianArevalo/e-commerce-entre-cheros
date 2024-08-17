@@ -220,3 +220,20 @@ input[type="color"]::-webkit-color-swatch {
         transform: rotate(360deg);
     }
 }
+
+.container-secondary-image.selected {
+    position: relative;
+}
+
+.container-secondary-image.selected::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 10;
+}
