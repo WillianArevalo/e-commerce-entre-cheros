@@ -194,9 +194,12 @@
         </div>
         <div>
             <div class="flex items-center gap-4">
-                <img src="{{ asset('/images/paypal.webp') }}" alt="" class="h-14 w-28 object-contain">
-                <img src="{{ asset('/images/mastercard-visa.jpg') }}" alt=""
-                    class="h-14 w-28 object-contain">
+                @if ($paymentMethods)
+                    @foreach ($paymentMethods as $paymentMethod)
+                        <img src="{{ Storage::url($paymentMethod->image) }}" alt="{{ $paymentMethod->name }}"
+                            class="h-14 w-28 rounded-xl object-cover">
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -216,6 +219,7 @@
                             </span>
                             <x-icon icon="arrow-down" class="h-5 w-6 text-zinc-300" />
                         </div>
+
                         <ul
                             class="selectOptions absolute z-10 mt-2 hidden w-full overflow-hidden rounded-2xl border border-zinc-300 bg-secondary py-1 shadow-lg">
                             <li class="itemOption flex items-center gap-2 px-4 py-2.5 text-sm text-white hover:bg-blue-950"
@@ -227,35 +231,38 @@
                                 Español
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
             <div class="w-72">
                 <div class="flex flex-col gap-2 font-secondary">
-                    <input type="hidden" id="divisa" name="divisa" value="dollar-estadounidense">
+                    <input type="hidden" id="current-currency" name="current-currency"
+                        value="{{ $currencyDefault->id ?? 0 }}">
                     <div class="relative">
                         <div
                             class="selected flex items-center justify-between rounded-full border border-zinc-300 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200">
                             <span class="itemSelected flex items-center gap-2 text-zinc-300">
-                                $ USD - Dólar estadounidense
+                                @if ($currencyDefault)
+                                    {{ $currencyDefault->symbol }} {{ $currencyDefault->code }} -
+                                    {{ $currencyDefault->name }}
+                                @else
+                                    Sin moneda especificada
+                                @endif
                             </span>
                             <x-icon icon="arrow-down" class="h-5 w-6 text-zinc-300" />
                         </div>
-                        <ul
-                            class="selectOptions absolute z-10 mt-2 hidden w-full overflow-hidden rounded-2xl border border-zinc-300 bg-secondary py-1 shadow-lg">
-                            <li class="itemOption flex items-center gap-2 px-4 py-2.5 text-sm text-white hover:bg-blue-950"
-                                data-value="dollar-estadounidense" data-input="#divisa">
-                                $ USD - Dólar estadounidense
-                            </li>
-                            <li class="itemOption flex items-center gap-2 px-4 py-2.5 text-sm text-white hover:bg-blue-950"
-                                data-value="euro" data-input="#divisa">
-                                € EURO - Euro
-                            </li>
-                            <li class="itemOption flex items-center gap-2 px-4 py-2.5 text-sm text-white hover:bg-blue-950"
-                                data-value="peso-mexicano" data-input="#divisa">
-                                $ MXN - Peso mexicano
-                            </li>
-                        </ul>
+                        @if ($currencies)
+                            <ul
+                                class="selectOptions absolute z-10 mt-2 hidden w-full overflow-hidden rounded-2xl border border-zinc-300 bg-secondary py-1 shadow-lg">
+                                @foreach ($currencies as $currency)
+                                    <li class="itemOption flex items-center gap-2 px-4 py-2.5 text-sm text-white hover:bg-blue-950"
+                                        data-value="{{ $currency->id }}" data-input="#current-currency">
+                                        {{ $currency->symbol }} {{ $currency->code }} - {{ $currency->name }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>
