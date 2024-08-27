@@ -19,13 +19,31 @@ $(document).ready(function () {
     $(".accordion-inventario").on("click", function () {
         const accordion = $(this).data("show");
         const $accordionElement = $(accordion);
+        $accordionElement.toggleClass("hidden");
+    });
 
-        if ($accordionElement.hasClass("accordion-active")) {
-            $accordionElement.removeClass("accordion-active");
-            $accordionElement.addClass("accordion-desactive");
-        } else {
-            $accordionElement.removeClass("accordion-desactive");
-            $accordionElement.addClass("accordion-active");
+    $(".secondary-image").on("click", function () {
+        $(".container-secondary-image").removeClass("selected");
+        $(this).parent().addClass("selected");
+        const newSrc = $(this).attr("src");
+        $("#main-image").attr("src", newSrc);
+    });
+
+    var $review = $("#review");
+    var $messageReview = $("#message-review");
+    $("#add-review").on("click", function () {
+        if ($review.val() === "") {
+            $review.addClass("is-invalid");
+            $messageReview
+                .removeClass("hidden")
+                .text("El campo no puede estar vacío");
+        }
+    });
+
+    $review.on("input", function () {
+        if ($review.val() !== "") {
+            $review.removeClass("is-invalid");
+            $messageReview.addClass("hidden");
         }
     });
 });

@@ -17,6 +17,10 @@ import "./product-view";
 import "./cart";
 import "./drawer";
 import "./sales-strategies";
+import "./navbar";
+import "./loader";
+import "./store";
+import "./checkout";
 import { initSwiper } from "./swiper";
 
 initSwiper();

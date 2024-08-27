@@ -111,36 +111,127 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("change", "input[name='is_active']", function () {
-        if ($(this).is(":checked")) {
-            $(this).val(1);
-        } else {
-            $(this).val(0);
-        }
-    });
+    $(document).on(
+        "change",
+        "input[name='is_active'], input[name='active'], input[name='is_default'], input[name='auto_update']",
+        function () {
+            if ($(this).is(":checked")) {
+                $(this).val(1);
+            } else {
+                $(this).val(0);
+            }
+        },
+    );
 
     toggleElementVisibility($("." + $("#predefined_rule").val()), true);
 
-    $(".btnEditShippingMethod").on("click", function () {
-        var action = $(this).data("action");
-        var href = $(this).data("href");
+    function handleEditMethod(buttonClass, drawerId, formId, checkboxId) {
+        $(buttonClass).on("click", function () {
+            var action = $(this).data("action");
+            var href = $(this).data("href");
 
-        $.ajax({
-            url: href,
-            type: "GET",
-            success: function (data) {
-                openDrawer("#drawer-edit-method");
-                data.method.is_active === 1
-                    ? $("#is_active").prop("checked", true)
-                    : $("#is_active").prop("checked", false);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function (data) {
+                    var dataObject = data ? Object.values(data)[0] : null;
+                    if (dataObject) {
+                        openDrawer(drawerId);
+                        console.info(dataObject);
 
-                $.each(data.method, function (key, value) {
-                    $("[id='" + key + "']").val(value);
-                });
-                $("#formEditMethod").attr("action", action);
-            },
+                        if (dataObject.active !== undefined) {
+                            $("#active").prop(
+                                "checked",
+                                dataObject.active === 1,
+                            );
+                        }
+
+                        if (dataObject.is_default !== undefined) {
+                            $("#is_default").prop(
+                                "checked",
+                                dataObject.is_default === 1,
+                            );
+                        }
+
+                        if (dataObject.auto_update !== undefined) {
+                            $("#auto_update").prop(
+                                "checked",
+                                dataObject.auto_update === 1,
+                            );
+                        }
+
+                        // Actualizar la imagen de previsualización si existe
+                        if (dataObject.image !== undefined) {
+                            $("#previewImageEdit").attr(
+                                "src",
+                                dataObject.image,
+                            );
+                        }
+
+                        // Rellenar el formulario con los datos recibidos
+                        $.each(dataObject, function (key, value) {
+                            $("[id='" + key + "']").val(value);
+                        });
+
+                        // Establecer la acción del formulario
+                        $(formId).attr("action", action);
+                    } else {
+                        console.error(
+                            "No se encontró un objeto válido en la respuesta:",
+                            data,
+                        );
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", status, error);
+                },
+            });
         });
+    }
+
+    // Aplicar la función genérica a los diferentes métodos
+    handleEditMethod(
+        ".btnEditShippingMethod",
+        "#drawer-edit-method",
+        "#formEditMethod",
+        "is_active",
+    );
+
+    handleEditMethod(
+        ".btnEditPaymentMethod",
+        "#drawer-edit-method",
+        "#formEditPaymentMethod",
+        "active",
+    );
+
+    handleEditMethod(
+        ".btnEditCurrency",
+        "#drawer-edit-currency",
+        "#formEditCurrency",
+        "active",
+    );
+
+    $("#imagePaymentMehod").on("change", function () {
+        showPreviewImage(this, "#previewImage");
     });
+
+    $("#imagePaymentMehodEdit").on("change", function () {
+        showPreviewImage(this, "#previewImageEdit");
+    });
+
+    function showPreviewImage(image, preview) {
+        $(image).prev().addClass("hidden");
+        const $preview = $(preview);
+        $preview.removeClass("hidden");
+        let archive = image.files[0];
+        if (archive) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $preview.attr("src", e.target.result);
+            };
+            reader.readAsDataURL(archive);
+        }
+    }
 
     $(document).on("click", ".showMethod", function () {
         $("#show-method-content").html("");
