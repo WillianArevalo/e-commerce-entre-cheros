@@ -18,6 +18,8 @@ return new class extends Migration
             $table->enum("discount_type", ["percentage", "fixed"]);
             $table->date("start_date");
             $table->date("end_date");
+            $table->boolean("active")->default(true);
+            $table->string("type");
             $table->integer("usage_limit")->nullable()->default(1);
             $table->timestamps();
         });
