@@ -65,4 +65,40 @@ class CouponRules
     {
         return self::$rules;
     }
+
+    public function validateCoupon($rule, $conditions)
+    {
+        if (!isset($this->predefinedRules[$rule])) {
+            throw new \Exception("Regla no válida");
+        }
+
+        $method = $this->predefinedRules[$rule];
+
+        if (!method_exists($this, $method)) {
+            throw new \Exception("El método de validación no existe.");
+        }
+
+        return $this->{$method}($conditions);
+    }
+
+    protected function validateMinimumProducts($conditions)
+    {
+        $cartTotal = $conditions["cart_count"] ?? 0;
+        $minimumAmount = $conditions["parameter"];
+        return $cartTotal >= $minimumAmount;
+    }
+
+    protected function validateFirstPurchase($conditions)
+    {
+        $user = $conditions['user'] ?? null;
+        if ($user && $user->orders()->count() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    protected function validateGiftCoupon($conditions)
+    {
+        return true;
+    }
 }
