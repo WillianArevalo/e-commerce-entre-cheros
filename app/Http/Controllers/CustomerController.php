@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ImageHelper;
+use App\Http\Requests\AddressRequest;
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use App\Models\User;
@@ -21,6 +22,15 @@ class CustomerController extends Controller
     public function create()
     {
         return view("admin.customers.create");
+    }
+
+    private function getCountries()
+    {
+        $response = Http::get("https://restcountries.com/v3.1/all");
+        if ($response->successful()) {
+            return $response->json();
+        }
+        return response()->json(["error" => "Unable to fetch countries"], 500);
     }
 
     public function store(CustomerRequest $request)
