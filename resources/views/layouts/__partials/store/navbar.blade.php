@@ -87,7 +87,7 @@
                                 </a>
                             </li>
                             <li class="w-full">
-                                <a href=""
+                                <a href="{{ Route('mycoupons') }}"
                                     class="group flex w-full items-center justify-start rounded-xl px-4 py-2 text-secondary hover:bg-blue-50 hover:text-tertiary">
                                     <x-icon-store icon="coupon"
                                         class="mr-2 inline-block h-4 w-4 truncate text-current group-hover:fill-tertiary" />
