@@ -18,7 +18,7 @@
         @else
             @include('layouts.__partials.store.toast-store', ['top' => 'top-5'])
         @endif
-        @include('layouts.__partials.store.toast-container')
+        @include('layouts.__partials.toast-container', ['class' => 'right-5 top-10'])
         @yield('content')
     </main>
 </body>

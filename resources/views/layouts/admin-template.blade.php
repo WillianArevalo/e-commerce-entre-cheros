@@ -26,6 +26,7 @@
 
 <body class="admin font-secondary dark:bg-black">
     @include('layouts.__partials.admin.navbar')
+    @include('layouts.__partials.toast-container', ['class' => 'right-5 top-5'])
     <main class="h-full bg-zinc-50 dark:bg-black">
         @include('layouts.__partials.admin.toast')
         <div id="overlay" class="fixed inset-0 z-30 hidden bg-zinc-900/80 dark:bg-zinc-900/90"></div>
