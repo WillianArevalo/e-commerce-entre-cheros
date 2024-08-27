@@ -123,4 +123,13 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    "currency" =>
+    [
+        "symbol" => env("APP_CURRENCY_SYMBOL", "$"),
+        "code" => env("APP_CURRENCY_CODE", "USD"),
+        "decimals" => env("APP_CURRENCY_DECIMALS", 2),
+        "dec_point" => env("APP_CURRENCY_DEC_POINT", "."),
+        "thousands_sep" => env("APP_CURRENCY_THOUSANDS_SEP", ","),
+    ],
+
 ];
