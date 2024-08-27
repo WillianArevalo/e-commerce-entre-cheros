@@ -209,6 +209,18 @@ Breadcrumbs::for('admin.sales-strategies.shipping-methods.index', function (Brea
     $trail->push('Métodos de envío', route('admin.sales-strategies.shipping-methods.index'));
 });
 
+//Admin > Sales Strategies > Payment Methods
+Breadcrumbs::for("admin.sales-strategies.payment-methods.index", function (BreadcrumbTrail $trail) {
+    $trail->parent("admin.sales-strategies.index");
+    $trail->push("Métodos de pago", route("admin.sales-strategies.payment-methods.index"));
+});
+
+//Admin > Sales Stratgies > Currencies
+Breadcrumbs::for("admin.sales-strategies.currencies.index", function (BreadcrumbTrail $trail) {
+    $trail->parent("admin.sales-strategies.index");
+    $trail->push("Monedas", route("admin.sales-strategies.currencies.index"));
+});
+
 /*  Breadcrumbs Store  */
 Breadcrumbs::for("faq", function (BreadcrumbTrail $trail) {
     $trail->push("Preguntas frecuentes", route("faq"));
