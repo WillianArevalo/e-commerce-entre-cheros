@@ -1,64 +1,74 @@
 @extends('layouts.template')
-
 @section('title', 'Details product')
-
 @section('content')
     <main class="mx-auto mb-10 w-4/5">
-        <section class="mt-32 flex gap-8">
+        <section class="mt-32 flex gap-32">
             <div class="flex h-max flex-1 flex-col items-center justify-center gap-2">
-                <img src="{{ Storage::url($product->main_image) }}" alt="Imagen principal del {{ $product->name }}"
-                    class="h-96 w-full rounded-xl object-cover">
-                <div class="flex items-center justify-center gap-2">
+                <div>
+                    <img id="main-image" src="{{ Storage::url($product->main_image) }}"
+                        alt="Imagen principal del {{ $product->name }}" class="mb-4 h-96 w-full rounded-xl object-cover">
+                </div>
+                <!-- Images secondarys -->
+                <div class="flex h-20 w-max items-center justify-center gap-2 py-20">
                     @if ($product->images->count() > 4)
-                        <button>
+                        <button class="button-prev-images cursor-pointer rounded-full bg-zinc-100 p-1 hover:bg-zinc-200">
                             <x-icon icon="arrow-left" class="h-5 w-5" />
                         </button>
                     @endif
                     @if ($product->images->count() > 0)
-                        @foreach ($product->images as $image)
-                            <img src="{{ Storage::url($image->image) }}" alt="Imagen secundaria"
-                                class="h-16 w-24 rounded-lg border border-tertiary object-cover">
-                        @endforeach
+                        <div class="swiper swiper-images-secondarys max-w-[450px]">
+                            <div class="swiper-wrapper">
+                                @foreach ($product->images as $image)
+                                    <div
+                                        class="swiper-slide container-secondary-image {{ $loop->iteration === 1 ? 'selected' : '' }} cursor-pointer overflow-hidden rounded-lg">
+                                        <img src="{{ Storage::url($image->image) }}" alt="Imagen secundaria"
+                                            class="secondary-image h-20 w-full object-cover">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     @endif
                     @if ($product->images->count() > 4)
-                        <button>
+                        <button class="button-next-images cursor-pointer rounded-full bg-zinc-100 p-1 hover:bg-zinc-200">
                             <x-icon icon="arrow-right" class="h-5 w-5" />
                         </button>
                     @endif
                 </div>
-                <div class="mt-4 flex gap-2 font-secondary">
-                    @if ($product->labels->count() > 0)
-                        @foreach ($product->labels as $label)
-                            <span
-                                class="flex items-center justify-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-800">
-                                {{ $label->name }}
-                            </span>
-                        @endforeach
-                    @endif
-                </div>
+                <!-- End Images secondarys -->
             </div>
             <div class="flex flex-1 flex-col gap-3">
-                <div class="flex justify-between">
-                    <h1 class="font-primary text-4xl font-bold text-secondary">{{ $product->name }}</h1>
-                    <div class="flex gap-2">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <h1 class="font-primary text-6xl font-bold text-secondary">
+                        {{ $product->name }}
+                    </h1>
+                    <div class="flex items-center gap-2">
+                        <form action="{{ route('favorites.add', $product->id) }}" method="POST"
+                            id="form-add-favorite-{{ $product->id }}">
+                            @csrf
+                            <label
+                                class="ui-like group flex h-max cursor-pointer items-center gap-2 rounded-full border border-rose-100 p-2 px-4 font-secondary text-sm text-rose-500 hover:bg-rose-50 hover:text-rose-500">
+                                <input type="checkbox"
+                                    class="btn-add-favorite {{ $product->is_favorite ? 'favourite' : '' }}"
+                                    data-form="#form-add-favorite-{{ $product->id }}" data-card="#{{ $product->id }}">
+                                Guardar
+                                <div class="like">
+                                    <x-icon-store icon="favourite" class="h-5 w-5 text-current group-hover:fill-current" />
+                                </div>
+                            </label>
+                        </form>
                         <button
-                            class="group flex items-center gap-2 rounded-lg bg-zinc-50 p-2 font-secondary text-sm text-rose-500 hover:bg-zinc-100">
-                            Guardar
-                            <x-icon-store icon="favourite" class="h-5 w-5 text-current group-hover:fill-rose-500" />
-                        </button>
-                        <button
-                            class="flex items-center gap-2 rounded-lg bg-zinc-50 p-2 font-secondary text-sm text-green-500 hover:bg-zinc-100">
+                            class="group flex h-max items-center gap-2 rounded-full border border-green-100 p-2 px-4 font-secondary text-sm text-green-500 hover:bg-green-50 hover:text-green-500">
                             Compartir
-                            <x-icon-store icon="share" class="h-6 w-6 text-current" />
+                            <x-icon-store icon="share" class="h-5 w-5 text-current" />
                         </button>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
-                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
-                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
-                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
-                    <x-icon icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon-store icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon-store icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon-store icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon-store icon="start" class="h-5 w-5 text-secondary" />
+                    <x-icon-store icon="start" class="h-5 w-5 text-secondary" />
                     <p class="font-secondary font-semibold text-tertiary">En stock</p>
                 </div>
                 <div class="flex items-end gap-2">
@@ -74,43 +84,54 @@
                         <span class="font-secondary text-5xl font-semibold text-secondary">${{ $product->price }}</span>
                     @endif
                 </div>
-                <p class="w-2/3 font-secondary text-secondary">
+                <p class="w-2/3 font-secondary text-sm text-zinc-500">
                     {{ $product->long_description }}
                 </p>
-                <div class="flex flex-col gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="flex items-center gap-1">
-                            <button
-                                class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
-                                id="btn-minus">
-                                <x-icon icon="minus" class="h-4 w-4 text-secondary" />
-                            </button>
-                            <input type="text" name="quantity" id="quantity"
-                                class="h-12 w-16 rounded-lg border-none text-center font-secondary focus:border-none focus:outline-none"
-                                readonly value="1" min="1" max="{{ $product->stock }}">
-                            <button
-                                class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
-                                id="btn-plus">
-                                <x-icon icon="plus" class="h-4 w-4 text-secondary" />
-                            </button>
-                        </div>
-                    </div>
+                <div class="flex flex-col gap-6">
                     <div class="flex items-center gap-2">
-                        <x-button type="button" typeButton="store-secondary" text="Añadir al carrito"
-                            icon="shopping-cart-add" />
-                        <x-button type="button" typeButton="store-gradient" text="Comprar" />
+                        <button
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
+                            id="btn-minus">
+                            <x-icon icon="minus" class="h-4 w-4 text-secondary" />
+                        </button>
+                        <input type="text" name="quantity" id="quantity"
+                            class="h-12 w-16 rounded-lg border-none text-center font-secondary focus:border-none focus:outline-none"
+                            readonly value="1" min="1" max="{{ $product->stock }}">
+                        <button
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
+                            id="btn-plus">
+                            <x-icon-store icon="plus" class="h-4 w-4 text-secondary" />
+                        </button>
                     </div>
-                    <div class="flex flex-col font-secondary">
-                        <div class="mb-2">
-                            <button
-                                class="accordion-inventario flex w-full items-center justify-between rounded-lg bg-zinc-100 px-6 py-3 hover:bg-zinc-200"
-                                data-show="#inventario-accordion">
-                                Inventario
-                                <x-icon icon="plus" class="h-5 w-5 text-current" />
-                            </button>
-                            <div class="accordion-desactive mt-2 flex flex-col gap-2 rounded-lg bg-zinc-100"
-                                id="inventario-accordion">
-                                <div class="px-6 pt-4">
+                    <!-- Container button -->
+                    <div class="flex items-center gap-2">
+                        <x-button-store type="button" typeButton="secondary" text="Añadir al carrito"
+                            icon="shopping-cart-add" />
+                        <x-button-store type="button" typeButton="primary" text="Comprar" />
+                    </div>
+                    <!-- End Container button -->
+                    <div class="flex gap-2 font-secondary">
+                        @if ($product->labels->count() > 0)
+                            @foreach ($product->labels as $label)
+                                <span
+                                    class="flex items-center justify-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-800">
+                                    {{ $label->name }}
+                                </span>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+                <div class="mt-4 flex flex-col font-secondary">
+                    <div class="mb-2">
+                        <button
+                            class="accordion-inventario flex w-full items-center justify-between rounded-xl bg-zinc-50 px-6 py-3 font-bold uppercase text-secondary hover:bg-zinc-100"
+                            data-show="#inventario-accordion">
+                            Inventario
+                            <x-icon icon="plus" class="h-5 w-5 text-current" />
+                        </button>
+                        <div class="mt-2 hidden animate-fade-down" id="inventario-accordion">
+                            <div class="flex flex-col gap-2 rounded-xl bg-zinc-50 py-4">
+                                <div class="px-6">
                                     <p class="font-bold text-secondary">Stock</p>
                                     <p class="font-secondary text-sm text-zinc-600">{{ $product->stock }} disponible</p>
                                 </div>
@@ -124,18 +145,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <button
-                                class="accordion-inventario flex w-full items-center justify-between rounded-lg bg-zinc-100 px-6 py-3 hover:bg-zinc-200"
-                                data-show="#inventario-impuestos">
-                                Impuestos
-                                <x-icon icon="plus" class="h-5 w-5 text-current" />
-                            </button>
-                            <div class="accordion-desactive mt-2 flex flex-col gap-2 rounded-lg bg-zinc-100"
-                                id="inventario-impuestos">
+                    </div>
+                    <div>
+                        <button
+                            class="accordion-inventario flex w-full items-center justify-between rounded-xl bg-zinc-50 px-6 py-3 font-bold uppercase text-secondary hover:bg-zinc-100"
+                            data-show="#inventario-impuestos">
+                            Impuestos
+                            <x-icon icon="plus" class="h-5 w-5 text-current" />
+                        </button>
+                        <div id="inventario-impuestos" class="mt-2 hidden animate-fade-down">
+                            <div class="flex flex-col gap-2 rounded-xl bg-zinc-50 py-4">
                                 @if ($product->taxes->count() > 0)
                                     @foreach ($product->taxes as $tax)
-                                        <div class="@if ($loop->iteration === 1) pt-4 @endif px-6">
+                                        <div class="px-6">
                                             <p class="font-bold text-secondary">
                                                 {{ $tax->name }}
                                             </p>
@@ -151,10 +173,10 @@
                 </div>
             </div>
         </section>
-        <section class="mt-4">
+        <section class="mt-20">
             <div>
                 <div class="mt-4 flex items-center gap-2 font-primary text-xl">
-                    <x-icon icon="start" class="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                    <x-icon-store icon="start" class="h-6 w-6 fill-yellow-300 text-yellow-400" />
                     <p class="font-bold">4.87</p>
                     <span class="flex items-center">
                         <x-icon icon="minus" class="h-5 w-5" />
@@ -211,68 +233,32 @@
                         </p>
                     </div>
                 </div>
-                <x-button type="button" typeButton="store-secondary" text="Ver más reseñas" />
+                <x-button-store type="button" typeButton="secondary" class="text-sm" text="Ver más reseñas" />
             </div>
-            <div class="mt-4 flex flex-col gap-2">
-                <label for="" class="font-secondary font-medium text-zinc-800">Reseña:</label>
-                <textarea name="review" id="review" cols="30" rows="5" placeholder="Escribe tu reseña"
-                    class="block w-full rounded-lg border-2 border-zinc-300 bg-zinc-50 p-2.5 font-secondary text-sm text-zinc-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"></textarea>
-                <x-button type="button" typeButton="store-secondary" text="Agregar reseña" class="ml-auto" />
+            <div class="mt-8 flex flex-col gap-2">
+                <x-input-store type="textarea" name="review" label="Reseña" id="review" cols="30"
+                    rows="5" placeholder="Escribe tu reseña..." />
+                <span id="message-review" class="text-sn hidden text-sm text-red-600"></span>
+                <x-button-store id="add-review" type="button" typeButton="secondary" text="Agregar reseña"
+                    class="ml-auto mt-4 text-sm" />
+
             </div>
         </section>
         <section class="py-4">
-            <div class="flex w-full flex-col justify-center gap-4 text-center">
+            <div class="flex w-full flex-col justify-center text-center">
                 <h2 class="p-4 font-primary text-3xl font-bold uppercase text-secondary">
                     Tambien te puede interesar
                 </h2>
-                <div class="relative mx-auto flex w-4/5 flex-wrap items-center justify-center">
-                    <button class="button-prev absolute -left-14 z-40 cursor-pointer rounded-lg hover:bg-zinc-100">
-                        <x-icon icon="arrow-left" class="h-12 w-12 text-secondary" />
-                    </button>
-                    <div class="swiper mySwiper">
-                        <div class="swiper-wrapper">
-                            @if ($products->count() > 0)
-                                @foreach ($products as $product)
-                                    <div
-                                        class="swiper-slide flex h-max w-96 flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white text-start">
-                                        <img src="{{ Storage::url($product->main_image) }}" alt=""
-                                            class="h-72 w-full object-cover">
-                                        <div class="p-4">
-                                            <h3 class="font-primary text-xl font-bold text-secondary">
-                                                {{ $product->name }}
-                                            </h3>
-                                            <p class="text-wrap font-secondary text-sm text-zinc-800">
-                                                {{ $product->short_description }}
-                                            </p>
-                                        </div>
-                                        <div class="mt-auto flex items-end justify-between p-4">
-                                            <div class="flex items-center gap-2">
-                                                <a href="{{ route('products.details', $product->id) }}"
-                                                    class="flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-primary text-white">
-                                                    <x-icon icon="shopping-cart-add" class="h-5 w-5 text-current" />
-                                                </a>
-                                                <a href="{{ route('products.details', $product->id) }}"
-                                                    class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
-                                                    <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
-                                                </a>
-                                            </div>
-                                            <span
-                                                class="font-secondary text-lg font-bold text-secondary">${{ $product->price }}</span>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                        <div class="swiper-pagination"></div>
+                @if ($products)
+                    <div id="slider">
+                        @include('layouts.__partials.store.slider', [
+                            'products' => $products,
+                        ])
                     </div>
-                    <button class="button-next absolute -right-14 z-40 cursor-pointer rounded-lg hover:bg-zinc-100">
-                        <x-icon icon="arrow-right" class="h-12 w-12 text-secondary" />
-                    </button>
+                @endif
+                <div class="mx-auto mt-8 w-max">
+                    <x-button-store type="a" href="{{ Route('store') }}" typeButton="primary" text="Ver más" />
                 </div>
-                <a href=""
-                    class="bg-gradient mx-auto w-max rounded-full bg-primary px-5 py-3 font-secondary font-medium uppercase text-white hover:bg-secondary">
-                    Ver más
-                </a>
             </div>
         </section>
     </main>
