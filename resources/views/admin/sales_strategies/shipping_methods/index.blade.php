@@ -66,7 +66,7 @@
                                                     {{ $method->name }}
                                                 </th>
                                                 <td class="px-4 py-3">
-                                                    @if ($method->is_active === 1)
+                                                    @if ($method->active === 1)
                                                         <span
                                                             class="rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 font-secondary text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">
                                                             Activo
@@ -158,9 +158,9 @@
                             value="{{ old('description') }}" />
                     </div>
                     <div class="w-full">
-                        <input type="checkbox" value="10" name="is_active"
+                        <input type="checkbox" value="0" name="active"
                             class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
-                        <label for="is_active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
+                        <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex-1">
@@ -229,9 +229,9 @@
                             placeholder="Ingresa la descripción del método" label="Descripción" />
                     </div>
                     <div class="w-full">
-                        <input type="checkbox" value="0" name="is_active" id="is_active"
+                        <input type="checkbox" value="0" name="active" id="active"
                             class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
-                        <label for="is_active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
+                        <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex-1">

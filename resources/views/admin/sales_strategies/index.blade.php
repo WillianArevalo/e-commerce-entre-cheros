@@ -46,20 +46,29 @@
                                                 class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                         </th>
                                         <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
-                                            Código</th>
+                                            Código
+                                        </th>
                                         <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
-                                            Tipo de descuento</th>
+                                            Tipo de descuento
+                                        </th>
                                         <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
-                                            Valor de descuento</th>
+                                            Valor de descuento
+                                        </th>
                                         <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
-                                            Regla</th>
-                                        <th scope="col" class="px-4 py-3">Acciones</th>
+                                            Regla
+                                        </th>
+                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                            Estado
+                                        </th>
+                                        <th scope="col" class="px-4 py-3">
+                                            Acciones
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($coupons->count() == 0)
                                         <tr>
-                                            <td colspan="4"
+                                            <td colspan="7"
                                                 class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
                                                 No hay cupones registrados
                                             </td>
@@ -81,20 +90,21 @@
                                                     </span>
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    @if ($coupon->discount_type === 'percentage')
-                                                        <span class="flex items-center gap-1">
-                                                            <x-icon icon="percent" class="h-4 w-4 text-zinc-500" />
+                                                    <span class="flex items-center gap-1">
+                                                        @if ($coupon->discount_type === 'percentage')
                                                             {{ $coupon->discount_value }}
-                                                        </span>
-                                                    @else
-                                                        <span class="flex items-center gap-1">
+                                                            <x-icon icon="percent" class="h-4 w-4 text-zinc-500" />
+                                                        @else
                                                             <x-icon icon="dollar" class="h-4 w-4 text-zinc-500" />
                                                             {{ $coupon->discount_value }}
-                                                        </span>
-                                                    @endif
+                                                        @endif
+                                                    </span>
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     {{ \App\Utils\CouponRules::getRule($coupon->rule->predefined_rule) }}
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    <x-badge-status status="{{ $coupon->active }}" />
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     <div class="flex gap-2">

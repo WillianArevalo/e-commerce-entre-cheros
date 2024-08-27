@@ -69,7 +69,7 @@
                                                 </th>
                                                 <td class="px-4 py-3">
                                                     <a href="{{ route('admin.products.show', $offer->product->id) }}"
-                                                        class="flex w-max items-center gap-2 rounded-lg p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                                        class="flex w-max items-center gap-2 rounded-lg p-2">
                                                         <img src="{{ Storage::url($offer->product->main_image) }}"
                                                             alt="" class="h-12 w-12 rounded-lg object-cover">
                                                         <div class="flex flex-col">
@@ -88,21 +88,18 @@
                                                     <span>{{ \Carbon\Carbon::parse($offer->end_date)->format('d M, Y') }}</span>
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    <form action="{{ route('admin.flash-offers.changeStatus') }}"
+                                                    <form action="{{ route('admin.flash-offers.change-show', $offer->id) }}"
                                                         id="formChangeShow-{{ $offer->id }}" method="POST">
                                                         @csrf
                                                         <label class="inline-flex cursor-pointer items-center"
                                                             for="{{ $offer->id }}">
-                                                            <input type="hidden" name="id"
-                                                                value="{{ $offer->id }}">
                                                             <input id="{{ $offer->id }}" type="checkbox"
                                                                 name="is_showing"
                                                                 data-form="#formChangeShow-{{ $offer->id }}"
-                                                                data-change="show" value=""
-                                                                class="toggleShow peer sr-only"
+                                                                value="" class="toggleShow peer sr-only"
                                                                 {{ $offer->is_showing === 1 ? 'checked' : '' }}>
                                                             <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
                                                             </div>
                                                             <span
                                                                 class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
@@ -112,18 +109,17 @@
                                                     </form>
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    <form action="{{ route('admin.flash-offers.changeStatus') }}"
+                                                    <form
+                                                        action="{{ route('admin.flash-offers.change-status', $offer->id) }}"
                                                         id="formChangeActive-{{ $offer->id }}" method="POST">
                                                         @csrf
                                                         <label class="cursor-pointe inline-flex items-center"
                                                             for="active-{{ $offer->id }}">
-                                                            <input type="hidden" name="id"
-                                                                value="{{ $offer->id }}">
                                                             <input id="active-{{ $offer->id }}" type="checkbox"
                                                                 name="is_active"
                                                                 data-form="#formChangeActive-{{ $offer->id }}"
                                                                 data-change="active" value=""
-                                                                class="toggleShow peer sr-only"
+                                                                class="toggleStatus peer sr-only"
                                                                 {{ $offer->is_active === 1 ? 'checked' : '' }}>
                                                             <div
                                                                 class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
@@ -142,7 +138,6 @@
                                                             data-action="{{ route('admin.flash-offers.update', $offer->id) }}"
                                                             typeButton="success" icon="edit" onlyIcon="true"
                                                             class="editFlashOffer" />
-
                                                         <form
                                                             action="{{ route('admin.flash-offers.destroy', $offer->id) }}"
                                                             id="formDeleteCategorie" method="POST">
