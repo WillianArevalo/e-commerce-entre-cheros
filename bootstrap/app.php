@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(["role" => App\Http\Middleware\Role::class]);
         $middleware->appendToGroup('web', \App\Http\Middleware\SetLocale::class);
+        $middleware->appendToGroup("web", \App\Http\Middleware\CurrencyCurrent::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
