@@ -1,54 +1,71 @@
 @props([
     'type' => 'text',
     'name',
-    'id',
-    'label',
+    'id' => '',
+    'label' => '',
+    'checked' => false,
     'placeholder' => '',
     'value' => '',
     'class' => '',
-    'required' => '',
+    'required' => false,
     'icon' => '',
     'error' => true,
 ])
 
 @php
+    // Determinar la clase de error si existe
     $errorClass = $errors->has($name) ? 'is-invalid' : '';
 
-    $labelClass = $required ? " after:content-['*'] after:ml-0.5 after:text-red-500" : '';
+    // Agregar a la clase del label si es requerido
+    $labelClass = $required ? "after:content-['*'] after:ml-0.5 after:text-red-500" : '';
 
-    $classes =
-        'bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 px-4 dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500 transition duration-300 ' .
-        $class .
-        ' ' .
-        $errorClass;
+    // Construir clases dinámicas para el input
+    $classes = collect([
+        'bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg',
+        'focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 px-4',
+        'dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-zinc-400 dark:text-white',
+        'dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500',
+        'transition duration-300 dark:read-only:bg-zinc-900',
+        $class,
+        $errorClass,
+    ])
+        ->filter()
+        ->join(' ');
 @endphp
-<label for="{{ $id }}" class="{{ $labelClass }} mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
-    {{ $label }}
-</label>
 
-@if ($icon)
-    <div class="relative w-full">
+@if ($label && $type !== 'checkbox')
+    <label for="{{ $id }}"
+        class="{{ $labelClass }} mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
+        {{ $label }}
+    </label>
+@endif
+
+<div class="relative w-full">
+    @if ($icon)
         <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
             <span class="font-medium text-zinc-500 dark:text-zinc-400">
                 <x-icon icon="{{ $icon }}" class="h-5 w-5 text-current" />
             </span>
         </div>
-        <input type="{{ $type }}" name="{{ $name }}" {{ $id !== '' ? 'id=' . $id : '' }}
-            placeholder="{{ $placeholder }}" value="{{ $value }}" class="{{ $classes }} ps-10"
-            {{ $attributes }}>
-    </div>
-@endif
+    @endif
 
-@if ($type != 'textarea' && !$icon)
-    <input type="{{ $type }}" name="{{ $name }}" {{ $id !== '' ? 'id=' . $id : '' }}
-        placeholder="{{ $placeholder }}" value="{{ $value }}" class="{{ $classes }}"
-        {{ $attributes }}>
-@endif
-
-@if ($type === 'textarea')
-    <textarea id="{{ $id }}" name="{{ $name }}" rows="4" class="{{ $classes }}"
-        placeholder="{{ $placeholder }}">{{ $value }}</textarea>
-@endif
+    @if ($type === 'textarea')
+        <textarea id="{{ $id }}" name="{{ $name }}" rows="4"
+            class="{{ $classes }} {{ $icon ? 'ps-10' : '' }}" placeholder="{{ $placeholder }}">{{ $value }}</textarea>
+    @elseif ($type === 'checkbox')
+        <input type="checkbox" value="{{ $value }}" name="{{ $name }}" id="{{ $id }}"
+            {{ $attributes }} {{ $checked ? 'checked' : '' }}
+            class="{{ $class }} h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+        <label for="{{ $id }}"
+            class="{{ $labelClass }} ms-2 text-sm font-medium text-zinc-900 dark:text-white">
+            {{ $label }}
+        </label>
+    @else
+        <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}"
+            placeholder="{{ $placeholder }}" value="{{ $value }}"
+            class="{{ $classes }} {{ $icon ? 'ps-10' : '' }}" {{ $attributes }}>
+    @endif
+</div>
 
 @if ($error === true)
     @error($name)

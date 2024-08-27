@@ -15,7 +15,7 @@
     $errorClass = $errors->has($name) ? 'is-invalid' : '';
     $labelClass = $required ? "after:content-['*'] after:ml-0.5 after:text-red-500" : '';
     $inputBaseClasses =
-        'text-sm w-full px-6 py-3 border border-zinc-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition duration-300';
+        'text-sm w-full px-6 py-3 border border-zinc-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition duration-300 text-zinc-700';
     $classes = "{$inputBaseClasses} {$class} {$errorClass}";
 
     $id = $id ?? $name;
