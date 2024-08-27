@@ -237,3 +237,14 @@ input[type="color"]::-webkit-color-swatch {
     pointer-events: none;
     z-index: 10;
 }
+
+.method-shipping-selected {
+    @apply ring-4 ring-blue-200 border-blue-500;
+}
+
+.step-completed {
+    @apply after:border-secondary !important;
+    & span {
+        @apply bg-secondary text-white !important;
+    }
+}
