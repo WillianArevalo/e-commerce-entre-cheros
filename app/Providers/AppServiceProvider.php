@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Currency;
+use App\Models\PaymentMethod;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer("layouts.__partials.store.footer", function ($view) {
+            $currencies = Currency::where("active", true)->get();
+            $currencyDefault = Currency::where("is_default", true)->first();
+            $paymentMethods = PaymentMethod::where("active", true)->get();
+            $view->with(
+                [
+                    "currencies" => $currencies,
+                    "currencyDefault" => $currencyDefault,
+                    "paymentMethods" => $paymentMethods
+                ]
+            );
+        });
     }
 }
