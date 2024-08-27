@@ -1,10 +1,15 @@
 @if ($coupon)
     <div class="p-4">
-        <div class="flex items-center gap-2 rounded-lg border border-zinc-200 px-4 py-2 dark:border-zinc-900">
-            <h2 class="text-lg font-medium text-zinc-500 dark:text-zinc-200">Código:</h2>
-            <span class="text-base font-bold dark:text-blue-600">
-                {{ $coupon->code }}
-            </span>
+        <div class="flex justify-between rounded-lg border border-zinc-200 px-4 py-2 dark:border-zinc-900">
+            <div class="flex items-center gap-2">
+                <h2 class="text-lg font-medium text-zinc-500 dark:text-zinc-200">Código:</h2>
+                <span class="text-base font-bold dark:text-blue-600">
+                    {{ $coupon->code }}
+                </span>
+            </div>
+            <div class="flex items-center">
+                <x-badge-status status="{{ $coupon->active }}" />
+            </div>
         </div>
         <div class="mt-2 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
             <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
@@ -66,8 +71,23 @@
                     </tr>
                 </tbody>
             </table>
+            <table class="w-full border-t text-left text-sm text-zinc-500 dark:border-zinc-900 dark:text-zinc-400">
+                <thead
+                    class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                        Tipo
+                    </th>
+                </thead>
+                <tbody>
+                    <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
+                        <td class="px-4 py-3">
+                            {{ ucfirst($coupon->type) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="mt-2 rounded-lg border border-zinc-200 px-4 py-2 dark:border-zinc-900">
+        <div class="mt-2 rounded-lg border border-zinc-200 p-4 dark:border-zinc-900">
             <div class="flex items-center gap-2">
                 <h2 class="font-medium dark:text-white">Regla:</h2>
                 <span class="text-sm text-zinc-600 dark:text-zinc-300">
