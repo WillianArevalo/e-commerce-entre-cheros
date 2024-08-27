@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FlashOffer;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FlashOfferController extends Controller
 {
@@ -71,35 +72,37 @@ class FlashOfferController extends Controller
         }
     }
 
-    public function changeStatus(Request $request)
+    public function changeShow(Request $request, string $id)
     {
-        $offer = FlashOffer::find($request->id);
-        if ($offer) {
-
-            if (isset($request->is_showing)) {
-                $offer->update(["is_showing" => $request->is_showing]);
+        DB::beginTransaction();
+        try {
+            $offer = FlashOffer::find($id);
+            if ($offer) {
+                !$request->input("is_showing") ?
+                    $offer->update(["is_showing" => 0]) :
+                    $offer->update(["is_showing" => 1]);
             }
-
-            if (isset($request->is_active)) {
-                $offer->update(["is_active" => $request->is_active]);
-            }
-
-            if ($request->ajax()) {
-                return response()->json(["success" => "Estado de la oferta relámpago actualizado con éxito"]);
-            }
-        } else {
-            if ($request->ajax()) {
-                return response()->json(["error" => "Oferta relámpago no encontrada"]);
-            }
+            DB::commit();
+            return response()->json(["success" => "Oferta actualizada correctamente"]);
+        } catch (\Exception $e) {
+            return response()->json(["error" => "Erro al actualizar la oferta. Error: " . $e->getMessage()]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function changeStatus(Request $request, string $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $offer = FlashOffer::find($id);
+            if ($offer) {
+                !$request->input("is_active") ?
+                    $offer->update(["is_active" => 0]) :
+                    $offer->update(["is_active" => 1]);
+            }
+            DB::commit();
+            return response()->json(["success" => "Oferta actualizada correctamente"]);
+        } catch (\Exception $e) {
+        }
     }
 
     /**
