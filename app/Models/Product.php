@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -58,12 +59,29 @@ class Product extends Model
         "offer_price",
         "offer_active",
         "offer_start_date",
-        "offer_end_date", "sku",
-        "stock", "barcode", "weight",
+        "offer_end_date",
+        "sku",
+        "stock",
+        "barcode",
+        "weight",
         "dimensions",
         "categorie_id",
         "subcategorie_id",
         "brand_id",
         "status"
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($product) {
+            $product->slug = Str::slug($product->name);
+        });
+    }
+
+    public function getPriceInCurrencyAttribute()
+    {
+        $currency =  Currency::getDefault();
+        return $currency->symbol . number_format($this->price * $currency->exchange_rate, 2);
+    }
 }
