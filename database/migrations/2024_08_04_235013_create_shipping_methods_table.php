@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name", 100);
             $table->text("description");
             $table->string("time", 100);
-            $table->boolean("is_active")->default(true);
+            $table->boolean("active")->default(true);
             $table->decimal("min_weight", 10, 2);
             $table->decimal("max_weight", 10, 2);
             $table->string("location", 100);

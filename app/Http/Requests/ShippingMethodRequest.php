@@ -25,7 +25,7 @@ class ShippingMethodRequest extends FormRequest
             "name" => "required|string",
             "description" => "required|string",
             "time" => "required|string",
-            "is_active" => "nullable|boolean",
+            "active" => "nullable|boolean",
             "min_weight" => "required|numeric",
             "max_weight" => "required|numeric",
             "location" => "required|string",

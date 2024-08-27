@@ -12,7 +12,7 @@ class ShippingMethod extends Model
     protected $fillable = [
         "name",
         "description",
-        "is_active",
+        "active",
         "min_weight",
         "max_weight",
         "location",
