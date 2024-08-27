@@ -21,16 +21,16 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.flash-offers.index') }}"
-                        class="group flex items-center gap-2 rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                    <a href="{{ route('admin.sales-strategies.payment-methods.index') }}"
+                        class="{{ \App\Helpers\RouteHelper::isActive(['admin.sales-strategies.payment-methods.index']) }} flex items-center gap-2 rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                         <x-icon icon="payment"
                             class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                         Metodos de pago
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.flash-offers.index') }}"
-                        class="group flex items-center gap-2 rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                    <a href="{{ route('admin.sales-strategies.currencies.index') }}"
+                        class="{{ \App\Helpers\RouteHelper::isActive(['admin.sales-strategies.currencies.index']) }} flex items-center gap-2 rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                         <x-icon icon="save-money-dollar"
                             class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                         Cambio de divisas
