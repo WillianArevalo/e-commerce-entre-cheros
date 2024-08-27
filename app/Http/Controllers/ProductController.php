@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Favorites;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\ProductEditRequest;
 use App\Http\Requests\ProductRequest;
@@ -12,6 +13,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -25,10 +27,13 @@ class ProductController extends Controller
         return view("admin.products.index", ["products" => $products, "count" => $count]);
     }
 
-    public function details(string $id)
+    public function details(string $slug)
     {
+        $user = Auth::user();
         $products = Product::with("categories", "subcategories", "brands", "taxes", "labels", "images")->paginate(10);
-        $product = Product::with("categories", "brands", "taxes", "labels", "images")->find($id);
+        $product = Product::with("categories", "brands", "taxes", "labels", "images")->where("slug", $slug)->firstOrFail();
+        $product->images->prepend((object)["image" => $product->main_image]);
+        Favorites::get($user, $products);
         return view("products.view", ["product" => $product, "products" => $products]);
     }
 
