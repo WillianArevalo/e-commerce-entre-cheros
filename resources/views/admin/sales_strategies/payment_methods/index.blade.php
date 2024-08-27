@@ -80,17 +80,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    @if ($method->active === 1)
-                                                        <span
-                                                            class="rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 font-secondary text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">
-                                                            Activo
-                                                        </span>
-                                                    @else
-                                                        <span
-                                                            class="rounded-full border-2 border-red-300 bg-red-200 px-4 py-1 font-secondary text-xs font-medium text-red-800 dark:border-red-400 dark:bg-red-800 dark:text-red-100">
-                                                            Inactivo
-                                                        </span>
-                                                    @endif
+                                                    <x-badge-status status="{{ $method->active }}" />
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     <p class="text-wrap">
@@ -110,7 +100,8 @@
                                                             typeButton="success" icon="edit" onlyIcon="true" />
                                                         <form
                                                             action="{{ route('admin.sales-strategies.payment-methods.destroy', $method->id) }}"
-                                                            id="formDeletePaymentMethod-{{ $method->id }}" method="POST">
+                                                            id="formDeletePaymentMethod-{{ $method->id }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <x-button type="button"
@@ -272,7 +263,7 @@
                         <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Editar método" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Editar método" icon="edit" typeButton="primary" />
                         <x-button type="button" data-drawer="#drawer-edit-method" class="close-drawer" text="Cancelar"
                             typeButton="secondary" icon="cancel" />
                     </div>
@@ -280,28 +271,6 @@
             </div>
         </div>
         <!-- End Drawer edit payment method -->
-
-        <!-- Drawer details payment method -->
-        <div id="drawer-details-method"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
-            tabindex="-1" aria-labelledby="drawer-details-method">
-            <h5 id="drawer-details-method-label"
-                class="ms-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
-                Detalles del método de envío
-            </h5>
-            <button type="button" data-drawer="#drawer-details-method"
-                class="close-drawer absolute end-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-white">
-                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                </svg>
-                <span class="sr-only">Close menu</span>
-            </button>
-            <div class="font-secondary text-sm" id="show-method-content">
-            </div>
-        </div>
-        <!-- End Drawer details payment method -->
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
