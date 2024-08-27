@@ -7,14 +7,28 @@ use App\Models\Brand;
 use App\Models\Categorie;
 use App\Models\Coupon;
 use App\Models\CouponRule;
+use App\Models\Currency;
 use App\Models\Label;
 use App\Models\Product;
 use App\Utils\CouponRules;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CouponController extends Controller
 {
+
+    public $symbol;
+
+    public function __construct()
+    {
+        $this->symbol = Currency::getDefault()->symbol;
+    }
+
+    public function myCoupons()
+    {
+        $coupons = Coupon::where("type", "general")->where("active", 1)->get();
+        return view("coupons.index", compact("coupons"));
+    }
+
     public function index()
     {
         $coupons = Coupon::with("rule")->get();
@@ -51,14 +65,7 @@ class CouponController extends Controller
         DB::beginTransaction();
         try {
 
-            $coupon = Coupon::create([
-                'code' => $validated['code'],
-                'discount_value' => $validated['discount_value'],
-                'discount_type' => $validated['discount_type'],
-                'start_date' => $validated['start_date'],
-                'end_date' => $validated['end_date'],
-                'usage_limit' => $validated['usage_limit'] ?? 1,
-            ]);
+            $coupon = Coupon::create($validated);
 
             CouponRule::create([
                 'coupon_id' => $coupon->id,
@@ -70,7 +77,7 @@ class CouponController extends Controller
             return redirect()->route("admin.sales-strategies.index")->with("success", "Cupón creado correctamente");
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route("admin.sales-strategies.index")->with("error", "Error al crear el cupón");
+            return redirect()->route("admin.sales-strategies.index")->with("error", "Error al crear el cupón. Error: " . $e->getMessage());
         }
     }
 
@@ -212,16 +219,9 @@ class CouponController extends Controller
         if ($coupon) {
             $parametersJson = $this->filterAndEncodeParameters($request->input("parameters"));
             DB::beginTransaction();
+            if (!isset($validated["active"])) $validated["active"] = 0;
             try {
-                $coupon->update([
-                    'code' => $validated['code'],
-                    'discount_value' => $validated['discount_value'],
-                    'discount_type' => $validated['discount_type'],
-                    'start_date' => $validated['start_date'],
-                    'end_date' => $validated['end_date'],
-                    'usage_limit' => $validated['usage_limit'] ?? 1,
-                ]);
-
+                $coupon->update($validated);
                 $coupon->rule()->update([
                     'predefined_rule' => $validated["predefined_rule"],
                     'parameters' => $parametersJson

@@ -32,6 +32,8 @@ class CouponRequest extends FormRequest
             "end_date" => "required|date",
             "predefined_rule" => "nullable|string",
             "parameters" => "nullable",
+            "active" => "boolean|nullable",
+            "type" => "string|required"
         ];
     }
 }

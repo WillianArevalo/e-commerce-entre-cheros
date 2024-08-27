@@ -22,7 +22,14 @@
                     <form action="{{ route('admin.sales-strategies.coupon.update', $coupon->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="rounded-lg border p-4 dark:border-zinc-900">
+                        @if ($errors->any())
+                            @foreach ($errors as $error)
+                                <span class="dark:text-white">
+                                    {{ $error }}
+                                </span>
+                            @endforeach
+                        @endif
+                        <div>
                             <div class="flex flex-col gap-4">
                                 <div class="flex gap-4">
                                     <div class="flex-[2]">
@@ -49,6 +56,7 @@
                                             placeholder="Ingresa el valor del descuento" required />
                                     </div>
                                 </div>
+
                                 <div class="flex gap-4">
                                     <div class="flex-1">
                                         <x-input type="date" name="start_date" id="start_date" label="Fecha de inicio"
@@ -61,16 +69,22 @@
                                     <div class="flex-1">
                                         <input type="hidden" name="predefined_rule" id="predefined_rule"
                                             value="{{ $coupon->rule->predefined_rule }}">
+                                        <input type="hidden" name="type" value="{{ $coupon->type }}">
                                         <x-input type="text" name="rule" id="rule" label="Regla" required
-                                            value="{{ \App\Utils\CouponRules::getRule($coupon->rule->predefined_rule) }}" />
+                                            value="{{ \App\Utils\CouponRules::getRule($coupon->rule->predefined_rule) }}"
+                                            readonly />
                                     </div>
-                                    @if ($parameters && $type === 'data')
-                                        <div class="flex-1">
-                                            <x-input type="text" name="parameters[]" label="Parametro" required
-                                                value="{{ $parameters }}" />
-                                        </div>
-                                    @endif
                                 </div>
+                                <div>
+                                    <x-input type="checkbox" id="active" name="active" value="{{ $coupon->active }}"
+                                        label="Activo" :checked="$coupon->active === 1" />
+                                </div>
+                                @if ($parameters && $type === 'data')
+                                    <div class="flex-1">
+                                        <x-input type="text" name="parameters[]" label="Parametro" required
+                                            value="{{ $parameters }}" />
+                                    </div>
+                                @endif
                                 <div class="flex items-center gap-4">
                                     @if ($type === 'model' && $data)
                                         @if ($data->count() > 0)
