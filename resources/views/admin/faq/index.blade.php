@@ -1,16 +1,14 @@
 @extends('layouts.admin-template')
-
-@section('title', 'Categorías')
-
+@section('title', 'Preguntas frecuentes')
 @section('content')
     <div class="mt-4 rounded-lg dark:border-zinc-900">
         @include('layouts.__partials.admin.header-page', [
             'title' => 'Preguntas frecuentes',
             'description' => 'Administra las preguntas frecuentes de tu aplicación',
         ])
-        <div class="bg-zinc-50 p-4 dark:bg-black">
+        <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
+                <div class="relative bg-white dark:bg-black">
                     <div class="border-b border-zinc-200 p-4 dark:border-zinc-900">
                         <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de preguntas
@@ -32,20 +30,27 @@
                                 icon="add-circle" typeButton="primary" />
                         </div>
                     </div>
-                    <div>
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
                         <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                            <thead class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
+                            <thead
+                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">#</th>
-                                    <th scope="col" class="px-4 py-3">Pregunta</th>
-                                    <th scope="col" class="px-4 py-3">Respuesta</th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        #
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Pregunta
+                                    </th>
+                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        Respuesta
+                                    </th>
                                     <th scope="col" class="px-4 py-3">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($faqs->count() > 0)
                                     @foreach ($faqs as $faq)
-                                        <tr class="border-b dark:border-zinc-900">
+                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                             <td class="px-4 py-3 text-start font-medium text-zinc-900 dark:text-white">
                                                 {{ $faq->id }}
                                             </td>
@@ -76,7 +81,7 @@
                                         </tr>
                                     @endforeach
                                 @else
-                                    <tr class="border-b dark:border-zinc-900">
+                                    <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                         <td colspan="4"
                                             class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
                                             No hay preguntas registradas
