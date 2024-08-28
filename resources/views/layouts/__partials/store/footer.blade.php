@@ -124,34 +124,21 @@
                 <div class="font-secondary">
                     <h3 class="font-primary text-3xl font-bold text-white">Legal</h3>
                     <ul class="mt-2 flex flex-col gap-2 text-white">
+                        @if ($policies->count() > 0)
+                            @foreach ($policies as $policy)
+                                <li class="footer-item group group w-max">
+                                    <a href="{{ Route('policies.show', $policy->slug) }}"
+                                        class="footer-link flex items-center justify-between gap-2">
+                                        <span class="arrow-icon">
+                                            <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                        </span>
+                                        {{ $policy->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @endif
                         <li class="footer-item group group w-max">
                             <a href="{{ Route('faq') }}" class="footer-link flex items-center justify-between gap-2">
-                                <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
-                                </span>
-                                Términos y condiciones
-                            </a>
-                        </li>
-                        <li class="footer-item group group w-max">
-                            <a href="{{ Route('faq') }}" class="footer-link flex items-center justify-between gap-2">
-                                <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
-                                </span>
-                                Políticas de privacidad
-                            </a>
-                        </li>
-                        <li class="footer-item group group w-max">
-                            <a href="{{ Route('faq') }}"
-                                class="footer-link flex items-center justify-between gap-2">
-                                <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
-                                </span>
-                                Políticas de envío
-                            </a>
-                        </li>
-                        <li class="footer-item group group w-max">
-                            <a href="{{ Route('faq') }}"
-                                class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
                                     <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
                                 </span>
