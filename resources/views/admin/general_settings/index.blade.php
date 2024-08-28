@@ -1,7 +1,5 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Ajustes generales')
-
 @section('content')
     <div class="mt-4 dark:border-zinc-900 dark:bg-black">
         <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
@@ -19,15 +17,20 @@
                     <div>
                         <h3 class="text-zinc-700 dark:text-zinc-300">Modo mantenimiento</h3>
                         <p class="text-sm text-zinc-600 dark:text-zinc-400">Activa o desactiva el modo mantenimiento</p>
-                        <label class="mt-2 inline-flex cursor-pointer items-center">
-                            <input type="checkbox" value="" class="peer sr-only">
-                            <div
-                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-700 dark:peer-focus:ring-blue-800">
-                            </div>
-                            <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
-                                Activado
-                            </span>
-                        </label>
+                        <form action="{{ Route('admin.general-settings.maintenance.update') }}" method="POST">
+                            @csrf
+                            <label class="mt-2 inline-flex cursor-pointer items-center">
+                                <input type="checkbox" name="site_in_maintenance" id="site_in_maintenance"
+                                    value="{{ $maintenance->value ?? 0 }}" class="peer sr-only"
+                                    {{ $maintenance->value == 1 ? 'checked' : '' }}>
+                                <div
+                                    class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-700 dark:peer-focus:ring-blue-800">
+                                </div>
+                                <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
+                                    Activado
+                                </span>
+                            </label>
+                        </form>
                         <x-button type="a" text="Ver página en mantimiento" icon="view" typeButton="secondary"
                             class="mt-2 w-max" />
                     </div>
@@ -63,10 +66,10 @@
                         <p class="text-sm text-zinc-600 dark:text-zinc-400">
                             Configura las cookies de la aplicación
                         </p>
-                        <div class="mt-2 flex items-center gap-4">
-                            <x-button type="button" text="Ver cookies" icon="view" typeButton="secondary"
-                                class="w-max" />
-                            <x-button type="a" text="Editar cookies" icon="edit" typeButton="primary"
+                        <div class="mt-2 flex flex-col gap-2">
+                            <x-button type="button" text="Ver cookies" icon="view" typeButton="secondary" class="w-max"
+                                id="view-cookies" />
+                            <x-button type="a" text="Configurar cookies" icon="settings" typeButton="primary"
                                 class="w-max" />
                         </div>
                     </div>
@@ -82,7 +85,7 @@
                         <p class="text-sm text-zinc-600 dark:text-zinc-400">
                             Contenido actual:
                         </p>
-                        @include('layouts.__partials.footer')
+                        @include('layouts.__partials.store.footer')
                     </div>
                     <x-button type="a" text="Editar footer" icon="edit" typeButton="primary" class="mt-4 w-max" />
                 </div>
@@ -97,7 +100,7 @@
                         <p class="mb-2 text-sm text-zinc-600 dark:text-zinc-400">
                             Contenido actual:
                         </p>
-                        @include('layouts.__partials.navbar')
+                        @include('layouts.__partials.store.navbar')
                     </div>
                     <x-button type="a" text="Editar menú de navegación" icon="edit" typeButton="primary"
                         class="mt-4 w-max" />
