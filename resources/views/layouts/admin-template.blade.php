@@ -35,6 +35,7 @@
                 @include('layouts.__partials.admin.breadcrumb')
             </div>
             @yield('content')
+            <x-cookie />
         </div>
     </main>
 </body>
