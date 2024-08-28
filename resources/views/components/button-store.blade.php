@@ -10,7 +10,7 @@
 
 @php
     $padding = $onlyIcon ? 'p-2' : 'px-4 py-3';
-    $baseClasses = 'rounded-full flex items-center justify-center gap-2 transition-colors  ' . $padding;
+    $baseClasses = 'rounded-xl flex items-center justify-center gap-2 transition-colors  ' . $padding;
     $buttonTypes = [
         'primary' => 'bg-primary text-white uppercase hover:bg-secondary bg-gradient',
         'secondary' => 'bg-white text-zinc-600 border border-zinc-300 uppercase hover:bg-zinc-100',
