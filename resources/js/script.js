@@ -49,4 +49,8 @@ $(document).ready(function () {
         let formId = $(this).data("form");
         $("#" + formId).submit();
     });
+
+    $(".close-cookies").on("click", function () {
+        $(".cookies").addClass("hidden");
+    });
 });
