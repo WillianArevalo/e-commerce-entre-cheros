@@ -1,6 +1,6 @@
 @if (Session::has('success') || Session::has('error') || Session::has('info'))
     <div id="toast"
-        class="{{ $top }} fixed right-5 z-50 flex w-96 animate-fade-left items-center justify-between gap-4 rounded-full bg-white p-4 font-secondary text-zinc-500 shadow animate-duration-300 animate-once"
+        class="{{ $top }} fixed right-5 z-50 flex w-96 animate-fade-left items-center justify-between gap-4 rounded-xl bg-white p-4 font-secondary text-zinc-500 shadow animate-duration-300 animate-once"
         role="alert">
         <div class="inline-flex flex-shrink-0 items-center justify-center">
             @if ($message = Session::get('success'))
@@ -15,7 +15,7 @@
             {{ $message }}
         </div>
         <button type="button"
-            class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 focus:ring-2 focus:ring-zinc-300"
+            class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 focus:ring-2 focus:ring-zinc-300"
             data-dismiss-target="#toast" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
