@@ -134,9 +134,9 @@ Breadcrumbs::for('admin.customers.edit', function (BreadcrumbTrail $trail, $cust
 });
 
 //Admin > General Settings
-Breadcrumbs::for('admin.general-settings', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.general-settings.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Ajustes generales', route('admin.general-settings'));
+    $trail->push('Ajustes generales', route('admin.general-settings.index'));
 });
 
 

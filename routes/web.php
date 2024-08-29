@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
@@ -48,11 +49,16 @@ Route::get("/faq", [FAQController::class, "showFaqsStore"])->name("faq");
 Route::get("/contact", [ContactController::class, "index"])->name("contact");
 
 Route::middleware("auth")->group(function () {
-    Route::get("/account", [AccountController::class, "index"])->name("account");
-    Route::get("/account/settings", [AccountController::class, "settings"])->name("account.settings");
-    Route::post("/account/update", [AccountController::class, "update"])->name("account.update");
-    Route::get("/account/change-password", [AccountController::class, "changePassword"])->name("account.change-password");
-    Route::post("/account/edit-password", [AccountController::class, "editPassword"])->name("account.edit-password");
+    Route::prefix("account")->name("account.")->group(function () {
+        Route::get("/", [AccountController::class, "index"])->name("index");
+        Route::get("/settings", [AccountController::class, "settings"])->name("settings");
+        Route::get("/settings-edit", [AccountController::class, "settingsEdit"])->name("settings-edit");
+        Route::post("/settings-update", [AccountController::class, "settingsUpdate"])->name("settings-update");
+        Route::get("/change-password", [AccountController::class, "changePassword"])->name("change-password");
+        Route::post("/edit-password", [AccountController::class, "editPassword"])->name("edit-password");
+        Route::get('/addresses/{slug}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
+        Route::resource("/addresses", AddressController::class);
+    });
 });
 
 Route::get("/orders", [OrderController::class, "showOrdersStore"])->name("orders");
@@ -61,6 +67,8 @@ Route::post("/orders/info-add", [OrderController::class, "addInfoCustomer"])->na
 Route::controller(ProductController::class)->group(function () {
     Route::get("/products/{slug}", "details")->name("products.details");
 });
+
+Route::get("/polices/{slug}", [PoliciesController::class, "showPolicy"])->name("policies.show");
 
 Route::controller(StoreController::class)->group(function () {
     Route::get("/store", "index")->name("store");
@@ -80,8 +88,10 @@ Route::controller(CartController::class)->group(function () {
     Route::post("/cart/remove/{id}", "remove")->name("cart.remove");
     Route::post("/cart/update/{id}", "update")->name("cart.update");
     Route::get("/cart/applied-coupon/{id}", "appliedCoupon")->name("cart.applied-coupon");
-    Route::post("/cart/applied-shipping-method", "appliedShippingMethod")->name("cart.applied-shipping-method");
     Route::post("/cart/apply-coupon", "applyCoupon")->name("cart.apply-coupon");
+    Route::post("/cart/apply-shipping-method", "applyShippingMethod")->name("cart.apply-shipping-method");
+    Route::post("/cart/apply-payment-method", "applyPaymentMethod")->name("cart.apply-payment-method");
+    Route::post("/cart/remove-coupon/{id}", "removeCoupon")->name("cart.remove-coupon");
 });
 
 Route::get("/my-coupons", [CouponController::class, "myCoupons"])->name("mycoupons");
@@ -119,8 +129,9 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::resource("/popups", PopupController::class);
     Route::resource("/users", UserController::class);
     Route::resource("/customers", CustomerController::class);
-    Route::get("/general-settings", [SettingsGeneralController::class, "index"])->name("general-settings");
+
     Route::resource("/policies", PoliciesController::class);
+    Route::post("/policies/download/{id}", [PoliciesController::class, "download"])->name("policies.download");
     Route::resource("/faq", FAQController::class);
     Route::get("locale/{locale}", [ConfigurationController::class, "setLocale"])->name("locale");
     Route::get("/settings", [SettingsController::class, "index"])->name("settings");
@@ -133,6 +144,11 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
         Route::resource("/shipping-methods", ShippingController::class);
         Route::resource("/payment-methods", PaymentController::class);
         Route::resource("/currencies", CurrencyController::class);
+    });
+
+    Route::prefix("general-settings")->name("general-settings.")->group(function () {
+        Route::get("/", [SettingsGeneralController::class, "index"])->name("index");
+        Route::post("/maintenance/update", [SettingsGeneralController::class, "maintenanceUpdate"])->name("maintenance.update");
     });
 });
 
