@@ -4,7 +4,7 @@ export function showToast(message, type) {
     const currentToastId = `toast-success-${toasCount++}`;
     const div = $(`<div id="${currentToastId}" role="alert"></div>`);
     div.addClass(
-        "flex items-center gap-4 justify-between w-96 p-4 text-zinc-500 bg-white rounded-full shadow-lg font-secondary z-50 animate-fade-left animate-once animate-duration-300",
+        "flex items-center gap-4 justify-between w-96 p-4 text-zinc-500 bg-white rounded-xl shadow-lg font-secondary z-50 animate-fade-left animate-once animate-duration-300",
     );
 
     let svg = "";
@@ -38,7 +38,7 @@ export function showToast(message, type) {
             ${message}
         </div>
         <button type="button"
-            class="ms-auto -mx-1.5 -my-1.5 bg-white text-zinc-400 hover:text-zinc-900 rounded-full focus:ring-2 focus:ring-zinc-300  hover:bg-zinc-100 inline-flex items-center justify-center h-8 w-8"
+            class="ms-auto -mx-1.5 -my-1.5 bg-white text-zinc-400 hover:text-zinc-900 rounded-xl focus:ring-2 focus:ring-zinc-300  hover:bg-zinc-100 inline-flex items-center justify-center h-8 w-8"
             data-dismiss-target="#${currentToastId}" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"

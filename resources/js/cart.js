@@ -80,7 +80,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#formApplyCoupon").on("submit", function (e) {
+    $(document).on("submit", "#formApplyCoupon", function (e) {
         e.preventDefault();
         if ($("#code").val() == "") {
             $("#code").addClass("is-invalid");
@@ -98,10 +98,10 @@ $(document).ready(function () {
                     showToast(response.success, "success");
                     $("#discount").text("-" + response.discount);
                     $("#subtotal").text(response.total);
-                    $("#apply-coupon").hide();
-                    $("#message-coupon").removeClass("hidden").addClass("flex");
-                    $("#remove-coupon-container").removeClass("hidden");
-                    $("#code").attr("disabled", true);
+                    $("#form-coupon").html(response.html);
+                    $("#totalWithShippingMethod").text(
+                        response.totalWithShippingMethod,
+                    );
                 } else {
                     showToast(response.error, "error");
                 }

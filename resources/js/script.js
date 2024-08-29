@@ -39,15 +39,18 @@ $(document).ready(function () {
         $(".deleteModal").removeClass("hidden").addClass("flex");
         let formId = $(this).data("form");
         $(".deleteModal .confirmDelete").attr("data-form", formId);
+        $("body").addClass("overflow-hidden");
     });
 
     $(document).on("click", ".closeModal", function () {
         $(".deleteModal").removeClass("flex").addClass("hidden");
+        $("body").removeClass("overflow-hidden");
     });
 
     $(document).on("click", ".confirmDelete", function () {
         let formId = $(this).data("form");
         $("#" + formId).submit();
+        $("body").removeClass("overflow-hidden");
     });
 
     $(".close-cookies").on("click", function () {

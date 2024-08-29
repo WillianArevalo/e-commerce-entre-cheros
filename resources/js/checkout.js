@@ -1,7 +1,14 @@
+import { showToast } from "./toast";
+
 $(document).ready(function () {
     $("#btn-edit-user-info").on("click", function () {
         $("#user-info").hide();
         $("#form-user-info").show();
+    });
+
+    $("#btn-cancel-user-info").on("click", function () {
+        $("#form-user-info").hide();
+        $("#user-info").show();
     });
 
     const tabs = $(".tab-content");
@@ -49,7 +56,7 @@ $(document).ready(function () {
         }
     });
 
-    showTab(currentTab);
+    showTab(1);
 
     $("#card_number").on("input", function () {
         let input = $(this).val().replace(/\D/g, "");
@@ -63,8 +70,22 @@ $(document).ready(function () {
     $("input[name='payment_method']").on("change", function () {
         $(".payment-method").hide();
         const name = $(this).data("name");
+
+        const form = $(this).closest("form");
         if (name == "Tarjeta de crédito") {
             $(".credit-card").show();
         }
+
+        $.ajax({
+            url: form.attr("action"),
+            method: "POST",
+            data: form.serialize(),
+            success: function (response) {
+                if (response.success) {
+                    showToast(response.success, "success");
+                    $("#payment-method-selected").html(response.html);
+                }
+            },
+        });
     });
 });
