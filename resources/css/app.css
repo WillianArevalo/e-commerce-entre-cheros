@@ -239,7 +239,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .method-shipping-selected {
-    @apply ring-4 ring-blue-200 border-blue-500;
+    @apply ring-4 ring-blue-200 border-blue-500 scale-105 transition-transform duration-300;
 }
 
 .step-completed {
