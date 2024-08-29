@@ -22,14 +22,13 @@ class AddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "address_line_1"    => "required|string",
-            "address_line_2"    => "nullable|string",
-            "city"              => "required|string",
-            "state"             => "required|string",
-            "country"           => "required|string",
-            "zip_code"          => "required|string",
-            "area_code"         => "required|string",
-            "customer_id"       => "required|integer|exists:customers,id",
+            "address_line_1" => "required|string",
+            "address_line_2" => "nullable|string",
+            "city" => "nullable|string",
+            "state"  => "nullable|string",
+            "country" => "required|string",
+            "zip_code" => "required|string",
+            "type" => "required|string"
         ];
     }
 }
