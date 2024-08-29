@@ -85,7 +85,7 @@
                     <h3 class="font-primary text-3xl font-bold text-white">Información</h3>
                     <ul class="mt-2 flex w-40 flex-col gap-2 text-primary">
                         <li class="footer-item group group w-max">
-                            <a href="{{ Route('account') }}"
+                            <a href="{{ Route('account.index') }}"
                                 class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
                                     <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
