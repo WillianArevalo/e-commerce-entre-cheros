@@ -23,6 +23,7 @@ class Customer extends Model
         "phone",
         "birthdate",
         "gender",
-        "status"
+        "status",
+        "area_code"
     ];
 }
