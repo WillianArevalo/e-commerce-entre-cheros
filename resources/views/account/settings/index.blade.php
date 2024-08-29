@@ -1,0 +1,151 @@
+@extends('layouts.__partials.store.template-profile')
+@section('profile-content')
+    <div class="flex flex-col">
+        <div class="py-2">
+            <h2 class="font-primary text-3xl font-bold text-secondary">
+                Configuración
+            </h2>
+        </div>
+        <div class="border-t border-zinc-200">
+            <div class="mt-4 flex flex-col">
+                <h3 class="text-lg font-semibold text-zinc-700">
+                    Datos de seguridad
+                </h3>
+                <div>
+                    <div class="flex flex-col">
+                        <div class="flex gap-2">
+                            <h4 class="font-medium text-secondary">Correo electrónico:</h4>
+                            <p>{{ $user->email }}</p>
+                        </div>
+                        <div class="mt-2">
+                            <x-button-store type="a" icon="recovery-mail" text="Cambiar correo" typeButton="secondary"
+                                class="w-max" />
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-medium text-secondary">Contraseña:</h4>
+                            <div class="flex items-center gap-1">
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                                <div class="h-1.5 w-1.5 rounded-full bg-zinc-800"></div>
+                            </div>
+                        </div>
+                        <div class="mt-1">
+                            <p class="text-xs text-zinc-600">
+                                Última actualización:
+                                {{ $user->updated_at->diffForHumans() }}
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <x-button-store type="a" href="{{ Route('account.change-password') }}"
+                                text="Cambiar contraseña" icon="reset-password" typeButton="secondary"
+                                class="w-max px-16" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 border-t border-zinc-200">
+                <div class="flex items-center justify-between pt-4">
+                    <h3 class="text-lg font-semibold text-zinc-700">Datos personales</h3>
+                    <a href="{{ Route('account.settings-edit') }}"
+                        class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-green-500">
+                        Editar datos
+                        <x-icon-store icon="arrow-right-02"
+                            class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                    </a>
+                </div>
+                <div class="mt-2 flex flex-col gap-3">
+                    <div class="flex gap-2">
+                        <h4 class="font-medium text-secondary">Usuario:</h4>
+                        <p class="text-zinc-800">{{ $user->username }}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <h4 class="font-medium text-secondary">Nombres:</h4>
+                        <p class="text-zinc-800">{{ $user->name }}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <h4 class="font-medium text-secondary">Apellidos:</h4>
+                        <p class="text-zinc-800">{{ $user->last_name }}</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-medium text-secondary">Género:</h4>
+                            <span class="flex items-center gap-1 text-zinc-800">
+                                @if ($user->customer)
+                                    @if ($user->customer->gender === 'female')
+                                        <x-icon-store icon="female" class="h-6 w-6 text-rose-500" />
+                                        Femenino
+                                    @else
+                                        <x-icon-store icon="male" class="h-5 w-5 text-primary" />
+                                        Masculino
+                                    @endif
+                                @else
+                                    No definido
+                                @endif
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-medium text-secondary">Telefono:</h4>
+                            <p class="text-zinc-800">{{ $user->customer->phone ?? 'No definido' }}</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-medium text-secondary">Fecha de nacimiento:</h4>
+                            <p class="text-zinc-800">
+                                {{ isset($user->customer->birthdate) ? \Carbon\Carbon::parse($user->customer->birthdate)->format('d M, Y') : 'Sin definir' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="flex items-center justify-between pt-4">
+                            <h3 class="text-base font-semibold text-zinc-700">
+                                Dirección
+                            </h3>
+                            <a href="{{ Route('account.addresses.index') }}"
+                                class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-green-500">
+                                Editar dirección
+                                <x-icon-store icon="arrow-right-02"
+                                    class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                            </a>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <h4 class="font-medium text-secondary">País:</h4>
+                            <p class="text-zinc-800">
+                                {{ $user->customer->address->country }}
+                            </p>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <h4 class="font-medium text-secondary">Dirección:</h4>
+                            <p class="text-zinc-800">
+                                {{ $user->customer->address->address_line_1 . ', ' . $user->customer->address->address_line_2 }}
+                            </p>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <h4 class="font-medium text-secondary">Código postal:</h4>
+                            <p class="text-zinc-800">
+                                {{ $user->customer->address->zip_code }}
+                            </p>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <h4 class="font-medium text-secondary">Estado:</h4>
+                            <p class="text-zinc-800">
+                                {{ $user->customer->address->state ?? '---' }}
+                            </p>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <h4 class="font-medium text-secondary">Ciudad:</h4>
+                            <p class="text-zinc-800">
+                                {{ $user->customer->address->city ?? '---' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
