@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\Cart as CartHelper;
 use App\Models\Coupon;
 use App\Models\Currency;
+use App\Models\PaymentMethod;
 use App\Utils\CouponRules;
 use Illuminate\Support\Facades\Auth;
 
@@ -138,14 +139,19 @@ class CartController extends Controller
             "status" => $status,
             "message" => $message,
             "total" => CartHelper::count(),
-            "totalPrice" => $this->symbol . number_format(CartHelper::total(), 2) ??  0,
-            "totalTaxes" => $this->symbol . number_format(CartHelper::totalTaxes(), 2)  ?? 0,
-            "totalWithTaxes" => $this->symbol . number_format(CartHelper::totalWithTaxes(), 2) ?? 0,
-            "totalDiscount" => $this->symbol . number_format(CartHelper::totalDiscount(), 2) ?? 0,
-            "subtotal" => $this->symbol . number_format(CartHelper::subtotal(), 2) ?? 0,
-            "totalWithShippingMethod" => $this->symbol . number_format(CartHelper::totalWithShippingMethod(), 2) ?? 0,
+            "totalPrice" => $this->priceFormat(CartHelper::total()),
+            "totalTaxes" => $this->priceFormat(CartHelper::totalTaxes()),
+            "totalWithTaxes" => $this->priceFormat(CartHelper::totalWithTaxes()),
+            "totalDiscount" => $this->priceFormat(CartHelper::totalDiscount()),
+            "subtotal" => $this->priceFormat(CartHelper::subtotal()),
+            "totalWithShippingMethod" => $this->priceFormat(CartHelper::totalWithShippingMethod()),
             "html" => view("layouts.__partials.ajax.store.row-cart", compact("cart"))->render(),
         ]);
+    }
+
+    public function priceFormat($number)
+    {
+        return $this->symbol . number_format($number, 2) ?? 0;
     }
 
     public function appliedCoupon(string $code)
@@ -158,6 +164,12 @@ class CartController extends Controller
     public function applyCoupon(Request $request)
     {
         $couponRules = new CouponRules();
+        $cart = CartHelper::get();
+
+        if (!$cart) {
+            return response()->json(["error" => "No puedes aplicar un cupón a un carrito vacío"]);
+        }
+
         $coupon = Coupon::with("rule")->where("code", "=", $request->input("code"))->first();
         if ($coupon) {
             $user = Auth::user();
@@ -179,16 +191,22 @@ class CartController extends Controller
             ];
             $isValid = $couponRules->validateCoupon($coupon->rule->predefined_rule, $conditions);
             if ($isValid) {
+                DB::beginTransaction();
+                try {
 
-                $cart = CartHelper::get();
-                $cart->coupon()->associate($coupon);
-                $cart->save();
-
-                return response()->json([
-                    "success" => "Cupón válido",
-                    "discount" => $this->symbol . number_format(CartHelper::totalDiscount(), 2),
-                    "total" => $this->symbol . number_format(CartHelper::subtotal(), 2)
-                ]);
+                    $cart->coupon()->associate($coupon);
+                    $cart->save();
+                    DB::commit();
+                    return response()->json([
+                        "success" => "Cupón válido",
+                        "discount" => $this->priceFormat(CartHelper::totalDiscount()),
+                        "total" => $this->priceFormat(CartHelper::subtotal()),
+                        "totalWithShippingMethod" => $this->priceFormat(CartHelper::totalWithShippingMethod()),
+                        "html" => view("layouts.__partials.ajax.store.form-coupon", ["cart" => CartHelper::get()])->render()
+                    ]);
+                } catch (\Exception $e) {
+                    return response()->json(["error" => "An error occurred while applying the coupon. Error: " . $e->getMessage()]);
+                }
             } else {
                 return response()->json(["error" => "Cupón no válido."]);
             }
@@ -197,19 +215,57 @@ class CartController extends Controller
         }
     }
 
-    public function appliedShippingMethod(Request $request)
+    public function removeCoupon(string $id)
+    {
+        $cart = CartHelper::get();
+        $coupon = Coupon::find($id);
+        DB::beginTransaction();
+        try {
+            $cart->coupon()->dissociate($coupon);
+            $cart->save();
+            DB::commit();
+            return response()->json([
+                "success" => "Cupón eliminado",
+                "discount" => $this->priceFormat(CartHelper::totalDiscount()),
+                "total" => $this->priceFormat(CartHelper::subtotal()),
+                "totalWithShippingMethod" => $this->priceFormat(CartHelper::totalWithShippingMethod()),
+                "html" => view("layouts.__partials.ajax.store.form-coupon", ["cart" => CartHelper::get()])->render()
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(["error" => "An error occurred while removing the coupon. Error: " . $e->getMessage()]);
+        }
+    }
+
+    public function applyShippingMethod(Request $request)
     {
         $shipping_method = ShippingMethod::find($request->input("shipping_method"));
         if (!$shipping_method) return response()->json(["status" => "error", "message" => "Shipping method not found"]);
-
         $cart = CartHelper::get();
-        $cart->shippingMethod()->associate($shipping_method);
-        $cart->save();
+        DB::beginTransaction();
+        try {
+            $cart->shippingMethod()->associate($shipping_method);
+            $cart->save();
+            DB::commit();
+            return response()->json([
+                "status" => "success",
+                "message" => "Shipping method applied",
+                "total" => $this->priceFormat(CartHelper::totalWithShippingMethod()),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(["status" => "error", "message" => "An error occurred while applying the shipping method. Error: " . $e->getMessage()]);
+        }
+    }
 
+    public function applyPaymentMethod(Request $request)
+    {
+        $paymentMethod = PaymentMethod::find($request->input("payment_method"));
+        if (!$paymentMethod) {
+            return response()->json(["error" => "Método de pago no encontrado"]);
+        }
+        session()->put("payment_method", $paymentMethod);
         return response()->json([
-            "status" => "success",
-            "message" => "Shipping method applied",
-            "total" => $this->symbol . number_format(CartHelper::totalWithShippingMethod(), 2),
+            "success" => "Método de pago aplicado",
+            "html" => view("layouts.__partials.ajax.store.payment-method", ["payment" => $paymentMethod])->render()
         ]);
     }
 }
