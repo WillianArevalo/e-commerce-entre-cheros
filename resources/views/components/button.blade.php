@@ -77,13 +77,13 @@
 @if ($type === 'a')
     @if ($iconAlign === 'left')
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-            <x-icon :icon="$icon" class="h-4 w-4 text-current" />
+            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
             {{ $text }}
         </a>
     @elseif ($iconAlign === 'right')
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
             {{ $text }}
-            <x-icon :icon="$icon" class="h-4 w-4 text-current" />
+            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
         </a>
     @else
         <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
@@ -92,7 +92,7 @@
     @endif
 @else
     <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
-        <x-icon :icon="$icon" class="h-4 w-4 text-current" />
+        <x-icon :icon="$icon" class="h-5 w-5 text-current" />
         {{ $text }}
     </button>
 @endif
