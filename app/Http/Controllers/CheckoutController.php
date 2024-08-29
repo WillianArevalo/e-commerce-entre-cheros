@@ -10,7 +10,6 @@ use GuzzleHttp\Client;
 
 class CheckoutController extends Controller
 {
-
     protected $client;
 
     public function __construct(Client $client)
@@ -25,15 +24,15 @@ class CheckoutController extends Controller
         $user = auth()->user();
         $countries = $this->getAllCountries();
         $payment_methods = PaymentMethod::all();
+        $payment_method = session()->get("payment_method");
 
         if (!$user || !$cart) {
             return redirect()->route("cart")->with("error", "No hay productos en el carrito");
         }
 
         $customer = $user->customer;
-
         if ($customer) {
-            $customer = $customer->load("address");
+            $address = $customer->address()->where("type", "shipping_address")->first();
         }
 
         return view("checkout.index", [
@@ -41,12 +40,13 @@ class CheckoutController extends Controller
             "user" => $user,
             "cart" => $cart,
             "customer" => $customer,
+            "address" => $address ?? null,
             "countries" => $countries,
             "payment_methods" => $payment_methods,
+            "payment" => $payment_method,
             "carts_totals" => CartHelper::totals()
         ]);
     }
-
 
     public function getAllCountries()
     {
