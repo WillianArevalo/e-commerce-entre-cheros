@@ -46,19 +46,17 @@
             <li class="relative flex items-center">
                 @if ($user = auth()->user())
                     <button type="button" class="profile flex items-center justify-center gap-1">
-                        {{--    <img src="{{ Storage::url($user->profile_photo_path) }}" alt=""
-                            class="h-10 w-10 rounded-full object-cover"> --}}
                         <x-icon-store icon="user" class="h-6 w-6 text-secondary" />
                         <div class="flex items-center justify-center gap-1">
                             <span class="block text-sm text-secondary">Hola,</span>
                             <span class="font-meidum truncate text-sm">{{ $user->name }}</span>
                         </div>
                     </button>
-                    <div class="absolute top-8 hidden w-52 overflow-hidden rounded-lg bg-white font-secondary text-sm shadow-md"
+                    <div class="absolute top-8 z-50 hidden w-52 overflow-hidden rounded-lg bg-white font-secondary text-sm shadow-md"
                         id="profile-options">
                         <ul class="flex flex-col p-2 font-medium">
                             <li class="mb-2 w-full">
-                                <a href="{{ Route('account') }}"
+                                <a href="{{ Route('account.index') }}"
                                     class="flex items-center justify-start rounded-xl px-4 py-2 hover:bg-zinc-100">
                                     <img src="{{ Storage::url($user->profile_photo_path) }}" alt=""
                                         class="min-w-12 h-12 rounded-full object-cover">
