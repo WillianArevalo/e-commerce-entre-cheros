@@ -15,7 +15,7 @@
                 <li>
                     <a href="{{ route('admin.sales-strategies.shipping-methods.index') }}"
                         class="{{ \App\Helpers\RouteHelper::isActive(['admin.sales-strategies.shipping-methods.index']) }} flex items-center gap-2 rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
-                        <x-icon icon="container-truck"
+                        <x-icon icon="package-import"
                             class="h-5 w-5 flex-shrink-0 text-current text-zinc-500 transition duration-75" />
                         Metodos de envío
                     </a>
@@ -31,7 +31,7 @@
                 <li>
                     <a href="{{ route('admin.sales-strategies.currencies.index') }}"
                         class="{{ \App\Helpers\RouteHelper::isActive(['admin.sales-strategies.currencies.index']) }} flex items-center gap-2 rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
-                        <x-icon icon="save-money-dollar"
+                        <x-icon icon="cash"
                             class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                         Cambio de divisas
                     </a>

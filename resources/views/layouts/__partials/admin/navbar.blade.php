@@ -317,9 +317,14 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li
+                class="{{ \App\Helpers\RouteHelper::isActive([
+                    'admin.general-settings.index',
+                    'admin.policies.index',
+                    'admin.faq.index',
+                ]) }} rounded-lg dark:text-white">
                 <button type="button"
-                    class="group flex w-full items-center rounded-lg p-2 text-base text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950"
+                    class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current"
                     aria-controls="dropdown-settings" data-collapse-toggle="dropdown-settings">
                     <x-icon icon="settings"
                         class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
@@ -330,26 +335,26 @@
                 </button>
                 <ul id="dropdown-settings" class="hidden space-y-2 py-2">
                     <li>
-                        <a href="{{ route('admin.general-settings') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                        <a href="{{ route('admin.general-settings.index') }}"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Ajustes generales
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.policies.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Políticas
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.faq.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Preguntas frecuentes
                         </a>
                     </li>
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Crear páginas
                         </a>
                     </li>
