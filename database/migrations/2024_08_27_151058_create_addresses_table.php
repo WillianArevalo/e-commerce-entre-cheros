@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string("state")->nullable();
             $table->string("city")->nullable();
             $table->string("zip_code")->nullable();
-            $table->string("area_code")->nullable();
+            $table->string("type")->nullable();
+            $table->string("slug")->nullable();
             $table->foreignId("customer_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date("birthdate")->nullable();
             $table->enum("gender", ["male", "female", "other"])->nullable();
             $table->string("status")->default("active");
+            $table->string("area_code")->nullable();
             $table->foreignId("user_id")->constrained();
             $table->timestamps();
         });
