@@ -1,6 +1,16 @@
 @extends('layouts.template')
 @section('title', 'Cart')
 @section('content')
+
+    @php
+        $coupon_code = '';
+        if (session('coupon') != null) {
+            $coupon_code = session('coupon')->code;
+        } elseif ($cart != null && $cart->coupon != null) {
+            $coupon_code = $cart->coupon->code;
+        }
+    @endphp
+
     <div>
         <!-- Header container -->
         <section class="relative h-[450px] w-full text-white"
@@ -166,9 +176,10 @@
                                         {{ $carts_totals['total_with_taxes'] }}
                                     </p>
                                 </div>
-                                <div class="mt-4">
-                                    <form action="{{ Route('cart.apply-coupon') }}" method="POST"
-                                        class="flex flex-col gap-2" id="formApplyCoupon">
+                                <div class="mt-4" id="form-coupon">
+                                    <form
+                                        action="{{ $cart && $cart->coupon ? Route('cart.remove-coupon', $cart->coupon->id ?? 0) : Route('cart.apply-coupon') }}"
+                                        method="POST" class="flex flex-col gap-2" id="formApplyCoupon">
                                         @csrf
                                         <div class="relative w-full">
                                             <div
@@ -178,12 +189,13 @@
                                             </div>
                                             <input type="text"
                                                 class="w-full rounded-xl border border-zinc-300 px-6 py-3 pl-12 text-sm text-zinc-700 transition duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
-                                                id="code" name="code"
-                                                value="{{ session('coupon') ? session('coupon')->code : '' }}"
-                                                placeholder="Código del cupón">
-                                            <div class="hidden" id="remove-coupon-container">
+                                                id="code" name="code" value="{{ $coupon_code }}"
+                                                placeholder="Código del cupón"
+                                                {{ $cart && $cart->coupon ? 'disabled' : '' }}>
+                                            <div class="{{ $cart && $cart->coupon ? '' : 'hidden' }}"
+                                                id="remove-coupon-container">
                                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2">
-                                                    <button type="button"
+                                                    <button type="submit"
                                                         class="rounded-xl bg-red-100 p-2 hover:bg-red-200"
                                                         id="remove-coupon">
                                                         <x-icon-store icon="cancel-circle" class="h-4 w-4 text-red-800" />
@@ -192,14 +204,16 @@
                                             </div>
                                         </div>
                                         <span id="message-coupon"
-                                            class="hidden items-center gap-2 text-sm text-green-500">
+                                            class="{{ $cart && $cart->coupon ? 'flex' : 'hidden' }} items-center gap-2 text-sm text-green-500">
                                             <x-icon-store icon="checkmark-circle" class="h-4 w-4 text-green-500" />
                                             Cupón aplicado
                                         </span>
-                                        <button type="submit" id="apply-coupon"
-                                            class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
-                                            Aplicar cupón
-                                        </button>
+                                        @if (!$cart || !$cart->coupon)
+                                            <button type="submit" id="apply-coupon"
+                                                class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
+                                                Aplicar cupón
+                                            </button>
+                                        @endif
                                     </form>
                                 </div>
                                 <div class="mt-4 flex flex-col gap-2 border-y py-4">
@@ -227,10 +241,18 @@
         <!-- Shipping method -->
         @if ($cart)
             <section class="relative -top-16 mx-20 border-t border-zinc-200">
-                <div class="mt-10 flex items-center justify-center">
-                    <h2 class="font-primary text-4xl font-bold uppercase text-secondary">
-                        Método de envío
-                    </h2>
+                <div class="mt-10 flex flex-col items-center gap-2">
+                    <div class="flex items-center justify-center gap-4">
+                        <p>
+                            <x-icon-store icon="truck-delivery" class="h-8 w-8 text-secondary" />
+                        </p>
+                        <h2 class="font-primary text-4xl font-bold uppercase text-secondary">
+                            Método de envío
+                        </h2>
+                    </div>
+                    <p class="text-zinc-700">
+                        Selecciona el método de envío que prefieras
+                    </p>
                 </div>
                 <div class="mt-8 flex">
                     <div class="flex-1">
@@ -238,7 +260,7 @@
                     </div>
                     <div class="flex-1">
                         @if ($shipping_methods->count() > 0)
-                            <form action="{{ Route('cart.applied-shipping-method') }}" method="POST">
+                            <form action="{{ Route('cart.apply-shipping-method') }}" method="POST">
                                 @csrf
                                 <div class="flex flex-col gap-4">
                                     @foreach ($shipping_methods as $method)
