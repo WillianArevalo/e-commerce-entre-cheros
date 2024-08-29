@@ -8,7 +8,7 @@
     <input type="hidden" id="{{ $id }}" name="{{ $name }}" value="{{ $value }}">
     <div class="relative">
         <div
-            class="selected @error($name) is-invalid @enderror flex w-full items-center justify-between rounded-xl border border-zinc-300 bg-white px-6 py-3 text-sm">
+            class="selected @error($name) is-invalid @enderror flex w-full items-center justify-between rounded-xl border border-zinc-300 bg-white px-6 py-3 text-sm text-zinc-700">
             <span class="itemSelected truncate" id="{{ $id }}_selected">
                 {{ $selected && isset($options[$selected]) ? $options[$selected] : ($text ?: 'Seleccionar') }}
             </span>
@@ -17,8 +17,8 @@
         <ul
             class="selectOptions {{ count($options) > 6 ? 'h-64 overflow-auto' : '' }} an absolute z-10 mb-8 mt-2 hidden w-full rounded-xl border border-zinc-200 bg-white p-2 shadow-lg">
             @foreach ($options as $value => $label)
-                <li class="itemOption truncate rounded-xl px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-50"
-                    title="{{ $label }}" data-value="{{ $value }}" data-input="#{{ $id }}">
+                <li class="itemOption cursor-default truncate rounded-xl px-4 py-2.5 text-sm text-zinc-700 hover:bg-zinc-50"
+                    data-value="{{ $value }}" data-input="#{{ $id }}">
                     {{ $label }}
                 </li>
             @endforeach
