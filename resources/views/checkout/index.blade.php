@@ -44,9 +44,11 @@
                                         method="POST">
                                         @csrf
                                         <div class="flex flex-col gap-2 font-secondary">
-                                            <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
-                                                Información del cliente
-                                            </h2>
+                                            <div>
+                                                <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                                    Información del cliente
+                                                </h2>
+                                            </div>
                                             <div class="flex flex-col gap-4">
                                                 <div class="flex w-full gap-4">
                                                     <div class="flex flex-1 flex-col gap-2">
@@ -70,7 +72,7 @@
                                                         <div class="flex flex-1 flex-col gap-2">
                                                             <x-input-store type="text" placeholder="503" label="Código"
                                                                 icon="plus" name="area_code"
-                                                                value="{{ $customer->address->area_code ?? '' }}" />
+                                                                value="{{ $customer->area_code ?? '' }}" />
                                                         </div>
                                                         <div class="flex flex-[3] flex-col gap-2">
                                                             <x-input-store type="text"
@@ -90,54 +92,63 @@
                                                     <div class="flex flex-1 flex-col gap-2">
                                                         <x-select-store label="País" id="country" name="country"
                                                             :options="$countries" required
-                                                            selected="{{ $customer->address->country ?? '' }}"
-                                                            value="{{ $customer->address->country ?? '' }}" />
+                                                            selected="{{ $address->country ?? '' }}"
+                                                            value="{{ $address->country ?? '' }}" />
                                                     </div>
                                                     <div class="flex flex-[2] flex-col gap-2">
                                                         <x-input-store type="text" name="address_line_1" placeholder=""
                                                             label="Dirección (línea 1)"
-                                                            value="{{ $customer->address->address_line_1 ?? '' }}"
-                                                            required />
+                                                            value="{{ $address->address_line_1 ?? '' }}" required />
                                                     </div>
                                                 </div>
                                                 <div class="flex w-full">
                                                     <div class="flex flex-1 flex-col gap-2">
                                                         <x-input-store type="text" placeholder="" name="address_line_2"
                                                             label="Dirección (línea 2)"
-                                                            value="{{ $customer->address->address_line_2 ?? '' }}" />
+                                                            value="{{ $address->address_line_2 ?? '' }}" />
                                                     </div>
                                                 </div>
                                                 <div class="flex w-full gap-4">
                                                     <div class="flex flex-1 flex-col gap-2">
                                                         <x-input-store type="text" placeholder="Ingresa el estado"
                                                             label="Estado" name="state"
-                                                            value="{{ $customer->address->state ?? '' }}" />
+                                                            value="{{ $address->state ?? '' }}" />
                                                     </div>
                                                     <div class="flex flex-[2] flex-col gap-2">
                                                         <x-input-store type="text" placeholder="Ingresa la ciudad"
                                                             label="Ciudad" name="city"
-                                                            value="{{ $customer->address->city ?? '' }}" />
+                                                            value="{{ $address->city ?? '' }}" />
                                                     </div>
                                                     <div class="flex flex-1 flex-col gap-2">
                                                         <x-input-store type="text"
                                                             placeholder="Ingresa el código postal    "
                                                             label="Código postal" name="zip_code"
-                                                            value="{{ $customer->address->zip_code ?? '' }}" required />
+                                                            value="{{ $address->zip_code ?? '' }}" required />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex justify-between">
+                                        <div class="flex items-center gap-4">
                                             <x-button-store type="submit" text="Guardar cambios" class="text-sm"
-                                                typeButton="secondary" />
+                                                typeButton="primary" />
+                                            <x-button-store type="button" id="btn-cancel-user-info" text="Cancelar"
+                                                class="text-sm" typeButton="secondary" />
                                         </div>
                                     </form>
                                 </div>
                                 <div id="user-info">
                                     <div>
-                                        <h1 class="font-primary text-2xl font-bold uppercase text-secondary">
-                                            Información del cliente
-                                        </h1>
+                                        <div class="flex justify-between">
+                                            <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                                Información del cliente
+                                            </h2>
+                                            <button type="button" id="btn-edit-user-info"
+                                                class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-green-500">
+                                                Editar datos
+                                                <x-icon-store icon="arrow-right-02"
+                                                    class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                                            </button>
+                                        </div>
                                         <div class="mt-4 flex flex-col gap-4 font-secondary">
                                             <div class="flex w-full gap-4">
                                                 <div class="flex flex-1 items-center gap-2">
@@ -167,7 +178,7 @@
                                                         </label>
                                                         <p class="text-zinc-600">
                                                             @if ($customer)
-                                                                + {{ $customer->address->area_code }}
+                                                                + {{ $customer->area_code }}
                                                                 {{ $customer->phone }}
                                                             @else
                                                                 ---
@@ -179,65 +190,74 @@
                                         </div>
                                     </div>
                                     <div class="mt-8 border-t border-zinc-300 pt-4">
-                                        <h1 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                        <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
                                             Dirección de envío
-                                        </h1>
-                                        <div class="mt-4 flex flex-col gap-4 font-secondary">
-                                            <div class="flex w-full gap-4">
-                                                <div class="flex flex-1 items-center gap-2">
-                                                    <label for="name" class="text-lg font-bold text-secondary">
-                                                        País:
-                                                    </label>
-                                                    <p class="text-zinc-600">
-                                                        {{ $customer->address->country ?? '---' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="flex w-full gap-4">
-                                                <div class="flex flex-1 items-center gap-2">
-                                                    <label for="name" class="text-lg font-bold text-secondary">
-                                                        Dirección:
-                                                    </label>
-                                                    <p class="text-zinc-600">
-                                                        @if ($customer)
-                                                            {{ $customer->address->address_line_1 ?? '' }}
-                                                            {{ $customer->address->address_line_2 ?? '' }}
-                                                        @else
-                                                            ---
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="flex w-full gap-4">
-                                                <div class="flex flex-1 items-center gap-2">
-                                                    <label for="name" class="text-lg font-bold text-secondary">
-                                                        Ciudad:
-                                                    </label>
-                                                    <p class="text-zinc-600">{{ $customer->address->city ?? '---' }}</p>
-                                                </div>
-                                                <div class="flex flex-1 items-center gap-2">
-                                                    <label for="name" class="text-lg font-bold text-secondary">
-                                                        Estado:
-                                                    </label>
-                                                    <p class="text-zinc-600">{{ $customer->address->state ?? '---' }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="flex w-full gap-4">
-                                                <div class="flex flex-1 gap-4">
-                                                    <div class="flex items-center gap-2">
+                                        </h2>
+                                        @if ($address)
+                                            <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 items-center gap-2">
                                                         <label for="name" class="text-lg font-bold text-secondary">
-                                                            Código postal:
+                                                            País:
                                                         </label>
                                                         <p class="text-zinc-600">
-                                                            {{ $customer->address->zip_code ?? '---' }}
+                                                            {{ $address->country ?? '---' }}
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 items-center gap-2">
+                                                        <label for="name" class="text-lg font-bold text-secondary">
+                                                            Dirección:
+                                                        </label>
+                                                        <p class="text-zinc-600">
+                                                            @if ($customer)
+                                                                {{ $address->address_line_1 ?? '' }}
+                                                                {{ $address->address_line_2 ?? '' }}
+                                                            @else
+                                                                ---
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 items-center gap-2">
+                                                        <label for="name" class="text-lg font-bold text-secondary">
+                                                            Ciudad:
+                                                        </label>
+                                                        <p class="text-zinc-600">{{ $address->city ?? '---' }}</p>
+                                                    </div>
+                                                    <div class="flex flex-1 items-center gap-2">
+                                                        <label for="name" class="text-lg font-bold text-secondary">
+                                                            Estado:
+                                                        </label>
+                                                        <p class="text-zinc-600">{{ $address->state ?? '---' }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 gap-4">
+                                                        <div class="flex items-center gap-2">
+                                                            <label for="name"
+                                                                class="text-lg font-bold text-secondary">
+                                                                Código postal:
+                                                            </label>
+                                                            <p class="text-zinc-600">
+                                                                {{ $address->zip_code ?? '---' }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            <div class="flex flex-col gap-8 py-10">
+                                                <p class="text-zinc-600">No hay dirección de envío registrada</p>
+                                                <x-button-store type="a"
+                                                    href="{{ Route('account.addresses.create') }}"
+                                                    text="Agregar dirección" class="w-max text-sm"
+                                                    typeButton="secondary" />
+                                            </div>
+                                        @endif
                                     </div>
-                                    <x-button-store type="button" text="Editar datos" class="mt-4 text-sm"
-                                        id="btn-edit-user-info" typeButton="secondary" />
                                 </div>
                             </div>
                             <!-- End Tab info customer -->
@@ -248,28 +268,26 @@
                                     <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
                                         Método de pago
                                     </h2>
+                                    <p class="text-zinc-700">
+                                        Selecciona el método de pago que deseas utilizar
+                                    </p>
                                     <div>
-                                        @if ($payment_methods->count() > 0)
-                                            @foreach ($payment_methods as $payment_method)
-                                                <div class="mt-4 flex items-center gap-4">
-                                                    <div class="flex items-center gap-4">
+                                        <form action="{{ Route('cart.apply-payment-method') }}" method="POST">
+                                            @csrf
+                                            @if ($payment_methods->count() > 0)
+                                                @foreach ($payment_methods as $payment_method)
+                                                    <label
+                                                        class="mt-4 flex h-20 w-44 items-center justify-center gap-4 rounded-xl border"
+                                                        style="background-image:url('{{ Storage::url($payment_method->image) }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
                                                         <input type="radio" name="payment_method"
                                                             id="{{ $payment_method->id }}"
                                                             value="{{ $payment_method->id }}"
-                                                            class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                                            class="hidden h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                                             data-name="{{ $payment_method->name }}">
-                                                        <label for="{{ $payment_method->id }}"
-                                                            class="text-lg font-bold text-secondary">
-                                                            {{ $payment_method->name }}
-                                                        </label>
-                                                    </div>
-                                                    <div class="flex flex-1 items-center gap-4">
-                                                        <img src="{{ Storage::url($payment_method->image) }}"
-                                                            alt="" class="h-10 w-20">
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                                    </label>
+                                                @endforeach
+                                            @endif
+                                        </form>
                                     </div>
                                     <div>
                                         <div class="credit-card payment-method mt-8 hidden">
@@ -299,6 +317,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mt-8 flex items-center gap-2">
+                                    <input type="checkbox" value="0" name="is_default" id="default"
+                                        class="h-4 w-4 rounded border border-zinc-300 bg-zinc-100 text-secondary focus:ring-2 focus:ring-secondary">
+                                    <label for="default" class="text-zinc-500">
+                                        Guardar como método de pago predeterminado
+                                    </label>
+                                </div>
                             </div>
                             <!-- End Tab payment -->
 
@@ -308,9 +333,152 @@
                                     <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
                                         Confirmar pedido
                                     </h2>
-                                    <div>
-                                        <div class="mt-4 flex flex-col gap-4">
-
+                                    <div class="mt-4">
+                                        <div>
+                                            <h2 class="font-primary text-xl font-bold uppercase text-secondary">
+                                                Información del cliente
+                                            </h2>
+                                            <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 items-center gap-2">
+                                                        <label for="name"
+                                                            class="text-lg font-bold text-secondary">Nombre:</label>
+                                                        <p class="text-zinc-600">{{ $user->name ?? '' }}</p>
+                                                    </div>
+                                                    <div class="flex flex-1 items-center gap-2">
+                                                        <label for="name"
+                                                            class="text-lg font-bold text-secondary">Apellido:</label>
+                                                        <p class="text-zinc-600">{{ $user->last_name ?? '' }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 items-center gap-2">
+                                                        <label for="name" class="text-lg font-bold text-secondary">
+                                                            Correo electrónico:
+                                                        </label>
+                                                        <p class="text-zinc-600">{{ $user->email ?? '' }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-full gap-4">
+                                                    <div class="flex flex-1 gap-4">
+                                                        <div class="flex items-center gap-2">
+                                                            <label for="name"
+                                                                class="text-lg font-bold text-secondary">
+                                                                Telefono:
+                                                            </label>
+                                                            <p class="text-zinc-600">
+                                                                @if ($customer)
+                                                                    + {{ $customer->area_code }}
+                                                                    {{ $customer->phone }}
+                                                                @else
+                                                                    ---
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8">
+                                            <h2 class="font-primary text-xl font-bold uppercase text-secondary">
+                                                Dirección de envío
+                                            </h2>
+                                            @if ($address)
+                                                <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                                    <div class="flex w-full gap-4">
+                                                        <div class="flex flex-1 items-center gap-2">
+                                                            <label for="name"
+                                                                class="text-lg font-bold text-secondary">
+                                                                País:
+                                                            </label>
+                                                            <p class="text-zinc-600">
+                                                                {{ $address->country ?? '---' }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex w-full gap-4">
+                                                        <div class="flex flex-1 items-center gap-2">
+                                                            <label for="name"
+                                                                class="text-lg font-bold text-secondary">
+                                                                Dirección:
+                                                            </label>
+                                                            <p class="text-zinc-600">
+                                                                @if ($customer)
+                                                                    {{ $address->address_line_1 ?? '' }}
+                                                                    {{ $address->address_line_2 ?? '' }}
+                                                                @else
+                                                                    ---
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex w-full gap-4">
+                                                        <div class="flex flex-1 items-center gap-2">
+                                                            <label for="name"
+                                                                class="text-lg font-bold text-secondary">
+                                                                Ciudad:
+                                                            </label>
+                                                            <p class="text-zinc-600">{{ $address->city ?? '---' }}</p>
+                                                        </div>
+                                                        <div class="flex flex-1 items-center gap-2">
+                                                            <label for="name"
+                                                                class="text-lg font-bold text-secondary">
+                                                                Estado:
+                                                            </label>
+                                                            <p class="text-zinc-600">{{ $address->state ?? '---' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex w-full gap-4">
+                                                        <div class="flex flex-1 gap-4">
+                                                            <div class="flex items-center gap-2">
+                                                                <label for="name"
+                                                                    class="text-lg font-bold text-secondary">
+                                                                    Código postal:
+                                                                </label>
+                                                                <p class="text-zinc-600">
+                                                                    {{ $address->zip_code ?? '---' }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="flex flex-col gap-8 py-10">
+                                                    <p class="text-zinc-600">No hay dirección de envío registrada</p>
+                                                    <x-button-store type="a"
+                                                        href="{{ Route('account.addresses.create') }}"
+                                                        text="Agregar dirección" class="w-max text-sm"
+                                                        typeButton="secondary" />
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="mt-8">
+                                            <h2 class="font-primary text-xl font-bold uppercase text-secondary">
+                                                Método de pago
+                                            </h2>
+                                            <div id="payment-method-selected">
+                                                @if ($payment)
+                                                    <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                                        <div class="flex w-full gap-4">
+                                                            <div class="flex flex-1 flex-col gap-2">
+                                                                <img src="{{ Storage::url($payment->image) }}"
+                                                                    alt="{{ $payment->name }}"
+                                                                    class="h-20 w-36 rounded-xl object-cover">
+                                                                <p class="text-zinc-600">
+                                                                    {{ $payment->name ?? '---' }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="flex flex-col gap-8 py-10">
+                                                        <p class="text-zinc-600">
+                                                            No hay método de pago seleccionado. Selecciona uno para
+                                                            continuar
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -319,11 +487,11 @@
 
                             <div class="mt-4 flex justify-between border-t border-zinc-300 pt-4">
                                 <x-button-store type="a" href="{{ Route('cart') }}" text="Regresar al carrito"
-                                    class="text-sm" typeButton="secondary" icon="arrow-left" />
+                                    typeButton="secondary" icon="arrow-left" />
                                 <div class="flex gap-4">
-                                    <x-button-store type="button" text="Regresar" class="text-sm"
-                                        typeButton="secondary" id="prev-step" />
-                                    <x-button-store type="button" text="Continuar" class="text-sm font-bold"
+                                    <x-button-store type="button" text="Regresar" typeButton="secondary"
+                                        id="prev-step" />
+                                    <x-button-store type="button" text="Continuar" class="font-medium"
                                         typeButton="primary" id="next-step" />
                                 </div>
                             </div>
@@ -361,7 +529,8 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <p class="py-10 text-center text-sm text-zinc-600">No hay productos en el carrito
+                                    <p class="py-10 text-center text-sm text-zinc-600">
+                                        No hay productos en el carrito
                                     </p>
                                 @endif
                                 <div class="mt-6 border-t border-zinc-300 font-secondary">
