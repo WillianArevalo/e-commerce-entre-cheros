@@ -30,6 +30,14 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="flex items-center justify-center">
+                            <button id="search-toggle"
+                                class="relative flex h-10 w-10 items-center justify-center rounded-lg p-3 hover:bg-zinc-100 focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
+                                <span class="pointer-events-none absolute dark:pointer-events-auto dark:opacity-100">
+                                    <x-icon icon="search" class="h-6 w-6 text-zinc-700 dark:text-white" />
+                                </span>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-center">
                             <button type="button" data-dropdown-toggle="dropdown-alerts"
                                 class="relative inline-flex items-center rounded-lg p-2 text-center text-sm font-medium text-white hover:bg-zinc-100 focus:outline-none focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
                                 <x-icon icon="notification" class="h-6 w-6 text-zinc-700 dark:text-white" />
@@ -93,54 +101,61 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="ms-2">
+                        <div class="flex items-center justify-center">
+                            <button
+                                class="relative flex h-10 w-10 items-center justify-center rounded-lg p-3 hover:bg-zinc-100 focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
+                                <span class="pointer-events-none absolute dark:pointer-events-auto dark:opacity-100">
+                                    <x-icon icon="information-circle" class="h-6 w-6 text-zinc-700 dark:text-white" />
+                                </span>
+                            </button>
+                        </div>
+                        <div class="relative ms-2">
                             <button type="button"
                                 class="flex rounded-full bg-zinc-800 text-sm focus:ring-4 focus:ring-zinc-300 dark:focus:ring-zinc-800"
-                                aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                <span class="sr-only">Open user menu</span>
+                                id="profile-admin">
                                 <img class="h-8 w-8 rounded-full object-cover"
                                     src="{{ Storage::url(auth()->user()->profile_photo_path) }}" alt="user photo">
                             </button>
-                        </div>
-                        <div class="z-50 my-4 hidden list-none divide-y divide-zinc-100 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-900 dark:bg-zinc-950"
-                            id="dropdown-user">
-                            <div class="px-4 py-3" role="none">
-                                <p class="text-sm text-zinc-900 dark:text-white" role="none">
-                                    {{ auth()->user()->username }}
-                                </p>
-                                <p class="truncate text-sm font-bold text-blue-500" role="none">
-                                    {{ auth()->user()->email }}
-                                </p>
-                            </div>
-                            <ul role="none">
-                                <li class="mt-2">
-                                    <a href="{{ route('admin.index') }}"
-                                        class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
-                                        role="menuitem">
-                                        <x-icon icon="dashboard-square" class="h-4 w-4 text-current" />
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a href="{{ route('admin.settings') }}"
-                                        class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
-                                        role="menuitem">
-                                        <x-icon icon="settings" class="h-4 w-4 text-current" />
-                                        Configuración
-                                    </a>
-                                </li>
-                                <li class="border-t border-zinc-100 pt-2 dark:border-zinc-900">
-                                    <form action="{{ route('logout') }}" method="POST" class="w-full">
-                                        @csrf
-                                        <button type="submit"
-                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-1.5 text-start text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                            <div class="absolute right-0 top-10 z-50 hidden list-none divide-y divide-zinc-100 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-900 dark:bg-zinc-950"
+                                id="dropdown-user">
+                                <div class="px-4 py-3" role="none">
+                                    <p class="text-sm text-zinc-900 dark:text-white" role="none">
+                                        {{ auth()->user()->username }}
+                                    </p>
+                                    <p class="truncate text-sm font-bold text-blue-500" role="none">
+                                        {{ auth()->user()->email }}
+                                    </p>
+                                </div>
+                                <ul role="none">
+                                    <li class="mt-2">
+                                        <a href="{{ route('admin.index') }}"
+                                            class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
-                                            <x-icon icon="logout" class="h-4 w-4 text-current" />
-                                            Cerrar sesión
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
+                                            <x-icon icon="dashboard-square" class="h-4 w-4 text-current" />
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="{{ route('admin.settings') }}"
+                                            class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                            role="menuitem">
+                                            <x-icon icon="settings" class="h-4 w-4 text-current" />
+                                            Configuración
+                                        </a>
+                                    </li>
+                                    <li class="border-t border-zinc-100 pt-2 dark:border-zinc-900">
+                                        <form action="{{ route('logout') }}" method="POST" class="w-full">
+                                            @csrf
+                                            <button type="submit"
+                                                class="flex w-full items-center gap-2 rounded-lg px-4 py-1.5 text-start text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                                                role="menuitem">
+                                                <x-icon icon="logout" class="h-4 w-4 text-current" />
+                                                Cerrar sesión
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,9 +168,9 @@
     aria-label="Sidebar">
     <div class="mt-2 h-full overflow-y-auto bg-white px-3 py-4 dark:bg-black">
         <ul class="space-y-2 font-medium">
-            <li>
+            <li class="{{ \App\Helpers\RouteHelper::isActive(['admin.index']) }} rounded-lg dark:text-white">
                 <a href="{{ route('admin.index') }}"
-                    class="{{ \App\Helpers\RouteHelper::isActive('admin/') }} group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current">
                     <x-icon icon="dashboard-square"
                         class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3">Dashboard</span>
