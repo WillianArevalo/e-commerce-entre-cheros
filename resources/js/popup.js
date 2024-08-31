@@ -77,13 +77,13 @@ $(document).ready(function () {
 
     $("#ff").on("Changed", function () {
         $(".headingPopup")
-            .removeClass("font-primary font-secondary font-tertiary")
+            .removeClass("font-league-spartan font-secondary font-mystical")
             .addClass("font-" + $(this).val());
     });
 
     $("#ffText").on("Changed", function () {
         $("#descriptionPoupText")
-            .removeClass("font-primary font-secondary font-tertiary")
+            .removeClass("font-league-spartan font-secondary font-mystical")
             .addClass("font-" + $(this).val());
     });
 

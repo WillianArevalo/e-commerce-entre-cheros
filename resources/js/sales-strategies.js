@@ -67,7 +67,7 @@ $(document).ready(function () {
         $paramatersPreview.html("");
         parameters.forEach((parameterValue, index) => {
             const previewDiv = $("<div></div>").addClass(
-                "bg-white text-zinc-600 border-zinc-300 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-900 rounded-full flex items-center justify-between gap-2 w-max",
+                "bg-white text-zinc-600 border-zinc-400 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-800 rounded-full flex items-center justify-between gap-2 w-max",
             );
             const parameterElement = $("<span></span>").text(parameterValue);
             const removeBtn = $("<button></button>")

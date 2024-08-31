@@ -115,11 +115,11 @@ $(document).ready(function () {
     $("input[name='shipping_method']").on("change", function () {
         $(".shipping-method")
             .removeClass("method-shipping-selected")
-            .addClass("border-zinc-300");
+            .addClass("border-zinc-400");
 
         const id = $(this).val();
         $(".shipping-method-" + id)
-            .removeClass("border-zinc-300")
+            .removeClass("border-zinc-400")
             .addClass("method-shipping-selected");
         const form = $(this).closest("form");
         $.ajax({
