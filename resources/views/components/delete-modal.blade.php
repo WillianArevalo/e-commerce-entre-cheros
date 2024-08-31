@@ -1,5 +1,5 @@
   <div id="{{ $modalId }}" tabindex="-1" aria-hidden="true"
-      class="deleteModal fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-40 md:inset-0 md:h-full">
+      class="deleteModal fixed left-0 right-0 top-0 z-50 hidden h-modal w-full animate-jump-in items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-40 animate-duration-300 animate-once md:inset-0 md:h-full">
       <div class="relative h-full w-full max-w-md animate-fade p-4 animate-duration-300 animate-once md:h-auto">
           <!-- Modal content -->
           <div class="relative rounded-lg bg-white p-4 text-center shadow dark:bg-zinc-950 sm:p-5">
