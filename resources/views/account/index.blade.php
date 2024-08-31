@@ -1,7 +1,7 @@
 @extends('layouts.__partials.store.template-profile')
 @section('profile-content')
     <div class="flex items-center justify-between">
-        <h2 class="font-primary text-3xl font-bold text-secondary">
+        <h2 class="font-league-spartan text-3xl font-bold text-secondary">
             Pedidos
         </h2>
         <a href="{{ Route('orders') }}"
@@ -11,7 +11,7 @@
                 class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
         </a>
     </div>
-    <div class="mt-4 flex items-center justify-around gap-4 border-t border-zinc-200 px-4 pb-4 pt-6 text-sm">
+    <div class="mt-4 flex items-center justify-around gap-4 border-t border-zinc-400 px-4 pb-4 pt-6 text-sm">
         <a href="#" class="flex flex-col items-center justify-center gap-2">
             <x-icon-store icon="payment-pendient" class="h-8 w-8 text-current text-tertiary" />
             Pendientes
@@ -25,7 +25,7 @@
             Cancelados
         </a>
     </div>
-    <div class="mt-4 border-t border-zinc-200 p-2">
+    <div class="mt-4 border-t border-zinc-400 p-2">
         <a href="#" class="flex items-center justify-start gap-2 pt-2 text-sm">
             <x-icon-store icon="dollar-circle" class="h-5 w-5 text-current text-tertiary" />
             Reeeembolsos y devoluciones

@@ -43,9 +43,9 @@
                                     <form action="{{ Route('orders.add-info') }}" class="flex flex-col gap-10"
                                         method="POST">
                                         @csrf
-                                        <div class="flex flex-col gap-2 font-secondary">
+                                        <div class="font-secondary flex flex-col gap-2">
                                             <div>
-                                                <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                                <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
                                                     Información del cliente
                                                 </h2>
                                             </div>
@@ -83,8 +83,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex flex-col gap-2 font-secondary">
-                                            <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                        <div class="font-secondary flex flex-col gap-2">
+                                            <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
                                                 Dirección de envio
                                             </h2>
                                             <div class="flex flex-col gap-4">
@@ -139,7 +139,7 @@
                                 <div id="user-info">
                                     <div>
                                         <div class="flex justify-between">
-                                            <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                            <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
                                                 Información del cliente
                                             </h2>
                                             <button type="button" id="btn-edit-user-info"
@@ -149,7 +149,7 @@
                                                     class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
                                             </button>
                                         </div>
-                                        <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                        <div class="font-secondary mt-4 flex flex-col gap-4">
                                             <div class="flex w-full gap-4">
                                                 <div class="flex flex-1 items-center gap-2">
                                                     <label for="name"
@@ -189,12 +189,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-8 border-t border-zinc-300 pt-4">
-                                        <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                    <div class="mt-8 border-t border-zinc-400 pt-4">
+                                        <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
                                             Dirección de envío
                                         </h2>
                                         @if ($address)
-                                            <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                            <div class="font-secondary mt-4 flex flex-col gap-4">
                                                 <div class="flex w-full gap-4">
                                                     <div class="flex flex-1 items-center gap-2">
                                                         <label for="name" class="text-lg font-bold text-secondary">
@@ -265,7 +265,7 @@
                             <!-- Tab payment -->
                             <div class="tab-content hidden" id="tab-payment">
                                 <div>
-                                    <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                    <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
                                         Método de pago
                                     </h2>
                                     <p class="text-zinc-700">
@@ -319,7 +319,7 @@
                                 </div>
                                 <div class="mt-8 flex items-center gap-2">
                                     <input type="checkbox" value="0" name="is_default" id="default"
-                                        class="h-4 w-4 rounded border border-zinc-300 bg-zinc-100 text-secondary focus:ring-2 focus:ring-secondary">
+                                        class="h-4 w-4 rounded border border-zinc-400 bg-zinc-100 text-secondary focus:ring-2 focus:ring-secondary">
                                     <label for="default" class="text-zinc-500">
                                         Guardar como método de pago predeterminado
                                     </label>
@@ -330,15 +330,15 @@
                             <!-- Tab order -->
                             <div class="tab-content hidden" id="tab-order">
                                 <div>
-                                    <h2 class="font-primary text-2xl font-bold uppercase text-secondary">
+                                    <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
                                         Confirmar pedido
                                     </h2>
                                     <div class="mt-4">
                                         <div>
-                                            <h2 class="font-primary text-xl font-bold uppercase text-secondary">
+                                            <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
                                                 Información del cliente
                                             </h2>
-                                            <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                            <div class="font-secondary mt-4 flex flex-col gap-4">
                                                 <div class="flex w-full gap-4">
                                                     <div class="flex flex-1 items-center gap-2">
                                                         <label for="name"
@@ -380,11 +380,11 @@
                                             </div>
                                         </div>
                                         <div class="mt-8">
-                                            <h2 class="font-primary text-xl font-bold uppercase text-secondary">
+                                            <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
                                                 Dirección de envío
                                             </h2>
                                             @if ($address)
-                                                <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                                <div class="font-secondary mt-4 flex flex-col gap-4">
                                                     <div class="flex w-full gap-4">
                                                         <div class="flex flex-1 items-center gap-2">
                                                             <label for="name"
@@ -453,12 +453,12 @@
                                             @endif
                                         </div>
                                         <div class="mt-8">
-                                            <h2 class="font-primary text-xl font-bold uppercase text-secondary">
+                                            <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
                                                 Método de pago
                                             </h2>
                                             <div id="payment-method-selected">
                                                 @if ($payment)
-                                                    <div class="mt-4 flex flex-col gap-4 font-secondary">
+                                                    <div class="font-secondary mt-4 flex flex-col gap-4">
                                                         <div class="flex w-full gap-4">
                                                             <div class="flex flex-1 flex-col gap-2">
                                                                 <img src="{{ Storage::url($payment->image) }}"
@@ -485,7 +485,7 @@
                             </div>
                             <!-- End Tab order -->
 
-                            <div class="mt-4 flex justify-between border-t border-zinc-300 pt-4">
+                            <div class="mt-4 flex justify-between border-t border-zinc-400 pt-4">
                                 <x-button-store type="a" href="{{ Route('cart') }}" text="Regresar al carrito"
                                     typeButton="secondary" icon="arrow-left" />
                                 <div class="flex gap-4">
@@ -498,9 +498,9 @@
                         </div>
                     </div>
                     <div class="w-full flex-1">
-                        <div class="z-10 mt-4 rounded-xl border border-zinc-300 bg-white p-6">
+                        <div class="z-10 mt-4 rounded-xl border border-zinc-400 bg-white p-6">
                             <div class="flex items-center justify-between">
-                                <h2 class="font-primary text-3xl font-bold uppercase text-secondary">
+                                <h2 class="font-league-spartan text-3xl font-bold uppercase text-secondary">
                                     Su pedido
                                 </h2>
                                 <x-button-store type="a" typeButton="secondary" text="Editar carrito"
@@ -515,7 +515,7 @@
                                                     class="h-20 w-20 rounded-xl border border-zinc-100">
                                             </div>
                                             <div class="flex flex-[2] flex-col justify-center">
-                                                <h3 class="font-primary text-xl font-bold text-secondary">
+                                                <h3 class="font-league-spartan text-xl font-bold text-secondary">
                                                     {{ $item->product->name }}
                                                 </h3>
                                                 <p class="font-secondary text-sm">
@@ -533,7 +533,7 @@
                                         No hay productos en el carrito
                                     </p>
                                 @endif
-                                <div class="mt-6 border-t border-zinc-300 font-secondary">
+                                <div class="font-secondary mt-6 border-t border-zinc-400">
                                     <div class="mt-2 flex justify-between text-sm">
                                         <p class="text-secondary">Subtotal</p>
                                         <p class="text-secondary">
@@ -573,7 +573,7 @@
         </section>
         <section class="mb-10 px-20 py-4">
             <div class="flex w-full flex-col justify-center gap-4 text-start">
-                <h2 class="border-b border-zinc-300 pb-4 font-primary text-3xl font-bold uppercase text-secondary">
+                <h2 class="border-b border-zinc-400 pb-4 font-league-spartan text-3xl font-bold uppercase text-secondary">
                     Haz tu compra aún más especial
                 </h2>
                 <div>

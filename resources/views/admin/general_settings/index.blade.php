@@ -1,8 +1,8 @@
 @extends('layouts.admin-template')
 @section('title', 'Ajustes generales')
 @section('content')
-    <div class="mt-4 dark:border-zinc-900 dark:bg-black">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+    <div class="mt-4 dark:border-zinc-800 dark:bg-black">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
             <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Ajustes generales
             </h1>
@@ -13,7 +13,7 @@
         <div class="m-4 p-4 dark:bg-black">
             <h2 class="text-xl font-semibold text-secondary dark:text-blue-400">Configuraciones</h2>
             <div class="flex gap-4">
-                <div class="mt-4 flex h-max w-max flex-col gap-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-900">
+                <div class="mt-4 flex h-max w-max flex-col gap-4 rounded-lg border border-zinc-400 p-4 dark:border-zinc-800">
                     <div>
                         <h3 class="text-zinc-700 dark:text-zinc-300">Modo mantenimiento</h3>
                         <p class="text-sm text-zinc-600 dark:text-zinc-400">Activa o desactiva el modo mantenimiento</p>
@@ -24,7 +24,7 @@
                                     value="{{ $maintenance->value ?? 0 }}" class="peer sr-only"
                                     {{ $maintenance->value == 1 ? 'checked' : '' }}>
                                 <div
-                                    class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-700 dark:peer-focus:ring-blue-800">
+                                    class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-700 dark:peer-focus:ring-blue-800">
                                 </div>
                                 <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                     Activado
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div
-                    class="mt-4 flex h-max w-max flex-col gap-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-900">
+                    class="mt-4 flex h-max w-max flex-col gap-4 rounded-lg border border-zinc-400 p-4 dark:border-zinc-800">
                     <div>
                         <h3 class="text-zinc-700 dark:text-zinc-300">Idiomas</h3>
                         <p class="text-sm text-zinc-600 dark:text-zinc-400">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div
-                    class="mt-4 flex h-max w-max flex-col gap-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-900">
+                    class="mt-4 flex h-max w-max flex-col gap-4 rounded-lg border border-zinc-400 p-4 dark:border-zinc-800">
                     <div>
                         <h3 class="text-zinc-700 dark:text-zinc-300">Cookies</h3>
                         <p class="text-sm text-zinc-600 dark:text-zinc-400">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <div class="rounded-lg border border-zinc-300 p-4 dark:border-zinc-900">
+                <div class="rounded-lg border border-zinc-400 p-4 dark:border-zinc-800">
                     <h3 class="text-zinc-700 dark:text-zinc-300">Footer</h3>
                     <p class="text-sm text-zinc-600 dark:text-zinc-400">
                         Configura el contenido del footer de la aplicación
@@ -89,7 +89,7 @@
                     </div>
                     <x-button type="a" text="Editar footer" icon="edit" typeButton="primary" class="mt-4 w-max" />
                 </div>
-                <div class="mt-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-900">
+                <div class="mt-4 rounded-lg border border-zinc-400 p-4 dark:border-zinc-800">
                     <h3 class="text-zinc-700 dark:text-zinc-300">
                         Menú de navegación
                     </h3>

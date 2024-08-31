@@ -21,7 +21,7 @@
 
     // Construir clases dinámicas para el input
     $classes = collect([
-        'bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg',
+        'bg-zinc-50 border border-zinc-400 text-zinc-900 text-sm rounded-lg',
         'focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 px-4',
         'dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-zinc-400 dark:text-white',
         'dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500',
@@ -55,7 +55,7 @@
     @elseif ($type === 'checkbox')
         <input type="checkbox" value="{{ $value }}" name="{{ $name }}" id="{{ $id }}"
             {{ $attributes }} {{ $checked ? 'checked' : '' }}
-            class="{{ $class }} h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+            class="{{ $class }} h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
         <label for="{{ $id }}"
             class="{{ $labelClass }} ms-2 text-sm font-medium text-zinc-900 dark:text-white">
             {{ $label }}

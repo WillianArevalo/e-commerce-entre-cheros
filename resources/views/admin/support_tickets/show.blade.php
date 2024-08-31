@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-4 rounded-lg">
-        <div class="flex flex-col items-start border-y bg-white px-4 py-4 dark:border-zinc-900 dark:bg-black">
+        <div class="flex flex-col items-start border-y bg-white px-4 py-4 dark:border-zinc-800 dark:bg-black">
             <a href="{{ route('admin.support-tickets.index') }}"
                 class="flex items-center justify-center gap-1 text-sm text-zinc-500 hover:text-zinc-600 hover:underline dark:text-zinc-400">
                 <x-icon icon="arrow-left-02" class="h-4 w-4 text-current" />
@@ -16,7 +16,7 @@
         </div>
         <div class="m-4">
             <div class="flex gap-4">
-                <div class="flex-[2] rounded-lg border dark:border-zinc-900">
+                <div class="flex-[2] rounded-lg border dark:border-zinc-800">
                     <div class="flex items-center justify-between px-4 py-4">
                         <div class="flex items-center gap-8">
                             <h1 class="text-2xl font-bold text-secondary dark:text-blue-500">#86802</h1>
@@ -24,14 +24,14 @@
                         </div>
                         <span class="rounded-full bg-green-500 px-3 py-1 text-sm text-white">Abierto</span>
                     </div>
-                    <div class="flex border-t dark:border-zinc-900">
+                    <div class="flex border-t dark:border-zinc-800">
                         <div
-                            class="flex flex-1 flex-col items-center justify-center gap-1 border-e p-4 dark:border-zinc-900">
+                            class="flex flex-1 flex-col items-center justify-center gap-1 border-e p-4 dark:border-zinc-800">
                             <p class="text-sm text-zinc-600 dark:text-zinc-400">Prioridad:</p>
                             <span class="rounded-full bg-yellow-300 px-3 py-1 text-sm text-white">Media</span>
                         </div>
                         <div
-                            class="flex flex-1 flex-col items-center justify-center gap-1 border-e p-4 dark:border-zinc-900">
+                            class="flex flex-1 flex-col items-center justify-center gap-1 border-e p-4 dark:border-zinc-800">
                             <p class="text-sm text-zinc-600 dark:text-zinc-400">Categoría:</p>
                             <p class="text-sm text-zinc-600 dark:text-zinc-400">Facturación</p>
                         </div>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-1 rounded-lg border px-4 py-4 dark:border-zinc-900">
+                <div class="flex-1 rounded-lg border px-4 py-4 dark:border-zinc-800">
                     <div class="flex flex-col gap-3">
                         <div class="flex items-center gap-4">
                             <h2 class="font-bold dark:text-white">Información del usuario</h2>
@@ -63,7 +63,7 @@
                         </div>
                         <div>
                             <div
-                                class="flex w-max items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm dark:border-zinc-900">
+                                class="flex w-max items-center gap-2 rounded-full border border-zinc-400 px-4 py-2 text-sm dark:border-zinc-800">
                                 <p class="text-zinc-600 dark:text-zinc-400">Fecha de creación:</p>
                                 <p class="text-zinc-600 dark:text-zinc-400">24/07/2024</p>
                             </div>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 flex-1 rounded-lg border px-4 py-4 dark:border-zinc-900">
+            <div class="mt-4 flex-1 rounded-lg border px-4 py-4 dark:border-zinc-800">
                 <div class="flex gap-4">
                     <div class="flex flex-1 flex-col items-start gap-2">
                         <h2 class="font-bold text-zinc-700 dark:text-white">Descripción</h2>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="2 flex flex-1 flex-col items-start gap-2">
                         <h2 class="font-bold text-zinc-700 dark:text-white">Archivos</h2>
-                        <div class="w-full overflow-hidden rounded-lg border border-zinc-300 dark:border-zinc-900">
+                        <div class="w-full overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                             <table class="w-full text-left text-sm text-zinc-50">
                                 <thead
                                     class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">

@@ -4,7 +4,7 @@
     <div>
         <section class="mt-16 border">
             <div class="p-4 text-center">
-                <h1 class="font-tertiary text-4xl uppercase text-secondary">
+                <h1 class="font-mystical text-4xl uppercase text-secondary">
                     Mis cupones
                 </h1>
             </div>
@@ -14,7 +14,7 @@
                         <div class="relative h-auto w-80 rounded-xl"
                             style="background-image:linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)), url('{{ asset('images/coupon-bg.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
                             <div class="p-4">
-                                <h2 class="font-primary text-3xl font-bold text-secondary">
+                                <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                                     {{ $coupon->code }}
                                 </h2>
                                 <span class="flex items-center gap-1 text-xl font-semibold text-red-700">

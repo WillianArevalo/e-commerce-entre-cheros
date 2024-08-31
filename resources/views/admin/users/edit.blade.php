@@ -17,28 +17,27 @@
                     @method('PUT')
                     <div class="flex gap-4">
                         <div
-                            class="flex h-max flex-1 flex-col rounded-lg border border-zinc-300 bg-white dark:border-zinc-900 dark:bg-black">
+                            class="flex h-max flex-1 flex-col rounded-lg border border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black">
                             <p
-                                class="border-b border-zinc-200 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:text-zinc-400">
+                                class="border-b border-zinc-400 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
                                 Foto de perfil
                             </p>
                             <div class="flex flex-col items-center justify-center py-4">
-                                <img src="{{ Storage::url($user->profile_photo_path) }}"
-                                    alt="Foto de perfil {{ $user->username }}" id="previewImage"
-                                    class="h-60 w-60 rounded-full object-cover">
+                                <img src="{{ Storage::url($user->profile) }}" alt="Foto de perfil {{ $user->username }}"
+                                    id="previewImage" class="h-60 w-60 rounded-full object-cover">
                             </div>
                             <div
-                                class="flex h-full items-center justify-end border-t border-zinc-200 p-4 dark:border-zinc-900">
+                                class="flex h-full items-center justify-end border-t border-zinc-400 p-4 dark:border-zinc-800">
                                 <label for="profile"
-                                    class="flex cursor-pointer items-center gap-2 rounded border-2 border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
+                                    class="flex cursor-pointer items-center gap-2 rounded border-2 border-zinc-400 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                     Cambiar foto
                                 </label>
                                 <input type="file" name="profile" id="profile" class="hidden">
                             </div>
                         </div>
-                        <div class="flex-[2] rounded-lg border border-zinc-300 bg-white dark:border-zinc-900 dark:bg-black">
+                        <div class="flex-[2] rounded-lg border border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black">
                             <p
-                                class="border-b border-zinc-200 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
+                                class="border-b border-zinc-400 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
                                 Información del usuario
                             </p>
                             <div class="flex flex-col gap-4 p-4">

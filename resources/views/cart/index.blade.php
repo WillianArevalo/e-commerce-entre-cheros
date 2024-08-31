@@ -26,30 +26,30 @@
         <!-- Cart -->
         <section class="relative -top-24">
             <div class="px-20">
-                <h1 class="text-start font-tertiary text-5xl font-normal uppercase text-secondary" data-aos="fade-right">
+                <h1 class="text-start font-mystical text-5xl font-normal uppercase text-secondary" data-aos="fade-right">
                     Carrito de compras
                 </h1>
                 <div class="mt-4 flex gap-10">
                     <div class="relative flex-[2]" data-aos="fade-right">
-                        <div class="min-h-96 z-10 mt-4 rounded-xl border border-zinc-300 bg-white p-4">
-                            <table class="min-w-full font-primary">
+                        <div class="min-h-96 z-10 mt-4 rounded-xl border border-zinc-400 bg-white p-4">
+                            <table class="min-w-full font-league-spartan">
                                 <thead>
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                            class="px-6 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Producto
                                         </th>
 
                                         <th scope="col"
-                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                            class="px-6 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Cantidad
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                            class="px-6 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Total
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left font-primary text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                            class="px-6 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
                                         </th>
                                     </tr>
                                 </thead>
@@ -82,7 +82,7 @@
                                                                             </span>
                                                                         </div>
                                                                         <span
-                                                                            class="me-2 mt-1 block rounded-full bg-purple-100 px-2.5 py-0.5 font-secondary text-xs font-medium text-purple-800">
+                                                                            class="font-secondary me-2 mt-1 block rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800">
                                                                             En oferta
                                                                         </span>
                                                                     </div>
@@ -103,13 +103,13 @@
                                                             <input type="hidden" name="action" value="minus">
                                                             <button type="button"
                                                                 data-form="#form-minus-cart-{{ $item->product->id }}"
-                                                                class="btnMinusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
+                                                                class="btnMinusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-400 hover:bg-zinc-100">
                                                                 <x-icon-store icon="minus"
                                                                     class="h-4 w-4 text-secondary" />
                                                             </button>
                                                         </form>
                                                         <input type="text" name="quantity" id="quantity"
-                                                            class="h-12 w-16 rounded-lg border-none text-center font-secondary text-sm focus:border-none focus:outline-none"
+                                                            class="font-secondary h-12 w-16 rounded-lg border-none text-center text-sm focus:border-none focus:outline-none"
                                                             readonly value="{{ $item->quantity }}" min="1">
                                                         <form action="{{ route('cart.update', $item->product->id) }}"
                                                             method="POST" id="form-plus-cart-{{ $item->product->id }}">
@@ -117,7 +117,7 @@
                                                             <input type="hidden" name="action" value="plus">
                                                             <button type="button"
                                                                 data-form="#form-plus-cart-{{ $item->product->id }}"
-                                                                class="btnPlusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
+                                                                class="btnPlusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-400 hover:bg-zinc-100">
                                                                 <x-icon-store icon="plus"
                                                                     class="h-4 w-4 text-secondary" />
                                                             </button>
@@ -125,7 +125,7 @@
                                                     </div>
                                                 </td>
                                                 <td
-                                                    class="whitespace-nowrap px-6 py-4 font-secondary text-sm text-zinc-500">
+                                                    class="font-secondary whitespace-nowrap px-6 py-4 text-sm text-zinc-500">
                                                     ${{ number_format($item->sub_total, 2) }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-4 text-start text-sm font-medium">
@@ -143,7 +143,8 @@
                                         @endforeach
                                     @else
                                         <tr class="border-t border-zinc-100">
-                                            <td class="whitespace-nowrap px-6 py-4 text-center font-primary" colspan="4">
+                                            <td class="whitespace-nowrap px-6 py-4 text-center font-league-spartan"
+                                                colspan="4">
                                                 Carrito vacío
                                             </td>
                                         </tr>
@@ -153,11 +154,11 @@
                         </div>
                     </div>
                     <div class="relative flex-1" data-aos="fade-left">
-                        <div class="z-10 mt-4 h-max w-full rounded-xl border border-zinc-300 bg-white p-4">
-                            <h2 class="pb-2 font-primary text-xl font-bold text-secondary">
+                        <div class="z-10 mt-4 h-max w-full rounded-xl border border-zinc-400 bg-white p-4">
+                            <h2 class="pb-2 font-league-spartan text-xl font-bold text-secondary">
                                 Resumen pedido
                             </h2>
-                            <div class="h-full border-t border-zinc-300 font-secondary">
+                            <div class="font-secondary h-full border-t border-zinc-400">
                                 <div class="mt-4 flex justify-between">
                                     <p class="text-secondary">Importe</p>
                                     <p class="font-medium text-tertiary" id="totalPriceCart">
@@ -170,7 +171,7 @@
                                         {{ $carts_totals['taxes'] }}
                                     </p>
                                 </div>
-                                <div class="mt-10 flex items-center justify-between border-y border-zinc-300 py-4">
+                                <div class="mt-10 flex items-center justify-between border-y border-zinc-400 py-4">
                                     <p class="text-secondary">Total con impuestos</p>
                                     <p class="font-medium text-tertiary" id="totalWithTaxes">
                                         {{ $carts_totals['total_with_taxes'] }}
@@ -188,7 +189,7 @@
                                                     class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                                             </div>
                                             <input type="text"
-                                                class="w-full rounded-xl border border-zinc-300 px-6 py-3 pl-12 text-sm text-zinc-700 transition duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
+                                                class="w-full rounded-xl border border-zinc-400 px-6 py-3 pl-12 text-sm text-zinc-700 transition duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
                                                 id="code" name="code" value="{{ $coupon_code }}"
                                                 placeholder="Código del cupón"
                                                 {{ $cart && $cart->coupon ? 'disabled' : '' }}>
@@ -210,7 +211,7 @@
                                         </span>
                                         @if (!$cart || !$cart->coupon)
                                             <button type="submit" id="apply-coupon"
-                                                class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
+                                                class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-400 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
                                                 Aplicar cupón
                                             </button>
                                         @endif
@@ -240,13 +241,13 @@
 
         <!-- Shipping method -->
         @if ($cart)
-            <section class="relative -top-16 mx-20 border-t border-zinc-200">
+            <section class="relative -top-16 mx-20 border-t border-zinc-400">
                 <div class="mt-10 flex flex-col items-center gap-2">
                     <div class="flex items-center justify-center gap-4">
                         <p>
                             <x-icon-store icon="truck-delivery" class="h-8 w-8 text-secondary" />
                         </p>
-                        <h2 class="font-primary text-4xl font-bold uppercase text-secondary">
+                        <h2 class="font-league-spartan text-4xl font-bold uppercase text-secondary">
                             Método de envío
                         </h2>
                     </div>
@@ -265,7 +266,7 @@
                                 <div class="flex flex-col gap-4">
                                     @foreach ($shipping_methods as $method)
                                         <div
-                                            class="shipping-method shipping-method-{{ $method->id ?? '' }} {{ $cart->shippingMethod != null ? ($cart->shippingMethod->id == $method->id ? 'method-shipping-selected' : '') : '' }} grid grid-cols-3 gap-8 rounded-2xl border border-zinc-300 bg-zinc-50 p-4">
+                                            class="shipping-method shipping-method-{{ $method->id ?? '' }} {{ $cart->shippingMethod != null ? ($cart->shippingMethod->id == $method->id ? 'method-shipping-selected' : '') : '' }} grid grid-cols-3 gap-8 rounded-2xl border border-zinc-400 bg-zinc-50 p-4">
                                             <div class="flex items-center justify-start gap-4">
                                                 <div class="flex items-center">
                                                     <input type="radio" name="shipping_method" id="shipping_method"
@@ -303,10 +304,10 @@
         <!-- End Shipping method -->
 
         <!-- Total -->
-        <section class="mx-20 border-y border-zinc-200 py-4">
+        <section class="mx-20 border-y border-zinc-400 py-4">
             <div class="flex flex-col items-end gap-4">
                 <div class="flex items-center gap-4">
-                    <h4 class="pt-1 font-primary text-4xl font-bold uppercase text-secondary">Total</h4>
+                    <h4 class="pt-1 font-league-spartan text-4xl font-bold uppercase text-secondary">Total</h4>
                     <p id="totalWithShippingMethod" class="font-secondary text-2xl font-semibold text-tertiary">
                         {{ $carts_totals['total_with_shipping'] }}
                     </p>
@@ -322,7 +323,8 @@
         <!-- Slider products -->
         <section class="mb-10 px-20 py-4">
             <div class="flex w-full flex-col justify-center gap-4 text-start">
-                <h2 class="border-b-2 border-zinc-300 pb-4 font-primary text-3xl font-bold uppercase text-secondary">
+                <h2
+                    class="border-b-2 border-zinc-400 pb-4 font-league-spartan text-3xl font-bold uppercase text-secondary">
                     No te quedes con las ganas
                 </h2>
                 <div>

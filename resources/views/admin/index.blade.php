@@ -13,22 +13,22 @@
             <div class="flex gap-4 px-4">
                 <div class="flex-1">
                     <div class="flex gap-4">
-                        <div class="h-full flex-1 rounded-xl border border-zinc-300 p-4 dark:border-zinc-900">
+                        <div class="h-full flex-1 rounded-xl border border-zinc-400 p-4 dark:border-zinc-800">
                             <div class="flex items-center gap-1">
                                 <span
-                                    class="m-1 rounded-full border border-zinc-300 bg-zinc-100 p-2 dark:border-zinc-900 dark:bg-zinc-950">
+                                    class="m-1 rounded-full border border-zinc-400 bg-zinc-100 p-2 dark:border-zinc-800 dark:bg-zinc-950">
                                     <x-icon icon="user-plus" class="h-8 w-8 text-blue-900 dark:text-blue-300" />
                                 </span>
                                 <span class="text-5xl font-bold text-secondary dark:text-tertiary">20</span>
                             </div>
-                            <span class="font-primary text-xl font-semibold text-secondary dark:text-tertiary">
+                            <span class="font-league-spartan text-xl font-semibold text-secondary dark:text-tertiary">
                                 Nuevos clientes
                             </span>
                         </div>
-                        <div class="h-full flex-1 rounded-xl border border-zinc-300 dark:border-zinc-900">
+                        <div class="h-full flex-1 rounded-xl border border-zinc-400 dark:border-zinc-800">
                             <div class="flex flex-col">
                                 <div
-                                    class="flex items-center justify-between rounded-t-xl border-b border-zinc-300 bg-zinc-100 px-4 py-2 dark:border-zinc-900 dark:bg-zinc-950">
+                                    class="flex items-center justify-between rounded-t-xl border-b border-zinc-400 bg-zinc-100 px-4 py-2 dark:border-zinc-800 dark:bg-zinc-950">
                                     <h2 class="text-base font-semibold text-zinc-500 dark:text-zinc-300">
                                         Pedidos
                                     </h2>
@@ -38,7 +38,7 @@
                                                 class="h-6 w-6 text-zinc-500 dark:text-zinc-300" />
                                         </button>
                                         <div
-                                            class="options absolute hidden w-40 rounded-lg border border-zinc-300 bg-white p-2 dark:border-zinc-900 dark:bg-zinc-950">
+                                            class="options absolute hidden w-40 rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
                                             <ul class="flex flex-col text-sm">
                                                 <li>
                                                     <a href="#"
@@ -70,8 +70,8 @@
                         </div>
                     </div>
                     <!-- Chart -->
-                    <div class="mt-4 h-max flex-1 rounded-xl border border-zinc-300 dark:border-zinc-900">
-                        <div class="flex flex-col rounded-t-xl border-b pb-4 dark:border-zinc-900">
+                    <div class="mt-4 h-max flex-1 rounded-xl border border-zinc-400 dark:border-zinc-800">
+                        <div class="flex flex-col rounded-t-xl border-b pb-4 dark:border-zinc-800">
                             <div class="flex justify-between p-4">
                                 <h2 class="text-base font-medium text-zinc-500 dark:text-zinc-300">Resumen de Ventas</h2>
                                 <div class="relative">
@@ -79,7 +79,7 @@
                                         <x-icon icon="more-hortizontal" class="h-6 w-6 text-zinc-500 dark:text-zinc-300" />
                                     </button>
                                     <div
-                                        class="options absolute hidden w-40 rounded-lg border border-zinc-300 bg-white p-2 dark:border-zinc-900 dark:bg-zinc-950">
+                                        class="options absolute hidden w-40 rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
                                         <ul class="flex flex-col text-sm">
                                             <li>
                                                 <a href="#"
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="px-4 font-secondary text-5xl font-bold text-secondary dark:text-tertiary">
+                            <span class="font-secondary px-4 text-5xl font-bold text-secondary dark:text-tertiary">
                                 $400,000
                             </span>
                         </div>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="flex-1">
                     <div class="flex gap-4">
-                        <div class="h-max flex-1 overflow-hidden rounded-xl border border-zinc-300 dark:border-zinc-900">
+                        <div class="h-max flex-1 overflow-hidden rounded-xl border border-zinc-400 dark:border-zinc-800">
                             <div class="bg-zinc-100 p-4 dark:bg-zinc-950">
                                 <p class="font-semibold text-zinc-600 dark:text-zinc-300">Usuarios</p>
                                 <p class="text-3xl font-bold text-secondary dark:text-tertiary">4.890</p>
@@ -124,13 +124,13 @@
                                 </p>
                             </div>
                             <div
-                                class="flex items-center justify-center border-t border-zinc-300 pt-4 dark:border-zinc-900">
+                                class="flex items-center justify-center border-t border-zinc-400 pt-4 dark:border-zinc-800">
                                 <div class="h-60 w-60">
                                     <canvas id="userChart"></canvas>
                                 </div>
                             </div>
                             <div
-                                class="mt-6 flex flex-col gap-1 border-t border-zinc-300 bg-zinc-100 p-4 dark:border-zinc-900 dark:bg-zinc-950">
+                                class="mt-6 flex flex-col gap-1 border-t border-zinc-400 bg-zinc-100 p-4 dark:border-zinc-800 dark:bg-zinc-950">
                                 <p class="flex items-center gap-2 text-xs uppercase">
                                     <span class="block h-3 w-8 rounded-full bg-[#f2d410]"></span>
                                     <span class="text-zinc-600 dark:text-zinc-300">
@@ -151,7 +151,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="h-max flex-1 overflow-hidden rounded-xl border border-zinc-300 dark:border-zinc-900">
+                        <div class="h-max flex-1 overflow-hidden rounded-xl border border-zinc-400 dark:border-zinc-800">
                             <div class="bg-zinc-100 p-4 dark:bg-zinc-950">
                                 <p class="font-semibold text-zinc-600 dark:text-zinc-300">Pedidos</p>
                                 <p class="text-3xl font-bold text-secondary dark:text-tertiary">400</p>
@@ -160,13 +160,13 @@
                                 </p>
                             </div>
                             <div
-                                class="flex items-center justify-center border-t border-zinc-300 pt-4 dark:border-zinc-900">
+                                class="flex items-center justify-center border-t border-zinc-400 pt-4 dark:border-zinc-800">
                                 <div class="h-60 w-60">
                                     <canvas id="orderChart"></canvas>
                                 </div>
                             </div>
                             <div
-                                class="mt-6 flex flex-col gap-1 border-t border-zinc-300 bg-zinc-100 p-4 dark:border-zinc-900 dark:bg-zinc-950">
+                                class="mt-6 flex flex-col gap-1 border-t border-zinc-400 bg-zinc-100 p-4 dark:border-zinc-800 dark:bg-zinc-950">
                                 <p class="flex items-center gap-2 text-xs uppercase">
                                     <span class="block h-3 w-8 rounded-full bg-[#138fdc]"></span>
                                     <span class="text-[#138fdc] dark:text-[#138fdc]">
@@ -188,7 +188,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 flex rounded-lg border border-zinc-300 dark:border-zinc-900">
+                    <div class="mt-4 flex rounded-lg border border-zinc-400 dark:border-zinc-800">
                         <div class="flex flex-1 items-start gap-4 border-e p-4 dark:border-zinc-950">
                             <span class="rounded-full p-2 dark:bg-zinc-950">
                                 <x-icon icon="package" class="h-6 w-6 text-yellow-500 dark:text-yellow-500" />
@@ -213,10 +213,10 @@
 
                 </div>
             </div>
-            <div class="mt-4 border-t border-zinc-300 dark:border-zinc-900">
-                <div class="m-4 overflow-hidden rounded-lg border border-zinc-300 dark:border-zinc-900">
+            <div class="mt-4 border-t border-zinc-400 dark:border-zinc-800">
+                <div class="m-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                     <div
-                        class="flex items-center justify-between rounded-t-lg border-b border-zinc-300 bg-zinc-100 dark:border-zinc-900 dark:bg-zinc-950">
+                        class="flex items-center justify-between rounded-t-lg border-b border-zinc-400 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950">
                         <h2 class="p-4 text-2xl font-bold uppercase text-secondary dark:text-tertiary">
                             Últimos pedidos
                         </h2>
@@ -235,7 +235,7 @@
                                     <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                         <li class="flex items-center">
                                             <input id="offers" name="filter[]" type="checkbox" value="offers"
-                                                class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
+                                                class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                             <label for="offers"
                                                 class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                 Con ofertas
@@ -244,7 +244,7 @@
                                         <li class="flex items-center">
                                             <input id="flash_offers" name="filter[]" type="checkbox"
                                                 value="flash_offers"
-                                                class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
+                                                class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                             <label for="flash_offers"
                                                 class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                 Con ofertas flash
@@ -258,24 +258,24 @@
                     <div class="">
                         <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
-                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Orden
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Total
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Cliente
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Estado de pago
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Estado de envío
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Fecha
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -285,32 +285,32 @@
                             </thead>
                             <tbody class="bg-white dark:bg-black">
                                 <tr>
-                                    <td class="border-e border-zinc-200 px-4 py-3 text-sm dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 text-sm dark:border-zinc-800">
                                         #1234
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 text-sm dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 text-sm dark:border-zinc-800">
                                         $200
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 text-sm dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 text-sm dark:border-zinc-800">
                                         <div class="flex items-center gap-2">
                                             <img src="{{ asset('images/photo.jpg') }}" alt=""
                                                 class="h-10 w-10 rounded-full object-cover">
                                             John Doe
                                         </div>
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 text-sm dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 text-sm dark:border-zinc-800">
                                         <span
                                             class="inline-block rounded-full bg-green-100 px-2 py-1 text-xs font-semibold uppercase text-green-500 dark:bg-green-900 dark:text-green-300">
                                             Completado
                                         </span>
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 text-sm dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 text-sm dark:border-zinc-800">
                                         <span
                                             class="inline-block rounded-full bg-green-100 px-2 py-1 text-xs font-semibold uppercase text-green-500 dark:bg-green-900 dark:text-green-300">
                                             Enviado
                                         </span>
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 text-sm dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 text-sm dark:border-zinc-800">
                                         12/12/2021
                                     </td>
                                     <td class="px-4 py-3">
@@ -321,28 +321,28 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         #1235
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         $150
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Jane Doe
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         <span
                                             class="inline-block rounded-full bg-yellow-100 px-2 py-1 text-xs font-semibold uppercase text-yellow-500 dark:bg-yellow-900 dark:text-yellow-300">
                                             Pendiente
                                         </span>
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         <span
                                             class="inline-block rounded-full bg-yellow-100 px-2 py-1 text-xs font-semibold uppercase text-yellow-500 dark:bg-yellow-900 dark:text-yellow-300">
                                             Pendiente
                                         </span>
                                     </td>
-                                    <td class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <td class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         12/12/2021
                                     </td>
                                     <td class="px-4 py-3">

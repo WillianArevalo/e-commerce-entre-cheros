@@ -10,7 +10,7 @@
          </label>
      </form>
      <a href="{{ route('products.details', $product->id) }}"
-         class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
+         class="flex items-center justify-center rounded-lg border border-zinc-400 bg-white px-5 py-3 font-league-spartan text-secondary transition-colors hover:bg-zinc-100">
          <x-icon-store icon="arrow-right" class="h-5 w-5 text-current" />
      </a>
  </div>
@@ -18,7 +18,7 @@
      @csrf
      <input type="hidden" name="quantity" value="1">
      <button type="button" data-form="#form-add-cart-{{ $product->id }}"
-         class="add-to-cart flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-primary text-white">
+         class="add-to-cart flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-league-spartan text-white">
          <x-icon-store icon="shopping-cart-add" class="h-5 w-5 text-current" />
      </button>
  </form>

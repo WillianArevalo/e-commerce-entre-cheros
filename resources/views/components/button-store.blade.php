@@ -13,11 +13,11 @@
     $baseClasses = 'rounded-full flex items-center justify-center gap-2 transition-colors duration-300  ' . $padding;
     $buttonTypes = [
         'primary' => 'bg-primary text-white hover:bg-secondary bg-gradient',
-        'secondary' => 'bg-white text-zinc-600 border border-zinc-300 hover:bg-zinc-100',
+        'secondary' => 'bg-white text-zinc-600 border border-zinc-400 hover:bg-zinc-100',
         'danger' => 'bg-red-500 text-white hover:bg-red-600',
         'warning' => 'bg-yellow-500 text-white hover:bg-yellow-600',
         'success' => 'bg-green-500 text-white hover:bg-green-600',
-        'default' => 'bg-white text-zinc-600 border border-zinc-300 hover:bg-zinc-100',
+        'default' => 'bg-white text-zinc-600 border border-zinc-400 hover:bg-zinc-100',
     ];
     $classes = $buttonTypes[$typeButton] . ' ' . $baseClasses . ' ' . $class;
 @endphp

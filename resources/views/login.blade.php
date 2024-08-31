@@ -11,9 +11,9 @@
             </div>
             <div class="relative flex flex-1 flex-col text-center">
                 <div class="px-10">
-                    <h1 class="font-primary text-5xl font-bold text-secondary">Inicia sesión</h1>
+                    <h1 class="font-league-spartan text-5xl font-bold text-secondary">Inicia sesión</h1>
                 </div>
-                <div class="mx-auto mt-4 w-3/5 font-secondary">
+                <div class="font-secondary mx-auto mt-4 w-3/5">
                     <form action="{{ route('login.validate') }}" method="POST">
                         @csrf
                         <div class="flex flex-col items-start gap-2">
@@ -29,7 +29,7 @@
                         <div class="mt-4 flex items-center justify-between">
                             <div class="flex items-center">
                                 <input checked id="checked-checkbox" type="checkbox" value=""
-                                    class="h-5 w-5 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    class="h-5 w-5 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                 <label for="checked-checkbox" class="ms-2 text-sm font-medium text-zinc-600">
                                     Recuerdame
                                 </label>

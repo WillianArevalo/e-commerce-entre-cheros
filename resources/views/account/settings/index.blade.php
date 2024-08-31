@@ -2,11 +2,11 @@
 @section('profile-content')
     <div class="flex flex-col">
         <div class="py-2">
-            <h2 class="font-primary text-3xl font-bold text-secondary">
+            <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                 Configuración
             </h2>
         </div>
-        <div class="border-t border-zinc-200">
+        <div class="border-t border-zinc-400">
             <div class="mt-4 flex flex-col">
                 <h3 class="text-lg font-semibold text-zinc-700">
                     Datos de seguridad
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 border-t border-zinc-200">
+            <div class="mt-4 border-t border-zinc-400">
                 <div class="flex items-center justify-between pt-4">
                     <h3 class="text-lg font-semibold text-zinc-700">Datos personales</h3>
                     <a href="{{ Route('account.settings-edit') }}"

@@ -19,14 +19,14 @@
                     <input type="hidden" id="gender" name="gender" value="M">
                     <div class="relative">
                         <div
-                            class="selected flex items-center justify-between rounded-full border border-zinc-300 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200">
+                            class="selected flex items-center justify-between rounded-full border border-zinc-400 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200">
                             <span class="itemSelected">
                                 Precio más alto
                             </span>
                             <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-600" />
                         </div>
                         <ul
-                            class="selectOptions absolute z-10 mt-2 hidden w-full rounded-2xl border border-zinc-200 bg-white py-1 shadow-lg">
+                            class="selectOptions absolute z-10 mt-2 hidden w-full rounded-2xl border border-zinc-400 bg-white py-1 shadow-lg">
                             <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="M"
                                 data-input="#gender">
                                 Relevancia
@@ -48,20 +48,20 @@
                 </div>
             </div>
             <div class="mt-8 flex gap-4 font-secondary">
-                <div class="flex w-full flex-1 flex-col gap-8 rounded-lg border border-zinc-300 p-4">
+                <div class="flex w-full flex-1 flex-col gap-8 rounded-lg border border-zinc-400 p-4">
                     <div>
                         <p class="mb-2 text-sm text-zinc-600">Más filtros</p>
                         <div class="flex flex-col gap-2">
                             <div class="flex items-center">
                                 <input id="offers" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                 <label for="offers" class="ms-2 text-sm font-medium text-zinc-900">
                                     Ofertas
                                 </label>
                             </div>
                             <div class="flex items-center">
                                 <input id="flash_offers" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                 <label for="flash_offers" class="ms-2 text-sm font-medium text-zinc-900">
                                     Ofertas relampago
                                 </label>
@@ -73,21 +73,21 @@
                         <div class="flex flex-col gap-2">
                             <div class="flex items-center">
                                 <input id="min-5" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                 <label for="min-5" class="ms-2 text-sm font-medium text-zinc-900">
                                     Menos de $5
                                 </label>
                             </div>
                             <div class="flex items-center">
                                 <input id="entre-5-10" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                 <label for="entre-5-10" class="ms-2 text-sm font-medium text-zinc-900">
                                     Entre $5 y $10
                                 </label>
                             </div>
                             <div class="flex items-center">
                                 <input id="more-10" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                 <label for="more-10" class="ms-2 text-sm font-medium text-zinc-900">
                                     Más de $10
                                 </label>
@@ -101,7 +101,7 @@
                                 @foreach ($categories as $category)
                                     <div class="flex items-center">
                                         <input id="{{ $category->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                         <label for="{{ $category->name }}" class="ms-2 text-sm font-medium text-zinc-900">
                                             {{ $category->name }}
                                         </label>
@@ -117,7 +117,7 @@
                                 @foreach ($subcategories as $subcategorie)
                                     <div class="flex items-center">
                                         <input id="{{ $subcategorie->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                         <label for="{{ $subcategorie->name }}"
                                             class="ms-2 text-sm font-medium text-zinc-900">
                                             {{ $subcategorie->name }}
@@ -134,7 +134,7 @@
                                 @foreach ($labels as $label)
                                     <div class="flex items-center">
                                         <input id="{{ $label->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                         <label for="{{ $label->name }}" class="ms-2 text-sm font-medium text-zinc-900">
                                             {{ $label->name }}
                                         </label>
@@ -150,7 +150,7 @@
                                 @foreach ($brands as $brand)
                                     <div class="flex items-center">
                                         <input id="{{ $brand->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                         <label for="{{ $brand->name }}" class="ms-2 text-sm font-medium text-zinc-900">
                                             {{ $brand->name }}
                                         </label>

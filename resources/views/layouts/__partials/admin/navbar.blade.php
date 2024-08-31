@@ -1,5 +1,5 @@
 <header>
-    <nav class="fixed top-0 z-30 w-full border-b border-zinc-200 bg-white dark:border-zinc-900 dark:bg-black">
+    <nav class="fixed top-0 z-30 w-full border-b border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black">
         <div class="py-3">
             <div class="flex items-center justify-between">
                 <div class="md:min-w-72 flex items-center justify-start ps-4 rtl:justify-end">
@@ -19,7 +19,7 @@
                         <img src="{{ asset('images/imagen6.png') }}" class="me-3 h-8 w-8 rounded-full object-cover"
                             alt="Entre Cheros logo" />
                         <span
-                            class="self-center whitespace-nowrap font-primary text-xl font-semibold text-secondary dark:text-primary sm:text-2xl">
+                            class="self-center whitespace-nowrap font-league-spartan text-xl font-semibold text-secondary dark:text-primary sm:text-2xl">
                             Entre Cheros
                         </span>
                     </a>
@@ -77,7 +77,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="mt-2 border-t border-zinc-100 pt-2 dark:border-zinc-900">
+                                    <li class="mt-2 border-t border-zinc-100 pt-2 dark:border-zinc-800">
                                         <a href="#"
                                             class="flex items-center justify-center gap-2 rounded-lg p-3 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
@@ -114,7 +114,7 @@
                                 class="flex rounded-full bg-zinc-800 text-sm focus:ring-4 focus:ring-zinc-300 dark:focus:ring-zinc-800"
                                 id="profile-admin">
                                 <img class="h-8 w-8 rounded-full object-cover"
-                                    src="{{ Storage::url(auth()->user()->profile_photo_path) }}" alt="user photo">
+                                    src="{{ Storage::url(auth()->user()->profile) }}" alt="user photo">
                             </button>
                             <div class="absolute right-0 top-10 z-50 hidden list-none divide-y divide-zinc-100 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-900 dark:bg-zinc-950"
                                 id="dropdown-user">
@@ -143,7 +143,7 @@
                                             Configuración
                                         </a>
                                     </li>
-                                    <li class="border-t border-zinc-100 pt-2 dark:border-zinc-900">
+                                    <li class="border-t border-zinc-100 pt-2 dark:border-zinc-800">
                                         <form action="{{ route('logout') }}" method="POST" class="w-full">
                                             @csrf
                                             <button type="submit"
@@ -164,7 +164,7 @@
     </nav>
 </header>
 <aside id="sidebar-multi-level-sidebar"
-    class="fixed left-0 top-0 z-20 mt-2 h-screen w-72 -translate-x-full border-e border-zinc-200 pt-12 transition-transform dark:border-zinc-900 xl:translate-x-0"
+    class="fixed left-0 top-0 z-20 mt-2 h-screen w-72 -translate-x-full border-e border-zinc-400 pt-12 transition-transform dark:border-zinc-800 xl:translate-x-0"
     aria-label="Sidebar">
     <div class="mt-2 h-full overflow-y-auto bg-white px-3 py-4 dark:bg-black">
         <ul class="space-y-2 font-medium">

@@ -28,26 +28,26 @@
                         </div>
                     </div>
                     <div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                             <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                                 <thead
-                                    class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                     <tr>
                                         <th scope="col"
-                                            class="w-10 border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                            class="w-10 border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             #
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Nombre
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Fecha de inicio
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Fecha de fin</th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Visualización</th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Estado</th>
                                         <th scope="col" class="px-4 py-3">Acciones</th>
                                     </tr>
@@ -99,7 +99,7 @@
                                                                 value="" class="toggleShow peer sr-only"
                                                                 {{ $offer->is_showing === 1 ? 'checked' : '' }}>
                                                             <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
+                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
                                                             </div>
                                                             <span
                                                                 class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
@@ -122,7 +122,7 @@
                                                                 class="toggleStatus peer sr-only"
                                                                 {{ $offer->is_active === 1 ? 'checked' : '' }}>
                                                             <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
                                                             </div>
                                                             <span
                                                                 class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
@@ -190,7 +190,7 @@
                                         value="{{ isset(session('product')->id) ? session('product')->id : old('product_id') }}">
                                     <div class="relative">
                                         <div
-                                            class="selected @error('product_id') is-invalid @enderror flex h-11 w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                            class="selected @error('product_id') is-invalid @enderror flex h-11 w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                             <span class="itemSelected flex items-center gap-2">
                                                 @if ($products->count() > 0)
                                                     @php
@@ -220,7 +220,7 @@
                                             <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-white" />
                                         </div>
                                         <ul
-                                            class="selectOptions {{ $products->count() > 6 ? 'h-60' : '' }} absolute z-10 mt-2 hidden w-full overflow-auto rounded-lg border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950">
+                                            class="selectOptions {{ $products->count() > 6 ? 'h-60' : '' }} absolute z-10 mt-2 hidden w-full overflow-auto rounded-lg border border-zinc-400 bg-white p-2 shadow-lg dark:border-zinc-800 dark:bg-zinc-950">
                                             @if ($products->count() > 0)
                                                 @foreach ($products as $product)
                                                     <li class="itemOption flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
@@ -270,7 +270,7 @@
                                         <input type="checkbox" value="is_showing" class="peer sr-only"
                                             name="is_showing">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Mostrar en la página principal
@@ -279,7 +279,7 @@
                                     <label class="inline-flex cursor-pointer items-center">
                                         <input type="checkbox" value="is_active" class="peer sr-only" name="is_active">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Activo
@@ -346,7 +346,7 @@
                                         <input type="checkbox" value="is_showing" class="peer sr-only" name="is_showing"
                                             id="is_showing_edit">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Mostrar en la página principal
@@ -356,7 +356,7 @@
                                         <input type="checkbox" value="is_active" class="peer sr-only" name="is_active"
                                             id="is_active_edit">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Activo

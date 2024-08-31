@@ -12,7 +12,7 @@
                         d="M0,96L34.3,117.3C68.6,139,137,181,206,208C274.3,235,343,245,411,229.3C480,213,549,171,617,170.7C685.7,171,754,213,823,229.3C891.4,245,960,235,1029,202.7C1097.1,171,1166,117,1234,101.3C1302.9,85,1371,107,1406,117.3L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z">
                     </path>
                 </svg>
-                <h1 class="mb-16 block font-tertiary text-5xl font-normal uppercase text-white" data-aos="zoom-in">
+                <h1 class="mb-16 block font-mystical text-5xl font-normal uppercase text-white" data-aos="zoom-in">
                     Contactanos
                 </h1>
             </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="flex-1" data-aos="fade-left">
                     <div class="flex flex-col gap-4">
-                        <h2 class="font-primary text-4xl font-bold text-secondary">Contacta con nosotros</h2>
+                        <h2 class="font-league-spartan text-4xl font-bold text-secondary">Contacta con nosotros</h2>
                         <p class="font-secondary text-sm text-zinc-600">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut error ab, aspernatur ex voluptatem,
                             sunt ducimus laudantium debitis natus explicabo architecto animi possimus nisi voluptatibus!
@@ -58,29 +58,29 @@
                         <div class="flex flex-col items-start rounded-3xl bg-zinc-100 p-4">
                             <div class="flex items-center gap-2">
                                 <x-icon-store icon="call" class="h-8 w-8 text-tertiary" />
-                                <h3 class="font-primary text-xl font-semibold text-secondary">Telefono</h3>
+                                <h3 class="font-league-spartan text-xl font-semibold text-secondary">Telefono</h3>
                             </div>
-                            <p class="ms-10 font-secondary text-sm text-zinc-600">+503 7545 6642</p>
+                            <p class="font-secondary ms-10 text-sm text-zinc-600">+503 7545 6642</p>
                         </div>
                         <div class="flex flex-col items-start rounded-3xl bg-zinc-100 p-4">
                             <div class="flex items-center gap-2">
                                 <x-icon-store icon="mail" class="h-8 w-8 text-tertiary" />
-                                <h3 class="font-primary text-xl font-semibold text-secondary">
+                                <h3 class="font-league-spartan text-xl font-semibold text-secondary">
                                     Correo electrónico
                                 </h3>
                             </div>
-                            <p class="ms-10 font-secondary text-sm text-zinc-600">
+                            <p class="font-secondary ms-10 text-sm text-zinc-600">
                                 contact@entrecheros.com
                             </p>
                         </div>
                         <div class="flex flex-col items-start rounded-3xl bg-zinc-100 p-4">
                             <div class="flex items-center gap-2">
                                 <x-icon-store icon="location" class="h-8 w-8 text-tertiary" />
-                                <h3 class="font-primary text-xl font-semibold text-secondary">
+                                <h3 class="font-league-spartan text-xl font-semibold text-secondary">
                                     Dirección
                                 </h3>
                             </div>
-                            <p class="ms-10 font-secondary text-sm text-zinc-600">
+                            <p class="font-secondary ms-10 text-sm text-zinc-600">
                                 4a Calle Poniente, San Salvador, El Salvador
                             </p>
                         </div>

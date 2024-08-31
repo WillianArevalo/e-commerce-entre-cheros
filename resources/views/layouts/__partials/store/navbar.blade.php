@@ -58,7 +58,7 @@
                             <li class="mb-2 w-full">
                                 <a href="{{ Route('account.index') }}"
                                     class="flex items-center justify-start rounded-xl px-4 py-2 hover:bg-zinc-100">
-                                    <img src="{{ Storage::url($user->profile_photo_path) }}" alt=""
+                                    <img src="{{ Storage::url($user->profile) }}" alt=""
                                         class="min-w-12 h-12 rounded-full object-cover">
                                     <div class="ml-2">
                                         <span class="block text-sm text-secondary">Hola,</span>
@@ -69,7 +69,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <hr class="border-t border-zinc-200">
+                            <hr class="border-t border-zinc-400">
                             <li class="mt-2 w-full">
                                 <a href="{{ Route('orders') }}"
                                     class="flex w-full items-center justify-start rounded-xl px-4 py-2 text-secondary hover:bg-blue-50 hover:text-tertiary">
@@ -100,7 +100,7 @@
                                     Favoritos
                                 </a>
                             </li>
-                            <hr class="border-t border-zinc-200">
+                            <hr class="border-t border-zinc-400">
                             <li class="my-2 w-full">
                                 <a href="{{ Route('account.settings') }}"
                                     class="flex w-full items-center justify-start rounded-xl px-4 py-2 text-secondary hover:bg-blue-50 hover:text-tertiary">
@@ -108,7 +108,7 @@
                                     Configuración
                                 </a>
                             </li>
-                            <hr class="border-t border-zinc-200">
+                            <hr class="border-t border-zinc-400">
                             <li class="mt-2 w-full">
                                 <form action="{{ Route('logout') }}" method="POST">
                                     @csrf

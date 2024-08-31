@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-4 rounded-lg">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
             <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Tickets de soporte
             </h1>
@@ -14,8 +14,8 @@
         </div>
         <div class="bg-zinc-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
-                    <div class="mb-4 border-b border-zinc-200 dark:border-zinc-900">
+                <div class="relative bg-white shadow-md dark:border dark:border-zinc-800 dark:bg-black sm:rounded-lg">
+                    <div class="mb-4 border-b border-zinc-400 dark:border-zinc-800">
                         <ul class="-mb-px flex flex-wrap text-center text-sm font-medium" id="default-tab"
                             data-tabs-toggle="#default-tab-content" role="tablist">
                             <li class="me-2" role="presentation">
@@ -34,11 +34,11 @@
                             </li>
                             <li class="me-2" role="presentation">
                                 <button
-                                    class="inline-block rounded-t-lg border-b-2 p-4 hover:border-zinc-300 hover:text-zinc-600 dark:hover:text-zinc-300"
+                                    class="inline-block rounded-t-lg border-b-2 p-4 hover:border-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
                                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
                                     aria-controls="dashboard" aria-selected="false">
                                     <div
-                                        class="flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-3 py-2 text-black dark:border-zinc-800 dark:bg-black dark:text-white">
+                                        class="flex items-center justify-center gap-2 rounded-full border border-zinc-400 bg-white px-3 py-2 text-black dark:border-zinc-800 dark:bg-black dark:text-white">
                                         Asignados a mí
                                         <span
                                             class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-white">

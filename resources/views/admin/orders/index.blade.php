@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-4 rounded-lg">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
             <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Administrar pedidos
             </h1>
@@ -14,8 +14,8 @@
         </div>
         <div class="bg-zinc-50 p-4 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-900 dark:bg-black sm:rounded-lg">
-                    <div class="border-b border-zinc-200 p-4 dark:border-zinc-900">
+                <div class="relative bg-white shadow-md dark:border dark:border-zinc-800 dark:bg-black sm:rounded-lg">
+                    <div class="border-b border-zinc-400 p-4 dark:border-zinc-800">
                         <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de pedidos
                         </h2>
@@ -49,7 +49,7 @@
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
@@ -58,7 +58,7 @@
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="fitbit"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías

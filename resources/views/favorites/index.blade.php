@@ -12,7 +12,7 @@
         </section>
         <section class="relative -top-28 px-20 py-4">
             <div class="flex w-full flex-col justify-center gap-4 text-center">
-                <h2 class="p-4 font-tertiary text-5xl uppercase text-secondary" data-aos="fade-up">
+                <h2 class="p-4 font-mystical text-5xl uppercase text-secondary" data-aos="fade-up">
                     Favoritos
                 </h2>
                 @if ($favorites->count() > 0)
@@ -22,7 +22,7 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="p-20 text-center font-secondary text-lg font-medium">No hay productos favoritos</p>
+                    <p class="font-secondary p-20 text-center text-lg font-medium">No hay productos favoritos</p>
                 @endif
                 <div class="mt-8 flex w-full items-center justify-center">
                     <x-button-store type="a" href="{{ route('store.products') }}" text="Ver más productos"

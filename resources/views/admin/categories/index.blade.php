@@ -1,7 +1,5 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Categorías')
-
 @section('content')
     <div>
         @include('layouts.__partials.admin.header-page', [
@@ -40,7 +38,7 @@
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
@@ -49,7 +47,7 @@
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-300 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
                                                 <label for="fitbit"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías
@@ -61,18 +59,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                         <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
-                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Imagen
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Nombre
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Subcategorías
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -104,7 +102,7 @@
                                                     <div class="flex flex-col gap-2">
                                                         @foreach ($category->subcategories as $subcategorie)
                                                             <div
-                                                                class="relative flex w-max items-center gap-2 rounded-lg border px-4 py-2 dark:border-zinc-900">
+                                                                class="relative flex w-max items-center gap-2 rounded-lg border px-4 py-2 dark:border-zinc-800">
                                                                 {{ $subcategorie->name }}
                                                                 <button class="btnDropDown text-zinc-600 dark:text-white"
                                                                     type="button">
@@ -227,7 +225,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="imageCategorie"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <div class="flex flex-col items-center justify-center pb-6 pt-5">
                                     <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
                                     <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
@@ -283,7 +281,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="edit-image-categorie"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <div class="hidden flex-col items-center justify-center pb-6 pt-5">
                                     <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
                                     <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span

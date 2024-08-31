@@ -1,8 +1,8 @@
   @if ($products->count() > 3)
-      <div class="flex flex-wrap justify-center items-center w-full mx-auto relative mt-4">
+      <div class="relative mx-auto mt-4 flex w-full flex-wrap items-center justify-center">
           <button
-              class="button-prev absolute z-30 -left-14 border border-zinc-300 hover:bg-zinc-100 p-2 rounded-full cursor-pointer flex items-center justify-center">
-              <x-icon icon="arrow-left" class="w-6 h-6 text-secondary" />
+              class="button-prev absolute -left-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 p-2 hover:bg-zinc-100">
+              <x-icon icon="arrow-left" class="h-6 w-6 text-secondary" />
           </button>
           <div class="swiper mySwiper">
               <div class="swiper-wrapper">
@@ -12,12 +12,12 @@
               </div>
           </div>
           <button
-              class="button-next absolute -right-14 z-30 border border-zinc-300 p-2 hover:bg-zinc-100 rounded-full cursor-pointer flex items-center justify-center">
-              <x-icon icon="arrow-right" class="w-6 h-6 text-secondary" />
+              class="button-next absolute -right-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 p-2 hover:bg-zinc-100">
+              <x-icon icon="arrow-right" class="h-6 w-6 text-secondary" />
           </button>
       </div>
   @else
-      <div class="flex gap-4 items-center justify-center mt-4">
+      <div class="mt-4 flex items-center justify-center gap-4">
           @foreach ($products as $product)
               <x-card-product :product="$product" :slide="false" width="w-96" />
           @endforeach

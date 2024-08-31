@@ -5,49 +5,49 @@
 @section('content')
     <main class="mb-10">
         <section class="mt-32">
-            <div class="bg-secondary w-max text-start p-10 rounded-r-2xl flex flex-col gap-4">
-                <h1 class="text-4xl font-primary text-primary uppercase font-bold">Categorías</h1>
-                <ul class="flex gap-4 flex-col font-secondary text-white">
+            <div class="flex w-max flex-col gap-4 rounded-r-2xl bg-secondary p-10 text-start">
+                <h1 class="font-league-spartan text-4xl font-bold uppercase text-primary">Categorías</h1>
+                <ul class="font-secondary flex flex-col gap-4 text-white">
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                     <li class="border-b-2 border-white pb-2">
-                        <a href="" class="flex gap-2 items-center justify-between">
+                        <a href="" class="flex items-center justify-between gap-2">
                             Nombre categoría
-                            <x-icon icon="arrow-right" class="w-5 h-5 text-current" />
+                            <x-icon icon="arrow-right" class="h-5 w-5 text-current" />
                         </a>
                     </li>
                 </ul>

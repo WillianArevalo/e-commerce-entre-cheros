@@ -23,7 +23,7 @@
                                          </span>
                                      </div>
                                      <span
-                                         class="me-2 mt-1 block rounded-full bg-purple-100 px-2.5 py-0.5 font-secondary text-xs font-medium text-purple-800">
+                                         class="font-secondary me-2 mt-1 block rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800">
                                          En oferta
                                      </span>
                                  </div>
@@ -43,25 +43,25 @@
                          @csrf
                          <input type="hidden" name="action" value="minus">
                          <button type="button" data-form="#form-minus-cart-{{ $item->product->id }}"
-                             class="btnMinusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
+                             class="btnMinusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-400 hover:bg-zinc-100">
                              <x-icon-store icon="minus" class="h-4 w-4 text-secondary" />
                          </button>
                      </form>
                      <input type="text" name="quantity" id="quantity"
-                         class="h-12 w-16 rounded-lg border-none text-center font-secondary text-sm focus:border-none focus:outline-none"
+                         class="font-secondary h-12 w-16 rounded-lg border-none text-center text-sm focus:border-none focus:outline-none"
                          readonly value="{{ $item->quantity }}" min="1">
                      <form action="{{ route('cart.update', $item->product->id) }}" method="POST"
                          id="form-plus-cart-{{ $item->product->id }}">
                          @csrf
                          <input type="hidden" name="action" value="plus">
                          <button type="button" data-form="#form-plus-cart-{{ $item->product->id }}"
-                             class="btnPlusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100">
+                             class="btnPlusCart flex h-8 w-8 items-center justify-center rounded-full border border-zinc-400 hover:bg-zinc-100">
                              <x-icon-store icon="plus" class="h-4 w-4 text-secondary" />
                          </button>
                      </form>
                  </div>
              </td>
-             <td class="whitespace-nowrap px-6 py-4 font-secondary text-sm text-zinc-500">
+             <td class="font-secondary whitespace-nowrap px-6 py-4 text-sm text-zinc-500">
                  ${{ number_format($item->sub_total, 2) }}
              </td>
              <td class="whitespace-nowrap px-6 py-4 text-start text-sm font-medium">
@@ -78,7 +78,7 @@
      @endforeach
  @else
      <tr class="border-t border-zinc-100">
-         <td class="whitespace-nowrap px-6 py-4 text-center font-primary" colspan="4">
+         <td class="whitespace-nowrap px-6 py-4 text-center font-league-spartan" colspan="4">
              Carrito vacío
          </td>
      </tr>

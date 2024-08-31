@@ -2,7 +2,7 @@
 @section('profile-content')
     <div class="flex flex-col">
         <div class="flex justify-between py-2">
-            <h2 class="font-primary text-3xl font-bold text-secondary">
+            <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                 Nueva dirección
             </h2>
             <a href="{{ Route('account.addresses.index') }}"
@@ -11,7 +11,7 @@
                 Regresar
             </a>
         </div>
-        <div class="border-t border-zinc-200">
+        <div class="border-t border-zinc-400">
             <form action="{{ Route('account.addresses.store') }}" method="POST" class="mt-4">
                 @csrf
                 <div class="flex flex-col gap-4">

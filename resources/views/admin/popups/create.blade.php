@@ -44,7 +44,7 @@
                         <h5 class="mb-2 font-bold text-zinc-700 dark:text-white">Previsualización</h5>
                         <!-- Preview Popup -->
                         <div
-                            class="popupContainer relative flex h-max w-full items-center justify-center overflow-auto rounded-lg border-2 border-dashed border-zinc-600 bg-zinc-300 py-32 dark:border-zinc-900 dark:bg-black">
+                            class="popupContainer relative flex h-max w-full items-center justify-center overflow-auto rounded-lg border-2 border-dashed border-zinc-600 bg-zinc-300 py-32 dark:border-zinc-800 dark:bg-black">
                             <div class="relative min-w-[450px] rounded-md bg-white" id="popup">
                                 <button type="button"
                                     class="closePopup absolute right-0 top-0 m-2 rounded-full p-1.5 hover:bg-zinc-200">
@@ -174,7 +174,7 @@
                             </div>
                             <div class="mt-4 flex items-center gap-4">
                                 <label for="addImagePopup"
-                                    class="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
+                                    class="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-400 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                     <x-icon icon="image-add" class="h-4 w-4 text-current" />
                                     Agregar imagen
                                 </label>

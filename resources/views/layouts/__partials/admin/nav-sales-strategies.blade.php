@@ -1,4 +1,4 @@
-        <div class="fixed top-0 mt-[70px] h-screen w-60 border-e border-zinc-200 dark:border-zinc-900">
+        <div class="fixed top-0 mt-[70px] h-screen w-60 border-e border-zinc-400 dark:border-zinc-800">
             <ul class="space-y-2 p-2 text-sm">
                 <li>
                     <a href="{{ route('admin.sales-strategies.index') }}"

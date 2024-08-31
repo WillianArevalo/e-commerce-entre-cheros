@@ -1,7 +1,7 @@
 @extends('layouts.admin-template')
 @section('title', 'Preguntas frecuentes')
 @section('content')
-    <div class="mt-4 rounded-lg dark:border-zinc-900">
+    <div class="mt-4 rounded-lg dark:border-zinc-800">
         @include('layouts.__partials.admin.header-page', [
             'title' => 'Preguntas frecuentes',
             'description' => 'Administra las preguntas frecuentes de tu aplicación',
@@ -9,7 +9,7 @@
         <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative bg-white dark:bg-black">
-                    <div class="border-b border-zinc-200 p-4 dark:border-zinc-900">
+                    <div class="border-b border-zinc-400 p-4 dark:border-zinc-800">
                         <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de preguntas
                         </h2>
@@ -30,18 +30,18 @@
                                 icon="add-circle" typeButton="primary" />
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                         <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
-                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         #
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Pregunta
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Respuesta
                                     </th>
                                     <th scope="col" class="px-4 py-3">Acciones</th>

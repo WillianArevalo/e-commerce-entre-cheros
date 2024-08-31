@@ -1,8 +1,8 @@
 @extends('layouts.admin-template')
 @section('title', 'Políticas')
 @section('content')
-    <div class="mt-4 dark:border-zinc-900 dark:bg-black">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-900 dark:bg-black">
+    <div class="mt-4 dark:border-zinc-800 dark:bg-black">
+        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
             <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
                 Políticas
             </h1>
@@ -63,7 +63,7 @@
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
                                                 <input id="offers" name="filter[]" type="checkbox" value="offers"
-                                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                                 <label for="offers"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con ofertas
@@ -72,7 +72,7 @@
                                             <li class="flex items-center">
                                                 <input id="flash_offers" name="filter[]" type="checkbox"
                                                     value="flash_offers"
-                                                    class="h-4 w-4 rounded border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                                 <label for="flash_offers"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con ofertas flash
@@ -84,19 +84,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                         <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
-                                class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                 <tr>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         <input id="default-checkbox" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Nombre
                                     </th>
-                                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Path
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -110,7 +110,7 @@
                                         <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                             <td class="px-4 py-3">
                                                 <input id="default-checkbox" type="checkbox" value="{{ $policy->id }}"
-                                                    class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                                             </td>
                                             <td class="px-4 py-3">
                                                 <span>{{ $policy->name }}</span>
@@ -189,7 +189,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="file-policie"
-                                class="dark:hover:bg-bray-800 @error('path') is-invalid  @enderror flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 p-4 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('path') is-invalid  @enderror flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 p-4 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <p>
                                     <span
                                         class="flex items-center justify-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">

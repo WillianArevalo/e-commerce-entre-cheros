@@ -2,11 +2,11 @@
 @section('profile-content')
     <div class="flex flex-col">
         <div class="py-2">
-            <h2 class="font-primary text-3xl font-bold text-secondary">
+            <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                 Direcciones
             </h2>
         </div>
-        <div class="border-t border-zinc-200">
+        <div class="border-t border-zinc-400">
             @if ($addresses->count() > 0)
                 @foreach ($addresses as $address)
                     <div class="mt-6 flex flex-col">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             @endif
-            <div class="mt-4 border-t border-zinc-200 pt-4">
+            <div class="mt-4 border-t border-zinc-400 pt-4">
                 <x-button-store type="a" href="{{ Route('account.addresses.create') }}"
                     text="Agregar nueva dirección" icon="plus" class="w-max" typeButton="secondary" />
             </div>

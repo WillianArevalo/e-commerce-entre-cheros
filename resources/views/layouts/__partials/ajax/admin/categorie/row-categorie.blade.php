@@ -1,5 +1,5 @@
   @if ($categories->count() == 0)
-      <tr class="border-b dark:border-zinc-900">
+      <tr class="border-b dark:border-zinc-800">
           <td colspan="4" class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
               No hay categorías
           </td>
@@ -19,7 +19,7 @@
                       <div class="flex flex-col gap-2">
                           @foreach ($category->subcategories as $subcategorie)
                               <div
-                                  class="relative flex w-max items-center gap-2 rounded-lg border px-4 py-2 dark:border-zinc-900">
+                                  class="relative flex w-max items-center gap-2 rounded-lg border px-4 py-2 dark:border-zinc-800">
                                   {{ $subcategorie->name }}
                                   <button class="btnDropDown text-zinc-600 dark:text-white" type="button">
                                       <x-icon icon="more-hortizontal" class="h-5 w-5 text-current" />

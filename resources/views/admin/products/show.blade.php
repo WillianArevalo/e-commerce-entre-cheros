@@ -12,7 +12,7 @@
         <div class="flex h-full gap-4 bg-white p-4 dark:bg-black">
             <div class="w-1/2">
                 <div
-                    class="mb-4 flex justify-between rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    class="mb-4 flex justify-between rounded-lg border border-zinc-400 bg-white p-4 dark:border-zinc-800 dark:bg-black">
                     <h2 class="text-2xl font-bold uppercase text-secondary dark:text-blue-200">
                         {{ $product->name }}
                     </h2>
@@ -22,7 +22,7 @@
                     </span>
                 </div>
                 <div
-                    class="flex flex-col gap-2 rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                    class="flex flex-col gap-2 rounded-lg border border-zinc-400 bg-white p-4 dark:border-zinc-800 dark:bg-black">
                     <div class="mt-2 flex flex-col gap-1">
                         <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Descripción corta:</h3>
                         <x-paragraph>
@@ -36,7 +36,7 @@
                         </x-paragraph>
                     </div>
                 </div>
-                <div class="mt-4 rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                <div class="mt-4 rounded-lg border border-zinc-400 bg-white p-4 dark:border-zinc-800 dark:bg-black">
                     <h2 class="text-xl font-bold text-secondary dark:text-blue-200">Imágenes del producto</h2>
                     <div class="mt-2 flex flex-col gap-4">
                         <div class="flex flex-1 flex-col gap-2">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <h2
-                        class="mt-4 border-t border-zinc-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
+                        class="mt-4 border-t border-zinc-400 pt-2 text-xl font-bold text-secondary dark:border-zinc-800 dark:text-blue-200">
                         Inventario
                     </h2>
                     <div class="flex gap-4">
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="flex w-1/2 flex-col">
-                <div class="categorie rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-900 dark:bg-black">
+                <div class="categorie rounded-lg border border-zinc-400 bg-white p-4 dark:border-zinc-800 dark:bg-black">
                     <h2 class="text-xl font-bold text-secondary dark:text-blue-200">Categoría</h2>
                     <div class="mt-2 flex flex-col gap-1">
                         <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Categoría principal:</h3>
@@ -121,7 +121,7 @@
                         </x-paragraph>
                     </div>
                     <h2
-                        class="border-t border-zinc-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
+                        class="border-t border-zinc-400 pt-2 text-xl font-bold text-secondary dark:border-zinc-800 dark:text-blue-200">
                         Precio
                     </h2>
                     <div class="mt- flex flex-col gap-1">
@@ -136,13 +136,13 @@
                             <x-paragraph>${{ $product->offer_price }}</x-paragraph>
                         </div>
                         <div
-                            class="mt-2 flex flex-col gap-1 rounded-lg border-2 border-dashed border-zinc-400 p-4 dark:border-zinc-900">
+                            class="mt-2 flex flex-col gap-1 rounded-lg border-2 border-dashed border-zinc-400 p-4 dark:border-zinc-800">
                             <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-100">Fecha de la oferta:</h3>
                             <div class="timeline-container">
                                 <div class="timeline">
                                     <div class="timeline-event start-date">
                                         <div
-                                            class="timeline-content border-zinc-200dark:text-zinc-300 rounded border bg-white p-4 text-sm text-zinc-700 dark:border-zinc-900 dark:bg-black">
+                                            class="timeline-content border-zinc-400dark:text-zinc-300 rounded border bg-white p-4 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-black">
                                             <h3 class="timeline-title text-zinc-700 dark:text-zinc-300">Fecha de inicio</h3>
                                             <x-paragraph class="timeline-date">
                                                 {{ \Carbon\Carbon::parse($product->offer_start_date)->format('d M, Y') }}
@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="timeline-event end-date">
                                         <div
-                                            class="timeline-content rounded border border-zinc-200 bg-white p-4 text-sm text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                            class="timeline-content rounded border border-zinc-400 bg-white p-4 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                             <h3 class="timeline-title text-zinc-700 dark:text-zinc-300">Fecha de fin</h3>
                                             <x-paragraph class="timeline-date">
                                                 {{ \Carbon\Carbon::parse($product->offer_end_date)->format('d M, Y') }}
@@ -163,7 +163,7 @@
                         </div>
                     @endif
                     <h2
-                        class="mt-4 border-t border-zinc-200 pt-2 text-xl font-bold text-secondary dark:border-zinc-900 dark:text-blue-200">
+                        class="mt-4 border-t border-zinc-400 pt-2 text-xl font-bold text-secondary dark:border-zinc-800 dark:text-blue-200">
                         Impuestos
                     </h2>
                     <div>
@@ -171,7 +171,7 @@
                             <tbody>
                                 @if ($product->taxes->count() > 0)
                                     @foreach ($product->taxes as $tax)
-                                        <tr class="border-b border-zinc-200 dark:border-zinc-900">
+                                        <tr class="border-b border-zinc-400 dark:border-zinc-800">
                                             <td class="py-2">
                                                 <span
                                                     class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
@@ -194,7 +194,7 @@
                         @else
                             @foreach ($product->labels as $label)
                                 <span
-                                    class="me-2 flex items-center justify-between gap-2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                    class="me-2 flex items-center justify-between gap-2 rounded-full border border-zinc-400 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:bg-black dark:text-white">
                                     {{ $label->name }}
                                 </span>
                             @endforeach

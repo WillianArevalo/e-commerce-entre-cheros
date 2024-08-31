@@ -25,7 +25,7 @@
                         <div class="mt-4 flex flex-col gap-4 lg:flex-row">
                             <div class="flex flex-1 flex-col gap-4">
                                 <div
-                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">General</h4>
                                     <div class="flex flex-col gap-4">
                                         <div>
@@ -63,7 +63,7 @@
                                                             required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
-                                                        class="mt-7 rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                        class="mt-7 rounded-lg border border-zinc-400 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-800 dark:bg-black dark:text-white">
                                                         <x-icon icon="x" class="h-4 w-4 text-current" />
                                                     </span>
                                                     <div>
@@ -72,7 +72,7 @@
                                                             required="required" error="{{ false }}" />
                                                     </div>
                                                     <span
-                                                        class="mt-7 rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                        class="mt-7 rounded-lg border border-zinc-400 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-800 dark:bg-black dark:text-white">
                                                         <x-icon icon="x" class="h-4 w-4 text-current" />
                                                     </span>
                                                     <div>
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Categoría y marca
                                     </h4>
@@ -113,14 +113,14 @@
                                                     value="{{ old('categorie_id') }}">
                                                 <div class="relative">
                                                     <div
-                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                         <span class="itemSelected" id="selectedSubCategorie">
                                                             Selecciona una subcategoría
                                                         </span>
                                                         <x-icon icon="arrow-down"
                                                             class="h-5 w-5 text-zinc-500 dark:text-white" />
                                                     </div>
-                                                    <ul class="selectOptionsSubCategories absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
+                                                    <ul class="selectOptionsSubCategories absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-400 bg-white p-2 shadow-lg dark:border-zinc-800 dark:bg-zinc-950"
                                                         id="listSubcategories">
                                                         <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                                                             data-value="" data-input="#subcategorie_id">
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Información de venta
                                     </h4>
@@ -203,7 +203,7 @@
                                                             <div>
                                                                 <input id="{{ $tax->name }}" type="checkbox"
                                                                     value="{{ $tax->id }}" name="tax_id[]"
-                                                                    class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600"
+                                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600"
                                                                     @php if($product->taxes->count()>0){
                                                                     foreach($product->taxes as $taxProduct){
                                                                         if($taxProduct->id ==$tax->id){
@@ -229,7 +229,7 @@
                             </div>
                             <div class="flex flex-1 flex-col gap-4">
                                 <div
-                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">Imágenes</h4>
                                     <div>
                                         <x-paragraph
@@ -237,7 +237,7 @@
                                             Imagen principal
                                         </x-paragraph>
                                         <label for="main_image"
-                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-900 dark:bg-transparent dark:hover:border-zinc-800 dark:hover:bg-zinc-950">
+                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-transparent dark:hover:border-zinc-800 dark:hover:bg-zinc-950">
                                             <div class="hidden flex-col items-center justify-center pb-6 pt-5">
                                                 <x-icon icon="cloud-upload"
                                                     class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
@@ -269,7 +269,7 @@
                                             </div>
                                             <div class="flex gap-2 text-sm text-zinc-400">
                                                 <label for="gallery_image"
-                                                    class="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
+                                                    class="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-400 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                                     <x-icon icon="image-add" class="h-4 w-4 text-current" />
                                                     Seleccionar imágenes
                                                 </label>
@@ -279,7 +279,7 @@
                                                     icon="reload" />
                                             </div>
                                         </div>
-                                        <div class="@php $product->images->count()>0 ? "h-auto": "h-24" @endphp mt-4 flex flex-wrap justify-start gap-2 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-900"
+                                        <div class="@php $product->images->count()>0 ? "h-auto": "h-24" @endphp mt-4 flex flex-wrap justify-start gap-2 rounded-lg border-2 border-dashed border-zinc-400 dark:border-zinc-800"
                                             id="previewImagesContainer">
                                             @if ($product->images->count() > 0)
                                                 @foreach ($product->images as $image)
@@ -294,7 +294,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                         Inventario
                                     </h4>
@@ -315,7 +315,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="h-max rounded-lg border border-zinc-300 bg-transparent p-4 dark:border-zinc-900 dark:bg-black">
+                                    class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <div class="flex items-center justify-between">
                                         <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
                                             Etiquetas
@@ -332,12 +332,12 @@
                                             <input type="hidden" name="label_id[]" id="label_id">
                                             <div class="relative">
                                                 <div
-                                                    class="selected flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                    class="selected flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                     <span class="itemSelected">Seleccionar etiqueta</span>
                                                     <x-icon icon="arrow-down"
                                                         class="h-5 w-5 text-zinc-500 dark:text-white" />
                                                 </div>
-                                                <ul class="selectOptionsLabels absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950"
+                                                <ul class="selectOptionsLabels absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-400 bg-white p-2 shadow-lg dark:border-zinc-800 dark:bg-zinc-950"
                                                     id="labelsList">
                                                     @if ($labels->count() > 0)
                                                         @foreach ($labels as $label)
@@ -373,12 +373,12 @@
                                             @endforeach
                                         @endif
                                     </div>
-                                    <div class="mt-4 flex h-auto w-full flex-wrap items-start gap-1 rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 p-2 dark:border-zinc-900 dark:bg-transparent"
+                                    <div class="mt-4 flex h-auto w-full flex-wrap items-start gap-1 rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 p-2 dark:border-zinc-800 dark:bg-transparent"
                                         id="previewLabelsContainer">
                                         @if ($product->labels->count() > 0)
                                             @foreach ($product->labels as $label)
                                                 <div
-                                                    class="me-2 flex items-center justify-between gap-2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                                    class="me-2 flex items-center justify-between gap-2 rounded-full border border-zinc-400 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:bg-black dark:text-white">
                                                     <span>{{ $label->name }}</span>
                                                     <button type="button" class="removeLabelEdit text-white"
                                                         data-label="{{ $label->name }}"
@@ -416,7 +416,7 @@
                 <div class="relative rounded-lg bg-white p-4 shadow dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
-                        class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-900 sm:mb-5">
+                        class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-800 sm:mb-5">
                         <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">
                             Agregar impuesto
                         </h3>
@@ -468,7 +468,7 @@
                 <div class="relative rounded-lg bg-white p-4 shadow dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
-                        class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-900 sm:mb-5">
+                        class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-800 sm:mb-5">
                         <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">
                             Agregar etiqueta
                         </h3>

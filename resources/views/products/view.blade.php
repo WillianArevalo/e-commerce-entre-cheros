@@ -38,7 +38,7 @@
             </div>
             <div class="flex flex-1 flex-col gap-3">
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h1 class="font-primary text-6xl font-bold text-secondary">
+                    <h1 class="font-league-spartan text-6xl font-bold text-secondary">
                         {{ $product->name }}
                     </h1>
                     <div class="flex items-center gap-2">
@@ -46,7 +46,7 @@
                             id="form-add-favorite-{{ $product->id }}">
                             @csrf
                             <label
-                                class="ui-like group flex h-max cursor-pointer items-center gap-2 rounded-full border border-rose-100 p-2 px-4 font-secondary text-sm text-rose-500 hover:bg-rose-50 hover:text-rose-500">
+                                class="ui-like font-secondary group flex h-max cursor-pointer items-center gap-2 rounded-full border border-rose-100 p-2 px-4 text-sm text-rose-500 hover:bg-rose-50 hover:text-rose-500">
                                 <input type="checkbox"
                                     class="btn-add-favorite {{ $product->is_favorite ? 'favourite' : '' }}"
                                     data-form="#form-add-favorite-{{ $product->id }}" data-card="#{{ $product->id }}">
@@ -57,7 +57,7 @@
                             </label>
                         </form>
                         <button
-                            class="group flex h-max items-center gap-2 rounded-full border border-green-100 p-2 px-4 font-secondary text-sm text-green-500 hover:bg-green-50 hover:text-green-500">
+                            class="font-secondary group flex h-max items-center gap-2 rounded-full border border-green-100 p-2 px-4 text-sm text-green-500 hover:bg-green-50 hover:text-green-500">
                             Compartir
                             <x-icon-store icon="share" class="h-5 w-5 text-current" />
                         </button>
@@ -77,28 +77,28 @@
                             class="font-secondary text-5xl font-semibold text-secondary">${{ $product->offer_price }}</span>
                         <span class="font-secondary text-2xl text-zinc-400 line-through">${{ $product->price }}</span>
                         <span
-                            class="me-2 rounded-full bg-purple-100 px-2.5 py-0.5 font-secondary text-sm font-medium text-purple-800">
+                            class="font-secondary me-2 rounded-full bg-purple-100 px-2.5 py-0.5 text-sm font-medium text-purple-800">
                             En oferta
                         </span>
                     @else
                         <span class="font-secondary text-5xl font-semibold text-secondary">${{ $product->price }}</span>
                     @endif
                 </div>
-                <p class="w-2/3 font-secondary text-sm text-zinc-500">
+                <p class="font-secondary w-2/3 text-sm text-zinc-500">
                     {{ $product->long_description }}
                 </p>
                 <div class="flex flex-col gap-6">
                     <div class="flex items-center gap-2">
                         <button
-                            class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-400 hover:bg-zinc-100"
                             id="btn-minus">
                             <x-icon icon="minus" class="h-4 w-4 text-secondary" />
                         </button>
                         <input type="text" name="quantity" id="quantity"
-                            class="h-12 w-16 rounded-lg border-none text-center font-secondary focus:border-none focus:outline-none"
+                            class="font-secondary h-12 w-16 rounded-lg border-none text-center focus:border-none focus:outline-none"
                             readonly value="1" min="1" max="{{ $product->stock }}">
                         <button
-                            class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 hover:bg-zinc-100"
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-400 hover:bg-zinc-100"
                             id="btn-plus">
                             <x-icon-store icon="plus" class="h-4 w-4 text-secondary" />
                         </button>
@@ -110,7 +110,7 @@
                         <x-button-store type="button" typeButton="primary" text="Comprar" />
                     </div>
                     <!-- End Container button -->
-                    <div class="flex gap-2 font-secondary">
+                    <div class="font-secondary flex gap-2">
                         @if ($product->labels->count() > 0)
                             @foreach ($product->labels as $label)
                                 <span
@@ -121,7 +121,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="mt-4 flex flex-col font-secondary">
+                <div class="font-secondary mt-4 flex flex-col">
                     <div class="mb-2">
                         <button
                             class="accordion-inventario flex w-full items-center justify-between rounded-xl bg-zinc-50 px-6 py-3 font-bold uppercase text-secondary hover:bg-zinc-100"
@@ -175,7 +175,7 @@
         </section>
         <section class="mt-20">
             <div>
-                <div class="mt-4 flex items-center gap-2 font-primary text-xl">
+                <div class="mt-4 flex items-center gap-2 font-league-spartan text-xl">
                     <x-icon-store icon="start" class="h-6 w-6 fill-yellow-300 text-yellow-400" />
                     <p class="font-bold">4.87</p>
                     <span class="flex items-center">
@@ -190,7 +190,7 @@
                                 class="h-12 w-12 rounded-full">
                             <div class="flex w-full justify-between">
                                 <div class="flex flex-col">
-                                    <p class="font-primary text-lg font-bold">Nombre de usuario</p>
+                                    <p class="font-league-spartan text-lg font-bold">Nombre de usuario</p>
                                     <p class="font-secondary text-sm text-zinc-600">21/6/2024</p>
                                 </div>
                                 <div class="flex items-center gap-2">
@@ -214,7 +214,7 @@
                                 class="h-12 w-12 rounded-full">
                             <div class="flex w-full justify-between">
                                 <div class="flex flex-col">
-                                    <p class="font-primary text-lg font-bold">Nombre de usuario</p>
+                                    <p class="font-league-spartan text-lg font-bold">Nombre de usuario</p>
                                     <p class="font-secondary text-sm text-zinc-600">21/6/2024</p>
                                 </div>
                                 <div class="flex items-center gap-2">
@@ -246,7 +246,7 @@
         </section>
         <section class="py-4">
             <div class="flex w-full flex-col justify-center text-center">
-                <h2 class="p-4 font-primary text-3xl font-bold uppercase text-secondary">
+                <h2 class="p-4 font-league-spartan text-3xl font-bold uppercase text-secondary">
                     Tambien te puede interesar
                 </h2>
                 @if ($products)

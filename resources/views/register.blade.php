@@ -7,9 +7,9 @@
         <div class="flex h-full w-full items-center justify-center">
             <div class="flex flex-1 flex-col text-center">
                 <div class="px-10">
-                    <h1 class="font-primary text-5xl font-bold text-secondary">Registrate</h1>
+                    <h1 class="font-league-spartan text-5xl font-bold text-secondary">Registrate</h1>
                 </div>
-                <div class="mx-auto mt-4 w-4/5 font-secondary">
+                <div class="font-secondary mx-auto mt-4 w-4/5">
                     <form action="">
                         <div class="flex gap-4">
                             <div class="flex flex-1 flex-col gap-2">

@@ -1,9 +1,9 @@
 <div
-    class="{{ $slide ? 'swiper-slide' : '' }} {{ $width }} flex h-[530px] flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white text-start">
+    class="{{ $slide ? 'swiper-slide' : '' }} {{ $width }} flex h-[530px] flex-col overflow-hidden rounded-lg border border-zinc-400 bg-white text-start">
     <div class="flex-grow">
         <img src="{{ Storage::url($product->main_image) }}" alt="" class="h-72 w-full object-cover">
         <div class="p-4">
-            <h3 class="font-primary text-2xl font-bold text-secondary">
+            <h3 class="font-league-spartan text-2xl font-bold text-secondary">
                 {{ $product->name }}
             </h3>
             <p class="text-wrap font-secondary text-sm text-zinc-800">
@@ -34,7 +34,7 @@
                 </label>
             </form>
             <a href="{{ route('products.details', $product->slug) }}"
-                class="flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-5 py-3 font-primary text-secondary transition-colors hover:bg-zinc-100">
+                class="flex items-center justify-center rounded-lg border border-zinc-400 bg-white px-5 py-3 font-league-spartan text-secondary transition-colors hover:bg-zinc-100">
                 <x-icon-store icon="arrow-right" class="h-5 w-5 text-current" />
             </a>
         </div>
@@ -42,7 +42,7 @@
             @csrf
             <input type="hidden" name="quantity" value="1">
             <button type="button" data-form="#form-add-cart-{{ $product->id }}"
-                class="add-to-cart flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-primary text-white">
+                class="add-to-cart flex items-center justify-center rounded-lg bg-secondary px-5 py-3 font-league-spartan text-white">
                 <x-icon-store icon="shopping-cart-add" class="h-5 w-5 text-current" />
             </button>
         </form>

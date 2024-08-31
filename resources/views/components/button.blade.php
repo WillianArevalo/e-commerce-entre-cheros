@@ -25,7 +25,7 @@
     @case('secondary')
         @php
             $classes =
-                'border text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
+                'border text-zinc-600 hover:bg-zinc-100 border-zinc-400 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
                 $classGeneral .
                 ' ' .
                 $class;
@@ -65,7 +65,7 @@
     @default
         @php
             $classes =
-                'border text-zinc-600 hover:bg-zinc-100 border-zinc-300 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
+                'border text-zinc-600 hover:bg-zinc-100 border-zinc-400 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
                 $classGeneral .
                 ' ' .
                 $class;

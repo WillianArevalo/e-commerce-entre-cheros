@@ -1,5 +1,5 @@
 <section
-    class="cookies fixed bottom-16 left-12 z-50 mx-auto hidden max-w-md rounded-2xl border border-zinc-300 bg-white p-4">
+    class="cookies fixed bottom-16 left-12 z-50 mx-auto hidden max-w-md rounded-2xl border border-zinc-400 bg-white p-4">
     <h2 class="text-lg font-semibold text-secondary">
         Cookies
     </h2>

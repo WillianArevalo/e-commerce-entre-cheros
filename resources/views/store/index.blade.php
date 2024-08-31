@@ -15,7 +15,7 @@
         <section class="relative -top-24" data-aos="zoom-in">
             <div class="relative mx-auto flex w-4/5 items-center justify-center">
                 <button
-                    class="button-prev-home absolute -left-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-300 p-2 hover:bg-zinc-100">
+                    class="button-prev-home absolute -left-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 p-2 hover:bg-zinc-100">
                     <x-icon icon="arrow-left" class="h-6 w-6 text-secondary" />
                 </button>
                 <div class="swiper swiper-home rounded-lg">
@@ -42,17 +42,17 @@
                     </div>
                 </div>
                 <button
-                    class="button-next-home absolute -right-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-300 p-2 hover:bg-zinc-100">
+                    class="button-next-home absolute -right-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 p-2 hover:bg-zinc-100">
                     <x-icon icon="arrow-right" class="h-6 w-6 text-secondary" />
                 </button>
             </div>
         </section>
         <section class="px-20">
             <div class="mb-8 flex flex-col items-center justify-center gap-4 text-center" data-aos="fade-up">
-                <h2 class="w-2/3 font-primary text-5xl font-bold uppercase text-secondary">
-                    Lo mejor de <span class="font-tertiary">Entre Cheros</span>
+                <h2 class="w-2/3 font-league-spartan text-5xl font-bold uppercase text-secondary">
+                    Lo mejor de <span class="font-mystical">Entre Cheros</span>
                 </h2>
-                <p class="w-1/2 font-secondary text-zinc-600">
+                <p class="font-secondary w-1/2 text-zinc-600">
                     Encuentra los mejores productos de la región, hechos con amor y calidad.
                 </p>
             </div>
@@ -73,7 +73,7 @@
                 @if ($categories->count() > 0)
                     @foreach ($categories as $category)
                         <a href="{{ route('store.search', ['search' => 'categorie_id', 'value' => $category->id]) }}"
-                            class="flex flex-col items-center justify-center gap-2 font-secondary" data-aos="zoom-in">
+                            class="font-secondary flex flex-col items-center justify-center gap-2" data-aos="zoom-in">
                             <img src="{{ Storage::url($category->image) }}" alt=""
                                 class="h-40 w-40 rounded-full object-cover">
                             {{ $category->name }}

@@ -6,7 +6,7 @@
              <x-icon-store icon="coupon" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
          </div>
          <input type="text"
-             class="w-full rounded-xl border border-zinc-300 px-6 py-3 pl-12 text-sm text-zinc-700 transition duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
+             class="w-full rounded-xl border border-zinc-400 px-6 py-3 pl-12 text-sm text-zinc-700 transition duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
              id="code" name="code" value="{{ $cart->coupon ? $cart->coupon->code : '' }}"
              placeholder="Código del cupón" {{ $cart->coupon ? 'disabled' : '' }}>
          <div class="{{ !$cart->coupon ? 'hidden' : '' }}" id="remove-coupon-container">
@@ -24,7 +24,7 @@
      </span>
      @if (!$cart->coupon)
          <button type="submit" id="apply-coupon"
-             class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
+             class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-400 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
              Aplicar cupón
          </button>
      @endif

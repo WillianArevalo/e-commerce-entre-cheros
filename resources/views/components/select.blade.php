@@ -8,14 +8,14 @@
     <input type="hidden" id="{{ $id }}" name="{{ $name }}" value="{{ $value }}">
     <div class="relative">
         <div
-            class="selected @error($name) is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+            class="selected @error($name) is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
             <span class="itemSelected truncate" id="{{ $id }}_selected">
                 {{ $selected && isset($options[$selected]) ? $options[$selected] : ($text ?: 'Seleccionar') }}
             </span>
             <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-white" />
         </div>
         <ul
-            class="selectOptions {{ count($options) > 6 ? 'h-64 overflow-auto' : '' }} absolute z-10 mb-8 mt-2 hidden w-full rounded-lg border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-900 dark:bg-zinc-950">
+            class="selectOptions {{ count($options) > 6 ? 'h-64 overflow-auto' : '' }} absolute z-10 mb-8 mt-2 hidden w-full rounded-lg border border-zinc-400 bg-white p-2 shadow-lg dark:border-zinc-800 dark:bg-zinc-950">
             @foreach ($options as $value => $label)
                 <li class="itemOption truncate rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                     title="{{ $label }}" data-value="{{ $value }}" data-input="#{{ $id }}">

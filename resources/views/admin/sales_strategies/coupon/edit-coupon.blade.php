@@ -110,7 +110,7 @@
                                 @if ($parameters && $type === 'model')
                                     @foreach ($parameters as $parameter)
                                         <div
-                                            class="me-2 flex w-max items-center justify-between gap-2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-900 dark:bg-black dark:text-white">
+                                            class="me-2 flex w-max items-center justify-between gap-2 rounded-full border border-zinc-400 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:bg-black dark:text-white">
                                             <span>{{ $parameter->name }}</span>
                                             <button type="button" class="remove-parameter"
                                                 data-parameter="{{ $parameter->id }}">

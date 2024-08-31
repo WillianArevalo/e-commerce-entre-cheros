@@ -19,7 +19,7 @@
           </div>
           <div class="w-full">
               <input type="checkbox" value="0" name="is_active" id="is_active_edit"
-                  class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600"
+                  class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600"
                   {{ $method->is_active === 1 ? 'checked' : '' }}>
               <label for="is_active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
           </div>

@@ -13,12 +13,12 @@
                         d="M0,256L60,229.3C120,203,240,149,360,128C480,107,600,117,720,138.7C840,160,960,192,1080,202.7C1200,213,1320,203,1380,197.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
                     </path>
                 </svg>
-                <img src="{{ Storage::url($user->profile_photo_path) }}" alt=""
+                <img src="{{ Storage::url($user->profile) }}" alt=""
                     class="absolute top-32 h-56 w-56 rounded-full object-cover shadow-md">
             </div>
         </section>
         <section class="mx-auto p-8">
-            <div class="mx-auto flex w-3/4 justify-center gap-16 rounded-2xl border border-zinc-300 p-4 font-semibold">
+            <div class="mx-auto flex w-3/4 justify-center gap-16 rounded-2xl border border-zinc-400 p-4 font-semibold">
                 <a href="{{ Route('favorites') }}"
                     class="flex flex-col items-center justify-center gap-1 text-sm text-rose-500 hover:scale-105">
                     <x-icon-store icon="favourite" class="h-8 w-8 fill-rose-500 text-current" />
@@ -36,10 +36,10 @@
                 </a>
             </div>
             <div class="mx-auto mt-8 flex w-3/4 gap-8">
-                <div class="h-max flex-1 overflow-hidden rounded-2xl border border-zinc-300">
+                <div class="h-max flex-1 overflow-hidden rounded-2xl border border-zinc-400">
                     @include('layouts.__partials.store.nav-profile')
                 </div>
-                <div class="h-max flex-[2] rounded-2xl border border-zinc-300 p-4">
+                <div class="h-max flex-[2] rounded-2xl border border-zinc-400 p-4">
                     @yield('profile-content')
                 </div>
         </section>

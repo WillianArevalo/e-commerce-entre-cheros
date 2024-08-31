@@ -2,11 +2,11 @@
 @section('profile-content')
     <div class="flex flex-col">
         <div class="py-2">
-            <h2 class="font-primary text-3xl font-bold text-secondary">
+            <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                 Editar datos
             </h2>
         </div>
-        <div class="border-t border-zinc-200">
+        <div class="border-t border-zinc-400">
             <form action="{{ Route('account.settings-update') }}" method="POST" class="mt-4">
                 @csrf
                 <div class="flex">

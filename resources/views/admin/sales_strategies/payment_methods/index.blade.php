@@ -33,24 +33,24 @@
                                     typeButton="primary" text="Agregar método" icon="add-circle" />
                             </div>
                         </div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
                             <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                                 <thead
-                                    class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
+                                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
                                     <tr>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Nombre
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Imagen
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Estado
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Descripción
                                         </th>
-                                        <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                             Proveedor
                                         </th>
                                         <th scope="col" class="px-4 py-3">
@@ -160,7 +160,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="imagePaymentMehod"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 p-10 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 p-10 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <div class="flex flex-col items-center justify-center pb-6 pt-5">
                                     <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
                                     <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
@@ -188,7 +188,7 @@
                     </div>
                     <div class="w-full">
                         <input type="checkbox" value="0" name="active"
-                            class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                         <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex items-center justify-center gap-2">
@@ -233,7 +233,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="imagePaymentMehodEdit"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 p-10 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 p-10 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
                                 <div class="hidden flex-col items-center justify-center pb-6 pt-5">
                                     <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
                                     <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
@@ -259,7 +259,7 @@
                     </div>
                     <div class="w-full">
                         <input type="checkbox" value="0" name="active" id="active"
-                            class="h-4 w-4 rounded border-2 border-zinc-300 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-900 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
                         <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex items-center justify-center gap-2">

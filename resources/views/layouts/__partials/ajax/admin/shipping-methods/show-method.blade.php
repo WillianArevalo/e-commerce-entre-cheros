@@ -1,6 +1,6 @@
 @if ($method)
     <div class="p-4">
-        <div class="flex flex-col rounded-lg border border-zinc-200 dark:border-zinc-900">
+        <div class="flex flex-col rounded-lg border border-zinc-400 dark:border-zinc-800">
             <div class="flex items-center justify-between gap-4 px-4 py-2">
                 <div>
                     <h2 class="font-bold uppercase text-zinc-700 dark:text-zinc-300">Nombre:</h2>
@@ -20,7 +20,7 @@
                     @endif
                 </div>
             </div>
-            <div class="border-t border-zinc-200 dark:border-zinc-900">
+            <div class="border-t border-zinc-400 dark:border-zinc-800">
                 <div class="flex flex-col gap-2 px-4 py-2">
                     <h3 class="font-bold uppercase text-zinc-700 dark:text-zinc-300">Descripción:</h3>
                     <x-paragraph>
@@ -50,11 +50,11 @@
                 </div>
             </div>
         </div>
-        <div class="mt-2 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-900">
+        <div class="mt-2 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
             <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                 <thead
-                    class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-900 dark:bg-black dark:text-zinc-300">
-                    <th scope="col" class="border-e border-zinc-200 px-4 py-3 dark:border-zinc-900">
+                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
+                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                         Peso máximo
                     </th>
                     <th scope="col" class="px-4 py-3">
