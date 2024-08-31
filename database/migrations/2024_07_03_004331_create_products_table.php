@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,12 +25,14 @@ return new class extends Migration
             $table->date("offer_end_date")->nullable();
             $table->boolean("offer_active")->default(false);
             $table->boolean("is_active")->default(true);
-            $table->string("status")->default("active");
+            $table->string("status")->default(Status::ACTIVE);
             $table->string("sku");
             $table->string("barcode")->nullable();
             $table->decimal("weight", 10, 2);
             $table->string("dimensions");
             $table->integer("stock");
+            $table->integer("min_stock");
+            $table->integer("max_stock");
             $table->foreignId("categorie_id")->constrained()->onDelete("cascade");
             $table->foreignId("subcategorie_id")->constrained()->inDelete("cascade")->nulleable();
             $table->foreignId("brand_id")->constrained()->onDelete("cascade");

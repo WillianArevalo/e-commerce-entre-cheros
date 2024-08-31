@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->string("zip_code")->nullable();
             $table->string("type")->nullable();
             $table->string("slug")->nullable();
+            $table->boolean("default")->default(Status::INACTIVE);
+            $table->boolean("active")->default(Status::ACTIVE);
             $table->foreignId("customer_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

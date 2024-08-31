@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->enum("discount_type", ["percentage", "fixed"]);
             $table->date("start_date");
             $table->date("end_date");
-            $table->boolean("active")->default(true);
+            $table->boolean("active")->default(Status::ACTIVE);
             $table->string("type");
             $table->integer("usage_limit")->nullable()->default(1);
             $table->timestamps();
