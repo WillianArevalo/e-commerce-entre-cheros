@@ -24,6 +24,8 @@ import "./checkout";
 import "./policies";
 import "./general-settings";
 import "./calendar";
+import "./chart";
+import "./dashboard";
 import { initSwiper } from "./swiper";
 
 initSwiper();
