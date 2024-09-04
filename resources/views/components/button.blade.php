@@ -1,98 +1,103 @@
-@props(['type', 'text', 'icon', 'typeButton', 'class', 'icon-align' => 'left', 'onlyIcon' => false])
+@props([
+    'type',
+    'text',
+    'icon',
+    'typeButton',
+    'class',
+    'iconAlign' => 'left',
+    'onlyIcon' => false,
+    'size' => 'normal',
+    'loading' => false, // Añadido para el estado de carga
+])
 
 @php
-    if ($onlyIcon) {
-        $padding = 'p-2';
-    } else {
-        $padding = 'px-3.5 py-2.5';
-    }
+    // Definir las clases según el tamaño
+    $sizes = [
+        'small' => [
+            'padding' => 'px-2.5 py-1.5',
+            'text' => 'text-sm',
+            'icon' => 'h-4 w-4',
+        ],
+        'normal' => [
+            'padding' => 'px-4 py-3',
+            'text' => 'text-sm',
+            'icon' => 'h-5 w-5',
+        ],
+        'large' => [
+            'padding' => 'px-6 py-4',
+            'text' => 'text-lg',
+            'icon' => 'h-6 w-6',
+        ],
+    ];
 
-    $classGeneral =
-        'font-medium rounded-lg flex items-center gap-2 transition-colors text-sm transition duration-300 ' . $padding;
+    // Establecer el padding dependiendo de si es solo ícono o no
+    $padding = $onlyIcon ? 'p-2' : $sizes[$size]['padding'];
+
+    // Clases base
+    $baseClasses =
+        'font-medium rounded-lg flex items-center gap-2 transition-colors transition duration-300 ' . $padding;
+
+    // Tipos de botones
+    $buttonTypes = [
+        'primary' =>
+            'bg-primary-500 text-white hover:bg-primary-600 dark:bg-primary-700 dark:text-white dark:hover:bg-primary-600',
+        'secondary' =>
+            'border text-zinc-600 hover:bg-zinc-100 border-zinc-400 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900',
+        'danger' => 'border border-red-500 border-opacity-30 text-red-500 hover:text-white hover:bg-red-500',
+        'warning' => 'bg-yellow-500 text-white hover:bg-yellow-600',
+        'info' => 'border border-sky-500 border-opacity-30 text-sky-500 hover:text-white hover:bg-sky-500',
+        'success' => 'border border-green-500 border-opacity-30 text-green-500 hover:text-white hover:bg-green-500',
+        'default' =>
+            'border text-zinc-600 hover:bg-zinc-100 border-zinc-400 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900',
+    ];
+
+    // Clases finales para el botón
+    $classes = $buttonTypes[$typeButton ?? 'default'] . ' ' . $baseClasses . ' ' . $class;
+
+    // Estado de carga: cuando está cargando, añadimos opacidad
+    $loadingClasses = $loading ? 'opacity-75 cursor-not-allowed' : '';
+    $classes .= ' ' . $loadingClasses;
 @endphp
 
-@switch($typeButton)
-    @case('primary')
-        @php
-            $classes =
-                'bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200 ' .
-                $classGeneral .
-                ' ' .
-                $class;
-        @endphp
-    @break
-
-    @case('secondary')
-        @php
-            $classes =
-                'border text-zinc-600 hover:bg-zinc-100 border-zinc-400 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
-                $classGeneral .
-                ' ' .
-                $class;
-        @endphp
-    @break
-
-    @case('success')
-        @php
-            $classes =
-                'border border-green-500 border-opacity-30 text-green-500 hover:text-white hover:bg-green-500 ' .
-                $classGeneral .
-                ' ' .
-                $class;
-        @endphp
-    @break
-
-    @case('danger')
-        @php
-            $classes =
-                'border border-red-500 border-opacity-30 text-red-500 hover:text-white hover:bg-red-500 ' .
-                $classGeneral .
-                ' ' .
-                $class;
-        @endphp
-    @break
-
-    @case('info')
-        @php
-            $classes =
-                'border border-sky-500 border-opacity-30 text-sky-500 hover:text-white hover:bg-sky-500 ' .
-                $classGeneral .
-                ' ' .
-                $class;
-        @endphp
-    @break
-
-    @default
-        @php
-            $classes =
-                'border text-zinc-600 hover:bg-zinc-100 border-zinc-400 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900  ' .
-                $classGeneral .
-                ' ' .
-                $class;
-        @endphp
-    @break
-@endswitch
-
-
 @if ($type === 'a')
-    @if ($iconAlign === 'left')
-        <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
-            {{ $text }}
-        </a>
-    @elseif ($iconAlign === 'right')
-        <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-            {{ $text }}
-            <x-icon :icon="$icon" class="h-5 w-5 text-current" />
-        </a>
-    @else
-        <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-            {{ $text }}
-        </a>
-    @endif
+    <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
+        @if ($loading)
+            <!-- Spinner para estado de carga -->
+            <x-icon icon="spinner" class="{{ $sizes[$size]['icon'] }} animate-spin text-white" />
+        @else
+            @if ($iconAlign === 'left' && !$onlyIcon)
+                <x-icon :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if (!$onlyIcon)
+                <span class="{{ $sizes[$size]['text'] }}">{{ $text }}</span>
+            @endif
+            @if ($iconAlign === 'right' && !$onlyIcon)
+                <x-icon :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if ($onlyIcon)
+                <x-icon :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+        @endif
+    </a>
 @else
-    <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
-        <x-icon :icon="$icon" class="h-5 w-5 text-current" />
-        {{ $text }}
+    <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}"
+        @if ($loading) disabled @endif>
+        @if ($loading)
+            <!-- Spinner para estado de carga -->
+            <x-icon icon="spinner" class="{{ $sizes[$size]['icon'] }} animate-spin text-white" />
+        @else
+            @if ($iconAlign === 'left' && !$onlyIcon)
+                <x-icon :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if (!$onlyIcon)
+                <span class="{{ $sizes[$size]['text'] }}">{{ $text }}</span>
+            @endif
+            @if ($iconAlign === 'right' && !$onlyIcon)
+                <x-icon :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if ($onlyIcon)
+                <x-icon :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+        @endif
     </button>
 @endif

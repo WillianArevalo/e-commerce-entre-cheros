@@ -22,9 +22,9 @@
     // Construir clases dinámicas para el input
     $classes = collect([
         'bg-zinc-50 border border-zinc-400 text-zinc-900 text-sm rounded-lg',
-        'focus:ring-4 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 px-4',
+        'focus:ring-4 focus:ring-primary-200 focus:border-primary-600 block w-full p-3 px-4',
         'dark:bg-zinc-950 dark:border-zinc-800 dark:placeholder-zinc-400 dark:text-white',
-        'dark:focus:ring-blue-950 dark:focus:ring-opacity-60 dark:focus:border-blue-500',
+        'dark:focus:ring-primary-950 dark:focus:border-primary-600',
         'transition duration-300 dark:read-only:bg-zinc-900',
         $class,
         $errorClass,
@@ -35,7 +35,7 @@
 
 @if ($label && $type !== 'checkbox')
     <label for="{{ $id }}"
-        class="{{ $labelClass }} mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
+        class="{{ $labelClass }} mb-2 block text-sm font-medium text-zinc-500 dark:text-zinc-300">
         {{ $label }}
     </label>
 @endif
@@ -55,7 +55,7 @@
     @elseif ($type === 'checkbox')
         <input type="checkbox" value="{{ $value }}" name="{{ $name }}" id="{{ $id }}"
             {{ $attributes }} {{ $checked ? 'checked' : '' }}
-            class="{{ $class }} h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+            class="{{ $class }} h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
         <label for="{{ $id }}"
             class="{{ $labelClass }} ms-2 text-sm font-medium text-zinc-900 dark:text-white">
             {{ $label }}
