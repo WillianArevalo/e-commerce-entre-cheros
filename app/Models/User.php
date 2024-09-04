@@ -30,10 +30,18 @@ class User extends Authenticatable
         'username',
         "name",
         "last_name",
-        "profile_photo_path",
+        "profile",
         'email',
         'password',
-        'role'
+        'role',
+        "locale",
+        "timezone",
+        "currency",
+        "last_login",
+        "last_activity",
+        "last_password_change",
+        "last_ip_address",
+        "theme",
     ];
 
     /**
