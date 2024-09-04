@@ -1,5 +1,5 @@
   @if ($categories->count() == 0)
-      <tr class="border-b dark:border-zinc-800">
+      <tr>
           <td colspan="4" class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
               No hay categorías
           </td>
