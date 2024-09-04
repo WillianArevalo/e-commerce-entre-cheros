@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let isDark = localStorage.getItem("theme") === "dark";
 
-    function createDoughnutChart(isDark) {
+    function createDoughnutChart() {
         var userCtx = document.getElementById("userChart").getContext("2d");
         if (window.userChartInstance) {
             window.userChartInstance.destroy(); // Destruye el gráfico existente
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             "#eee7b9", // Rojo para "Inactive"
                         ],
                         borderWidth: 8,
-                        borderColor: isDark ? "#000000" : "#ffffff", // Cambia el color del borde
+                        borderColor: "rgba(0,0,0,0)", // Cambia el color del borde
                     },
                 ],
             },
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function createDoughnutChartOrder(isDark) {
+    function createDoughnutChartOrder() {
         var orderCtx = document.getElementById("orderChart").getContext("2d");
         if (window.orderChartInstance) {
             window.orderChartInstance.destroy(); // Destruye el gráfico existente
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             "#e3342f", // Rojo para "Inactive"
                         ],
                         borderWidth: 8,
-                        borderColor: isDark ? "#000000" : "#ffffff", // Cambia el color del borde
+                        borderColor: "rgba(0,0,0,0)", // Cambia el color del borde
                     },
                 ],
             },
@@ -84,15 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Crear el gráfico inicialmente
-    createDoughnutChart(isDark);
-    createDoughnutChartOrder(isDark);
-
-    // Cambiar el tema y recrear el gráfico con el borde adecuado
-    $("#toggleTheme").on("click", () => {
-        isDark = localStorage.getItem("theme") === "light";
-        createDoughnutChart(isDark); // Recrear el gráfico con el nuevo borde
-        createDoughnutChartOrder(isDark); // Recrear el gráfico con el nuevo borde
-    });
+    createDoughnutChart();
+    createDoughnutChartOrder();
 
     new Chart(ctx, {
         type: "line",

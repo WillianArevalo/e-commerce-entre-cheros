@@ -26,6 +26,7 @@ import "./general-settings";
 import "./calendar";
 import "./chart";
 import "./dashboard";
+import "./settings";
 import { initSwiper } from "./swiper";
 
 initSwiper();

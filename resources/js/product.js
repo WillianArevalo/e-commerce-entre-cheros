@@ -1,3 +1,5 @@
+import { showToast } from "./toast-admin";
+
 $(document).ready(function () {
     function handleSelectOptions(containerClass, selectedClass, inputEvent) {
         $(document).on("click", `${containerClass} .itemOption`, function () {
@@ -137,7 +139,7 @@ $(document).ready(function () {
         $("#gallery_image").val("");
         $previewImagesContainer
             .html(
-                '<p class="m-auto text-sm dark:text-zinc-400">Sin imágenes seleccionadas</p>',
+                '<p class="text-sm text-zinc-500 dark:text-zinc-300 m-auto">Sin imágenes seleccionadas</p>',
             )
             .removeClass("h-auto")
             .addClass("h-20");
@@ -154,7 +156,7 @@ $(document).ready(function () {
             updateHiddenLabels();
             updatePreviewLabels();
         } else {
-            console.log("Ese valor ya existe");
+            showToast("La etiqueta ya ha sido seleccionada", "info");
         }
     }
 
@@ -183,9 +185,7 @@ $(document).ready(function () {
                     '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-current" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none"> <path d="M19.0005 4.99988L5.00049 18.9999M5.00049 4.99988L19.0005 18.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
                 )
                 .attr("type", "button")
-                .addClass(
-                    "text-current dark:hover:text-blue-500 hover:text-blue-500",
-                );
+                .addClass("text-current hover:text-primary-600");
             removeBtn.on("click", () => removeLabel(index));
             previewDiv.append(labelElement).append(removeBtn);
             $previewLabelsContainer.append(previewDiv);
@@ -203,7 +203,7 @@ $(document).ready(function () {
     function labelTextHide() {
         if (labels.length === 0) {
             $("#previewLabelsContainer").html(
-                '<p class="m-auto text-sm dark:text-white p-4">Sin etiquetas seleccionadas</p>',
+                '<p class="text-sm text-zinc-500 dark:text-zinc-300 p-4 m-auto">Sin etiquetas seleccionadas</p>',
             );
         }
     }
@@ -260,6 +260,7 @@ $(document).ready(function () {
                     $("#checkBoxTaxes").html(response.html);
                     $("#addTax").addClass("hidden");
                     $("body").removeClass("overflow-hidden");
+                    showToast("Impuesto agregado correctamente", "success");
                 },
                 error: function (error) {
                     console.log(error);
@@ -289,6 +290,7 @@ $(document).ready(function () {
                     $("#labelsList").html(response.html);
                     $("#addLabel").addClass("hidden");
                     $("body").removeClass("overflow-hidden");
+                    showToast("Etiqueta agregada correctamente", "success");
                 },
                 error: function (error) {
                     console.log(error);

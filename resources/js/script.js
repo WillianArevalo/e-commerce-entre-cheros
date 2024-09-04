@@ -1,21 +1,46 @@
 $(document).ready(function () {
-    const $btnToggleTheme = $("#toggleTheme");
+    const $btnToggleTheme = $(".theme-toggle");
     const $html = $("html");
+    const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+    ).matches;
+    let theme = localStorage.getItem("theme") || "system";
 
-    if (localStorage.getItem("theme") === "dark") {
-        $html.addClass("dark");
-    } else {
-        $html.removeClass("dark");
+    $(".theme-toggle").removeClass("theme-selected");
+
+    function applyTheme(theme) {
+        $(".theme-toggle").removeClass("theme-selected");
+        if (theme === "dark") {
+            $html.addClass("dark");
+            $(".theme-dark").addClass("theme-selected");
+        } else if (theme === "light") {
+            $html.removeClass("dark");
+            $(".theme-light").addClass("theme-selected");
+        } else if (theme === "system") {
+            systemPrefersDark
+                ? $html.addClass("dark")
+                : $html.removeClass("dark");
+            $(".theme-system").addClass("theme-selected");
+        }
     }
 
+    applyTheme(theme);
+
     $btnToggleTheme.on("click", function () {
-        if ($html.hasClass("dark")) {
-            $html.removeClass("dark");
-            localStorage.setItem("theme", "light");
-        } else {
-            $html.addClass("dark");
-            localStorage.setItem("theme", "dark");
-        }
+        theme = $(this).data("theme");
+        const form = $(this).closest("form");
+        form.append("<input type='hidden' name='theme' value='" + theme + "'>");
+        $.ajax({
+            type: "POST",
+            url: form.attr("action"),
+            data: form.serialize(),
+            success: function (response) {
+                if (response.success) {
+                    localStorage.setItem("theme", theme);
+                    applyTheme(theme);
+                }
+            },
+        });
     });
 
     const $inputSearch = $("#inputSearch");
