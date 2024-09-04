@@ -30,15 +30,18 @@ class UserRequest extends FormRequest
             "name" => "required|string",
             "last_name" => "required|string",
             "role" => "required|string",
+            "locale" => "nullable|string",
+            "currency" => "nullable|string",
+            "timezone" => "nullable|string",
         ];
 
         if ($isUpdate) {
             $rules["password"] = "nullable|string";
-            $rules["profile"] = "nullable|image";
+            $rules["profile"] = "nullable|image:jpeg,png,jpg,gif,svg|max:2048";
         } else {
             $rules["password"] = "required|string";
             $rules["password_confirmation"] = "required|string";
-            $rules["profile"] = "required|image";
+            $rules["profile"] = "nullable|image:jpeg,png,jpg,gif,svg|max:2048";
         }
 
         return $rules;
