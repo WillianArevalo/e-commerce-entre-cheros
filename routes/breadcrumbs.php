@@ -141,9 +141,9 @@ Breadcrumbs::for('admin.general-settings.index', function (BreadcrumbTrail $trai
 
 
 //Admin > Settings
-Breadcrumbs::for('admin.settings', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.settings.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Configuración', route('admin.settings'));
+    $trail->push('Configuración', route('admin.settings.index'));
 });
 
 //Admin > Policies

@@ -134,7 +134,15 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::post("/policies/download/{id}", [PoliciesController::class, "download"])->name("policies.download");
     Route::resource("/faq", FAQController::class);
     Route::get("locale/{locale}", [ConfigurationController::class, "setLocale"])->name("locale");
-    Route::get("/settings", [SettingsController::class, "index"])->name("settings");
+
+    Route::prefix("settings")->name("settings.")->group(function () {
+        Route::get("/", [SettingsController::class, "index"])->name("index");
+        Route::post("/update", [SettingsController::class, "update"])->name("update");
+        Route::post("/change-color", [SettingsController::class, "changeColor"])->name("change-color");
+        Route::post("/change-theme", [SettingsController::class, "changeTheme"])->name("change-theme");
+        Route::post("/change-profile", [SettingsController::class, "changeProfilePhoto"])->name("change-profile");
+    });
+
     Route::resource("/support-tickets", SupportTicketController::class);
     Route::resource("/orders", OrderController::class);
 
