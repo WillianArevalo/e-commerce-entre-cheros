@@ -22,7 +22,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button data-drawer="#drawer-new-categorie" class="open-drawer" type="button"
-                                text="Nueva categoría" icon="add-circle" typeButton="primary" />
+                                text="Nueva categoría" icon="plus" typeButton="primary" />
                             <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button"
                                     typeButton="secondary" icon="filter" text="Filtros" />
@@ -38,7 +38,7 @@
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
@@ -47,7 +47,7 @@
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                                                 <label for="fitbit"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías
@@ -225,7 +225,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="imageCategorie"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:border-primary-400 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-primary-950 dark:hover:bg-zinc-950">
                                 <div class="flex flex-col items-center justify-center pb-6 pt-5">
                                     <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
                                     <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span
@@ -242,7 +242,7 @@
                         @enderror
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar categoría" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Agregar categoría" icon="plus" typeButton="primary" />
                         <x-button type="button" data-drawer="#drawer-new-categorie" class="close-drawer"
                             text="Cancelar" typeButton="secondary" />
                     </div>
@@ -281,7 +281,7 @@
                         </label>
                         <div class="flex w-full items-center justify-center">
                             <label for="edit-image-categorie"
-                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-zinc-500 dark:hover:bg-zinc-950">
+                                class="dark:hover:bg-bray-800 @error('image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:border-primary-400 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-transparent dark:hover:border-primary-950 dark:hover:bg-zinc-950">
                                 <div class="hidden flex-col items-center justify-center pb-6 pt-5">
                                     <x-icon icon="cloud-upload" class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
                                     <p class="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span

@@ -24,7 +24,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button type="a" typeButton="primary" href="{{ route('admin.popups.create') }}"
-                                text="Agregar anuncio" icon="add-circle" />
+                                text="Agregar anuncio" icon="plus" />
                         </div>
                     </div>
                     <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
@@ -59,10 +59,10 @@
                                             <td class="px-4 py-3">
                                                 @if ($popup->active === 1)
                                                     <span
-                                                        class="rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 font-secondary text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">Activo</span>
+                                                        class="font-secondary rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">Activo</span>
                                                 @else
                                                     <span
-                                                        class="rounded-full border-2 border-red-300 bg-red-200 px-4 py-1 font-secondary text-xs font-medium text-red-800 dark:border-red-400 dark:bg-red-800 dark:text-red-100">
+                                                        class="font-secondary rounded-full border-2 border-red-300 bg-red-200 px-4 py-1 text-xs font-medium text-red-800 dark:border-red-400 dark:bg-red-800 dark:text-red-100">
                                                         Inactivo
                                                     </span>
                                                 @endif

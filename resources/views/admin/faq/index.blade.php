@@ -27,7 +27,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button data-drawer="#drawer-new-faq" class="open-drawer" type="button" text="Nueva pregunta"
-                                icon="add-circle" typeButton="primary" />
+                                icon="plus" typeButton="primary" />
                         </div>
                     </div>
                     <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
@@ -127,7 +127,7 @@
                             label="Respuesta" value="{{ old('answer') }}" />
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar pregunta" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Agregar pregunta" icon="plus" typeButton="primary" />
                         <x-button type="button" class="close-drawer" data-drawer="#drawer-new-faq" text="Cancelar"
                             typeButton="secondary" />
                     </div>

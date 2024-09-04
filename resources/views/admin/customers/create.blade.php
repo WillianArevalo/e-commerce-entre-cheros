@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar cliente" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Agregar cliente" icon="plus" typeButton="primary" />
                         <x-button type="a" href="{{ route('admin.customers.index') }}" text="Regresar"
                             typeButton="secondary" />
                     </div>

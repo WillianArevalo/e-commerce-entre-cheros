@@ -1,7 +1,5 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Nuevo producto')
-
 @section('content')
     <div class="mt-4">
         @include('layouts.__partials.admin.header-crud-page', [
@@ -16,7 +14,9 @@
                     @csrf
                     <div>
                         <div class="flex flex-col gap-1">
-                            <h2 class="text-lg uppercase text-zinc-700 dark:text-zinc-300">Información del producto</h2>
+                            <h2 class="text-lg font-bold uppercase text-zinc-600 dark:text-zinc-300">
+                                Información del producto
+                            </h2>
                             <x-paragraph>
                                 Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                             </x-paragraph>
@@ -25,7 +25,9 @@
                             <div class="flex flex-1 flex-col gap-4">
                                 <div
                                     class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
-                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">General</h4>
+                                    <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
+                                        General
+                                    </h4>
                                     <div class="flex flex-col gap-4">
                                         <div>
                                             <x-input label="Nombre" type="text" id="name" name="name"
@@ -92,7 +94,7 @@
                                 </div>
                                 <div
                                     class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
-                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
+                                    <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
                                         Categoría y marca
                                     </h4>
                                     <div class="flex flex-col gap-4">
@@ -110,7 +112,7 @@
                                                     value="{{ old('categorie_id') }}">
                                                 <div class="relative">
                                                     <div
-                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                        class="selected @error('subcategorie_id') is-invalid @enderror flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-3 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                         <span class="itemSelected" id="selectedSubCategorie">
                                                             Selecciona una subcategoría
                                                         </span>
@@ -119,7 +121,7 @@
                                                     </div>
                                                     <ul class="selectOptionsSubCategories absolute z-10 mt-2 hidden w-full rounded-lg border border-zinc-400 bg-white p-2 shadow-lg dark:border-zinc-800 dark:bg-zinc-950"
                                                         id="listSubcategories">
-                                                        <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
+                                                        <li class="itemOption rounded-lg px-4 py-3 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                                                             data-value="" data-input="#subcategorie_id">
                                                             Ninguna categoría principal seleccionada
                                                         </li>
@@ -138,7 +140,7 @@
                                 </div>
                                 <div
                                     class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
-                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
+                                    <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
                                         Información de venta
                                     </h4>
                                     <div class="flex flex-col">
@@ -182,11 +184,11 @@
                                         </div>
                                         <div class="mt-4">
                                             <div class="flex items-center justify-between">
-                                                <p class="block text-base font-semibold text-blue-700 dark:text-blue-400">
+                                                <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
                                                     Impuestos
-                                                </p>
+                                                </h4>
                                                 <x-button type="button" id="showModalTax" data-modal-target="addTax"
-                                                    data-modal-toggle="addTax" text="Nuevo impuesto" icon="add-circle"
+                                                    data-modal-toggle="addTax" text="Nuevo impuesto" icon="plus"
                                                     typeButton="secondary" />
                                             </div>
                                             <div class="mt-4 flex flex-col">
@@ -196,16 +198,16 @@
                                                 <div class="flex flex-col" id="checkBoxTaxes">
                                                     @if ($taxes->count() > 0)
                                                         @foreach ($taxes as $tax)
-                                                            <div>
-                                                                <input id="{{ $tax->name }}" type="checkbox"
-                                                                    value="{{ $tax->id }}" name="tax_id[]"
-                                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
-                                                                <label for="{{ $tax->name }}"
-                                                                    class="ms-2 text-sm font-medium text-zinc-900 dark:text-zinc-300">
-                                                                    {{ $tax->name }}
-                                                                    <span
-                                                                        class="text-xs text-blue-700 dark:text-blue-400">({{ $tax->rate }}%)</span>
-                                                                </label>
+                                                            <div class="flex items-center gap-2">
+                                                                <div>
+                                                                    <x-input type="checkbox" name="tax_id[]"
+                                                                        value="{{ $tax->id }}"
+                                                                        id="{{ $tax->name }}"
+                                                                        label="{{ $tax->name }}" />
+                                                                </div>
+                                                                <span class="flex items-center text-xs text-primary-600">
+                                                                    ({{ $tax->rate }}%)
+                                                                </span>
                                                             </div>
                                                         @endforeach
                                                     @endif
@@ -218,13 +220,15 @@
                             <div class="flex flex-1 flex-col gap-4">
                                 <div
                                     class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
-                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">Imágenes</h4>
+                                    <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
+                                        Imágenes
+                                    </h4>
                                     <div>
                                         <x-paragraph class="mb-2 after:ml-0.5 after:text-red-500 after:content-['*']">
                                             Imagen principal
                                         </x-paragraph>
                                         <label for="main_image"
-                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-transparent dark:hover:border-zinc-800 dark:hover:bg-zinc-950">
+                                            class="dark:hover:bg-bray-800 @error('main_image') is-invalid  @enderror flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 bg-zinc-50 hover:border-primary-500 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-transparent dark:hover:border-primary-950 dark:hover:bg-zinc-950">
                                             <div class="flex flex-col items-center justify-center pb-6 pt-5">
                                                 <x-icon icon="cloud-upload"
                                                     class="h-12 w-12 text-zinc-400 dark:text-zinc-500" />
@@ -249,7 +253,7 @@
                                                 <x-paragraph>
                                                     Galería de imágenes
                                                 </x-paragraph>
-                                                <x-paragraph class="w-64 text-xs">
+                                                <x-paragraph class="w-48 text-xs">
                                                     Nota: Selecciona todas las imáges de una sola vez.
                                                 </x-paragraph>
                                             </div>
@@ -273,7 +277,7 @@
                                 </div>
                                 <div
                                     class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
-                                    <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
+                                    <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
                                         Inventario
                                     </h4>
                                     <div class="flex gap-4">
@@ -295,11 +299,11 @@
                                 <div
                                     class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
                                     <div class="flex items-center justify-between">
-                                        <h4 class="mb-2 text-base font-semibold text-blue-700 dark:text-blue-400">
+                                        <h4 class="mb-2 text-base font-semibold text-black dark:text-white">
                                             Etiquetas
                                         </h4>
                                         <x-button type="button" id="showModalLabel" data-modal-target="addLabel"
-                                            data-modal-toggle="addLabel" text="Nueva etiqueta" icon="add-circle"
+                                            data-modal-toggle="addLabel" text="Nueva etiqueta" icon="plus"
                                             typeButton="secondary" />
                                     </div>
                                     <div class="flex gap-4">
@@ -310,7 +314,7 @@
                                             <input type="hidden" name="label_id[]" id="label_id">
                                             <div class="relative">
                                                 <div
-                                                    class="selected flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-2.5 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                    class="selected flex w-full items-center justify-between rounded-lg border border-zinc-400 bg-zinc-50 px-4 py-3 text-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
                                                     <span class="itemSelected">Seleccionar etiqueta</span>
                                                     <x-icon icon="arrow-down"
                                                         class="h-5 w-5 text-zinc-500 dark:text-white" />
@@ -319,14 +323,14 @@
                                                     id="labelsList">
                                                     @if ($labels->count() > 0)
                                                         @foreach ($labels as $label)
-                                                            <li class="itemOption rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
+                                                            <li class="itemOption rounded-lg px-4 py-3 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                                                                 data-value="{{ $label->name }}" data-input="#label_id">
                                                                 {{ $label->name }}
                                                             </li>
                                                         @endforeach
                                                     @else
                                                         <li
-                                                            class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-700">
+                                                            class="itemOption pointer-events-none rounded-lg px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-700">
                                                             Sin etiquetas registradas
                                                         </li>
                                                     @endif
@@ -346,10 +350,10 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar producto" icon="add-circle" typeButton="primary"
+                        <x-button type="submit" text="Agregar producto" icon="plus" typeButton="primary"
                             id="addButtonProduct" />
                         <x-button type="a" href="{{ route('admin.products.index') }}" text="Regresar"
-                            typeButton="secondary" />
+                            typeButton="secondary" icon="return" />
                     </div>
                 </form>
                 <form action="{{ route('admin.subcategories.search') }}" id="formSearchSubcategorie" method="POST">
@@ -364,7 +368,8 @@
             class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-90 md:inset-0 md:h-full">
             <div class="relative h-full w-full max-w-md p-4 md:h-auto">
                 <!-- Modal content -->
-                <div class="relative rounded-lg bg-white p-4 shadow dark:bg-zinc-950 sm:p-5">
+                <div
+                    class="relative animate-jump-in rounded-lg bg-white p-4 shadow animate-duration-300 dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
                         class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-800 sm:mb-5">
@@ -401,7 +406,7 @@
                             </div>
                         </div>
                         <div class="mt-4 flex justify-end gap-2">
-                            <x-button type="button" id="addTaxButton" text="Agregar" icon="add-circle"
+                            <x-button type="button" id="addTaxButton" text="Agregar" icon="plus"
                                 typeButton="primary" />
                             <x-button type="button" data-modal-toggle="addTax" text="Cancelar"
                                 typeButton="secondary" />
@@ -416,7 +421,8 @@
             class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-90 md:inset-0 md:h-full">
             <div class="relative h-full w-full max-w-md p-4 md:h-auto">
                 <!-- Modal content -->
-                <div class="relative rounded-lg bg-white p-4 shadow dark:bg-zinc-950 sm:p-5">
+                <div
+                    class="relative animate-jump-in rounded-lg bg-white p-4 shadow animate-duration-300 dark:bg-zinc-950 sm:p-5">
                     <!-- Modal header -->
                     <div
                         class="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-zinc-800 sm:mb-5">
@@ -446,7 +452,7 @@
                             </div>
                         </div>
                         <div class="mt-4 flex justify-end gap-2">
-                            <x-button type="button" id="addLabelButton" text="Agregar" icon="add-circle"
+                            <x-button type="button" id="addLabelButton" text="Agregar" icon="plus"
                                 typeButton="primary" />
                             <x-button type="button" data-modal-toggle="addLabel" text="Cancelar"
                                 typeButton="secondary" />

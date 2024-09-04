@@ -13,7 +13,9 @@
             @include('layouts.__partials.admin.nav-sales-strategies')
             <div class="mx-auto ms-60 w-full p-4">
                 <div class="flex flex-col gap-1">
-                    <h2 class="text-lg uppercase text-zinc-700 dark:text-zinc-300">Información del cupón</h2>
+                    <h2 class="text-lg font-bold uppercase text-zinc-700 dark:text-zinc-300">
+                        Editar información del cupón
+                    </h2>
                     <p class="text-sm text-zinc-500 dark:text-zinc-400">
                         Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                     </p>

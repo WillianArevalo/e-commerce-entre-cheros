@@ -12,7 +12,7 @@
         <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
             <div class="mx-auto ms-60 w-full">
-                <h2 class="px-4 pt-4 font-secondary text-xl font-medium text-zinc-600 dark:text-zinc-200">
+                <h2 class="font-secondary px-4 pt-4 text-xl font-medium text-zinc-600 dark:text-zinc-200">
                     Métodos de pago
                 </h2>
                 <div class="mx-auto w-full">
@@ -30,7 +30,7 @@
                             <div
                                 class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                                 <x-button type="button" class="open-drawer" data-drawer="#drawer-new-method"
-                                    typeButton="primary" text="Agregar método" icon="add-circle" />
+                                    typeButton="primary" text="Agregar método" icon="plus" />
                             </div>
                         </div>
                         <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
@@ -192,7 +192,7 @@
                         <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">Activo</label>
                     </div>
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar método" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Agregar método" icon="plus" typeButton="primary" />
                         <x-button type="button" data-drawer="#drawer-new-method" class="close-drawer" text="Cancelar"
                             typeButton="secondary" icon="cancel" />
                     </div>

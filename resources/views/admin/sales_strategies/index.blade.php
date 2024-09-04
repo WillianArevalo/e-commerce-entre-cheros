@@ -14,7 +14,7 @@
         <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
             <div class="mx-auto ms-60 w-full">
-                <h2 class="px-4 pt-4 font-secondary text-xl font-medium text-zinc-600 dark:text-zinc-200">
+                <h2 class="font-secondary px-4 pt-4 text-xl font-medium text-zinc-600 dark:text-zinc-200">
                     Cupones de descuento
                 </h2>
                 <div class="mx-auto w-full">
@@ -32,7 +32,7 @@
                             <div
                                 class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                                 <x-button type="a" href="{{ route('admin.sales-strategies.coupon.create') }}"
-                                    typeButton="primary" text="Agregar cupon" icon="add-circle" />
+                                    typeButton="primary" text="Agregar cupon" icon="plus" />
                             </div>
                         </div>
                         <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">

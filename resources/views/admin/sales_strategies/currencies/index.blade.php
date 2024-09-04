@@ -13,7 +13,7 @@
             @include('layouts.__partials.admin.nav-sales-strategies')
             <div class="mx-auto ms-60 w-full">
                 <div class="mb-4">
-                    <h2 class="px-4 pt-4 font-secondary text-xl font-medium text-zinc-600 dark:text-zinc-200">
+                    <h2 class="font-secondary px-4 pt-4 text-xl font-medium text-zinc-600 dark:text-zinc-200">
                         Monedas
                     </h2>
                 </div>
@@ -32,7 +32,7 @@
                             <div
                                 class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                                 <x-button type="button" class="open-drawer" data-drawer="#drawer-new-currency"
-                                    typeButton="primary" text="Nueva moneda" icon="add-circle" />
+                                    typeButton="primary" text="Nueva moneda" icon="plus" />
                             </div>
                         </div>
                         <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
@@ -100,17 +100,7 @@
                                                     {{ $currency->exchange_rate }}
                                                 </td>
                                                 <td class="px-4 py-3">
-                                                    @if ($currency->active === 1)
-                                                        <span
-                                                            class="rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 font-secondary text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">
-                                                            Activo
-                                                        </span>
-                                                    @else
-                                                        <span
-                                                            class="rounded-full border-2 border-red-300 bg-red-200 px-4 py-1 font-secondary text-xs font-medium text-red-800 dark:border-red-400 dark:bg-red-800 dark:text-red-100">
-                                                            Inactivo
-                                                        </span>
-                                                    @endif
+                                                    <x-badge-status :status="$currency->active" />
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     <div class="flex gap-2">
@@ -188,7 +178,7 @@
                     <div class="flex w-full flex-wrap items-center gap-4">
                         <div class="flex items-center gap-2">
                             <input type="checkbox" value="0" name="is_default" id="default"
-                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                             <label for="default" class="text-sm text-zinc-500 dark:text-zinc-400">
                                 Divisa por defecto
                             </label>
@@ -219,21 +209,21 @@
                         </div>
                         <div>
                             <input type="checkbox" value="0" name="auto_update" id="update"
-                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                             <label for="update" class="text-sm text-zinc-500 dark:text-zinc-400">
                                 Actualización automática
                             </label>
                         </div>
                         <div>
                             <input type="checkbox" value="0" name="active"
-                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                             <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">
                                 Activa
                             </label>
                         </div>
                     </div>
                     <div class="mt-4 flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar moneda" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Agregar moneda" icon="plus" typeButton="primary" />
                         <x-button type="button" data-drawer="#drawer-new-currency" class="close-drawer" text="Cancelar"
                             typeButton="secondary" icon="cancel" />
                     </div>
@@ -283,7 +273,7 @@
                     <div class="flex w-full flex-wrap items-center gap-4">
                         <div class="flex items-center gap-2">
                             <input type="checkbox" name="is_default" id="is_default"
-                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                             <label for="is_default" class="text-sm text-zinc-500 dark:text-zinc-400">
                                 Divisa por defecto
                             </label>
@@ -314,14 +304,14 @@
                         </div>
                         <div>
                             <input type="checkbox" value="0" name="auto_update" id="auto_update"
-                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                             <label for="auto_update" class="text-sm text-zinc-500 dark:text-zinc-400">
                                 Actualización automática
                             </label>
                         </div>
                         <div>
                             <input type="checkbox" value="0" name="active" id="active"
-                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                             <label for="active" class="text-sm text-zinc-500 dark:text-zinc-400">
                                 Activa
                             </label>

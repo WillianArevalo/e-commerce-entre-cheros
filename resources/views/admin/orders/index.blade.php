@@ -1,20 +1,15 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Categorías')
-
 @section('content')
     <div class="mt-4 rounded-lg">
         <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
+            <h1 class="font-secondary text-secondary text-2xl font-bold dark:text-blue-400">
                 Administrar pedidos
             </h1>
-            <p class="text-sm text-zinc-400">
-                Administra los pedidos
-            </p>
         </div>
-        <div class="bg-zinc-50 p-4 dark:bg-black">
+        <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-800 dark:bg-black sm:rounded-lg">
+                <div class="relative bg-white dark:bg-black">
                     <div class="border-b border-zinc-400 p-4 dark:border-zinc-800">
                         <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de pedidos
@@ -33,7 +28,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button type="a" href="{{ route('admin.customers.create') }}" text="Nuevo cliente"
-                                icon="add-circle" typeButton="primary" />
+                                icon="plus" typeButton="primary" />
                             <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button type="button" typeButton="secondary" id="filterDropdownButton"
                                     data-dropdown-toggle="filterDropdown" text="Filtros" icon="filter" />
@@ -49,7 +44,7 @@
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-primary-600">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
@@ -58,7 +53,7 @@
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-primary-600">
                                                 <label for="fitbit"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías
@@ -70,28 +65,28 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                            <thead class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
-                                <tr>
-                                    <th scope="col" class="px-4 py-3">Foto</th>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Apellido</th>
-                                    <th scope="col" class="px-4 py-3">Correo</th>
-                                    <th scope="col" class="px-4 py-3">Telefono</th>
-                                    <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
+                    <x-table>
+                        <x-slot name="thead">
+                            <x-tr>
+                                <x-th>Cliente</x-th>
+                                <x-th>Fecha</x-th>
+                                <x-th>Estado</x-th>
+                                <x-th :last="true">Acciones</x-th>
+                            </x-tr>
+                        </x-slot>
+                        <x-slot name="tbody">
+                            <x-tr section="body">
+                                <x-td>Cliente</x-td>
+                                <x-td>Fecha</x-td>
+                                <x-td>Estado</x-td>
+                                <x-td>Acciones</x-td>
+                            </x-tr>
+                        </x-slot>
+                    </x-table>
                 </div>
             </div>
         </div>
-        <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar el cliente?"
-            message="No podrás recuperar este registro" action="" />
+        <x-delete-modal modalId="deleteModal" title="¿Estás seguro de la orden?" message="No podrás recuperar este registro"
+            action="" />
     </div>
 @endsection

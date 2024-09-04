@@ -190,7 +190,7 @@
                                                     Impuestos
                                                 </p>
                                                 <x-button type="button" id="showModalTax" data-modal-target="addTax"
-                                                    data-modal-toggle="addTax" text="Nuevo impuesto" icon="add-circle"
+                                                    data-modal-toggle="addTax" text="Nuevo impuesto" icon="plus"
                                                     typeButton="secondary" />
                                             </div>
                                             <div class="mt-4 flex flex-col">
@@ -321,7 +321,7 @@
                                             Etiquetas
                                         </h4>
                                         <x-button type="button" id="showModalLabel" data-modal-target="addLabel"
-                                            data-modal-toggle="addLabel" text="Nueva etiqueta" icon="add-circle"
+                                            data-modal-toggle="addLabel" text="Nueva etiqueta" icon="plus"
                                             typeButton="secondary" />
                                     </div>
                                     <div class="flex gap-4">
@@ -450,7 +450,7 @@
                             </div>
                         </div>
                         <div class="mt-4 flex justify-end gap-2">
-                            <x-button type="button" id="addTaxButton" text="Agregar" icon="add-circle"
+                            <x-button type="button" id="addTaxButton" text="Agregar" icon="plus"
                                 typeButton="primary" />
                             <x-button type="button" data-modal-toggle="addTax" text="Cancelar"
                                 typeButton="secondary" />
@@ -495,7 +495,7 @@
                             </div>
                         </div>
                         <div class="mt-4 flex justify-end gap-2">
-                            <x-button type="button" id="addLabelButton" text="Agregar" icon="add-circle"
+                            <x-button type="button" id="addLabelButton" text="Agregar" icon="plus"
                                 typeButton="primary" />
                             <x-button type="button" data-modal-toggle="addLabel" text="Cancelar"
                                 typeButton="secondary" />

@@ -2,7 +2,7 @@
 @section('profile-content')
     <div class="flex flex-col">
         <div class="py-2">
-            <h2 class="font-league-spartan text-3xl font-bold text-secondary">
+            <h2 class="text-secondary font-league-spartan text-3xl font-bold">
                 Editar datos
             </h2>
         </div>
@@ -55,7 +55,6 @@
                     <x-button-store type="submit" text="Guardar cambios" typeButton="primary"
                         class="mt-4 w-max font-semibold" />
                 </div>
-
             </form>
         </div>
     </div>

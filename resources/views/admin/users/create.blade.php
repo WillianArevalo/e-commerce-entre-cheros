@@ -1,94 +1,126 @@
 @extends('layouts.admin-template')
-
-@section('title', 'Nueva categoría')
-
+@section('title', 'Nuevo usuario')
 @section('content')
-    <div class="mt-4 dark:bg-black">
+    <div class="dark:bg-black">
         @include('layouts.__partials.admin.header-crud-page', [
             'title' => 'Nuevo usuario',
             'text' => 'Regresar a la lista de usuarios',
             'url' => route('admin.users.index'),
         ])
-        <div class="mt-4 bg-white px-4 dark:bg-black">
+        <div class="bg-white dark:bg-black">
             <div class="mx-auto w-full">
-                <form action="{{ route('admin.users.store') }}" class="flex flex-col gap-4" enctype="multipart/form-data"
-                    method="POST">
+                <form action="{{ Route('admin.users.store') }}" id="form-add-user" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="flex gap-4">
-                        <div
-                            class="bg-whtie flex h-max flex-1 flex-col rounded-lg border border-zinc-400 dark:border-zinc-800 dark:bg-black">
-                            <p
-                                class="border-b border-zinc-400 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
-                                Foto de perfil
-                            </p>
-                            <div class="flex flex-col items-center justify-center py-4">
-                                <img src="{{ asset('images/default-profile.png') }}" alt="Foto de perfil" id="previewImage"
-                                    class="@error('profile') is-invalid @enderror h-60 w-60 rounded-full object-cover">
-                                @error('profile')
-                                    <span class="mt-4 text-sm text-red-500">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                    <div class="flex">
+                        <div class="flex-[4]">
+                            <div class="flex flex-col gap-1 border-b border-zinc-400 p-4 dark:border-zinc-800">
+                                <h2 class="text-lg font-bold uppercase text-zinc-600 dark:text-zinc-300">
+                                    Información del usuario
+                                </h2>
+                                <x-paragraph>
+                                    Los campos marcados con <span class="text-red-500">*</span> son obligatorios
+                                </x-paragraph>
                             </div>
-                            <div class="flex justify-end border-t border-zinc-400 dark:border-zinc-800">
-                                <label for="profile"
-                                    class="m-4 flex cursor-pointer items-center gap-2 rounded border-2 border-zinc-400 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
-                                    <x-icon icon="image-add" class="h-5 w-5 text-current" />
-                                    Agregar foto
-                                </label>
-                                <input type="file" name="profile" id="profile" class="hidden">
+                            @if ($errors->any())
+                                <div class="flex items-center justify-center gap-4 bg-red-100 p-4 dark:bg-red-500">
+                                    <x-icon icon="alert" class="h-5 w-5 text-red-500 dark:text-red-300" />
+                                    <ul class="list-inside list-disc text-red-500 dark:text-red-300">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <div class="flex flex-col gap-4 p-4">
+                                <div class="flex gap-4">
+                                    <div class="flex-1">
+                                        <x-input label="Nombre de usuario" placeholder="Usuario" name="username"
+                                            type="text" icon="user" required />
+                                    </div>
+                                    <div class="flex-[3]">
+                                        <x-input label="Correo electrónico" placeholder="Ingresa el correo electronico"
+                                            name="email" type="email" icon="mail" required />
+                                    </div>
+                                    <div class="flex-1">
+                                        <x-select label="Rol" name="role" id="role" required :options="[
+                                            'admin' => 'Administrador',
+                                            'user' => 'Usuario',
+                                        ]"
+                                            selected="{{ old('role') }}" />
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="flex-1">
+                                        <x-input type="password" label="Contraseña" icon="password-user" id="password-user"
+                                            placeholder="Ingresa la contraseña" name="password" required />
+                                    </div>
+                                    <div class="flex-1">
+                                        <x-input type="password" label="Confirmar contraseña" icon="lock-check"
+                                            placeholder="Confirma la contraseña" id="password-confirmed"
+                                            name="password_confirmation" required />
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="flex-1">
+                                        <x-input type="text" label="Nombre" placeholder="Ingresa el nombre"
+                                            name="name" required />
+                                    </div>
+                                    <div class="flex-1">
+                                        <x-input type="text" label="Apellido" placeholder="Ingresa el apellido"
+                                            name="last_name" required />
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="flex-1">
+                                        <x-select label="Lenguaje" name="locale" id="locale" :options="[
+                                            'es' => 'Español',
+                                            'en' => 'Inglés',
+                                        ]" />
+                                    </div>
+                                    <div class="flex-1">
+                                        <x-select label="Moneda" name="currency" id="currency" :options="$currencies->pluck('code', 'id')->toArray()" />
+                                    </div>
+                                    <div class="flex-1">
+                                        <x-select label="Estado" name="status" id="status" :options="[
+                                            '0' => 'Activo',
+                                            '1' => 'Inactivo',
+                                        ]" />
+                                    </div>
+                                </div>
+                                <div class="w-56">
+                                    <x-input label="Zona horiaria" placeholder="Ingresa la zona horaria" name="timezone"
+                                        icon="timezone" />
+                                </div>
                             </div>
                         </div>
-                        <div class="flex-[2] rounded-lg border border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black">
-                            <p
-                                class="border-b border-zinc-400 p-4 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
-                                Información del usuario
-                            </p>
-                            <div class="flex flex-col gap-4 p-4">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1">
-                                        <x-input type="text" name="username" id="username" label="Nombre de usuario"
-                                            placeholder="Ingresa el usuario" />
-                                    </div>
-                                    <div class="flex-[2]">
-                                        <x-input type="email" name="email" id="email_user" label="Correo electrónico"
-                                            placeholder="Ingresa el correo electrónico del usuario" />
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1">
-                                        <x-input type="text" name="name" id="name" label="Nombre"
-                                            placeholder="Ingresa el nombre" />
-                                    </div>
-                                    <div class="flex-1">
-                                        <x-input type="text" name="last_name" id="last_name" label="Apellido"
-                                            placeholder="Ingresa el apellido del usuario" />
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1">
-                                        <x-input type="password" name="password" id="password_user" label="Contraseña"
-                                            placeholder="Ingresa la contraseña del usuario" />
-                                    </div>
-                                    <div class="flex-1">
-                                        <x-input type="password" name="password_confirmation" id="password_confirmation"
-                                            label="Confirmar contraseña" placeholder="Confirmar la contraseña" />
-                                    </div>
-                                </div>
-                                <div class="flex">
-                                    <x-select label="Rol" id="role" name="role" value="principal"
-                                        :options="['admin' => 'Administrador', 'supervisor' => 'Supervisor']" selected="admin" />
-                                </div>
+                        <div class="flex-[1.5] border-s border-zinc-400 dark:border-zinc-800">
+                            <h2 class="p-4 text-center text-base font-bold uppercase text-zinc-600 dark:text-zinc-300">
+                                Foto de perfil
+                            </h2>
+                            <div class="group relative flex items-center justify-center p-4">
+                                <img src="{{ Storage::url('images/default-profile.png') }}" alt="Foto de perfil"
+                                    class="h-56 w-56 rounded-full object-cover" id="image-profile">
+                                <label for="profile"
+                                    class="absolute inset-0 flex cursor-pointer items-center justify-center rounded-full bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                    <x-icon icon="camera-plus" class="h-5 w-5" />
+                                    <input type="file" name="profile" id="profile" class="hidden"
+                                        accept=".img, .jpg, .png, .webp" />
+                                </label>
+                            </div>
+                            <div class="mt-4 flex items-center justify-center">
+                                <x-button type="button" id="remove-image" icon="image-remove" text="Eliminar imagen"
+                                    typeButton="secondary" size="small" />
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Ingresar usuario" icon="add-circle" typeButton="primary" />
-                        <x-button type="a" href="{{ route('admin.users.index') }}" text="Regresar"
+                    <div class="flex items-center justify-center gap-4 border-t border-zinc-400 py-4 dark:border-zinc-800">
+                        <x-button type="submit" text="Guardar" icon="save" typeButton="primary" />
+                        <x-button type="a" href="{{ Route('admin.users.index') }}" text="Cancelar" icon="cancel"
                             typeButton="secondary" />
                     </div>
                 </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

@@ -1,7 +1,5 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Marcas')
-
 @section('content')
     <div>
         @include('layouts.__partials.admin.header-page', [
@@ -24,7 +22,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button type="button" data-drawer="#drawer-new-flash-offer" class="open-drawer"
-                                typeButton="primary" text="Agregar oferta relámpago" icon="add-circle" />
+                                typeButton="primary" text="Agregar oferta relámpago" icon="plus" />
                         </div>
                     </div>
                     <div>
@@ -44,12 +42,17 @@
                                             Fecha de inicio
                                         </th>
                                         <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Fecha de fin</th>
+                                            Fecha de fin
+                                        </th>
                                         <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Visualización</th>
+                                            Visualización
+                                        </th>
                                         <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Estado</th>
-                                        <th scope="col" class="px-4 py-3">Acciones</th>
+                                            Estado
+                                        </th>
+                                        <th scope="col" class="px-4 py-3">
+                                            Acciones
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +78,7 @@
                                                         <div class="flex flex-col">
                                                             <span>{{ $offer->product->name }}</span>
                                                             <span
-                                                                class="me-2 w-max rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                                                                class="me-2 w-max rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                                                                 ${{ $offer->product->offer_price }}
                                                             </span>
                                                         </div>
@@ -99,7 +102,7 @@
                                                                 value="" class="toggleShow peer sr-only"
                                                                 {{ $offer->is_showing === 1 ? 'checked' : '' }}>
                                                             <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
+                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
                                                             </div>
                                                             <span
                                                                 class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
@@ -122,7 +125,7 @@
                                                                 class="toggleStatus peer sr-only"
                                                                 {{ $offer->is_active === 1 ? 'checked' : '' }}>
                                                             <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-800">
                                                             </div>
                                                             <span
                                                                 class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
@@ -207,7 +210,7 @@
                                                             class="h-8 w-8 rounded-lg object-cover">
                                                         <span>{{ $selectedProduct->name }}</span>
                                                         <span
-                                                            class="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                                            class="rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                                                             ${{ $selectedProduct->price }}
                                                         </span>
                                                     @else
@@ -230,7 +233,7 @@
                                                             class="h-8 w-8 rounded-lg object-cover">
                                                         <span>{{ $product->name }}</span>
                                                         <span
-                                                            class="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                                            class="rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                                                             ${{ $product->price }}
                                                         </span>
                                                     </li>
@@ -270,7 +273,7 @@
                                         <input type="checkbox" value="is_showing" class="peer sr-only"
                                             name="is_showing">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-950">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Mostrar en la página principal
@@ -279,7 +282,7 @@
                                     <label class="inline-flex cursor-pointer items-center">
                                         <input type="checkbox" value="is_active" class="peer sr-only" name="is_active">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-950">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Activo
@@ -288,7 +291,7 @@
                                 </div>
                             </div>
                             <div class="mt-6 flex items-center justify-center gap-2">
-                                <x-button type="submit" text="Agregar oferta" typeButton="primary" icon="add-circle" />
+                                <x-button type="submit" text="Agregar oferta" typeButton="primary" icon="plus" />
                                 <x-button type="button" text="Cancelar" typeButton="secondary" class="close-drawer"
                                     data-drawer="#drawer-new-flash-offer" />
                             </div>
@@ -346,7 +349,7 @@
                                         <input type="checkbox" value="is_showing" class="peer sr-only" name="is_showing"
                                             id="is_showing_edit">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-950">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Mostrar en la página principal
@@ -356,7 +359,7 @@
                                         <input type="checkbox" value="is_active" class="peer sr-only" name="is_active"
                                             id="is_active_edit">
                                         <div
-                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-blue-800">
+                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-950">
                                         </div>
                                         <span class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                             Activo
@@ -365,7 +368,7 @@
                                 </div>
                             </div>
                             <div class="mt-6 flex items-center justify-center gap-2">
-                                <x-button type="submit" text="Editar oferta" typeButton="primary" icon="add-circle" />
+                                <x-button type="submit" text="Editar oferta" typeButton="primary" icon="plus" />
                                 <x-button type="button" text="Cancelar" typeButton="secondary" class="close-drawer"
                                     data-drawer="#drawer-edit-flash-offer" />
                             </div>

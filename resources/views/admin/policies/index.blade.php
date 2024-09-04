@@ -3,7 +3,7 @@
 @section('content')
     <div class="mt-4 dark:border-zinc-800 dark:bg-black">
         <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
+            <h1 class="font-secondary text-secondary text-2xl font-bold dark:text-blue-400">
                 Políticas
             </h1>
             <p class="text-sm text-zinc-700 dark:text-zinc-400">
@@ -48,7 +48,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button data-drawer="#drawer-new-policie" class="open-drawer" type="button"
-                                text="Nueva política" icon="add-circle" typeButton="primary" />
+                                text="Nueva política" icon="plus" typeButton="primary" />
                             <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button type="button" id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
                                     typeButton="secondary" icon="filter" text="Filtros" />
@@ -212,7 +212,7 @@
                     </div>
 
                     <div class="flex items-center justify-center gap-2">
-                        <x-button type="submit" text="Agregar política" icon="add-circle" typeButton="primary" />
+                        <x-button type="submit" text="Agregar política" icon="plus" typeButton="primary" />
                         <x-button type="button" data-drawer="#drawer-new-policie" class="close-drawer" text="Cancelar"
                             typeButton="secondary" />
                     </div>

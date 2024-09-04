@@ -29,7 +29,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button type="a" href="{{ route('admin.customers.create') }}" text="Nuevo cliente"
-                                icon="add-circle" typeButton="primary" />
+                                icon="plus" typeButton="primary" />
                             <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button type="button" typeButton="secondary" id="filterDropdownButton"
                                     data-dropdown-toggle="filterDropdown" text="Filtros" icon="filter" />
@@ -45,7 +45,7 @@
                                             <li class="flex items-center">
                                                 <input id="no_subcategories" name="filter[]" type="checkbox"
                                                     value="no_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-primary-600">
                                                 <label for="no_subcategories"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Sin subcategorías
@@ -54,7 +54,7 @@
                                             <li class="flex items-center">
                                                 <input id="has_subcategories" name="filter[]" type="checkbox"
                                                     value="has_subcategories"
-                                                    class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-zinc-400 bg-zinc-100 focus:ring-2 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-primary-600">
                                                 <label for="fitbit"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con subcategorías

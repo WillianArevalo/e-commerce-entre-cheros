@@ -1,7 +1,5 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Marcas')
-
 @section('content')
     <div>
         @include('layouts.__partials.admin.header-page', [
@@ -23,7 +21,7 @@
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
                             <x-button type="button" class="open-drawer" data-drawer="#drawer-new-brand"
-                                typeButton="primary" text="Agregar marca" icon="add-circle" />
+                                typeButton="primary" text="Agregar marca" icon="plus" />
                         </div>
                     </div>
                     <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
@@ -134,8 +132,8 @@
                                 placeholder="Ingresa la descripción de la marca" value="{{ old('description') }}" />
                         </div>
                     </div>
-                    <div class="mt-4 flex justify-end gap-2">
-                        <x-button type="submit" typeButton="primary" text="Agregar" icon="add-circle" />
+                    <div class="mt-4 flex justify-center gap-2">
+                        <x-button type="submit" typeButton="primary" text="Agregar" icon="plus" />
                         <x-button type="button" data-drawer="#drawer-new-brand" class="close-drawer"
                             typeButton="secondary" text="Cancelar" />
                     </div>
@@ -173,7 +171,7 @@
                                 placeholder="Ingresa la descripción de la marca" value="{{ old('description') }}" />
                         </div>
                     </div>
-                    <div class="mt-4 flex justify-end gap-2">
+                    <div class="mt-4 flex justify-center gap-2">
                         <x-button type="submit" typeButton="primary" text="Editar" icon="edit" />
                         <x-button type="button" data-drawer="#drawer-edit-brand" class="close-drawer"
                             typeButton="secondary" text="Cancelar" />

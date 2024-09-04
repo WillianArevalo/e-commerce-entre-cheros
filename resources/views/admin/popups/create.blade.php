@@ -183,7 +183,7 @@
                             </div>
                             <div class="mt-4 flex items-center gap-4">
                                 <x-button type="button" id="addInputPopup" typeButton="secondary" text="Agregar campo"
-                                    icon="add-circle" />
+                                    icon="plus" />
                                 <x-button type="button" icon="delete" id="removeInputPoup" typeButton="danger" />
                             </div>
                             <div id="optionsInput" class="mt-4 hidden">

@@ -34,7 +34,7 @@
                         </div>
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
-                            <x-button type="button" icon="reload" typeButton="secondary" />
+                            <x-button type="button" icon="reload" typeButton="secondary" onlyIcon="true" />
                             <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button"
                                     icon="filter" typeButton="secondary" text="Filtros" />
@@ -49,7 +49,7 @@
                                         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li class="flex items-center">
                                                 <input id="offers" name="filter[]" type="checkbox" value="offers"
-                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-white dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-500 dark:bg-zinc-950 dark:ring-offset-zinc-700 dark:focus:ring-blue-600">
                                                 <label for="offers"
                                                     class="ml-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                                                     Con ofertas
@@ -91,7 +91,7 @@
                             </div>
                             <div>
                                 <x-button type="a" href="{{ route('admin.products.create') }}"
-                                    text-="Agregar producto" icon="add-circle" typeButton="primary" />
+                                    text-="Agregar producto" icon="plus" typeButton="primary" />
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                                 <tr>
                                     <th scope="col" class="w-10 border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         <input id="default-checkbox" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                                     </th>
                                     <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Producto
@@ -133,7 +133,7 @@
                                         <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
                                             <td class="px-4 py-3">
                                                 <input id="default-checkbox" type="checkbox" value=""
-                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
                                             </td>
                                             <td class="px-4 py-3">
                                                 <span>{{ $product->name }}</span>
@@ -153,7 +153,7 @@
                                             </td>
                                             <td class="px-4 py-3">
                                                 <span
-                                                    class="rounded-full bg-blue-100 px-3 py-1 font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                                    class="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium uppercase text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                                                     {{ $product->categories->name }}
                                                 </span>
                                             </td>
