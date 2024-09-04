@@ -152,6 +152,84 @@
             '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-photo-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 8h.01" /><path d="M12.5 21h-6.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6.5" /><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l3.5 3.5" /><path d="M14 14l1 -1c.679 -.653 1.473 -.829 2.214 -.526" /><path d="M19 22v-6" /><path d="M22 19l-3 -3l-3 3" /></svg>',
         'password-user' =>
             '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-password-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17v4" /><path d="M10 20l4 -2" /><path d="M10 18l4 2" /><path d="M5 17v4" /><path d="M3 20l4 -2" /><path d="M3 18l4 2" /><path d="M19 17v4" /><path d="M17 20l4 -2" /><path d="M17 18l4 2" /><path d="M9 6a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M7 14a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2" /></svg>',
+        'device-desktop' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-desktop"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10z" /><path d="M7 20h10" /><path d="M9 16v4" /><path d="M15 16v4" /></svg>',
+        'logo' => '
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 1080.000000 1080.000000" preserveAspectRatio="xMidYMid meet">
+                <metadata>
+                    Created by potrace 1.16, written by Peter Selinger 2001-2019
+                </metadata>
+                    <g transform="translate(0.000000,1080.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
+                    <path d="M4085 9714 c-342 -57 -665 -243 -917 -529 -213 -241 -387 -580 -454
+                        -883 l-19 -84 -35 5 c-25 3 -41 -1 -55 -14 -20 -18 -23 -18 -145 32 -322 131
+                        -691 227 -831 217 -48 -4 -65 -10 -87 -31 -23 -23 -27 -35 -27 -85 0 -48 7
+                        -73 37 -133 82 -164 231 -326 503 -546 396 -320 517 -466 604 -731 55 -166 80
+                        -412 81 -817 1 -624 218 -1218 620 -1700 50 -60 174 -198 274 -305 437 -467
+                        562 -639 631 -876 100 -339 -74 -663 -380 -707 -61 -9 -98 -8 -207 8 -213 29
+                        -302 31 -370 5 -72 -27 -144 -94 -153 -143 -9 -47 16 -92 64 -117 51 -26 179
+                        -40 366 -40 83 0 248 -3 367 -7 l217 -6 25 -56 c41 -92 49 -173 35 -356 -10
+                        -142 -10 -167 5 -225 20 -79 59 -138 108 -165 35 -18 40 -19 80 -5 54 19 92
+                        72 115 162 15 59 16 84 6 230 -7 104 -8 186 -2 227 12 84 55 180 83 185 54 11
+                        745 25 788 16 101 -20 179 -84 214 -176 20 -51 22 -137 13 -429 -4 -107 -2
+                        -125 18 -167 46 -101 152 -104 227 -6 59 79 61 89 61 388 0 253 2 279 20 325
+                        l21 50 299 6 c165 4 345 12 400 18 345 38 417 58 423 118 7 68 -49 123 -144
+                        143 -27 5 -260 21 -518 35 -258 14 -470 26 -471 27 -1 2 -5 126 -8 276 l-5
+                        273 41 -7 c121 -20 206 -6 463 76 189 61 263 74 378 67 190 -12 368 -104 565
+                        -291 46 -45 432 -457 856 -916 424 -459 790 -848 812 -863 63 -44 150 -49 187
+                        -11 25 24 19 83 -13 139 -16 28 -358 419 -761 870 -403 451 -740 828 -749 839
+                        -15 17 -14 20 23 52 149 129 383 133 591 11 95 -55 235 -197 381 -386 224
+                        -290 467 -560 687 -763 138 -126 219 -176 301 -185 38 -5 48 -2 70 20 66 66
+                        15 161 -167 314 -315 264 -553 528 -762 848 -50 77 -95 145 -99 152 -8 15 64
+                        53 143 77 153 45 364 -8 536 -136 70 -52 130 -109 244 -233 73 -79 79 -83 46
+                        -35 -136 198 -328 401 -482 510 -236 166 -453 240 -701 240 l-117 0 3 132 c11
+                        464 -159 950 -503 1443 -198 283 -354 453 -975 1065 -282 278 -563 559 -623
+                        625 -456 499 -741 991 -857 1475 -33 140 -42 130 109 130 231 0 468 33 643 91
+                        200 65 399 196 505 333 55 72 116 176 108 184 -2 3 -46 11 -97 18 -150 22
+                        -311 62 -498 124 -164 55 -270 97 -795 314 -366 152 -634 235 -870 271 -123
+                        18 -389 18 -500 -1z m236 -999 c450 -74 828 -406 935 -821 51 -197 42 -467
+                        -20 -652 -118 -345 -398 -610 -778 -736 -138 -46 -242 -60 -397 -53 -655 29
+                        -1201 630 -1133 1249 54 495 413 902 887 1009 121 27 354 28 506 4z m1315
+                        -1712 c17 -10 196 -189 398 -398 203 -209 488 -497 635 -641 245 -240 462
+                        -467 638 -669 38 -44 143 -159 232 -255 283 -304 374 -420 458 -587 130 -254
+                        132 -419 6 -475 -60 -26 -91 -16 -210 75 -144 109 -188 151 -634 597 -425 426
+                        -430 430 -497 414 -42 -10 -52 -23 -52 -69 0 -79 0 -79 726 -857 251 -268 355
+                        -387 364 -413 7 -22 9 -54 5 -81 -5 -37 -13 -49 -52 -79 -62 -47 -113 -60
+                        -179 -46 -64 15 -182 71 -248 118 -28 20 -278 263 -556 539 -278 277 -517 507
+                        -533 513 -75 29 -136 -77 -88 -154 10 -16 114 -140 231 -275 329 -380 320
+                        -368 320 -413 0 -30 -7 -46 -30 -69 -28 -27 -35 -30 -73 -24 -127 20 -357 120
+                        -517 223 -227 148 -554 441 -762 683 -345 403 -558 910 -562 1336 -1 138 0
+                        141 26 176 18 24 62 53 139 93 265 139 476 338 620 588 71 122 89 148 112 157
+                        33 13 49 12 83 -7z m-2326 -668 c237 -159 460 -226 771 -229 250 -3 256 -8
+                        263 -233 3 -76 10 -156 15 -178 34 -130 0 -204 -130 -284 -206 -127 -426 -181
+                        -737 -181 -212 0 -224 10 -300 242 -82 249 -118 447 -129 703 l-6 150 28 33
+                        c58 69 93 65 225 -23z m1207 -1267 c14 -13 39 -50 55 -83 30 -60 94 -162 214
+                        -346 112 -170 578 -643 762 -773 168 -118 192 -137 207 -167 21 -40 13 -88
+                        -19 -118 -55 -52 -262 -47 -561 14 -283 57 -542 176 -886 406 -237 159 -526
+                        438 -659 638 -36 53 -39 106 -10 144 26 33 64 44 170 51 159 10 340 79 503
+                        193 43 29 88 58 100 63 35 15 96 4 124 -22z m236 -1730 c175 -76 385 -135 587
+                        -163 63 -9 142 -20 174 -25 102 -16 133 -68 115 -194 -6 -41 -7 -126 -3 -201
+                        l6 -131 -26 -31 c-46 -55 -56 -56 -539 -49 -494 7 -473 3 -511 80 -17 34 -17
+                        47 -7 144 14 135 14 273 0 382 -26 207 35 263 204 188z" />
+                                <path d="M3757 8229 c-98 -23 -200 -109 -245 -207 -37 -81 -43 -204 -13 -283
+                        56 -149 209 -237 393 -227 143 8 247 81 312 217 27 58 31 76 31 151 0 72 -4
+                        93 -27 140 -79 161 -273 251 -451 209z" />
+                    </g>
+            </svg>',
+        'return' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>',
+        'photo-edit' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-photo-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 8h.01" /><path d="M11 20h-4a3 3 0 0 1 -3 -3v-10a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v4" /><path d="M4 15l4 -4c.928 -.893 2.072 -.893 3 0l3 3" /><path d="M14 14l1 -1c.31 -.298 .644 -.497 .987 -.596" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>',
+        'phone' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-phone"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>',
+        'lock-check' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-lock-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v.5" /><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M8 11v-4a4 4 0 1 1 8 0v4" /><path d="M15 19l2 2l4 -4" /></svg>',
+        'camera-plus' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-camera-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 20h-7a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v3.5" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>',
+        'spinner' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-rotate-clockwise"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5" /></svg>',
+        'timezone' =>
+            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-timezone"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.884 10.554a9 9 0 1 0 -10.337 10.328" /><path d="M3.6 9h16.8" /><path d="M3.6 15h6.9" /><path d="M11.5 3a17 17 0 0 0 -1.502 14.954" /><path d="M12.5 3a17 17 0 0 1 2.52 7.603" /><path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M18 16.5v1.5l.5 .5" /></svg>',
     ];
 
     $iconSvg = $icons[$icon] ?? null;
