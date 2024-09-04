@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ImageHelper;
 use App\Http\Requests\UserRequest;
+use App\Models\Currency;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -24,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("admin.users.create");
+        $currencies = Currency::all();
+        return view("admin.users.create", compact("currencies"));
     }
 
     /**
@@ -34,12 +37,19 @@ class UserController extends Controller
     {
         $validated = $request->validated();
         if ($request->hasFile("profile")) {
-            $validated["profile_photo_path"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
+            $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
         }
-        $user = User::create($validated);
-        if ($user) {
-            return redirect()->route("admin.users.index")->with("success", "Usuario agregado correctamente");
-        } else {
+        DB::beginTransaction();
+        try {
+            $user = User::create($validated);
+            DB::commit();
+            if ($user) {
+                return redirect()->route("admin.users.index")->with("success", "Usuario agregado correctamente");
+            } else {
+                return redirect()->route("admin.users.index")->with("error", "Error al agregar el usuario");
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->route("admin.users.index")->with("error", "Error al agregar el usuario");
         }
     }
@@ -58,34 +68,39 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::find($id);
-        return view("admin.users.edit", compact("user"));
+        $currencies = Currency::all();
+        return view("admin.users.edit", ["user" => $user, "currencies" => $currencies]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, string $id)
+    public function update(UserRequest $request, $id)
     {
-        $user = User::find($id);
-        if ($user) {
-            $validate = $request->validated();
-            if ($request->hasFile("profile")) {
-                if ($user->profile_photo_path) {
-                    ImageHelper::deleteImage($user->profile_photo_path);
-                }
-                $validate["profile_photo_path"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
-            }
+        $validated = $request->validated();
+        $user = User::findOrFail($id);
 
-            if ($request->input("password")) {
-                $validate["password"] = Hash::make($request->input("password"));
-            } else {
-                $validate["password"] = $user->password;
+        if ($request->hasFile("profile")) {
+            if ($user->profile && $user->profile !== "images/default-profile.png") {
+                ImageHelper::deleteImage($user->profile);
             }
+            $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
+        }
 
-            $user->update($validate);
-            return redirect()->route("admin.users.index")->with("success", "Usuario editado correctamente");
+        if ($request->filled('password')) {
+            $validated['password'] = Hash::make($validated['password']);
         } else {
-            return redirect()->route("admin.users.index")->with("error", "Usuario no encontrado");
+            unset($validated['password']);
+        }
+
+        DB::beginTransaction();
+        try {
+            $user->update($validated);
+            DB::commit();
+            return redirect()->route("admin.users.index")->with("success", "Usuario actualizado correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route("admin.users.index")->with("error", "Error al actualizar el usuario. Error: " . $e->getMessage());
         }
     }
 
@@ -97,8 +112,8 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user) {
 
-            if ($user->profile_photo_path) {
-                ImageHelper::deleteImage($user->profile_photo_path);
+            if ($user->profile) {
+                ImageHelper::deleteImage($user->profile);
             }
             $user->delete();
             return redirect()->route("admin.users.index")->with("success", "Usuario eliminado correctamente");
