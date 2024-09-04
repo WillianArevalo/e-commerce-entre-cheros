@@ -1,26 +1,26 @@
-.dark .active-link-admin {
+.active-link-admin {
     background: linear-gradient(
         to right,
-        rgba(8, 51, 223, 0.1),
-        rgba(0, 3, 15, 0.1)
+        var(--primary-color-rgba),
+        rgba(0, 3, 15, 0)
     );
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: rgb(55, 55, 238) !important;
+
+    color: var(--primary-color-600) !important;
     & svg {
-        color: rgb(55, 79, 238);
+        color: var(--primary-color-600) !important;
     }
 }
 
-.dark .active-link-admin:hover {
+.active-link-admin:hover {
     background: linear-gradient(
         to right,
-        rgba(8, 51, 223, 0.2),
-        rgba(0, 3, 15, 0.1)
+        var(--primary-color-rgba-20),
+        rgba(0, 3, 15, 0)
     ) !important;
 
     &:hover {
         svg {
-            color: rgb(35, 38, 214);
+            color: var(--primary-color-500) !important;
         }
     }
 }
