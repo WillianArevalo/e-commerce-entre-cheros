@@ -16,18 +16,14 @@
                         </svg>
                     </button>
                     <a href="{{ route('admin.index') }}" class="flex md:me-24">
-                        <img src="{{ asset('images/imagen6.png') }}" class="me-3 h-8 w-8 rounded-full object-cover"
-                            alt="Entre Cheros logo" />
+                        <x-icon icon="logo" class="me-2 h-8 w-8 text-primary-700 dark:text-primary-700" />
                         <span
-                            class="self-center whitespace-nowrap font-league-spartan text-xl font-semibold text-secondary dark:text-primary sm:text-2xl">
+                            class="self-center whitespace-nowrap font-league-spartan text-xl font-bold text-primary-600 sm:text-2xl">
                             Entre Cheros
                         </span>
                     </a>
                 </div>
-                <div class="flex w-auto items-center justify-end pe-4 md:w-full xl:justify-between">
-                    <div class="hidden text-zinc-500 xl:block">
-                        @include('layouts.__partials.admin.breadcrumb')
-                    </div>
+                <div class="flex w-auto items-center justify-end pe-4 md:w-full">
                     <div class="flex items-center gap-2">
                         <div class="flex items-center justify-center">
                             <button id="search-toggle"
@@ -43,7 +39,7 @@
                                 <x-icon icon="notification" class="h-6 w-6 text-zinc-700 dark:text-white" />
                                 <span class="sr-only">Notifications</span>
                                 <div
-                                    class="absolute -end-1 -top-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-red-500 text-xs font-bold text-white dark:border-black">
+                                    class="absolute -end-1 -top-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-primary-600 text-xs font-bold text-white dark:border-black">
                                     3
                                 </div>
                             </button>
@@ -88,18 +84,23 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="flex items-center justify-center">
-                            <button id="toggleTheme"
-                                class="relative flex h-10 w-10 items-center justify-center rounded-lg p-3 hover:bg-zinc-100 focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
-                                <span
-                                    class="sun-icon pointer-events-none absolute opacity-0 dark:pointer-events-auto dark:opacity-100">
-                                    <x-icon icon="sun" class="h-6 w-6 text-zinc-700 dark:text-white" />
-                                </span>
-                                <span
-                                    class="moon-icon pointer-events-auto absolute opacity-100 dark:pointer-events-none dark:opacity-0">
-                                    <x-icon icon="moon" class="icon-moon h-6 w-6 text-zinc-700 dark:text-white" />
-                                </span>
-                            </button>
+                        <div class="ms-2 rounded-full border border-zinc-400 px-2 py-1 dark:border-zinc-800">
+                            <form action="{{ Route('admin.settings.change-theme') }}" method="POST"
+                                class="flex items-center justify-center gap-2">
+                                @csrf
+                                <button type="button" data-theme="light"
+                                    class="theme-toggle theme-light flex items-center rounded-full p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                    <x-icon icon="sun" class="h-4 w-4 text-zinc-700 dark:text-white" />
+                                </button>
+                                <button type="button" data-theme="system"
+                                    class="theme-toggle theme-system flex items-center rounded-full p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                    <x-icon icon="device-desktop" class="h-4 w-4 text-zinc-700 dark:text-white" />
+                                </button>
+                                <button type="button" data-theme="dark"
+                                    class="theme-toggle theme-dark flex items-center rounded-full p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                    <x-icon icon="moon" class="h-4 w-4 text-zinc-700 dark:text-white" />
+                                </button>
+                            </form>
                         </div>
                         <div class="flex items-center justify-center">
                             <button
@@ -109,20 +110,26 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="relative ms-2">
-                            <button type="button"
-                                class="flex rounded-full bg-zinc-800 text-sm focus:ring-4 focus:ring-zinc-300 dark:focus:ring-zinc-800"
-                                id="profile-admin">
-                                <img class="h-8 w-8 rounded-full object-cover"
-                                    src="{{ Storage::url(auth()->user()->profile) }}" alt="user photo">
-                            </button>
-                            <div class="absolute right-0 top-10 z-50 hidden list-none divide-y divide-zinc-100 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-900 dark:bg-zinc-950"
+                        <div class="relative">
+                            <div class="flex items-center gap-2">
+                                <button type="button" class="flex items-center gap-2" id="profile-admin">
+                                    <div id="container-profile-photo">
+                                        <img class="h-8 w-8 rounded-full object-cover"
+                                            src="{{ Storage::url(auth()->user()->profile) }}" alt="user photo">
+                                    </div>
+                                    <span class="flex flex-col text-sm font-bold text-primary-500">
+                                        {{ auth()->user()->name }}
+                                    </span>
+                                    <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
+                                </button>
+                            </div>
+                            <div class="absolute right-0 top-10 z-50 hidden list-none divide-y divide-zinc-400 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-800 dark:bg-zinc-950"
                                 id="dropdown-user">
                                 <div class="px-4 py-3" role="none">
                                     <p class="text-sm text-zinc-900 dark:text-white" role="none">
                                         {{ auth()->user()->username }}
                                     </p>
-                                    <p class="truncate text-sm font-bold text-blue-500" role="none">
+                                    <p class="truncate text-sm font-bold text-primary-500" role="none">
                                         {{ auth()->user()->email }}
                                     </p>
                                 </div>
@@ -136,19 +143,18 @@
                                         </a>
                                     </li>
                                     <li class="mb-2">
-                                        <a href="{{ route('admin.settings') }}"
+                                        <a href="{{ route('admin.settings.index') }}"
                                             class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
                                             <x-icon icon="settings" class="h-4 w-4 text-current" />
                                             Configuración
                                         </a>
                                     </li>
-                                    <li class="border-t border-zinc-100 pt-2 dark:border-zinc-800">
+                                    <li class="border-t border-zinc-400 pt-2 dark:border-zinc-800">
                                         <form action="{{ route('logout') }}" method="POST" class="w-full">
                                             @csrf
                                             <button type="submit"
-                                                class="flex w-full items-center gap-2 rounded-lg px-4 py-1.5 text-start text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
-                                                role="menuitem">
+                                                class="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-400 px-2.5 py-1.5 text-sm text-zinc-600 transition-colors duration-300 hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                                 <x-icon icon="logout" class="h-4 w-4 text-current" />
                                                 Cerrar sesión
                                             </button>
@@ -261,7 +267,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#"
+                <a href="{{ Route('admin.orders.index') }}"
                     class="group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
                     <x-icon icon="orders"
                         class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
