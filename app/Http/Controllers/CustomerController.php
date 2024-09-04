@@ -39,7 +39,7 @@ class CustomerController extends Controller
         $validated["role"] = "customer";
 
         if ($request->hasFile("profile")) {
-            $validated["profile_photo_path"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
+            $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
         }
 
         $user = User::create($validated);
@@ -66,9 +66,9 @@ class CustomerController extends Controller
         $customer = Customer::with("user")->find($id);
         if ($customer) {
 
-            if ($customer->user->profile_photo_path && $request->hasFile("profile")) {
-                ImageHelper::deleteImage($customer->user->profile_photo_path);
-                $validated["profile_photo_path"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
+            if ($customer->user->profile && $request->hasFile("profile")) {
+                ImageHelper::deleteImage($customer->user->profile);
+                $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
             }
 
             if ($request->input("password")) {
