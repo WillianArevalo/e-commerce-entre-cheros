@@ -31,7 +31,8 @@ return new class extends Migration
             $table->timestamp('last_activity')->nullable();
             $table->timestamp('last_password_change')->nullable();
             $table->string("last_ip_address")->nullable();
-            $table->string("theme")->default("default");
+            $table->string("theme")->default("light");
+            $table->string("color")->default("blue");
             $table->rememberToken();
             $table->timestamps();
         });
