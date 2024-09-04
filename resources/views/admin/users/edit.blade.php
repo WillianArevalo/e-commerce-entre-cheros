@@ -50,7 +50,8 @@
                                             'admin' => 'Administrador',
                                             'user' => 'Usuario',
                                         ]"
-                                            selected="{{ old('role', $user->role) }}" />
+                                            selected="{{ old('role', $user->role) }}"
+                                            value="{{ old('role', $user->role) }}" />
                                     </div>
                                 </div>
                                 <div class="flex gap-4">
@@ -84,7 +85,7 @@
                                             value="{{ old('locale', $user->locale) }}" />
                                     </div>
                                     <div class="flex-1">
-                                        <x-select label="Moneda" name="currency" id="currency" :options="$currencies->pluck('code', 'id')->toArray()"
+                                        <x-select label="Moneda" name="currency" id="currency" :options="$currencies->pluck('code', 'code')->toArray()"
                                             selected="{{ old('currency', $user->currency) }}"
                                             value="{{ old('currency', $user->currency) }}" />
                                     </div>

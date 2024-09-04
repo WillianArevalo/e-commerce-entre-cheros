@@ -131,6 +131,8 @@
                                                     <x-button type="button" data-form="formDeleteUser" onlyIcon="true"
                                                         icon="delete" typeButton="danger" class="buttonDelete" />
                                                 </form>
+                                                <x-button type="a" href="{{ Route('admin.users.show', $user->id) }}"
+                                                    icon="view" typeButton="secondary" onlyIcon="true" />
                                             </div>
                                         </x-td>
                                     </x-tr>
