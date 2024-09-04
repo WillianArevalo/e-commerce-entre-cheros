@@ -53,16 +53,15 @@ class AuthController extends Controller
     {
         $credentials = $request->only("email", "password");
         $user = User::where("email", $credentials["email"])->first();
-
         if (!$user) {
             return redirect()->back()->with("error", "Usuario no encontrado")->withInput(request()->only("email"));
         }
-
         if (!Hash::check($credentials["password"], $user->password)) {
             return redirect()->back()->with("error", "Contraseña incorrecta")->withInput(request()->only("email"));
         }
-
         Auth::login($user);
+        $user->update(["last_login" => now()]);
+        $user->update(["last_ip_address" => $request->ip()]);
         return redirect()->route("admin.index");
     }
 
