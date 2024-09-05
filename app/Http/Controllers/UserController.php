@@ -59,7 +59,12 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        if ($user) {
+            return view("admin.users.show", compact("user"));
+        } else {
+            return redirect()->route("admin.users.index")->with("error", "Usuario no encontrado");
+        }
     }
 
     /**
@@ -110,15 +115,19 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        if ($user) {
-
+        DB::beginTransaction();
+        try {
+            if (!$user) {
+                return redirect()->route("admin.users.index")->with("error", "Usuario no encontrado");
+            }
             if ($user->profile) {
                 ImageHelper::deleteImage($user->profile);
             }
             $user->delete();
+            DB::commit();
             return redirect()->route("admin.users.index")->with("success", "Usuario eliminado correctamente");
-        } else {
-            return redirect()->route("admin.users.index")->with("error", "Error al eliminar el usuario");
+        } catch (\Exception $e) {
+            return redirect()->route("admin.users.index")->with("error", "Error al eliminar el usuario. Error: " . $e->getMessage());
         }
     }
 }
