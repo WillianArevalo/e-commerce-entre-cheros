@@ -300,9 +300,15 @@
                         class="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-700 p-3 text-sm font-medium text-blue-100 dark:bg-blue-900 dark:text-blue-300">3</span>
                 </a>
             </li>
-            <li>
+            <li
+                class="{{ \App\Helpers\RouteHelper::isActive([
+                    'admin.users.index',
+                    'admin.users.create',
+                    'admin.users.edit',
+                    'admin.users.show',
+                ]) }} rounded-lg dark:text-white">
                 <a href="{{ route('admin.users.index') }}"
-                    class="group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current">
                     <x-icon icon="user"
                         class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap">Usuarios</span>
