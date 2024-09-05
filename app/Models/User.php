@@ -9,6 +9,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    protected $dates = [
+        'last_login',
+        'last_activity',
+        'last_password_change',
+    ];
+
     use HasFactory, Notifiable;
 
     public function customer()
@@ -63,6 +70,9 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'last_login' => 'datetime',
+            'last_activity' => 'datetime',
+            'last_password_change' => 'datetime',
             'password' => 'hashed',
         ];
     }
