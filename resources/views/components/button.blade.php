@@ -15,7 +15,7 @@
     $sizes = [
         'small' => [
             'padding' => 'px-2.5 py-1.5',
-            'text' => 'text-sm',
+            'text' => 'text-xs',
             'icon' => 'h-4 w-4',
         ],
         'normal' => [
