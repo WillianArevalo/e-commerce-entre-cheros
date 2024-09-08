@@ -14,12 +14,12 @@
     // Definir las clases según el tamaño
     $sizes = [
         'small' => [
-            'padding' => 'px-2.5 py-1.5',
+            'padding' => 'px-4 py-2',
             'text' => 'text-xs',
             'icon' => 'h-4 w-4',
         ],
         'normal' => [
-            'padding' => 'px-4 py-3',
+            'padding' => 'px-5 py-3',
             'text' => 'text-sm',
             'icon' => 'h-5 w-5',
         ],
