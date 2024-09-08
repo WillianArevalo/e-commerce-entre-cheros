@@ -22,28 +22,14 @@ class CustomerRequest extends FormRequest
     public function rules(): array
     {
 
-        $isUpdate = $this->isMethod("put") || $this->isMethod("patch");
-
         $rules = [
             "phone" => "required|string",
             "birthdate" => "required|date",
             "gender" => "required|string",
-            "email" => "required|email",
-            "username" => "required|string",
-            "name" => "required|string",
-            "last_name" => "required|string",
-            "profile" => "required|image",
+            "status" => "nullable|boolean",
+            "area_code" => "nullable|string",
+            "user_id" => "required|integer|exists:users,id",
         ];
-
-        if ($isUpdate) {
-            $rules["profile"] = "nullable|image";
-            $rules["password"] = "nullable|string";
-            $rules["password_confirmation"] = "nullable|string";
-        } else {
-            $rules["password"] = "required|string";
-            $rules["password_confirmation"] = "required|string";
-            $rules["profile"] = "required|image";
-        }
 
         return $rules;
     }
