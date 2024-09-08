@@ -247,3 +247,7 @@ input[type="color"]::-webkit-color-swatch {
 .theme-selected {
     @apply bg-zinc-200 dark:bg-zinc-900;
 }
+
+.options-open {
+    @apply dark:ring-zinc-950 dark:border-zinc-500 ring-4 ring-zinc-200 border-zinc-600;
+}
