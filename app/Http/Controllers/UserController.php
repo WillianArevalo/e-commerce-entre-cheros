@@ -86,7 +86,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($request->hasFile("profile")) {
-            if ($user->profile && $user->profile !== "images/default-profile.png") {
+            if ($user->profile && $user->profile !== "images/default-profile.webp") {
                 ImageHelper::deleteImage($user->profile);
             }
             $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
