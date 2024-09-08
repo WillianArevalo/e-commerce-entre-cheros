@@ -24,6 +24,7 @@ class Customer extends Model
         "birthdate",
         "gender",
         "status",
-        "area_code"
+        "area_code",
+        "user_id",
     ];
 }

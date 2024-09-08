@@ -18,7 +18,10 @@ class Address extends Model
         "state",
         "country",
         "zip_code",
-        "type"
+        "type",
+        "slug",
+        "default",
+        "active"
     ];
 
     public function customer()
