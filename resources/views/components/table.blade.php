@@ -1,10 +1,12 @@
-<div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
+@props(['thead', 'tbody'])
+
+<div class="overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
     <table {{ $attributes->merge(['class' => 'w-full text-left text-sm text-zinc-500 dark:text-zinc-400']) }}>
         <thead
             class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300">
             {{ $thead ?? '' }}
         </thead>
-        <tbody>
+        <tbody {{ $tbody->attributes->merge([]) }}>
             {{ $tbody ?? '' }}
         </tbody>
     </table>
