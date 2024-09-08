@@ -5,14 +5,28 @@ namespace App\Http\Controllers;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\UserRequest;
+use App\Models\Address;
+use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\User;
+use App\Utils\Addresses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    protected $client;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
+
     public function index()
     {
         $customers = Customer::with("user")->get();
@@ -21,66 +35,130 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view("admin.customers.create");
+        $currencies = Currency::all();
+        $countries = $this->getAllCountries();
+        $addresses = Addresses::getAddresses();
+        $users = User::doesntHave("customer")->get();
+        return view("admin.customers.create", [
+            "currencies" => $currencies,
+            "countries" => $countries,
+            "addresses" => $addresses,
+            "users" => $users
+        ]);
     }
 
-    private function getCountries()
+    public function getAllCountries()
     {
-        $response = Http::get("https://restcountries.com/v3.1/all");
-        if ($response->successful()) {
-            return $response->json();
-        }
-        return response()->json(["error" => "Unable to fetch countries"], 500);
+        $reponse = $this->client->request('GET', 'https://restcountries.com/v3.1/all');
+        $countries = json_decode($reponse->getBody()->getContents(), true);
+        $countryNames = array_map(function ($country) {
+            return $country['name']['common'];
+        }, $countries);
+        $countryArray = array_combine($countryNames, $countryNames);
+        ksort($countryArray);
+        return $countryArray;
     }
 
-    public function store(CustomerRequest $request)
+    public function store(CustomerRequest $request, AddressRequest $addressRequest)
     {
-        $validated = $request->validated();
-        $validated["role"] = "customer";
+        $customerRequest = $request->validated();
+        $addressRequest = $addressRequest->validated();
 
-        if ($request->hasFile("profile")) {
-            $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
-        }
+        DB::beginTransaction();
+        try {
+            // Crear cliente asociado al usuario
+            $customer = Customer::create($customerRequest);
 
-        $user = User::create($validated);
-        if ($user) {
-            $customer =  $user->customer()->create($validated);
-            if ($customer) {
-                return redirect()->route("admin.customers.index")->with("success", "Cliente creado correctamente");
-            }
+            // Crear dirección asociada al cliente
+            Address::create([
+                'customer_id' => $customer->id,
+                'address_line_1' => $addressRequest['address_line_1'],
+                'address_line_2' => $addressRequest['address_line_2'],
+                'city' => $addressRequest['city'],
+                'state' => $addressRequest['state'],
+                'country' => $addressRequest['country'],
+                'zip_code' => $addressRequest['zip_code'],
+                'type' => $addressRequest['type'],
+                'default' => $addressRequest['default'] ?? 0,
+                'active' => $addressRequest['active'] ?? 0,
+            ]);
+
+            // Solo aquí se confirma la transacción completa
+            DB::commit();
+
+            return redirect()->route('admin.customers.index')->with('success', 'Cliente creado correctamente');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Error al crear el cliente: ' . $e->getMessage());
         }
-        return back()->with("error", "Error al crear el cliente");
     }
+
+
 
     public function edit(string $id)
     {
-        $customer = Customer::with("user")->find($id);
+        $customer = Customer::with("user")->with("address")->find($id);
+        $address = Address::where('customer_id', $id)->get();
+        $currencies = Currency::all();
+        $countries = $this->getAllCountries();
+        $addresses = Addresses::getAddresses();
+        $users = User::doesntHave("customer")->get();
         if ($customer) {
-            return view("admin.customers.edit", compact("customer"));
+            return view(
+                "admin.customers.edit",
+                [
+                    "customer" => $customer,
+                    "currencies" => $currencies,
+                    "countries" => $countries,
+                    "addresses" => $addresses,
+                    "users" => $users,
+                    "address" => $address
+                ]
+            );
         }
     }
 
     public function update(CustomerRequest $request, string $id)
     {
-        $validated = $request->validated();
+        $customerRequest = $request->validated();
         $customer = Customer::with("user")->find($id);
         if ($customer) {
+            DB::beginTransaction();
+            try {
 
-            if ($customer->user->profile && $request->hasFile("profile")) {
-                ImageHelper::deleteImage($customer->user->profile);
-                $validated["profile"] = ImageHelper::saveImage($request->file("profile"), "images/profile-photos");
+                if ($request->input("name") != $customer->user->name || $request->input("last_name") != $customer->user->last_name) {
+                    $user = User::find($customer->user_id);
+                    $user->update([
+                        "name" => $request->input("name"),
+                        "last_name" => $request->input("last_name"),
+                    ]);
+                }
+
+                $customer->update($customerRequest);
+                DB::commit();
+                return redirect()->route("admin.customers.index")->with("success", "Cliente actualizado correctamente");
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return back()->with("error", "Error al actualizar el cliente: " . $e->getMessage());
             }
-
-            if ($request->input("password")) {
-                $validated["password"] = Hash::make($request->input("password"));
-            } else {
-                $validated["password"] = $customer->user->password;
-            }
-
-            $customer->user->update($validated);
-            $customer->update($validated);
-            return redirect()->route("admin.customers.index")->with("success", "Cliente actualizado correctamente");
         }
-        return back()->with("error", "Error al actualizar el cliente");
+        return back()->with("error", "Cliente no encontrado");
+    }
+
+    public function destroy(string $id)
+    {
+        $customer = Customer::with("user")->find($id);
+        DB::beginTransaction();
+        try {
+            if ($customer) {
+                $customer->user->delete();
+                DB::commit();
+                return redirect()->route("admin.customers.index")->with("success", "Cliente eliminado correctamente");
+            }
+            return back()->with("error", "Cliente no encontrado");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with("error", "Error al eliminar el cliente: " . $e->getMessage());
+        }
     }
 }
