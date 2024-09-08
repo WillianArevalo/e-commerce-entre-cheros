@@ -28,7 +28,10 @@ class AddressRequest extends FormRequest
             "state"  => "nullable|string",
             "country" => "required|string",
             "zip_code" => "required|string",
-            "type" => "required|string"
+            "type" => "required|string",
+            "customer_id" => "nullable|integer",
+            "default" => "nullable|boolean",
+            "active" => "nullable|boolean"
         ];
     }
 }
