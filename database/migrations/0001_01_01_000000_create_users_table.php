@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string("profile")->default("images/default-profile.png");
+            $table->string("profile")->default("images/default-profile.webp");
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean("status")->default(Status::ACTIVE);
