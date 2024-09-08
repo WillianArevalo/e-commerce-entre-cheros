@@ -7,40 +7,27 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
+use Illuminate\Support\Facades\Blade;
 
 // Admin
 Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail) {
-    $trail->push('Admin', route('admin.index'));
+    $icon = Blade::render("<x-icon icon='dashboard-square' class='w-4 h-4' />");
+    $trail->push('Administrador', route('admin.index'));
+    $trail->push($icon . 'Dashboard', route('admin.index'));
 });
 
 // Admin => Categories
 Breadcrumbs::for('admin.categories.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Categorías', route('admin.categories.index'));
-});
-
-// Admin > Categories > Create
-Breadcrumbs::for('admin.categories.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('admin.categories.index');
-    $trail->push('Crear nueva', route('admin.categories.create'));
-});
-
-// Admin > Categories > Edit > {category}
-Breadcrumbs::for('admin.categories.edit', function (BreadcrumbTrail $trail, $category) {
-    $trail->parent('admin.categories.index');
-    $trail->push('Editar', route('admin.categories.edit', $category));
-});
-
-// Admin > SubCategories > Edit > {subcategory}
-Breadcrumbs::for('admin.subcategories.edit', function (BreadcrumbTrail $trail, $subcategory) {
-    $trail->parent('admin.categories.index');
-    $trail->push('Editar', route('admin.subcategories.edit', $subcategory));
+    $icon = Blade::render("<x-icon icon='bookmark' class='w-4 h-4' />");
+    $trail->push($icon . 'Categorías', route('admin.categories.index'));
 });
 
 // Admin > Brands
 Breadcrumbs::for('admin.brands.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Marcas', route('admin.brands.index'));
+    $icon = Blade::render("<x-icon icon='brand-medium' class='w-4 h-4' />");
+    $trail->push($icon . 'Marcas', route('admin.brands.index'));
 });
 
 // Admin > Products
@@ -52,19 +39,19 @@ Breadcrumbs::for('admin.products.index', function (BreadcrumbTrail $trail) {
 // Admin > Products > Create
 Breadcrumbs::for('admin.products.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.products.index');
-    $trail->push('Crear nuevo', route('admin.products.create'));
+    $trail->push('Nuevo producto', route('admin.products.create'));
 });
 
 //Admin > Products > Detalles > {product}
 Breadcrumbs::for('admin.products.show', function (BreadcrumbTrail $trail, $product) {
     $trail->parent('admin.products.index');
-    $trail->push('Detalles', route('admin.products.show', $product));
+    $trail->push('Detalles del producto', route('admin.products.show', $product));
 });
 
 // Admin > Products > Edit > {product}
 Breadcrumbs::for('admin.products.edit', function (BreadcrumbTrail $trail, $product) {
     $trail->parent('admin.products.index');
-    $trail->push('Editar', route('admin.products.edit', $product));
+    $trail->push('Editar producto', route('admin.products.edit', $product));
 });
 
 //Admin > Flash Offers
@@ -99,32 +86,44 @@ Breadcrumbs::for('admin.popups.create', function (BreadcrumbTrail $trail) {
 
 //Admin > Users
 Breadcrumbs::for('admin.users.index', function (BreadcrumbTrail $trail) {
+    $icon = Blade::render("<x-icon icon='user' class='w-4 h-4' />");
     $trail->parent('admin.index');
-    $trail->push('Usuarios', route('admin.users.index'));
+    $trail->push($icon . 'Usuarios', route('admin.users.index'));
 });
 
 //Admin > Users > Create
 Breadcrumbs::for('admin.users.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.users.index');
-    $trail->push('Crear nuevo', route('admin.users.create'));
+    $icon = Blade::render("<x-icon icon='user-plus' class='w-4 h-4' />");
+    $trail->push($icon . 'Nuevo usuario', route('admin.users.create'));
 });
 
 //Admin > Users > Edit > {user}
 Breadcrumbs::for('admin.users.edit', function (BreadcrumbTrail $trail, $user) {
     $trail->parent('admin.users.index');
-    $trail->push('Editar', route('admin.users.edit', $user));
+    $icon = Blade::render("<x-icon icon='user-edit' class='w-4 h-4' />");
+    $trail->push($icon . 'Editar usuario', route('admin.users.edit', $user));
+});
+
+//Admin > Users > Show > {user}
+Breadcrumbs::for('admin.users.show', function (BreadcrumbTrail $trail, $user) {
+    $trail->parent('admin.users.index');
+    $icon = Blade::render("<x-icon icon='user-search' class='w-4 h-4' />");
+    $trail->push($icon . 'Detalles del usuario', route('admin.users.show', $user));
 });
 
 //Admin > Customers
 Breadcrumbs::for('admin.customers.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Clientes', route('admin.customers.index'));
+    $icon = Blade::render("<x-icon icon='user-group' class='w-4 h-4' />");
+    $trail->push($icon . 'Clientes', route('admin.customers.index'));
 });
 
 //Admin > Customers > Create
 Breadcrumbs::for('admin.customers.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.customers.index');
-    $trail->push('Crear nuevo', route('admin.customers.create'));
+    $icon = Blade::render("<x-icon icon='user-plus' class='w-4 h-4' />");
+    $trail->push($icon . 'Nuevo cliente', route('admin.customers.create'));
 });
 
 //Admin > Customers > Edit > {customer}
@@ -215,7 +214,7 @@ Breadcrumbs::for("admin.sales-strategies.payment-methods.index", function (Bread
     $trail->push("Métodos de pago", route("admin.sales-strategies.payment-methods.index"));
 });
 
-//Admin > Sales Stratgies > Currencies
+//Admin > Sales Strategies > Currencies
 Breadcrumbs::for("admin.sales-strategies.currencies.index", function (BreadcrumbTrail $trail) {
     $trail->parent("admin.sales-strategies.index");
     $trail->push("Monedas", route("admin.sales-strategies.currencies.index"));

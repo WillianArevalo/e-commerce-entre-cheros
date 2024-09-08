@@ -57,7 +57,6 @@ Route::middleware("auth")->group(function () {
         Route::get("/change-password", [AccountController::class, "changePassword"])->name("change-password");
         Route::post("/edit-password", [AccountController::class, "editPassword"])->name("edit-password");
         Route::get('/addresses/{slug}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
-        Route::resource("/addresses", AddressController::class);
     });
 });
 
@@ -129,6 +128,7 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
     Route::resource("/popups", PopupController::class);
     Route::resource("/users", UserController::class);
     Route::resource("/customers", CustomerController::class);
+    Route::resource("/addresses", AddressController::class);
 
     Route::resource("/policies", PoliciesController::class);
     Route::post("/policies/download/{id}", [PoliciesController::class, "download"])->name("policies.download");
