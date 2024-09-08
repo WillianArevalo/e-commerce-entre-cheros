@@ -1,4 +1,4 @@
-export { openDrawer };
+export { openDrawer, closeDrawer, showOverlay, hideOverlay };
 
 function openDrawer(drawerId) {
     $(drawerId).removeClass("translate-x-full");
