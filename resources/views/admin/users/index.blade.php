@@ -63,83 +63,89 @@
                             </div>
                         </div>
                     </div>
-                    <x-table>
-                        <x-slot name="thead">
-                            <x-tr>
-                                <x-th class="w-10">
-                                    <input id="default-checkbox" type="checkbox" value=""
-                                        class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
-                                </x-th>
-                                <x-th>Foto</x-th>
-                                <x-th>Nombre</x-th>
-                                <x-th>Apellido</x-th>
-                                <x-th>Usuario</x-th>
-                                <x-th>Correo</x-th>
-                                <x-th>Rol</x-th>
-                                <x-th>Estado</x-th>
-                                <x-th :last="true">Acciones</x-th>
-                            </x-tr>
-                        </x-slot>
-                        <x-slot name="tbody">
-                            @if ($users->isEmpty())
-                                <x-tr section="body">
-                                    <x-td colspan="8">
-                                        No se encontraron registros
-                                    </x-td>
+                    <div class="mx-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th class="w-10">
+                                        <input id="default-checkbox" type="checkbox" value=""
+                                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                    </x-th>
+                                    <x-th>Foto</x-th>
+                                    <x-th>Nombre</x-th>
+                                    <x-th>Apellido</x-th>
+                                    <x-th>Usuario</x-th>
+                                    <x-th>Correo</x-th>
+                                    <x-th>Rol</x-th>
+                                    <x-th>Estado</x-th>
+                                    <x-th :last="true">Acciones</x-th>
                                 </x-tr>
-                            @else
-                                @foreach ($users as $user)
+                            </x-slot>
+                            <x-slot name="tbody">
+                                @if ($users->isEmpty())
                                     <x-tr section="body">
-                                        <x-td>
-                                            <input id="default-checkbox" type="checkbox" value="{{ $user->id }}"
-                                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
-                                        </x-td>
-                                        <x-td>
-                                            <img src="{{ Storage::url($user->profile) }}"
-                                                alt="Foto de perfil del usuario {{ $user->username }}"
-                                                class="h-10 w-10 rounded-full object-cover">
-                                        </x-td>
-                                        <x-td>
-                                            <span>{{ $user->name }}</span>
-                                        </x-td>
-                                        <x-td>
-                                            <span>{{ $user->last_name }}</span>
-                                        </x-td>
-                                        <x-td>
-                                            <span>{{ $user->username }}</span>
-                                        </x-td>
-                                        <x-td>
-                                            <span>{{ $user->email }}</span>
-                                        </x-td>
-                                        <x-td>
-                                            <span
-                                                class="me-2 rounded-full bg-primary-100 px-3 py-1 font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
-                                                {{ Str::ucfirst($user->role) }}
-                                            </span>
-                                        </x-td>
-                                        <x-td>
-                                            <x-badge-status status="{{ $user->status }}" />
-                                        </x-td>
-                                        <x-td>
-                                            <div class="flex gap-2">
-                                                <x-button type="a" href="{{ route('admin.users.edit', $user->id) }}"
-                                                    onlyIcon="true" icon="edit" typeButton="success" />
-                                                <form action="{{ route('admin.users.destroy', $user->id) }}"
-                                                    id="formDeleteUser" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-button type="button" data-form="formDeleteUser" onlyIcon="true"
-                                                        icon="delete" typeButton="danger" class="buttonDelete" />
-                                                </form>
-                                                <x-button type="a" href="{{ Route('admin.users.show', $user->id) }}"
-                                                    icon="view" typeButton="secondary" onlyIcon="true" />
-                                            </div>
+                                        <x-td colspan="8">
+                                            No se encontraron registros
                                         </x-td>
                                     </x-tr>
-                                @endforeach
-                            @endif
-                        </x-slot>
-                    </x-table>
+                                @else
+                                    @foreach ($users as $user)
+                                        <x-tr section="body">
+                                            <x-td>
+                                                <input id="default-checkbox" type="checkbox" value="{{ $user->id }}"
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                            </x-td>
+                                            <x-td>
+                                                <img src="{{ Storage::url($user->profile) }}"
+                                                    alt="Foto de perfil del usuario {{ $user->username }}"
+                                                    class="h-10 w-10 rounded-full object-cover">
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $user->name }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $user->last_name }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $user->username }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $user->email }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span
+                                                    class="me-2 rounded-full bg-primary-100 px-3 py-1 font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                                                    {{ Str::ucfirst($user->role) }}
+                                                </span>
+                                            </x-td>
+                                            <x-td>
+                                                <x-badge-status status="{{ $user->status }}" />
+                                            </x-td>
+                                            <x-td>
+                                                <div class="flex gap-2">
+                                                    <x-button type="a"
+                                                        href="{{ route('admin.users.edit', $user->id) }}" onlyIcon="true"
+                                                        icon="edit" typeButton="success" />
+                                                    <form action="{{ route('admin.users.destroy', $user->id) }}"
+                                                        id="formDeleteUser-{{ $user->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-button type="button"
+                                                            data-form="formDeleteUser-{{ $user->id }}" onlyIcon="true"
+                                                            data-modal-target="deleteModal" data-modal-toggle="deleteModal"
+                                                            icon="delete" typeButton="danger" class="buttonDelete" />
+                                                    </form>
+                                                    <x-button type="a"
+                                                        href="{{ Route('admin.users.show', $user->id) }}" icon="view"
+                                                        typeButton="secondary" onlyIcon="true" />
+                                                </div>
+                                            </x-td>
+                                        </x-tr>
+                                    @endforeach
+                                @endif
+                            </x-slot>
+                        </x-table>
+                    </div>
                 </div>
             </div>
         </div>

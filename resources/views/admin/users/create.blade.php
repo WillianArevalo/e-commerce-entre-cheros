@@ -115,7 +115,7 @@
                     </div>
                     <div class="flex items-center justify-center gap-4 border-t border-zinc-400 py-4 dark:border-zinc-800">
                         <x-button type="submit" text="Guardar" icon="save" typeButton="primary" />
-                        <x-button type="a" href="{{ Route('admin.users.index') }}" text="Cancelar" icon="cancel"
+                        <x-button type="a" href="{{ url()->previous() }}" text="Cancelar" icon="cancel"
                             typeButton="secondary" />
                     </div>
                 </form>
