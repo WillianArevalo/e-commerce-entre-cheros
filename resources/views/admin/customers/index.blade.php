@@ -1,16 +1,14 @@
 @extends('layouts.admin-template')
-
-@section('title', 'Categorías')
-
+@section('title', 'Clientes')
 @section('content')
-    <div class="mt-4 rounded-lg">
+    <div>
         @include('layouts.__partials.admin.header-page', [
             'title' => 'Clientes',
             'description' => 'Administrar clientes registrados.',
         ])
-        <div class="bg-zinc-50 p-4 dark:bg-black">
+        <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-800 dark:bg-black sm:rounded-lg">
+                <div class="relative bg-white dark:bg-black">
                     <div class="border-b border-zinc-400 p-4 dark:border-zinc-800">
                         <h2 class="text-base font-semibold text-zinc-700 dark:text-zinc-200">
                             Lista de clientes registrados
@@ -66,73 +64,90 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                            <thead class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
-                                <tr>
-                                    <th scope="col" class="px-4 py-3">Foto</th>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Apellido</th>
-                                    <th scope="col" class="px-4 py-3">Correo</th>
-                                    <th scope="col" class="px-4 py-3">Telefono</th>
-                                    <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($customers as $customer)
-                                    <tr>
-                                        <td class="px-4 py-3">
-                                            <img src="{{ Storage::url($customer->user->profile) }}"
-                                                alt="Foto de perfil del usuario {{ $customer->user->username }}"
-                                                class="h-10 w-10 rounded-full object-cover">
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span>{{ $customer->user->name }}</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span>{{ $customer->user->last_name }}</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span>{{ $customer->user->email }}</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span>{{ $customer->phone }}</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span
-                                                class="me-2 rounded-full bg-blue-100 px-3 py-1 font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                                                {{ Str::ucfirst($customer->status) }}
+                    <div class="mx-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th class="w-10">
+                                        <input id="default-checkbox" type="checkbox" value=""
+                                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                    </x-th>
+                                    <x-th>Foto</x-th>
+                                    <x-th>Nombre</x-th>
+                                    <x-th>Apellido</x-th>
+                                    <x-th>Correo</x-th>
+                                    <x-th>Telefono</x-th>
+                                    <x-th>Estado</x-th>
+                                    <x-th :last="true">Acciones</x-th>
+                                </x-tr>
+                            </x-slot>
+                            <x-slot name="tbody">
+                                @if ($customers->isEmpty())
+                                    <x-tr section="body" class="text-center">
+                                        <x-td colspan="8" class="py-8">
+                                            <span class="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                                                No se ha agregado ningún cliente
                                             </span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <div class="flex gap-2">
-                                                <x-button type="a"
-                                                    href="{{ route('admin.customers.edit', $customer->id) }}"
-                                                    icon="edit" typeButton="success" onlyIcon="true" />
-                                                <form action="{{ route('admin.customers.destroy', $customer->id) }}"
-                                                    id="formDeleteCustomer-{{ $customer->id }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-button type="button"
-                                                        data-form="formDeleteCustomer-{{ $customer->id }}" icon="delete"
-                                                        typeButton="danger" class="buttonDelete" onlyIcon="true"
-                                                        data-modal-target="deleteModal" data-modal-toggle="deleteModal" />
-                                                </form>
-                                                <x-button type="a"
-                                                    href="{{ route('admin.customers.edit', $customer->id) }}"
-                                                    icon="view" typeButton="secondary" onlyIcon="true" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </x-td>
+                                    </x-tr>
+                                @else
+                                    @foreach ($customers as $customer)
+                                        <x-tr section="body">
+                                            <x-td>
+                                                <input id="default-checkbox" type="checkbox" value="{{ $customer->id }}"
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                            </x-td>
+                                            <x-td>
+                                                <img src="{{ Storage::url($customer->user->profile) }}"
+                                                    alt="Foto de perfil del usuario {{ $customer->user->username }}"
+                                                    class="h-10 w-10 rounded-full object-cover">
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $customer->user->name }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $customer->user->last_name }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $customer->user->email }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <span>{{ $customer->phone }}</span>
+                                            </x-td>
+                                            <x-td>
+                                                <x-badge-status :status="$customer->status" />
+                                            </x-td>
+                                            <x-td>
+                                                <div class="flex gap-2">
+                                                    <x-button type="a"
+                                                        href="{{ route('admin.customers.edit', $customer->id) }}"
+                                                        icon="edit" typeButton="secondary" onlyIcon="true" />
+                                                    <form action="{{ route('admin.customers.destroy', $customer->id) }}"
+                                                        id="formDeleteCustomer-{{ $customer->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-button type="button"
+                                                            data-form="formDeleteCustomer-{{ $customer->id }}"
+                                                            icon="delete" typeButton="secondary" class="buttonDelete"
+                                                            onlyIcon="true" data-modal-target="deleteModal"
+                                                            data-modal-toggle="deleteModal" />
+                                                    </form>
+                                                    <x-button type="a"
+                                                        href="{{ route('admin.customers.edit', $customer->id) }}"
+                                                        icon="view" typeButton="secondary" onlyIcon="true" />
+                                                </div>
+                                            </x-td>
+                                        </x-tr>
+                                    @endforeach
+                                @endif
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
             </div>
         </div>
         <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar el cliente?"
-            message="No podrás recuperar este registro" action="" />
+            message="Se eliminará el usuario y toda la información relacionada a el cliente. No podrás recuperar este registro"
+            action="" />
     </div>
 @endsection
