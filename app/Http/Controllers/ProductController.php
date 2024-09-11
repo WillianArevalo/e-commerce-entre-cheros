@@ -14,27 +14,31 @@ use App\Models\ProductImage;
 use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-
     public function index()
     {
-        $products = Product::with("categories", "subcategories", "brands", "taxes", "labels", "images")->paginate(10);
+        $products = Product::with(['categories', 'subcategories', 'brands', 'taxes', 'labels', 'images'])->paginate(10);
         $count = Product::count();
-        return view("admin.products.index", ["products" => $products, "count" => $count]);
+        return view('admin.products.index', compact('products', 'count'));
     }
 
     public function details(string $slug)
     {
         $user = Auth::user();
-        $products = Product::with("categories", "subcategories", "brands", "taxes", "labels", "images")->paginate(10);
-        $product = Product::with("categories", "brands", "taxes", "labels", "images")->where("slug", $slug)->firstOrFail();
-        $product->images->prepend((object)["image" => $product->main_image]);
-        Favorites::get($user, $products);
-        return view("products.view", ["product" => $product, "products" => $products]);
+        $product = Product::with(['categories', 'brands', 'taxes', 'labels', 'images'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $product->images->prepend((object)['image' => $product->main_image]);
+        $relatedProducts = Product::with(['categories', 'subcategories', 'brands', 'taxes', 'labels', 'images'])->paginate(10);
+        Favorites::get($user, $relatedProducts);
+
+        return view('products.view', compact('product', 'relatedProducts'));
     }
 
     public function create()
@@ -44,213 +48,192 @@ class ProductController extends Controller
         $taxes = Tax::all();
         $labels = Label::all();
 
-        return view("admin.products.create", ["categories" => $categories, "brands" => $brands, "taxes" => $taxes, "labels" => $labels,]);
+        return view('admin.products.create', compact('categories', 'brands', 'taxes', 'labels'));
     }
 
     public function store(ProductRequest $request)
     {
-        $validated = $request->validated();
-        $dimensions = $request->input("long") . "x" . $request->input("width") . "x" . $request->input("height") . " " . "cm";
-        $validated["dimensions"] = $dimensions;
+        DB::beginTransaction();
+        try {
+            $validated = $request->validated();
+            $validated['dimensions'] = $this->formatDimensions($request);
+            $validated['offer_active'] = $request->has('offer_active') ? 1 : 0;
+            $validated['is_active'] = $request->has('is_active') ? 1 : 0;
 
-        $folderName = $request->input("name") . "-" . time();
-        $folder = Str::slug($folderName);
-        $subFolder = "images/products/" . $folder;
+            $product = Product::create($validated);
+            $folderPath = $this->getProductImageFolder($request->input('name'));
+            $this->handleImages($request, $product, $folderPath);
+            $this->syncTaxesAndLabels($request, $product);
 
-        $product = Product::create($validated);
-
-        if ($request->hasFile("main_image")) {
-            $validated["main_image"] = ImageHelper::saveImage($request->file("main_image"), $subFolder);
-            $product->update(['main_image' => $validated["main_image"]]);
-        }
-
-        if ($product) {
-            if ($request->input("tax_id")) {
-                $taxIds = $request->input("tax_id");
-                $product->taxes()->attach($taxIds);
-            }
-
-            if ($request->input("labels")) {
-                $labelIds = [];
-                foreach ($request->input("labels") as $label) {
-                    $label = Label::firstOrCreate(["name" => $label]);
-                    $labelIds[] = $label->id;
-                }
-                $product->labels()->attach($labelIds);
-            }
-
-            if ($request->hasFile("gallery_image")) {
-                $galleryImages = $request->file("gallery_image");
-                $imagesPaths = [];
-
-                foreach ($galleryImages as $galleryImage) {
-                    $filePath = ImageHelper::saveImage($galleryImage, $subFolder);
-                    $imagesPaths[] = ["image" => $filePath, "product_id" => $product->id];
-                }
-                $product->images()->createMany($imagesPaths);
-            }
-
-            return redirect()->route("admin.products.index")->with("success", "Producto creado correctamente");
+            DB::commit();
+            return redirect()->route('admin.products.index')->with('success', 'Producto creado correctamente');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.products.index')->with('error', 'Error al crear el producto. Error:' . $e->getMessage());
         }
     }
 
     public function show(string $id)
     {
-        $product = Product::with("categories", "brands", "taxes", "labels")->find($id);
-        $productDimensions = $product->dimensions;
-        if (strpos($productDimensions, ' ') !== false) {
-            $dimensionsParts = explode(' ', $productDimensions);
-            if (count($dimensionsParts) === 2) {
-                $dimensions = $dimensionsParts[0];
-                $unit = $dimensionsParts[1];
-                $dimensionValues = explode('x', $dimensions);
-                if (count($dimensionValues) === 3) {
-                    $length = $dimensionValues[0];
-                    $width = $dimensionValues[1];
-                    $height = $dimensionValues[2];
-                }
-            }
-        }
-        $product["length"] = $length;
-        $product["width"] = $width;
-        $product["height"] = $height;
-        $nextProduct = Product::where("id", ">", $id)->first();
-        $previousProduct = Product::where("id", "<", $id)->first();
-        return view("admin.products.show", ["product" => $product, "nextProduct" => $nextProduct, "previousProduct" => $previousProduct]);
+        $product = Product::with(['categories', 'brands', 'taxes', 'labels'])->findOrFail($id);
+        $this->extractDimensions($product);
+
+        $nextProduct = Product::where('id', '>', $id)->first();
+        $previousProduct = Product::where('id', '<', $id)->first();
+
+        return view('admin.products.show', compact('product', 'nextProduct', 'previousProduct'));
     }
 
     public function destroy(string $id)
     {
-        $product = Product::find($id);
-        $images = ProductImage::where("product_id", $id)->get();
-        if (!$product) {
-            return redirect()->route("admin.products.index")->with("error", "No se pudo encontrar el producto");
-        }
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+            $images = ProductImage::where('product_id', $id)->get();
 
-        if ($product->main_image) {
-            ImageHelper::deleteImage($product->main_image);
-        }
+            if ($product->main_image) {
+                ImageHelper::deleteImage($product->main_image);
+            }
 
-        if ($images) {
-            $directory = dirname($images->first()->image);
             foreach ($images as $image) {
                 ImageHelper::deleteImage($image->image);
             }
-            ImageHelper::deleteDirectory($directory);
-        }
 
-        $product->delete();
-        return redirect()->route("admin.products.index")->with("success", "Producto eliminado correctamente");
+            ImageHelper::deleteDirectory($this->getProductImageFolder($product->name));
+
+            $product->delete();
+            DB::commit();
+            return redirect()->route('admin.products.index')->with('success', 'Producto eliminado correctamente');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.products.index')->with('error', 'Error al eliminar el producto');
+        }
     }
 
     public function edit(string $id)
     {
-        $product = Product::with("categories", "brands", "taxes", "labels", "images")->find($id);
+        $product = Product::with(['categories', 'brands', 'taxes', 'labels', 'images'])->findOrFail($id);
         $categories = Categorie::all();
         $brands = Brand::all();
         $taxes = Tax::all();
         $labels = Label::all();
 
-        $productDimensions = $product->dimensions;
-        if (strpos($productDimensions, ' ') !== false) {
-            $dimensionsParts = explode(' ', $productDimensions);
-            if (count($dimensionsParts) === 2) {
-                $dimensions = $dimensionsParts[0];
-                $unit = $dimensionsParts[1];
-                $dimensionValues = explode('x', $dimensions);
-                if (count($dimensionValues) === 3) {
-                    $length = $dimensionValues[0];
-                    $width = $dimensionValues[1];
-                    $height = $dimensionValues[2];
-                }
-            }
-        }
-        $product["length"] = $length;
-        $product["width"] = $width;
-        $product["height"] = $height;
+        $this->extractDimensions($product);
 
-        return view("admin.products.edit", ["product" => $product, "categories" => $categories, "brands" => $brands, "taxes" => $taxes, "labels" => $labels]);
+        return view('admin.products.edit', compact('product', 'categories', 'brands', 'taxes', 'labels'));
     }
 
     public function update(ProductEditRequest $request, string $id)
     {
-        $product = Product::find($id);
-        $validated = $request->validated();
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+            $validated = $request->validated();
+            $validated['dimensions'] = $this->formatDimensions($request);
+            $validated['offer_active'] = $request->has('offer_active') ? 1 : 0;
+            $validated['is_active'] = $request->has('is_active') ? 1 : 0;
 
-        $dimensions = $request->input("long") . "x" . $request->input("width") . "x" . $request->input("height") . " " . "cm";
-        $validated["dimensions"] = $dimensions;
+            $currentFolderPath = $this->getProductImageFolder($product);
+            $newFolderPath = $this->getProductImageFolder($request->input('name'), $product->created_at);
 
-        $currentFolderName = Str::slug($product->name . "-" . strtotime($product->created_at));
-        $newFolderName = Str::slug($request->input("name") . "-" . strtotime($product->created_at));
-        $currentFolderPath = "images/products/" . $currentFolderName;
-        $newFolderPath = "images/products/" . $newFolderName;
-
-        if ($currentFolderName !== $newFolderName) {
-
-            Storage::makeDirectory("public/" . $newFolderPath);
-
-            if (!$request->hasFile("main_image")) {
-                $mainImagePath = $product->main_image;
-                $mainImageFileName = basename($mainImagePath);
-                Storage::move("public/" . $mainImagePath, "public/" . $newFolderPath . "/" . $mainImageFileName);
-                $validated["main_image"] = $newFolderPath . "/" . $mainImageFileName;
+            if ($currentFolderPath !== $newFolderPath) {
+                $this->moveProductImages($request, $product, $currentFolderPath, $newFolderPath);
             }
 
-            if (!$request->hasFile("gallery_image")) {
-                $productImages = $product->images;
-                foreach ($productImages as $productImage) {
-                    $imagePath = $productImage->image;
-                    $imageFileName = basename($imagePath);
-                    Storage::move("public/" . $imagePath, "public/" . $newFolderPath . "/" . $imageFileName);
-                    $productImage->update(['image' => $newFolderPath . "/" . $imageFileName]);
-                }
-            }
+            $product->update($validated);
+            $this->syncTaxesAndLabels($request, $product);
+            $this->handleImages($request, $product, $newFolderPath);
+
+            DB::commit();
+            return redirect()->route('admin.products.index')->with('success', 'Producto actualizado correctamente');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.products.index')->with('error', 'Error al actualizar el producto');
+        }
+    }
+
+    // Helper methods
+    private function formatDimensions(Request $request)
+    {
+        return $request->input('long') . 'x' . $request->input('width') . 'x' . $request->input('height') . ' cm';
+    }
+
+    private function extractDimensions(Product $product)
+    {
+        if (strpos($product->dimensions, ' ') !== false) {
+            list($dimensions, $unit) = explode(' ', $product->dimensions);
+            list($product['length'], $product['width'], $product['height']) = explode('x', $dimensions);
+        }
+    }
+
+    private function syncTaxesAndLabels(Request $request, Product $product)
+    {
+        if ($request->has('tax_id')) {
+            $product->taxes()->sync($request->input('tax_id'));
         }
 
-        if ($request->hasFile("main_image")) {
+        if ($request->has('labels')) {
+            $labelIds = array_map(function ($labelName) {
+                return Label::firstOrCreate(['name' => $labelName])->id;
+            }, $request->input('labels'));
+            $product->labels()->sync($labelIds);
+        }
+    }
+
+    private function handleImages(Request $request, Product $product, $folderPath = null)
+    {
+        $folderPath = $folderPath ?? $this->getProductImageFolder($product);
+
+        if ($request->hasFile('main_image')) {
             if ($product->main_image) {
                 ImageHelper::deleteImage($product->main_image);
             }
-            $validated["main_image"] = ImageHelper::saveImage($request->file("main_image"), $newFolderPath);
+            $product->update(['main_image' => ImageHelper::saveImage($request->file('main_image'), $folderPath)]);
         }
 
-        if ($product->update($validated)) {
-            if ($request->input("tax_id")) {
-                $taxIds = $request->input("tax_id");
-                $product->taxes()->sync($taxIds);
-            }
-
-            if ($request->input("labels")) {
-                $labelIds = [];
-                foreach ($request->input("labels") as $label) {
-                    $label = Label::firstOrCreate(["name" => $label]);
-                    $labelIds[] = $label->id;
-                }
-                $product->labels()->sync($labelIds);
-            }
-
-            if ($request->hasFile("gallery_image")) {
-                $existingImages = $product->images;
-                foreach ($existingImages as $image) {
-                    ImageHelper::deleteImage($image->image);
-                    $image->delete();
-                }
-
-                $galleryImages = $request->file("gallery_image");
-                $imagesPaths = [];
-
-                foreach ($galleryImages as $galleryImage) {
-                    $filePath = ImageHelper::saveImage($galleryImage, $newFolderPath);
-                    $imagesPaths[] = ["image" => $filePath, "product_id" => $product->id];
-                }
-                $product->images()->createMany($imagesPaths);
-            }
-
-            if ($currentFolderName !== $newFolderName) {
-                Storage::deleteDirectory("public/" . $currentFolderPath);
-            }
-
-            return redirect()->route("admin.products.index")->with("success", "Producto actualizado correctamente");
+        if ($request->hasFile('gallery_image')) {
+            $this->saveGalleryImages($request->file('gallery_image'), $product, $folderPath);
         }
+    }
+
+    private function saveGalleryImages($galleryImages, Product $product, $folderPath)
+    {
+        $existingImages = $product->images;
+        foreach ($existingImages as $image) {
+            ImageHelper::deleteImage($image->image);
+            $image->delete();
+        }
+
+        $imagesPaths = array_map(function ($image) use ($folderPath, $product) {
+            return ['image' => ImageHelper::saveImage($image, $folderPath), 'product_id' => $product->id];
+        }, $galleryImages);
+
+        $product->images()->createMany($imagesPaths);
+    }
+
+    private function moveProductImages(Request $request, Product $product, $currentFolderPath, $newFolderPath)
+    {
+        Storage::makeDirectory("public/$newFolderPath");
+
+        if (!$request->hasFile('main_image')) {
+            $mainImageFileName = basename($product->main_image);
+            Storage::move("public/$currentFolderPath/$mainImageFileName", "public/$newFolderPath/$mainImageFileName");
+            $product->update(['main_image' => "$newFolderPath/$mainImageFileName"]);
+        }
+
+        if (!$request->hasFile('gallery_image')) {
+            foreach ($product->images as $image) {
+                $imageFileName = basename($image->image);
+                Storage::move("public/$image->image", "public/$newFolderPath/$imageFileName");
+                $image->update(['image' => "$newFolderPath/$imageFileName"]);
+            }
+        }
+
+        Storage::deleteDirectory("public/$currentFolderPath");
+    }
+
+    private function getProductImageFolder($name, $createdAt = null)
+    {
+        return 'images/products/' . Str::slug($name);
     }
 }
