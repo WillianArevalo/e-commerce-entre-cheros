@@ -7,6 +7,7 @@ use App\Http\Requests\CategorieRequest;
 use App\Models\Categorie;
 use App\Models\SubCategorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CategorieController extends Controller
@@ -19,13 +20,11 @@ class CategorieController extends Controller
         return view("categories.index");
     }
 
-
     public function index(Categorie $categorie = null)
     {
         $categories = Categorie::with("subcategories")->paginate(10);
-        return view("admin.categories.index", ["categories" => $categories, "categorie" => $categorie]);
+        return view("admin.categories.index", compact("categories", "categorie"));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -40,43 +39,52 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
             "name" => "required|string",
             "image" => "required|image",
         ];
 
-        if ($request->input("typeCategorie") === "secundaria") {
+        $isSubcategory = $request->input("typeCategorie") === "secundaria";
+        if ($isSubcategory) {
             $rules["categorie_id"] = "required|exists:categories,id";
-            $validated = $request->validate($rules);
-            $categorie = Categorie::find($request->input("categorie_id"));
-            if (!$categorie) {
-                return redirect()->back()->with("error", "No se pudo encontrar la categoría padre");
-            }
-
-            if ($request->hasFile("image")) {
-                $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/subcategories");
-            }
-
-            $subCategorie = SubCategorie::create($validated);
-            if (!$subCategorie) {
-                return redirect()->back()->with("error", "No se pudo crear la subcategoría");
-            }
-            return redirect()->route("admin.categories.index")->with("success", "Subcategoría creada correctamente");
         }
 
         $validated = $request->validate($rules);
 
-        if ($request->hasFile("image")) {
-            $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
-        }
-        $categorie = Categorie::create($validated);
-        if (!$categorie) {
-            return redirect()->back()->with("error", "No se pudo crear la categoría");
-        }
-        return redirect()->route("admin.categories.index")->with("success", "Categoría creada correctamente");
-    }
+        try {
+            DB::beginTransaction();
 
+            if ($request->hasFile("image")) {
+                $imagePath = $isSubcategory ? 'images/subcategories' : 'images/categories';
+                $validated["image"] = ImageHelper::saveImage($request->file("image"), $imagePath);
+            }
+
+            if ($isSubcategory) {
+                $categorie = Categorie::find($request->input("categorie_id"));
+                if (!$categorie) {
+                    return redirect()->back()->with("error", "No se pudo encontrar la categoría padre");
+                }
+
+                $subCategorie = SubCategorie::create($validated);
+                if (!$subCategorie) {
+                    throw new \Exception("No se pudo crear la subcategoría");
+                }
+                DB::commit();
+                return redirect()->route("admin.categories.index")->with("success", "Subcategoría creada correctamente");
+            }
+
+            $categorie = Categorie::create($validated);
+            if (!$categorie) {
+                throw new \Exception("No se pudo crear la categoría");
+            }
+
+            DB::commit();
+            return redirect()->route("admin.categories.index")->with("success", "Categoría creada correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with("error", $e->getMessage());
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -107,16 +115,26 @@ class CategorieController extends Controller
         }
 
         $validated = $request->validate($rules);
-        if ($request->hasFile("image")) {
-            if ($categorie->image) {
-                ImageHelper::deleteImage($categorie->image);
+
+        try {
+            DB::beginTransaction();
+
+            if ($request->hasFile("image")) {
+                if ($categorie->image) {
+                    ImageHelper::deleteImage($categorie->image);
+                }
+                $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
+            } else {
+                $validated["image"] = $categorie->image;
             }
-            $validated["image"] = ImageHelper::saveImage($request->file("image"), "images/categories");
-        } else {
-            $validated["image"] = $categorie->image;
+
+            $categorie->update($validated);
+            DB::commit();
+            return redirect()->route("admin.categories.index")->with("success", "Categoría actualizada correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with("error", $e->getMessage());
         }
-        $categorie->update($validated);
-        return redirect()->route("admin.categories.index")->with("success", "Categoría actualizada correctamente");
     }
 
     /**
@@ -129,26 +147,31 @@ class CategorieController extends Controller
             return redirect()->back()->with("error", "No se pudo eliminar la categoría");
         }
 
-        if ($categorie->image) {
-            ImageHelper::deleteImage($categorie->image);
+        try {
+            DB::beginTransaction();
+
+            if ($categorie->image) {
+                ImageHelper::deleteImage($categorie->image);
+            }
+
+            $categorie->delete();
+            DB::commit();
+            return redirect()->route("admin.categories.index")->with("success", "Categoría eliminada correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with("error", $e->getMessage());
         }
-
-        $categorie->delete();
-        return redirect()->route("admin.categories.index")->with("success", "Categoría eliminada correctamente");
     }
-
 
     public function search(Request $request)
     {
         $query = Categorie::query();
-        if ($request->input("inputSearch")) {
-            $name = $request->input("inputSearch");
-            $query->where("name", "like", "%$name%");
+
+        if ($search = $request->input("inputSearch")) {
+            $query->where("name", "like", "%$search%");
         }
 
-        if ($request->input("filter")) {
-            $filters = $request->input("filter");
-
+        if ($filters = $request->input("filter")) {
             if (!(in_array('has_subcategories', $filters) && in_array('no_subcategories', $filters))) {
                 if (in_array('no_subcategories', $filters)) {
                     $query->doesntHave('subcategories');
@@ -161,6 +184,7 @@ class CategorieController extends Controller
         }
 
         $categories = $query->get();
+
         if ($request->ajax()) {
             return view("layouts.__partials.ajax.admin.categorie.row-categorie", compact("categories"))->render();
         }
