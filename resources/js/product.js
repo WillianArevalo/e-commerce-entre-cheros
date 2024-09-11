@@ -177,7 +177,7 @@ $(document).ready(function () {
         $previewLabelsContainer.html("");
         labels.forEach((labelValue, index) => {
             const previewDiv = $("<div></div>").addClass(
-                "bg-white text-zinc-600 border-zinc-400 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-800 rounded-full flex items-center justify-between gap-2",
+                "bg-white text-zinc-600 border-zinc-400 text-sm font-medium me-2 px-4 py-2 border dark:text-white dark:bg-black dark:border-zinc-800 rounded-lg flex items-center justify-between gap-2",
             );
             const labelElement = $("<span></span>").text(labelValue);
             const removeBtn = $("<button></button>")

@@ -81,4 +81,16 @@ $(document).ready(function () {
     $(".close-cookies").on("click", function () {
         $(".cookies").addClass("hidden");
     });
+
+    $(document).on(
+        "change",
+        "input[name='is_active'], input[name='active'], input[name='is_default'], input[name='auto_update'], input[name='default'], input[name='status'], input[name='offer_active']",
+        function () {
+            if ($(this).is(":checked")) {
+                $(this).val(1);
+            } else {
+                $(this).val(0);
+            }
+        },
+    );
 });

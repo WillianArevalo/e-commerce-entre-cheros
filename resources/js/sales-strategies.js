@@ -111,18 +111,6 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on(
-        "change",
-        "input[name='is_active'], input[name='active'], input[name='is_default'], input[name='auto_update'], input[name='default'], input[name='status']",
-        function () {
-            if ($(this).is(":checked")) {
-                $(this).val(1);
-            } else {
-                $(this).val(0);
-            }
-        },
-    );
-
     toggleElementVisibility($("." + $("#predefined_rule").val()), true);
 
     function handleEditMethod(buttonClass, drawerId, formId, checkboxId) {
