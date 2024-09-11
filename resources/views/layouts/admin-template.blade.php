@@ -159,7 +159,7 @@
     @include('layouts.__partials.toast-container', ['class' => 'right-5 top-5'])
     <main class="h-full bg-zinc-50 dark:bg-black">
         @include('layouts.__partials.admin.toast')
-        <div id="overlay" class="fixed inset-0 z-30 hidden bg-zinc-900/80 dark:bg-zinc-900/90"></div>
+        <div id="overlay" class="fixed inset-0 z-30 hidden bg-zinc-950 bg-opacity-50"></div>
         <div class="mt-16 xl:ml-72">
             <div>
                 @include('layouts.__partials.admin.breadcrumb')
