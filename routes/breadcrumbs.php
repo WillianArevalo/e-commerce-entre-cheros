@@ -33,25 +33,29 @@ Breadcrumbs::for('admin.brands.index', function (BreadcrumbTrail $trail) {
 // Admin > Products
 Breadcrumbs::for('admin.products.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Productos', route('admin.products.index'));
+    $icon = Blade::render("<x-icon icon='cube' class='w-4 h-4' />");
+    $trail->push($icon . 'Productos', route('admin.products.index'));
 });
 
 // Admin > Products > Create
 Breadcrumbs::for('admin.products.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.products.index');
-    $trail->push('Nuevo producto', route('admin.products.create'));
+    $icon = Blade::render("<x-icon icon='cube-plus' class='w-4 h-4' />");
+    $trail->push($icon . 'Nuevo producto', route('admin.products.create'));
 });
 
 //Admin > Products > Detalles > {product}
 Breadcrumbs::for('admin.products.show', function (BreadcrumbTrail $trail, $product) {
     $trail->parent('admin.products.index');
-    $trail->push('Detalles del producto', route('admin.products.show', $product));
+    $icon = Blade::render("<x-icon icon='list-details' class='w-4 h-4' />");
+    $trail->push($icon . 'Detalles del producto', route('admin.products.show', $product));
 });
 
 // Admin > Products > Edit > {product}
 Breadcrumbs::for('admin.products.edit', function (BreadcrumbTrail $trail, $product) {
     $trail->parent('admin.products.index');
-    $trail->push('Editar producto', route('admin.products.edit', $product));
+    $icon = Blade::render("<x-icon icon='edit' class='w-4 h-4' />");
+    $trail->push($icon . 'Editar producto', route('admin.products.edit', $product));
 });
 
 //Admin > Flash Offers
@@ -142,7 +146,8 @@ Breadcrumbs::for('admin.general-settings.index', function (BreadcrumbTrail $trai
 //Admin > Settings
 Breadcrumbs::for('admin.settings.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Configuración', route('admin.settings.index'));
+    $icon = Blade::render("<x-icon icon='settings' class='w-4 h-4' />");
+    $trail->push($icon . 'Configuración', route('admin.settings.index'));
 });
 
 //Admin > Policies
