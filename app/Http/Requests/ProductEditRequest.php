@@ -41,6 +41,7 @@ class ProductEditRequest extends FormRequest
             "long" => "required|string",
             "width" => "required|string",
             "height" => "required|string",
+            "is_active" => "nullable|boolean",
         ];
     }
 }
