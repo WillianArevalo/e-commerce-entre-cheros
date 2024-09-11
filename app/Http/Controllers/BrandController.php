@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
+use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -17,28 +21,26 @@ class BrandController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        $rules = [
-            "name" => "required|string",
-            "description" => "nullable|string"
-        ];
-        $request->validate($rules);
-        $brand = Brand::create($request->all());
-        if (!$brand) {
+        DB::beginTransaction();
+        try {
+            $brand = Brand::create($request->all());
+            if ($request->hasFile("logo")) {
+                $brand->logo = ImageHelper::saveImage($request->file("logo"), "brands/logos");
+            }
+            if ($request->hasFile("banner")) {
+                $brand->banner = ImageHelper::saveImage($request->file("banner"), "brands/banners");
+            }
+            $brand->save();
+            DB::commit();
+            return back()->with("success", "Marca creada correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
             return back()->with("error", "No se pudo crear la marca");
         }
-        return back()->with("success", "Marca creada correctamente");
     }
 
     /**
@@ -58,24 +60,38 @@ class BrandController extends Controller
         if (!$brand) {
             return back()->with("error", "No se pudo encontrar la marca");
         }
+        $brand["logo"] = Storage::url($brand->logo);
+        $brand["banner"] = Storage::url($brand->banner);
         return response()->json(["brand" => $brand]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BrandRequest $request, string $id)
     {
-        $rules = [
-            "name" => "required|string",
-        ];
-        $request->validate($rules);
-        $brand = Brand::find($id);
-        if (!$brand) {
-            return back()->with("error", "No se pudo encontrar la marca");
+        DB::beginTransaction();
+        try {
+            $brand = Brand::find($id);
+            if (!$brand) {
+                return back()->with("error", "No se pudo encontrar la marca");
+            }
+            $brand->update($request->all());
+            if ($request->hasFile("logo")) {
+                ImageHelper::deleteImage($brand->logo);
+                $brand->logo = ImageHelper::saveImage($request->file("logo"), "brands/logos");
+            }
+            if ($request->hasFile("banner")) {
+                ImageHelper::deleteImage($brand->banner);
+                $brand->banner = ImageHelper::saveImage($request->file("banner"), "brands/banners");
+            }
+            $brand->save();
+            DB::commit();
+            return back()->with("success", "Marca actualizada correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with("error", "No se pudo actualizar la marca");
         }
-        $brand->update($request->all());
-        return back()->with("success", "Marca actualizada correctamente");
     }
 
     /**
