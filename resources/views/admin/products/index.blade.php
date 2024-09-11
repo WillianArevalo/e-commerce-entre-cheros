@@ -95,69 +95,74 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
-                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                            <thead
-                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                                <tr>
-                                    <th scope="col" class="w-10 border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                    <div class="mx-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th>
                                         <input id="default-checkbox" type="checkbox" value=""
                                             class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Producto
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Imagen
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Precio
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         SKU
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Inventario
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Categoría
-                                    </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    </x-th>
+                                    <x-th>
+                                        Estado
+                                    </x-th>
+                                    <x-th>
                                         Acciones
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableProduct">
+                                    </x-th>
+                                </x-tr>
+                            </x-slot>
+                            <x-slot name="tbody" id="tableProduct">
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)
-                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                            <td class="px-4 py-3">
+                                        <x-tr section="body">
+                                            <x-td>
                                                 <input id="default-checkbox" type="checkbox" value=""
                                                     class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <span>{{ $product->name }}</span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <img src="{{ Storage::url($product->main_image) }}"
                                                     alt="{{ $product->name }}" class="h-16 w-16 rounded-lg object-cover">
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <span>${{ $product->price }}</span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <span>{{ $product->sku }}</span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <span>{{ $product->stock }} en stock</span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <span
                                                     class="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium uppercase text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                                                     {{ $product->categories->name }}
                                                 </span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
+                                                <x-badge-status :status="$product->is_active" />
+                                            </x-td>
+                                            <x-td>
                                                 <div class="flex items-center space-x-2">
                                                     <x-button type="a" icon="edit" typeButton="success"
                                                         href="{{ route('admin.products.edit', $product->id) }}"
@@ -190,8 +195,8 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </x-td>
+                                        </x-tr>
                                     @endforeach
                                 @else
                                     <tr>
@@ -200,8 +205,8 @@
                                         </td>
                                     </tr>
                                 @endif
-                            </tbody>
-                        </table>
+                            </x-slot>
+                        </x-table>
                         {{ $products->links('vendor.pagination.pagination-custom') }}
                     </div>
                 </div>

@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
+                    <div class="mx-4 mb-4 rounded-lg border border-zinc-400 dark:border-zinc-800">
                         <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
                             <thead
                                 class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">

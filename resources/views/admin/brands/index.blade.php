@@ -8,7 +8,7 @@
         ])
         <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
-                <div class="relative overflow-hidden bg-white dark:bg-black">
+                <div class="bg-e relative overflow-hidden bg-white dark:bg-black">
                     <div
                         class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
                         <div class="w-full md:w-1/2">
@@ -24,44 +24,44 @@
                                 typeButton="primary" text="Agregar marca" icon="plus" />
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
-                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                            <thead
-                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                                <tr>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                        #
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                        Nombre
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                        Descripción
-                                    </th>
-                                    <th scope="col" class="px-4 py-3">
-                                        Acciones
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableBrand">
+                    <div class="mx-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th>#</x-th>
+                                    <x-th>Logo</x-th>
+                                    <x-th>Banner</x-th>
+                                    <x-th>Nombre</x-th>
+                                    <x-th>Descripción</x-th>
+                                    <x-th last="true">Acciones</x-th>
+                                </x-tr>
+                            </x-slot>
+                            <x-slot name="tbody" id="tableBrand">
                                 @if ($brands->count() == 0)
-                                    <tr>
-                                        <td colspan="4"
-                                            class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
+                                    <x-tr>
+                                        <x-td>
                                             No hay marcas
-                                        </td>
-                                    </tr>
+                                        </x-td>
+                                    </x-tr>
                                 @else
                                     @foreach ($brands as $brand)
-                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                            <th scope="row"
-                                                class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
+                                        <x-tr section="body">
+                                            <x-td>
                                                 {{ $loop->iteration }}
-                                            </th>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
+                                                <img src="{{ Storage::url($brand->logo) }}" alt="Logo {{ $brand->name }}"
+                                                    class="h-14 w-14 rounded-lg object-cover">
+                                            </x-td>
+                                            <x-td>
+                                                <img src="{{ Storage::url($brand->banner) }}"
+                                                    alt="Banner {{ $brand->name }}"
+                                                    class="h-14 w-36 rounded-lg object-cover">
+                                            </x-td>
+                                            <x-td>
                                                 <span>{{ $brand->name }}</span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <span>
                                                     @if ($brand->description != null)
                                                         {{ $brand->description }}
@@ -69,15 +69,14 @@
                                                         <span class="text-zinc-500">No hay descripción</span>
                                                     @endif
                                                 </span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <div class="flex gap-2">
                                                     <x-button type="button"
                                                         data-href="{{ route('admin.brands.edit', $brand->id) }}"
                                                         data-action="{{ route('admin.brands.update', $brand->id) }}"
                                                         typeButton="success" icon="edit" onlyIcon="true"
                                                         class="editBrand" />
-
                                                     <form action="{{ route('admin.brands.destroy', $brand->id) }}"
                                                         id="formDeleteBrand-{{ $brand->id }}" method="POST">
                                                         @csrf
@@ -88,13 +87,16 @@
                                                             typeButton="danger" data-modal-target="deleteModal"
                                                             data-modal-toggle="deleteModal" />
                                                     </form>
+                                                    <x-button type="a" typeButton="secondary"
+                                                        href="{{ $brand->website }}" target="_blank" icon="link"
+                                                        onlyIcon="true" />
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </x-td>
+                                        </x-tr>
                                     @endforeach
                                 @endif
-                            </tbody>
-                        </table>
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
             </div>
@@ -103,6 +105,7 @@
         <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar la marca?"
             message="No podrás recuperar este registro" action="" />
 
+        <!-- Drawer new brand -->
         <div id="drawer-new-brand"
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
@@ -120,15 +123,56 @@
                 <span class="sr-only">Close menu</span>
             </button>
             <div>
-                <form action="{{ route('admin.brands.store') }}" id="formAddBrand" method="POST">
+                <form action="{{ route('admin.brands.store') }}" id="formAddBrand" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="flex flex-col gap-4">
                         <div>
-                            <x-input type="text" name="name" id="name" label="Nombre"
+                            <x-input type="text" name="name" label="Nombre"
                                 placeholder="Ingresa el nombre de la marca" value="{{ old('name') }}" required />
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <x-input type="textarea" name="description" id="description" label="Descripción"
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <p class="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-300">Logo</p>
+                                <label for="logo"
+                                    class="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-950">
+                                    <div class="flex flex-col items-center justify-center p-8 text-center">
+                                        <x-icon icon="cloud-plus" class="h-10 w-10 text-zinc-400 dark:text-zinc-500" />
+                                        <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                            PNG, JPG, WEBP
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('images/photo.jpg') }}" alt="Preview logo" id="preview-logo"
+                                        class="m-4 hidden h-28 w-28 rounded-lg">
+                                    <input type="file" class="hidden" name="logo" id="logo"
+                                        accept=".png, .jpg, .webp">
+                                </label>
+                            </div>
+                            <div class="flex-[2]">
+                                <p class="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-300">
+                                    Banner
+                                </p>
+                                <label for="banner"
+                                    class="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 p-4 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-950">
+                                    <div class="flex flex-col items-center justify-center p-4 text-center">
+                                        <x-icon icon="cloud-plus" class="h-10 w-10 text-zinc-400 dark:text-zinc-500" />
+                                        <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                            PNG, JPG, WEBP
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('images/photo.jpg') }}" alt="Preview banner" id="preview-banner"
+                                        class="m-4 hidden h-28 w-full rounded-lg object-cover">
+                                    <input type="file" class="hidden" name="banner" id="banner"
+                                        accept=".png, .jpg, .webp">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <x-input type="text" name="website" label="Website" icon="link"
+                                placeholder="Ingresa la URL del sitio web" value="{{ old('website') }}" required />
+                        </div>
+                        <div>
+                            <x-input type="textarea" name="description" label="Descripción"
                                 placeholder="Ingresa la descripción de la marca" value="{{ old('description') }}" />
                         </div>
                     </div>
@@ -140,7 +184,9 @@
                 </form>
             </div>
         </div>
+        <!-- End Drawer new brand -->
 
+        <!-- Drawer edit brand -->
         <div id="drawer-edit-brand"
             class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
@@ -158,16 +204,56 @@
                 <span class="sr-only">Close menu</span>
             </button>
             <div>
-                <form action="" id="formEditBrand" method="POST">
+                <form action="" id="formEditBrand" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="flex flex-col gap-4">
                         <div>
-                            <x-input type="text" name="name" id="edit_name_brand" label="Nombre"
+                            <x-input type="text" name="name" label="Nombre" id="name"
                                 placeholder="Ingresa el nombre de la marca" value="{{ old('name') }}" required />
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <x-input type="textarea" name="description" id="edit_description_brand" label="Descripción"
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <p class="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-300">Logo</p>
+                                <label for="logo-edit"
+                                    class="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-950">
+                                    <div class="hidden flex-col items-center justify-center p-8 text-center">
+                                        <x-icon icon="cloud-plus" class="h-10 w-10 text-zinc-400 dark:text-zinc-500" />
+                                        <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                            PNG, JPG, WEBP
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('images/photo.jpg') }}" alt="Preview logo" id="preview-logo-edit"
+                                        class="m-4 h-28 w-28 rounded-lg object-cover">
+                                    <input type="file" class="hidden" name="logo" id="logo-edit"
+                                        accept=".png, .jpg, .webp">
+                                </label>
+                            </div>
+                            <div class="flex-[2]">
+                                <p class="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-300">
+                                    Banner
+                                </p>
+                                <label for="banner-edit"
+                                    class="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-400 p-4 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-950">
+                                    <div class="hidden flex-col items-center justify-center p-4 text-center">
+                                        <x-icon icon="cloud-plus" class="h-10 w-10 text-zinc-400 dark:text-zinc-500" />
+                                        <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                            PNG, JPG, WEBP
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('images/photo.jpg') }}" alt="Preview banner"
+                                        id="preview-banner-edit" class="m-4 h-28 w-full rounded-lg object-cover">
+                                    <input type="file" class="hidden" name="banner" id="banner-edit"
+                                        accept=".png, .jpg, .webp">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <x-input type="text" name="website" label="Website" icon="link" id="website"
+                                placeholder="Ingresa la URL del sitio web" value="{{ old('website') }}" required />
+                        </div>
+                        <div>
+                            <x-input type="textarea" name="description" label="Descripción" id="description"
                                 placeholder="Ingresa la descripción de la marca" value="{{ old('description') }}" />
                         </div>
                     </div>
@@ -179,6 +265,7 @@
                 </form>
             </div>
         </div>
+        <!--  End Drawer edit brand -->
 
     </div>
     <script>

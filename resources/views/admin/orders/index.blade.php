@@ -1,12 +1,11 @@
 @extends('layouts.admin-template')
-@section('title', 'Categorías')
+@section('title', 'Pedidos')
 @section('content')
-    <div class="mt-4 rounded-lg">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
-            <h1 class="font-secondary text-secondary text-2xl font-bold dark:text-blue-400">
-                Administrar pedidos
-            </h1>
-        </div>
+    <div>
+        @include('layouts.__partials.admin.header-page', [
+            'title' => 'Pedidos',
+            'description' => 'Administra los pedidos de tus clientes',
+        ])
         <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative bg-white dark:bg-black">
@@ -65,24 +64,26 @@
                             </div>
                         </div>
                     </div>
-                    <x-table>
-                        <x-slot name="thead">
-                            <x-tr>
-                                <x-th>Cliente</x-th>
-                                <x-th>Fecha</x-th>
-                                <x-th>Estado</x-th>
-                                <x-th :last="true">Acciones</x-th>
-                            </x-tr>
-                        </x-slot>
-                        <x-slot name="tbody">
-                            <x-tr section="body">
-                                <x-td>Cliente</x-td>
-                                <x-td>Fecha</x-td>
-                                <x-td>Estado</x-td>
-                                <x-td>Acciones</x-td>
-                            </x-tr>
-                        </x-slot>
-                    </x-table>
+                    <div class="m-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th>Cliente</x-th>
+                                    <x-th>Fecha</x-th>
+                                    <x-th>Estado</x-th>
+                                    <x-th :last="true">Acciones</x-th>
+                                </x-tr>
+                            </x-slot>
+                            <x-slot name="tbody">
+                                <x-tr section="body">
+                                    <x-td>Cliente</x-td>
+                                    <x-td>Fecha</x-td>
+                                    <x-td>Estado</x-td>
+                                    <x-td>Acciones</x-td>
+                                </x-tr>
+                            </x-slot>
+                        </x-table>
+                    </div>
                 </div>
             </div>
         </div>
