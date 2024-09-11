@@ -24,6 +24,8 @@ export default {
                     900: "var(--primary-color-900)",
                     950: "var(--primary-color-950)",
                 },
+                secondary: "var(--secondary-color-store)",
+                tertiary: "var(--tertiary-color-store)",
             },
             fontFamily: {
                 "league-spartan": ["League Spartan", "sans-serif"],
