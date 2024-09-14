@@ -177,8 +177,24 @@ Breadcrumbs::for('admin.support-tickets.show', function (BreadcrumbTrail $trail,
 //Admin > Orders
 Breadcrumbs::for('admin.orders.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
-    $trail->push('Pedidos', route('admin.orders.index'));
+    $icon = Blade::render("<x-icon icon='orders' class='w-4 h-4' />");
+    $trail->push($icon . 'Pedidos', route('admin.orders.index'));
 });
+
+//Admin > Orders > Show
+Breadcrumbs::for('admin.orders.show', function (BreadcrumbTrail $trail, $order) {
+    $trail->parent('admin.orders.index');
+    $icon = Blade::render("<x-icon icon='shopping-bag-search' class='w-4 h-4' />");
+    $trail->push($icon . 'Detalles del pedido', route('admin.orders.show', $order));
+});
+
+//Admin > Orders > Edit
+Breadcrumbs::for('admin.orders.edit', function (BreadcrumbTrail $trail, $order) {
+    $trail->parent('admin.orders.index');
+    $icon = Blade::render("<x-icon icon='shopping-bag-edit' class='w-4 h-4' />");
+    $trail->push($icon . 'Editar pedido', route('admin.orders.edit', $order));
+});
+
 
 //Admin > Sales Strategies
 Breadcrumbs::for('admin.sales-strategies.index', function (BreadcrumbTrail $trail) {

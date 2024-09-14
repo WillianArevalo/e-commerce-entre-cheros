@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AccountAddressController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
@@ -56,12 +57,13 @@ Route::middleware("auth")->group(function () {
         Route::post("/settings-update", [AccountController::class, "settingsUpdate"])->name("settings-update");
         Route::get("/change-password", [AccountController::class, "changePassword"])->name("change-password");
         Route::post("/edit-password", [AccountController::class, "editPassword"])->name("edit-password");
-        Route::get('/addresses/{slug}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
+        Route::resource("/addresses", AccountAddressController::class);
     });
 });
 
 Route::get("/orders", [OrderController::class, "showOrdersStore"])->name("orders");
 Route::post("/orders/info-add", [OrderController::class, "addInfoCustomer"])->name("orders.add-info");
+Route::post("/orders/store", [OrderController::class, "store"])->name("orders.store");
 
 Route::controller(ProductController::class)->group(function () {
     Route::get("/products/{slug}", "details")->name("products.details");
@@ -91,6 +93,7 @@ Route::controller(CartController::class)->group(function () {
     Route::post("/cart/apply-shipping-method", "applyShippingMethod")->name("cart.apply-shipping-method");
     Route::post("/cart/apply-payment-method", "applyPaymentMethod")->name("cart.apply-payment-method");
     Route::post("/cart/remove-coupon/{id}", "removeCoupon")->name("cart.remove-coupon");
+    Route::post("/cart/destroy", "destroy")->name("cart.destroy");
 });
 
 Route::get("/my-coupons", [CouponController::class, "myCoupons"])->name("mycoupons");
@@ -145,6 +148,7 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
 
     Route::resource("/support-tickets", SupportTicketController::class);
     Route::resource("/orders", OrderController::class);
+    Route::post("/order/status/{id}", [OrderController::class, "changeStatus"])->name("orders.status");
 
     Route::prefix("sales-strategies")->name("sales-strategies.")->group(function () {
         Route::get("/", [SaleStrategyController::class, "index"])->name("index");
