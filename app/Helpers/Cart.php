@@ -14,7 +14,7 @@ class Cart
         }
         $user = auth()->user();
         // Buscar el carrito existente
-        $cart = CartModel::with("items.product")->where("user_id", $user->id)->first();
+        $cart = CartModel::with("items.product")->with("shippingMethod")->where("user_id", $user->id)->first();
         return $cart;
     }
 
@@ -137,5 +137,14 @@ class Cart
             "shipping" => $symbol . number_format($cart->shippingMethod->cost ?? 0, 2),
             "total_with_shipping" => $symbol . number_format(self::totalWithShippingMethod(), 2)
         ];
+    }
+
+    public static function clear()
+    {
+        $cart = self::get();
+        if ($cart) {
+            $cart->items()->delete();
+            $cart->delete();
+        }
     }
 }
