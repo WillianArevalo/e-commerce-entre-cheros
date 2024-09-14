@@ -132,4 +132,10 @@ return [
         "thousands_sep" => env("APP_CURRENCY_THOUSANDS_SEP", ","),
     ],
 
+    "paypal" =>
+    [
+        "client_id" => env("PAYPAL_CLIENT_ID"),
+        "secret" => env("PAYPAL_SECRET"),
+    ],
+
 ];
