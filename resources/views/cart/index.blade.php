@@ -29,12 +29,12 @@
                 <h1 class="text-start font-mystical text-5xl font-normal uppercase text-secondary" data-aos="fade-right">
                     Carrito de compras
                 </h1>
-                <div class="mt-4 flex gap-10">
+                <div class="mt-8 flex gap-10">
                     <div class="relative flex-[2]" data-aos="fade-right">
-                        <div class="min-h-96 z-10 mt-4 rounded-xl border border-zinc-400 bg-white p-4">
+                        <div class="min-h-96 z-10 rounded-xl border border-zinc-400 bg-white p-4">
                             <table class="min-w-full font-league-spartan">
                                 <thead>
-                                    <tr>
+                                    <tr class="border-b border-zinc-400">
                                         <th scope="col"
                                             class="px-6 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
                                             Producto
@@ -143,7 +143,7 @@
                                         @endforeach
                                     @else
                                         <tr class="border-t border-zinc-100">
-                                            <td class="whitespace-nowrap px-6 py-4 text-center font-league-spartan"
+                                            <td class="whitespace-nowrap px-6 py-4 text-center font-league-spartan text-sm text-zinc-500"
                                                 colspan="4">
                                                 Carrito vacío
                                             </td>
@@ -152,28 +152,38 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="mt-4 flex justify-end">
+                            <form action="{{ Route('cart.destroy') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="flex items-center gap-2 rounded-full bg-red-100 px-4 py-2 text-sm text-red-600">
+                                    <x-icon-store icon="shopping-cart-remove" class="h-4 w-4 text-current" />
+                                    Vaciar carrito
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <div class="relative flex-1" data-aos="fade-left">
-                        <div class="z-10 mt-4 h-max w-full rounded-xl border border-zinc-400 bg-white p-4">
+                        <div class="z-10 h-max w-full rounded-xl border border-zinc-400 bg-white p-4">
                             <h2 class="pb-2 font-league-spartan text-xl font-bold text-secondary">
                                 Resumen pedido
                             </h2>
                             <div class="font-secondary h-full border-t border-zinc-400">
                                 <div class="mt-4 flex justify-between">
                                     <p class="text-secondary">Importe</p>
-                                    <p class="font-medium text-tertiary" id="totalPriceCart">
+                                    <p class="font-medium text-primary" id="totalPriceCart">
                                         {{ $carts_totals['total'] }}
                                     </p>
                                 </div>
                                 <div class="mt-2 flex justify-between">
                                     <p class="text-secondary">Impuesto</p>
-                                    <p class="font-medium text-tertiary" id="totalTaxes">
+                                    <p class="font-medium text-primary" id="totalTaxes">
                                         {{ $carts_totals['taxes'] }}
                                     </p>
                                 </div>
                                 <div class="mt-10 flex items-center justify-between border-y border-zinc-400 py-4">
                                     <p class="text-secondary">Total con impuestos</p>
-                                    <p class="font-medium text-tertiary" id="totalWithTaxes">
+                                    <p class="font-medium text-primary" id="totalWithTaxes">
                                         {{ $carts_totals['total_with_taxes'] }}
                                     </p>
                                 </div>
@@ -284,7 +294,7 @@
                                                 </p>
                                             </div>
                                             <div class="flex items-center justify-end">
-                                                <span class="text-lg font-medium uppercase text-tertiary">
+                                                <span class="text-lg font-medium uppercase text-primary">
                                                     @if ($method->cost == 0)
                                                         Gratis
                                                     @else
@@ -308,7 +318,7 @@
             <div class="flex flex-col items-end gap-4">
                 <div class="flex items-center gap-4">
                     <h4 class="pt-1 font-league-spartan text-4xl font-bold uppercase text-secondary">Total</h4>
-                    <p id="totalWithShippingMethod" class="font-secondary text-2xl font-semibold text-tertiary">
+                    <p id="totalWithShippingMethod" class="font-poppins text-3xl font-semibold text-primary">
                         {{ $carts_totals['total_with_shipping'] }}
                     </p>
                 </div>

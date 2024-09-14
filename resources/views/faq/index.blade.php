@@ -1,7 +1,5 @@
 @extends('layouts.template')
-
 @section('title', 'Preguntas frecuentes')
-
 @section('content')
     <main>
         <section class="mt-32">
@@ -32,13 +30,13 @@
                 </div>
             </div>
         </section>
-        <section class="mt-8 w-full bg-tertiary px-20 py-10">
+        <section class="mt-8 w-full bg-primary px-20 py-10">
             <div class="mx-auto flex w-full items-center justify-center gap-4">
                 <div class="flex flex-1 flex-col gap-4" data-aos="fade-right">
                     <h2 class="font-league-spartan text-4xl font-bold uppercase text-white">
                         Descubre el sabor y la tradición de El Salvador con nuestra variedad de productos únicos
                     </h2>
-                    <x-button type="a" href="{{ Route('store.products') }}" typeButton="store-secondary"
+                    <x-button-store type="a" href="{{ Route('store.products') }}" typeButton="secondary"
                         text="Comprar ahora" class="w-max" />
                 </div>
                 <div class="flex w-full flex-1 items-center justify-center" data-aos="zoom-in-left">

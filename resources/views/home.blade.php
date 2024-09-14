@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
     <main>
-        <section class="home__header relative w-full text-white"
+        <section class="relative h-[600px] w-full text-white"
             style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
             <div class="relative left-20 top-32 flex w-2/3 flex-col gap-4" data-aos="fade-right">
                 <h1 class="text-start font-league-spartan text-6xl font-bold uppercase">
@@ -57,7 +57,7 @@
                 </div>
             </section>
         @endif
-        <section class="mt-8 w-full bg-tertiary px-20 py-10">
+        <section class="mt-8 w-full bg-primary px-20 py-10">
             <div class="mx-auto flex w-full items-center justify-center gap-4">
                 <div class="flex flex-1 flex-col gap-4" data-aos="fade-right">
                     <h2 class="font-league-spartan text-4xl font-bold uppercase text-white">
@@ -104,7 +104,7 @@
                     class="absolute bottom-20 left-20" />
             </div>
         </section>
-        <section class="mt-8 w-full bg-tertiary px-20 py-10">
+        <section class="mt-8 w-full bg-primary px-20 py-10">
             <div class="mx-auto flex w-3/4 items-center justify-center gap-4" data-aos="zoom-in-right">
                 <div class="flex w-full items-center justify-center">
                     <img src="{{ asset('images/imagen2.png') }}" alt="" class="h-64 w-72">

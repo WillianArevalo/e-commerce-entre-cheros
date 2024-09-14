@@ -24,8 +24,8 @@
                 </div>
             </div>
             <div class="mt-8 flex items-center justify-center">
-                <x-button type="a" text="Contactanos" class="w-60 pt-4 font-league-spartan font-bold"
-                    typeButton="store-gradient" />
+                <x-button-store type="a" text="Contactanos" class="w-60 pt-4 font-league-spartan font-bold"
+                    typeButton="primary" />
             </div>
         </section>
         <section class="relative mt-10 flex flex-col items-center justify-center gap-4 p-20">
