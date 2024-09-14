@@ -8,8 +8,8 @@
             <div class="flex flex-col gap-4 px-10">
                 <div class="flex items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <x-icon-store icon="location" class="h-5 w-5 text-primary" />
-                        <h4 class="text-primary">Dirección:</h4>
+                        <x-icon-store icon="location" class="h-5 w-5 text-tertiary" />
+                        <h4 class="text-tertiary">Dirección:</h4>
                     </div>
                     <div>
                         <p class="text-white">El Salvador</p>
@@ -17,8 +17,8 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <x-icon-store icon="mail" class="h-5 w-5 text-primary" />
-                        <h4 class="text-primary">Correo electrónico:</h4>
+                        <x-icon-store icon="mail" class="h-5 w-5 text-tertiary" />
+                        <h4 class="text-tertiary">Correo electrónico:</h4>
                     </div>
                     <div>
                         <p class="text-white">contact@entrecheros.com</p>
@@ -26,8 +26,8 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <x-icon-store icon="call" class="h-5 w-5 text-primary" />
-                        <h4 class="text-primary">Telefono:</h4>
+                        <x-icon-store icon="call" class="h-5 w-5 text-tertiary" />
+                        <h4 class="text-tertiary">Telefono:</h4>
                     </div>
                     <div>
                         <p class="text-white">+503 7545 6642</p>
@@ -153,11 +153,11 @@
                 <div>
                     <div class="relative w-full">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                            <x-icon-store icon="mail" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
+                            <x-icon-store icon="mail" class="h-5 w-5 text-white" />
                         </div>
                         <input type="email" name="mail" id="mail"
                             placeholder="Ingresa tu correo electrónico"
-                            class="w-full rounded-xl border border-zinc-400 px-6 py-3 pl-12 text-sm transition duration-300 focus:border-blue-500">
+                            class="w-full rounded-xl border border-white bg-transparent px-6 py-3 pl-12 text-sm transition duration-300 placeholder:text-zinc-200 focus:border-blue-500">
                     </div>
                     <small class="mt-1 block w-4/5 text-zinc-200">
                         Ingresa tu correo electrónico para estar al tanto de nuestras ofertas
@@ -165,15 +165,15 @@
                 </div>
                 <div class="mt-4 flex items-center justify-end gap-4">
                     <a href=""
-                        class="rounded-full bg-tertiary p-3 text-white transition duration-300 hover:scale-110">
+                        class="rounded-full bg-primary p-3 text-white transition duration-300 hover:scale-110">
                         <x-icon-store icon="facebook" class="h-6 w-6 text-current" />
                     </a>
                     <a href=""
-                        class="rounded-full bg-tertiary p-3 text-white transition duration-300 hover:scale-110">
+                        class="rounded-full bg-primary p-3 text-white transition duration-300 hover:scale-110">
                         <x-icon-store icon="twitter" class="h-6 w-6 text-current" />
                     </a>
                     <a href=""
-                        class="rounded-full bg-tertiary p-3 text-white transition duration-300 hover:scale-110">
+                        class="rounded-full bg-primary p-3 text-white transition duration-300 hover:scale-110">
                         <x-icon-store icon="instagram" class="h-6 w-6 text-current" />
                     </a>
                 </div>
@@ -204,7 +204,7 @@
                             <span class="itemSelected flex items-center gap-2 text-zinc-300">
                                 Español
                             </span>
-                            <x-icon icon="arrow-down" class="h-5 w-6 text-zinc-300" />
+                            <x-icon-store icon="arrow-down" class="h-5 w-6 text-zinc-300" />
                         </div>
 
                         <ul
@@ -237,7 +237,7 @@
                                     Sin moneda especificada
                                 @endif
                             </span>
-                            <x-icon icon="arrow-down" class="h-5 w-6 text-zinc-300" />
+                            <x-icon-store icon="arrow-down" class="h-5 w-6 text-zinc-300" />
                         </div>
                         @if ($currencies)
                             <ul

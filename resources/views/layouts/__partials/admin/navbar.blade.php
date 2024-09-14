@@ -266,9 +266,10 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li
+                class="{{ \App\Helpers\RouteHelper::isActive(['admin.orders.index']) }} rounded-lg dark:text-white">
                 <a href="{{ Route('admin.orders.index') }}"
-                    class="group flex items-center rounded-lg p-2 text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-950">
+                    class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current">
                     <x-icon icon="orders"
                         class="h-5 w-5 flex-shrink-0 text-zinc-500 transition duration-75 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white" />
                     <span class="ms-3 flex-1 whitespace-nowrap">Pedidos</span>
