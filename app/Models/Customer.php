@@ -19,6 +19,11 @@ class Customer extends Model
         return $this->hasOne(Address::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     protected $fillable = [
         "phone",
         "birthdate",
