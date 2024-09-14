@@ -1,0 +1,259 @@
+/*
+================================================================
+SECTION: Login
+================================================================
+*/
+
+.wave-login {
+    transform: rotate(-90deg);
+    transform-origin: bottom;
+    top: auto;
+}
+
+/*
+================================================================
+SECTION: Navbar and Footer
+================================================================
+*/
+
+.link-nav,
+.link-foot {
+    display: inline-block;
+    position: relative;
+    width: max-content;
+}
+
+.link-nav::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: #011b4e;
+    transition: width 0.3s ease-in-out;
+}
+
+.link-foot::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: #bcddf1;
+    transition: width 0.3s ease-in-out;
+}
+
+.link-nav:hover::after,
+.link-foot:hover::after {
+    width: 100%;
+}
+
+.link-nav.active::after,
+.link-foot.active::after {
+    width: 100%;
+}
+
+.footer-item {
+    position: relative;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-left: 0px;
+    text-decoration: none;
+    color: var(--tertiary-color-store);
+    transition: padding-left 0.3s ease;
+}
+
+.arrow-icon {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.footer-link:hover {
+    padding-left: 30px;
+    text-decoration: underline;
+}
+
+.footer-item:hover .arrow-icon {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.footer {
+    position: relative;
+    background-image: url("/public/images/fondo4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1; /* Asegura que el contenido del footer esté por encima de la máscara */
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #011b4e; /* Usando bg-secondary de Tailwind */
+    opacity: 0.9; /* Ajusta la opacidad según el efecto que desees */
+    z-index: -1; /* Coloca la máscara debajo del contenido del footer */
+}
+
+/*
+================================================================
+GENERAL STYLES
+================================================================
+*/
+
+/* Modal image product view  */
+#modal-image {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Background gradient for buttons primary's of store */
+.bg-gradient {
+    background: linear-gradient(45deg, #011b4e, #0e4d92, #138fdc 100%);
+}
+
+.bg-gradient:hover {
+    background: linear-gradient(45deg, #011030, #0a396b, #0e70ad 100%);
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.not-favorite {
+    @apply bg-zinc-100 border-zinc-400 text-zinc-600;
+}
+
+.favorite {
+    @apply bg-rose-600 border-rose-600 text-white;
+}
+
+/*
+================================================================
+SECTION: Dashboard and profile user Store
+================================================================
+*/
+
+.link-profile.active {
+    background-color: #e1effe;
+    color: #011b4e;
+}
+
+.link-profile:hover {
+    background-color: #e1effe;
+    color: #011b4e;
+}
+
+.link-profile:hover::before {
+    display: block;
+}
+
+.link-profile::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 6px;
+    background-color: #011b4e;
+    display: none;
+}
+
+.link-profile.active::before {
+    display: block;
+}
+
+/*
+================================================================
+SECTION: Details product
+================================================================
+*/
+
+.container-secondary-image.selected {
+    position: relative;
+}
+
+.container-secondary-image.selected::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Star's */
+.start-unselected {
+    svg {
+        @apply fill-gray-300 text-gray-400;
+    }
+}
+
+.star-selected {
+    svg {
+        @apply fill-yellow-400 text-yellow-400;
+    }
+}
+
+.star-selected:hover {
+    svg {
+        @apply fill-yellow-400 text-yellow-400;
+    }
+}
+
+/*
+================================================================
+SECTION: Cart and checkout
+================================================================
+*/
+
+.method-shipping-selected {
+    @apply ring-4 ring-blue-200 border-blue-500 scale-105 transition-transform duration-300;
+}
+
+.method-payment-selected {
+    @apply ring-4 ring-blue-200 border-blue-500 scale-105 transition-transform duration-300;
+}
+
+.step-completed {
+    @apply after:border-primary-600 !important;
+    & span {
+        @apply bg-primary-600 text-white !important;
+    }
+}

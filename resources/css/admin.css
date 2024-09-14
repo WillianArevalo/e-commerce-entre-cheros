@@ -1,0 +1,79 @@
+/* Popup pages */
+.imagePoup:hover > button,
+.inputPopup:hover > button {
+    display: block;
+}
+
+/* Theme selected topbar admin */
+.theme-selected {
+    @apply bg-zinc-200 dark:bg-zinc-900;
+}
+
+/* Link navbar admin */
+.active-link-admin {
+    background: linear-gradient(
+        to right,
+        var(--primary-color-rgba),
+        rgba(0, 3, 15, 0)
+    );
+
+    color: var(--primary-color-600) !important;
+    & svg {
+        color: var(--primary-color-600) !important;
+    }
+}
+
+.active-link-admin:hover {
+    background: linear-gradient(
+        to right,
+        var(--primary-color-rgba-20),
+        rgba(0, 3, 15, 0)
+    ) !important;
+
+    &:hover {
+        svg {
+            color: var(--primary-color-500) !important;
+        }
+    }
+}
+
+/* Dimensions box */
+.dimension-box {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-30deg);
+    animation: rotate 10s infinite linear;
+}
+
+.dimension-box .face {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(52, 152, 219, 0.6);
+    border: 1px solid #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.dimension-box .front {
+    transform: translateZ(25px);
+}
+.dimension-box .back {
+    transform: rotateY(180deg) translateZ(25px);
+}
+.dimension-box .left {
+    transform: rotateY(-90deg) translateZ(25px);
+}
+.dimension-box .right {
+    transform: rotateY(90deg) translateZ(25px);
+}
+.dimension-box .top {
+    transform: rotateX(90deg) translateZ(25px);
+}
+.dimension-box .bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+}
