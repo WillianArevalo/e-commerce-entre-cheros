@@ -38,7 +38,7 @@
                                                     value="{{ $product->name }}" />
                                             </div>
                                             <div>
-                                                <x-input label="Descripción corta" type="text" id="short_description"
+                                                <x-input label="Descripción corta" type="textarea" id="short_description"
                                                     name="short_description" value="{{ $product->short_description }}"
                                                     required="required"
                                                     placeholder="Escribe la descripción corta del producto aquí" />

@@ -49,6 +49,7 @@
                                         <x-select label="Rol" name="role" id="role" required :options="[
                                             'admin' => 'Administrador',
                                             'user' => 'Usuario',
+                                            'customer' => 'Cliente',
                                         ]"
                                             selected="{{ old('role', $user->role) }}"
                                             value="{{ old('role', $user->role) }}" />

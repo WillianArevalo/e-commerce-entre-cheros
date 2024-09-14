@@ -26,7 +26,7 @@
                         </div>
                         <div
                             class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
-                            <x-button type="a" href="{{ route('admin.customers.create') }}" text="Nuevo cliente"
+                            <x-button type="a" href="{{ route('admin.customers.create') }}" text="Nuevo pedido"
                                 icon="plus" typeButton="primary" />
                             <div class="flex w-full items-center space-x-3 md:w-auto">
                                 <x-button type="button" typeButton="secondary" id="filterDropdownButton"
@@ -64,30 +64,127 @@
                             </div>
                         </div>
                     </div>
-                    <div class="m-4">
+                    <div class="mx-4">
                         <x-table>
                             <x-slot name="thead">
                                 <x-tr>
+                                    <x-th class="flex w-12 items-center justify-center">
+                                        <input id="default-checkbox" type="checkbox" value=""
+                                            class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                    </x-th>
                                     <x-th>Cliente</x-th>
-                                    <x-th>Fecha</x-th>
+                                    <x-th>N° orden</x-th>
+                                    <x-th>Total</x-th>
+                                    <x-th>Fecha creado</x-th>
                                     <x-th>Estado</x-th>
                                     <x-th :last="true">Acciones</x-th>
                                 </x-tr>
                             </x-slot>
                             <x-slot name="tbody">
-                                <x-tr section="body">
-                                    <x-td>Cliente</x-td>
-                                    <x-td>Fecha</x-td>
-                                    <x-td>Estado</x-td>
-                                    <x-td>Acciones</x-td>
-                                </x-tr>
+                                @if ($orders->count() > 0)
+                                    @foreach ($orders as $order)
+                                        <x-tr section="body">
+                                            <x-td>
+                                                <input id="default-checkbox" type="checkbox" value="{{ $order->id }}"
+                                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                            </x-td>
+                                            <x-td>
+                                                <div class="flex gap-4">
+                                                    <div>
+                                                        <img src="{{ Storage::url($order->customer->user->profile) }}"
+                                                            alt="{{ $order->customer->user->name }} profile"
+                                                            class="h-10 w-10 rounded-full object-cover">
+                                                    </div>
+                                                    <div class="flex flex-col items-start justify-center gap-1 text-sm">
+                                                        <p>{{ $order->customer->user->name }}</p>
+                                                        <p>{{ $order->customer->user->email }}</p>
+                                                    </div>
+                                                </div>
+                                            </x-td>
+                                            <x-td>{{ $order->number_order }}</x-td>
+                                            <x-td>${{ $order->total }}</x-td>
+                                            <x-td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M, Y') }}</x-td>
+                                            <x-td>
+                                                <x-status-badge status="{{ $order->status }}" color="yellow" />
+                                            </x-td>
+                                            <x-td>
+                                                <div class="items center flex justify-center gap-2">
+                                                    <x-button type="a" icon="edit" typeButton="success"
+                                                        onlyIcon="true"
+                                                        href="{{ route('admin.orders.edit', $order->id) }}" />
+                                                    <form action="{{ route('admin.orders.destroy', $order->id) }}"
+                                                        id="formDeleteOrder-{{ $order->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-button type="button"
+                                                            data-form="formDeleteOrder-{{ $order->id }}"
+                                                            class="buttonDelete" onlyIcon="true" icon="delete"
+                                                            typeButton="danger" data-modal-target="deleteModal" />
+                                                    </form>
+                                                    <x-button type="a" icon="view" typeButton="secondary"
+                                                        onlyIcon="true"
+                                                        href="{{ route('admin.orders.show', $order->id) }}" />
+                                                    <x-button type="button" icon="printer" typeButton="secondary"
+                                                        onlyIcon="true" />
+                                                    <div class="relative">
+                                                        <x-button type="button" icon="refresh" typeButton="secondary"
+                                                            onlyIcon="true" class="show-options" />
+                                                        <div
+                                                            class="options absolute right-0 top-11 z-10 hidden w-40 rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
+                                                            <p class="font-semibold text-zinc-800 dark:text-zinc-300">
+                                                                Cambiar estado
+                                                            </p>
+                                                            <form action="{{ Route('admin.orders.status', $order->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="status">
+                                                                <ul class="mt-2 flex flex-col text-sm">
+                                                                    <li>
+                                                                        <button type="button"
+                                                                            class="change-status-order flex w-full items-center gap-1 rounded-lg px-2 py-2 text-emerald-700 hover:bg-emerald-100 dark:text-emerald-400 dark:hover:bg-emerald-950 dark:hover:bg-opacity-20"
+                                                                            data-status="completed">
+                                                                            <x-icon icon="check" class="h-4 w-4" />
+                                                                            Completado
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button type="button"
+                                                                            class="change-status-order flex w-full items-center gap-1 rounded-lg px-2 py-2 text-yellow-700 hover:bg-yellow-100 dark:text-yellow-400 dark:hover:bg-yellow-950 dark:hover:bg-opacity-20"
+                                                                            data-status="pending">
+                                                                            <x-icon icon="reload" class="h-4 w-4" />
+                                                                            Pendiente
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button type="button" href="#"
+                                                                            class="change-status-order flex w-full items-center gap-1 rounded-lg px-2 py-2 text-red-700 hover:bg-red-100 dark:text-red-400 dark:hover:bg-red-950 dark:hover:bg-opacity-20"
+                                                                            data-status="canceled">
+                                                                            <x-icon icon="x" class="h-4 w-4" />
+                                                                            Cancelado
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </x-td>
+                                        </x-tr>
+                                    @endforeach
+                                @else
+                                    <x-tr section="body">
+                                        <x-td class="text-center" :colspan="7">
+                                            No se encontraron registros
+                                        </x-td>
+                                    </x-tr>
+                                @endif
                             </x-slot>
                         </x-table>
                     </div>
                 </div>
             </div>
         </div>
-        <x-delete-modal modalId="deleteModal" title="¿Estás seguro de la orden?" message="No podrás recuperar este registro"
-            action="" />
+        <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar la orden?"
+            message="No podrás recuperar este registro" action="" />
     </div>
 @endsection
