@@ -14,28 +14,19 @@ $(document).ready(function () {
         },
     );
 
-    $(document).on("change", ".btn-add-favorite", function () {
-        var dataForm = $(this).data("form");
-        const form = $(dataForm);
-        const data = $(form).serialize();
-        const url = $(form).attr("action");
-        const card = $(this).data("card");
-        const input = $(this);
-        input.addClass("checked");
-
+    $(document).on("click", ".btn-add-favorite", function () {
+        const form = $(this).closest("form");
+        $(this).toggleClass("favorite").toggleClass("not-favorite");
         $.ajax({
-            url: url,
+            url: form.attr("action"),
             method: "POST",
-            data: data,
+            data: form.serialize(),
             success: function (data) {
                 if (data.status === "auth") window.location.href = "/login";
-
                 if (data.status === "success" || data.status === "info") {
                     if (data.message) {
                         showToast(data.message, data.status);
                     }
-                    input.removeClass("checked");
-                    $(card).html(data.html);
                     $("#favorite-count").text(data.count);
                 }
             },

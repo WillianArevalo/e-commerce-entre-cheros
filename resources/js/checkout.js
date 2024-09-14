@@ -56,7 +56,7 @@ $(document).ready(function () {
         }
     });
 
-    showTab(1);
+    showTab(currentTab);
 
     $("#card_number").on("input", function () {
         let input = $(this).val().replace(/\D/g, "");
@@ -68,13 +68,16 @@ $(document).ready(function () {
     });
 
     $("input[name='payment_method']").on("change", function () {
+        $(".payment-methods").removeClass("method-payment-selected");
+
         $(".payment-method").hide();
         const name = $(this).data("name");
-
         const form = $(this).closest("form");
         if (name == "Tarjeta de crédito") {
             $(".credit-card").show();
         }
+
+        $(this).parent().addClass("method-payment-selected");
 
         $.ajax({
             url: form.attr("action"),
