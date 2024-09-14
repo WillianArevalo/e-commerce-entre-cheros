@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $products = Product::whereDoesntHave("flash_offers")->get();
+        $products = Product::with("labels")->whereDoesntHave("flash_offers")->get();
         $categories = Categorie::all();
         $flashOffers = Product::whereHas('flash_offers', function ($query) {
             $query->where('is_showing', true)

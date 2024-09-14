@@ -268,4 +268,10 @@ class CartController extends Controller
             "html" => view("layouts.__partials.ajax.store.payment-method", ["payment" => $paymentMethod])->render()
         ]);
     }
+
+    public function destroy()
+    {
+        CartHelper::clear();
+        return redirect()->route("cart")->with("success", "Carrito vaciado");
+    }
 }

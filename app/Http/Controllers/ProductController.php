@@ -9,9 +9,11 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Categorie;
 use App\Models\Label;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Tax;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,16 +31,17 @@ class ProductController extends Controller
 
     public function details(string $slug)
     {
-        $user = Auth::user();
+        $user = Auth::check() ? Auth::user() : null;
         $product = Product::with(['categories', 'brands', 'taxes', 'labels', 'images'])
             ->where('slug', $slug)
             ->firstOrFail();
-
+        $purchase = $user ? $this->userHasPurchaseProduct($user->id, $product->id) : false;
         $product->images->prepend((object)['image' => $product->main_image]);
-        $relatedProducts = Product::with(['categories', 'subcategories', 'brands', 'taxes', 'labels', 'images'])->paginate(10);
-        Favorites::get($user, $relatedProducts);
-
-        return view('products.view', compact('product', 'relatedProducts'));
+        $products = Product::with(['categories', 'subcategories', 'brands', 'taxes', 'labels', 'images'])->paginate(10);
+        if ($user) {
+            Favorites::get($user, $products);
+        }
+        return view('products.view', compact('product', 'products', 'purchase'));
     }
 
     public function create()
@@ -133,7 +136,7 @@ class ProductController extends Controller
             $validated['offer_active'] = $request->has('offer_active') ? 1 : 0;
             $validated['is_active'] = $request->has('is_active') ? 1 : 0;
 
-            $currentFolderPath = $this->getProductImageFolder($product);
+            $currentFolderPath = $this->getProductImageFolder($request->input("name"));
             $newFolderPath = $this->getProductImageFolder($request->input('name'), $product->created_at);
 
             if ($currentFolderPath !== $newFolderPath) {
@@ -235,5 +238,14 @@ class ProductController extends Controller
     private function getProductImageFolder($name, $createdAt = null)
     {
         return 'images/products/' . Str::slug($name);
+    }
+
+    private function userHasPurchaseProduct($userId, $productId)
+    {
+        $user = User::find($userId);
+        $customer = $user->customer;
+        return Order::where("customer_id", $customer->id)->whereHas("items", function ($query) use ($productId) {
+            $query->where("product_id", $productId);
+        })->exists();
     }
 }
