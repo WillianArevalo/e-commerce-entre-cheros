@@ -20,3 +20,4 @@ yarn-error.log
 /.vscode
 /public/images
 /public/svg
+/config/laravel-to-uml.php
