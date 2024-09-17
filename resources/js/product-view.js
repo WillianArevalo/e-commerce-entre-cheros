@@ -45,16 +45,14 @@ $(document).ready(function () {
         $("#review-container").toggleClass("hidden");
     });
 
-    var stars = $(".star");
-    var ratingValue = $("#rating-value");
+    $("#btn-edit-review").on("click", function () {
+        $(".review-user-current").hide();
+        $("#edit-review-container").toggleClass("hidden");
+    });
 
-    // Al hacer clic en una estrella
-    stars.on("click", function () {
-        var value = $(this).data("value");
-        ratingValue.val(value);
-        // Actualizar las estrellas visualmente
+    function updateStars(stars, ratingValue, starClass) {
         stars.each(function (index) {
-            if (index < value) {
+            if (index < ratingValue) {
                 $(this)
                     .removeClass("start-unselected")
                     .addClass("star-selected");
@@ -64,41 +62,42 @@ $(document).ready(function () {
                     .addClass("start-unselected");
             }
         });
-    });
+    }
 
-    // Efecto de hover
-    stars.on("mouseover", function () {
+    updateStars(
+        $("#star-rating-edit .star-edit"),
+        $("#rating-value-edit").val(),
+    );
+
+    $("#star-rating .star").on("click", function () {
         var value = $(this).data("value");
-
-        // Actualizar las estrellas hasta la que está siendo 'hovered'
-        stars.each(function (index) {
-            if (index < value) {
-                $(this)
-                    .addClass("star-selected")
-                    .removeClass("start-unselected");
-            } else {
-                $(this)
-                    .addClass("start-unselected")
-                    .removeClass("star-selected");
-            }
-        });
+        $("#rating-value").val(value);
+        updateStars($("#star-rating .star"), value);
     });
 
-    // Volver al estado actual después del hover
-    stars.on("mouseout", function () {
-        var value = ratingValue.val() || 0;
+    $("#star-rating .star").on("mouseover", function () {
+        var value = $(this).data("value");
+        updateStars($("#star-rating .star"), value);
+    });
 
-        // Restaurar las estrellas al estado de la puntuación seleccionada
-        stars.each(function (index) {
-            if (index < value) {
-                $(this)
-                    .addClass("star-selected")
-                    .removeClass("start-unselected");
-            } else {
-                $(this)
-                    .addClass("start-unselected")
-                    .removeClass("star-selected");
-            }
-        });
+    $("#star-rating .star").on("mouseout", function () {
+        var value = $("#rating-value").val() || 0;
+        updateStars($("#star-rating .star"), value);
+    });
+
+    $("#star-rating-edit .star-edit").on("click", function () {
+        var value = $(this).data("value");
+        $("#rating-value-edit").val(value);
+        updateStars($("#star-rating-edit .star-edit"), value);
+    });
+
+    $("#star-rating-edit .star-edit").on("mouseover", function () {
+        var value = $(this).data("value");
+        updateStars($("#star-rating-edit .star-edit"), value);
+    });
+
+    $("#star-rating-edit .star-edit").on("mouseout", function () {
+        var value = $("#rating-value-edit").val() || 0;
+        updateStars($("#star-rating-edit .star-edit"), value);
     });
 });

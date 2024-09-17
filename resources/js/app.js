@@ -28,6 +28,8 @@ import "./chart";
 import "./dashboard";
 import "./settings";
 import "./customer";
+import "./order";
+import "./reviews";
 import { initSwiper } from "./swiper";
 
 initSwiper();
