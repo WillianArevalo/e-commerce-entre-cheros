@@ -1,7 +1,5 @@
 @extends('layouts.template')
-
-@section('title', 'Categorys')
-
+@section('title', 'Categorías')
 @section('content')
     <main class="mb-10">
         <section class="mt-32">
