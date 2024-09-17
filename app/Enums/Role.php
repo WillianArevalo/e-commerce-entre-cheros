@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-interface Role
+interface ROLE
 {
     const ADMIN = 1;
     const USER = 2;

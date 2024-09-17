@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-class Theme
+class THEME
 {
     const LIGHT = 'light';
     const DARK = 'dark';
