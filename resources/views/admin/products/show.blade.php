@@ -1,5 +1,5 @@
 @extends('layouts.admin-template')
-@section('title', 'Ver producto')
+@section('title', 'Detalles del producto')
 @section('content')
     <div>
         @include('layouts.__partials.admin.header-crud-page', [
@@ -302,7 +302,7 @@
                                 @else
                                     @foreach ($product->labels as $label)
                                         <span
-                                            class="me-2 flex items-center justify-between gap-2 rounded-xl border border-zinc-400 bg-white px-4 py-2 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:bg-black dark:text-white">
+                                            class="bg-{{ $label->color }}-100 text-{{ $label->color }}-800 dark:bg-{{ $label->color }}-900 dark:text-{{ $label->color }}-300 rounded-full px-3 py-1 text-xs font-semibold dark:bg-opacity-20">
                                             {{ $label->name }}
                                         </span>
                                     @endforeach

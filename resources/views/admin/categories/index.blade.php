@@ -60,9 +60,9 @@
                         </div>
                     </div>
                     <div class="mx-4 mb-4 rounded-lg border border-zinc-400 dark:border-zinc-800">
-                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
+                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400" id="tableCategorie">
                             <thead
-                                class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
+                                class="border-y border-zinc-400 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:text-zinc-300">
                                 <tr>
                                     <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Imagen
@@ -73,12 +73,12 @@
                                     <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Subcategorías
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="border-b border-zinc-400 px-4 py-3 dark:border-zinc-800">
                                         Acciones
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody id="tableCategorie">
+                            <tbody>
                                 @if ($categories->count() == 0)
                                     <tr class="border-b dark:border-zinc-950">
                                         <td colspan="4"
