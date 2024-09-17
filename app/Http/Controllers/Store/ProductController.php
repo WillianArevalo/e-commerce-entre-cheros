@@ -15,16 +15,38 @@ class ProductController extends Controller
     public function details(string $slug)
     {
         $user = Auth::check() ? Auth::user() : null;
-        $product = Product::with(['categories', 'brands', 'taxes', 'labels', 'images', 'reviews'])
+        $product = Product::with([
+            'categories',
+            'brands',
+            'taxes',
+            'labels',
+            'images',
+            'reviews'
+        ])
             ->where('slug', $slug)
             ->firstOrFail();
+
         $purchase = $user ? $this->userHasPurchaseProduct($user->id, $product->id) : false;
         $product->images->prepend((object)['image' => $product->main_image]);
-        $products = Product::with(['categories', 'subcategories', 'brands', 'taxes', 'labels', 'images'])->where("id", "!=", $product->id)->paginate(10);
+        $products = Product::with([
+            'categories',
+            'subcategories',
+            'brands',
+            'taxes',
+            'labels',
+            'images'
+        ])
+            ->where("id", "!=", $product->id)
+            ->paginate(10);
+
+        $reviews = $product->reviews->where('is_approved', 1);
+        $userReview = null;
+
         if ($user) {
+            $userReview = $product->reviews->where('user_id', $user->id)->first();
             Favorites::get($user, $products);
         }
-        return view('products.view', compact('product', 'products', 'purchase'));
+        return view('products.view', compact('product', 'products', 'purchase', 'user', 'userReview', "reviews"));
     }
 
     private function userHasPurchaseProduct($userId, $productId)
