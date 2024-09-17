@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Checkout')
+@section('title', '')
 @section('content')
     <main>
         <div class="relative mt-12 h-80 w-full"
@@ -40,7 +40,7 @@
                             <!-- Tab info customer -->
                             <div class="tab-content" id="tab-user-info">
                                 <div id="form-user-info" class="hidden">
-                                    <form action="{{ Route('orders.add-info') }}" class="flex flex-col gap-10"
+                                    <form action="{{ Route('customer.store') }}" class="flex flex-col gap-10"
                                         method="POST">
                                         @csrf
                                         <div class="font-secondary flex flex-col gap-2">
@@ -277,7 +277,7 @@
                                             @if ($payment_methods->count() > 0)
                                                 @foreach ($payment_methods as $payment_method)
                                                     <label
-                                                        class="mt-4 flex h-20 w-44 items-center justify-center gap-4 rounded-xl border"
+                                                        class="payment-methods mt-4 flex h-20 w-44 cursor-pointer items-center justify-center gap-4 rounded-xl border"
                                                         style="background-image:url('{{ Storage::url($payment_method->image) }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
                                                         <input type="radio" name="payment_method"
                                                             id="{{ $payment_method->id }}"
@@ -330,10 +330,16 @@
                             <!-- Tab order -->
                             <div class="tab-content hidden" id="tab-order">
                                 <div>
-                                    <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
-                                        Confirmar pedido
-                                    </h2>
+                                    <div class="flex items-center gap-2">
+                                        <span class="rounded-full bg-secondary p-2.5">
+                                            <x-icon-store icon="shopping-basket-done" class="h-6 w-6 text-white" />
+                                        </span>
+                                        <h2 class="font-league-spartan text-2xl font-bold uppercase text-secondary">
+                                            Confirmar pedido
+                                        </h2>
+                                    </div>
                                     <div class="mt-4">
+                                        <!-- Info user -->
                                         <div>
                                             <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
                                                 Información del cliente
@@ -379,6 +385,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- End info user -->
+
+                                        <!-- Shipping method -->
+                                        <div class="mt-8">
+                                            <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
+                                                Método de envío
+                                            </h2>
+                                            @if ($cart->shippingMethod)
+                                                <div class="mt-4">
+                                                    <div>
+                                                        <h3 class="text-lg font-bold text-secondary">
+                                                            {{ $cart->shippingMethod->name }}
+                                                        </h3>
+                                                        <p class="text-zinc-600">
+                                                            {{ $cart->shippingMethod->description }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="flex flex-col gap-8 py-10">
+                                                    <p class="text-zinc-600">No hay dirección de envío registrada</p>
+                                                    <x-button-store type="a"
+                                                        href="{{ Route('account.addresses.create') }}"
+                                                        text="Agregar dirección" class="w-max text-sm"
+                                                        typeButton="secondary" />
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <!-- End shipping method -->
+
+                                        <!-- Address shipping -->
                                         <div class="mt-8">
                                             <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
                                                 Dirección de envío
@@ -452,6 +489,9 @@
                                                 </div>
                                             @endif
                                         </div>
+                                        <!-- End address shipping -->
+
+                                        <!-- Payment method -->
                                         <div class="mt-8">
                                             <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary">
                                                 Método de pago
@@ -480,6 +520,14 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <!-- End payment method -->
+                                    </div>
+                                    <div class="mt-4 flex justify-end">
+                                        <form action="{{ Route('orders.store') }}" method="POST">
+                                            @csrf
+                                            <x-button-store type="submit" text="Realizar pedido"
+                                                class="w-52 text-lg font-bold uppercase" typeButton="primary" />
+                                        </form>
                                     </div>
                                 </div>
                             </div>
