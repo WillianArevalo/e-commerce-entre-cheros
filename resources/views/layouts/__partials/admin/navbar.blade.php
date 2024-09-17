@@ -2,7 +2,7 @@
     <nav class="fixed top-0 z-30 w-full border-b border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black">
         <div class="py-3">
             <div class="flex items-center justify-between">
-                <div class="md:min-w-72 flex items-center justify-start ps-4 rtl:justify-end">
+                <div class="flex w-72 items-center justify-start ps-4 rtl:justify-end">
                     <button data-drawer-target="sidebar-multi-level-sidebar"
                         data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar"
                         type="button"
@@ -15,13 +15,23 @@
                             </path>
                         </svg>
                     </button>
-                    <a href="{{ route('admin.index') }}" class="flex md:me-24">
-                        <x-icon icon="logo" class="me-2 h-8 w-8 text-primary-700 dark:text-primary-700" />
-                        <span
-                            class="self-center whitespace-nowrap font-league-spartan text-xl font-bold text-primary-600 sm:text-2xl">
-                            Entre Cheros
-                        </span>
-                    </a>
+                    <div class="flex items-center gap-8">
+                        <a href="{{ route('admin.index') }}" class="flex items-center">
+                            <x-icon icon="logo" class="me-2 h-8 w-8 text-primary-700 dark:text-primary-700" />
+                            <span
+                                class="self-center whitespace-nowrap font-league-spartan text-xl font-bold text-primary-600 sm:text-2xl">
+                                Entre Cheros
+                            </span>
+                        </a>
+                        <a href="{{ Route('home') }}" data-tooltip-target="tooltip-default" target="_blank">
+                            <x-icon icon="external-link" class="h-6 w-6 text-zinc-700 dark:text-white" />
+                        </a>
+                        <div id="tooltip-default" role="tooltip"
+                            class="tooltip invisible absolute z-10 inline-block rounded-lg bg-zinc-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-zinc-900">
+                            Visitar sitio
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex w-auto items-center justify-end pe-4 md:w-full">
                     <div class="flex items-center gap-2">
@@ -228,6 +238,7 @@
                     'admin.sales-strategies.coupon.create',
                     'admin.sales-strategies.coupon.edit',
                     'admin.sales-strategies.shipping-methods.index',
+                    'admin.reviews.index',
                 ]) }} rounded-lg dark:text-white">
                 <button type="button"
                     class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current"
@@ -259,15 +270,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ Route('admin.reviews.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-zinc-900 transition duration-75 dark:text-white">
                             Administrar reseñas
                         </a>
                     </li>
                 </ul>
             </li>
-            <li
-                class="{{ \App\Helpers\RouteHelper::isActive(['admin.orders.index']) }} rounded-lg dark:text-white">
+            <li class="{{ \App\Helpers\RouteHelper::isActive(['admin.orders.index']) }} rounded-lg dark:text-white">
                 <a href="{{ Route('admin.orders.index') }}"
                     class="group flex w-full items-center rounded-lg p-2 text-base transition duration-75 dark:text-current">
                     <x-icon icon="orders"

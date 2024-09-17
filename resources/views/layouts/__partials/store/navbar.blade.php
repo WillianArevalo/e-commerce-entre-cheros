@@ -71,7 +71,7 @@
                             </li>
                             <hr class="border-t border-zinc-200">
                             <li class="mt-2 w-full">
-                                <a href="{{ Route('orders') }}"
+                                <a href="{{ Route('orders.index') }}"
                                     class="flex w-full items-center justify-start rounded-xl px-4 py-2 text-secondary hover:bg-blue-50 hover:text-primary">
                                     <x-icon-store icon="shopping-bag" class="mr-2 inline-block h-4 w-4 text-current" />
                                     Mis pedidos

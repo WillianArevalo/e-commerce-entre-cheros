@@ -8,9 +8,10 @@
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('images/imagen6.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')
-    @vite('resources/css/timeline.css')
     @vite('resources/js/app.js')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
     <!-- Theme switcher -->
     <script>
         (function() {
