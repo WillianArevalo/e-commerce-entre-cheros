@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\{
     PoliciesController,
     PopupController,
     ProductController,
+    ReviewController,
     SaleStrategyController,
     SettingsController,
     SettingsGeneralController,
@@ -120,4 +121,8 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
         Route::get("/", [SettingsGeneralController::class, "index"])->name("index");
         Route::post("/maintenance/update", [SettingsGeneralController::class, "maintenanceUpdate"])->name("maintenance.update");
     });
+
+    // Reviews 
+    Route::resource("/reviews", ReviewController::class);
+    Route::post("/reviews/status/{id}", [ReviewController::class, "changeStatus"])->name("reviews.status");
 });

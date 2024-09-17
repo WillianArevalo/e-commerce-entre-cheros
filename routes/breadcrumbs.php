@@ -241,6 +241,13 @@ Breadcrumbs::for("admin.sales-strategies.currencies.index", function (Breadcrumb
     $trail->push("Monedas", route("admin.sales-strategies.currencies.index"));
 });
 
+//Admin > Reviews
+Breadcrumbs::for("admin.reviews.index", function (BreadcrumbTrail $trail) {
+    $trail->parent("admin.index");
+    $icon = Blade::render("<x-icon icon='message' class='w-4 h-4' />");
+    $trail->push($icon . "Reseñas", route("admin.reviews.index"));
+});
+
 /*  Breadcrumbs Store  */
 Breadcrumbs::for("faq", function (BreadcrumbTrail $trail) {
     $trail->push("Preguntas frecuentes", route("faq"));

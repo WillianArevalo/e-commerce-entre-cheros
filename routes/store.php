@@ -78,9 +78,8 @@ Route::middleware("auth")->group(function () {
     });
 
     // Orders
-    Route::get("/orders", [OrderController::class, "index"])->name("orders");
     Route::post("/orders/info-add", [CustomerController::class, "store"])->name("customer.store");
-    Route::post("/orders/store", [OrderController::class, "store"])->name("orders.store");
+    Route::resource("/orders", OrderController::class);
 
     // Favorites
     Route::controller(FavoriteController::class)->group(function () {
