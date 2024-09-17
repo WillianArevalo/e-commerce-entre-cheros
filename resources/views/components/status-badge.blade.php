@@ -21,6 +21,6 @@
 @endswitch
 
 <span
-    class="bg-{{ $color }}-100 text-{{ $color }}-500 dark:bg-{{ $color }}-900 dark:text-{{ $color }}-300 inline-block rounded-full px-2 py-1 text-xs font-semibold uppercase">
-    {{ $status }}
+    class="bg-{{ $color }}-100 text-{{ $color }}-800 dark:bg-{{ $color }}-900 dark:text-{{ $color }}-300 w-max rounded-full px-2.5 py-0.5 text-xs font-medium dark:bg-opacity-20">
+    {{ ucfirst($status) }}
 </span>

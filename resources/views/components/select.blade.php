@@ -23,7 +23,7 @@
                 </li>
             @else
                 @foreach ($options as $value => $label)
-                    <li class="itemOption truncate rounded-lg px-4 py-3 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
+                    <li class="itemOption cursor-default truncate rounded-lg px-4 py-3 text-sm text-zinc-900 hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-900"
                         title="{{ $label }}" data-value="{{ $value }}"
                         data-input="#{{ $id }}">
                         {{ $label }}
