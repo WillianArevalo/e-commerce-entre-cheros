@@ -7,6 +7,7 @@ use App\Http\Requests\LoginAdminRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -23,16 +24,24 @@ class AuthController extends Controller
 
     public function validate(Request $request)
     {
-
         $rules = [
             "email" => "required|email",
             "password" => "required"
         ];
 
         $request->validate($rules);
-
         $credentials = $request->only("email", "password");
         $user = User::where("email", $credentials["email"])->first();
+
+        if (Auth::attempt($credentials, $request->filled("remember"))) {
+            $user->update(["last_login" => now()]);
+            $user->update(["last_ip_address" => $request->ip()]);
+            if ($user->role != "admin") {
+                return redirect()->attempt("/");
+            } else {
+                return redirect()->route("admin.index");
+            }
+        }
 
         if (!$user) {
             return redirect()->back()->with("error", "Usuario no encontrado")->withInput(request()->only("email"));
@@ -71,5 +80,29 @@ class AuthController extends Controller
         Auth::logout();
         session()->flush();
         return redirect()->back();
+    }
+
+    public function register(Request $request)
+    {
+        $rules = [
+            "name" => "required",
+            "last_name" => "required",
+            "email" => "required|email",
+            "password" => "required|confirmed"
+        ];
+        DB::beginTransaction();
+        try {
+            $request->validate($rules);
+            $validated = $request->all();
+            $validated["password"] = Hash::make($validated["password"]);
+            $validated["username"] = $validated["name"] . $validated["last_name"];
+            $user = User::create($validated);
+            Auth::login($user);
+            DB::commit();
+            return redirect()->route("home");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with("error", "Error al registrar el usuario. Error:" . $e->getMessage())->withInput(request()->all());
+        }
     }
 }

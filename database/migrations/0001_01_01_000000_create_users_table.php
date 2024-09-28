@@ -34,6 +34,8 @@ return new class extends Migration
             $table->string("last_ip_address")->nullable();
             $table->string("theme")->default(THEME::LIGHT);
             $table->string("color")->default("blue");
+            $table->string("google_id")->nullable();
+            $table->string("google_profile")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

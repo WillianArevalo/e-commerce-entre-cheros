@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function supportTickets()
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -55,6 +59,8 @@ class User extends Authenticatable
         "last_password_change",
         "last_ip_address",
         "theme",
+        "google_id",
+        "google_profile",
     ];
 
     /**

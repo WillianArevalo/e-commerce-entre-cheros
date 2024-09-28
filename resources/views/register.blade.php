@@ -1,7 +1,5 @@
 @extends('layouts.login-template')
-
-@section('title', 'Iniciar sesión')
-
+@section('title', 'Registrate')
 @section('content')
     <section class="flex h-screen w-full items-center justify-center">
         <div class="flex h-full w-full items-center justify-center">
@@ -10,7 +8,8 @@
                     <h1 class="font-league-spartan text-5xl font-bold text-secondary">Registrate</h1>
                 </div>
                 <div class="font-secondary mx-auto mt-4 w-4/5">
-                    <form action="">
+                    <form action="{{ Route('register.post') }}" id="form-register" method="POST">
+                        @csrf
                         <div class="flex gap-4">
                             <div class="flex flex-1 flex-col gap-2">
                                 <x-input-store name="name" id="name" label="Nombre"
@@ -21,37 +20,47 @@
                                     placeholder="Ingresa tu apellido aquí" autocomplete="off" type="text" />
                             </div>
                         </div>
-                        <div class="mt-4 flex gap-4">
-                            <div class="flex flex-1 flex-col gap-2">
-                                <x-input-store id="birthdate" name="birthdate" autocomplete="off" type="date"
-                                    label="Fecha de nacimiento" />
-                            </div>
-                            <div class="flex flex-1 flex-col gap-2">
-                                <x-input-store id="phone" type="text" name="phone"
-                                    placeholder="Ingresa tu telefono aquí" label="Telefono" icon="call" />
-                            </div>
-                            <div class="flex flex-1 flex-col gap-2">
-                                <x-select-store label="Género" id="gender" name="gender" :options="['male' => 'Masculino', 'female' => 'Femenino']" />
-                            </div>
-                        </div>
                         <div class="mt-4 flex flex-1 flex-col gap-2">
                             <x-input-store type="email" name="email" id="email"
                                 placeholder="Ingresa tu correo eletrónico" label="Correo electrónico" icon="mail" />
                         </div>
                         <div class="mt-4 flex gap-4">
                             <div class="flex flex-1 flex-col gap-2">
-                                <x-input-store type="password" name="password" id="password"
+                                <x-input-store type="password" name="password" id="password-register"
                                     placeholder="Ingresa la contraseña" icon="password" label="Contraseña" />
+                                <ul id="password-requirements" class="hidden text-start text-xs">
+                                    <li id="char-length" class="text-red-500">Debe tener al menos 8 caracteres</li>
+                                    <li id="upper-case" class="text-red-500">Debe tener al menos una letra mayúscula</li>
+                                    <li id="number" class="text-red-500">Debe tener al menos un número</li>
+                                    <li id="special-char" class="text-red-500">
+                                        Debe tener al menos un carácter especial (@,
+                                        #, $, etc.)
+                                    </li>
+                                </ul>
                             </div>
                             <div class="flex flex-1 flex-col gap-2">
-                                <x-input-store type="password" name="confirm-password" id="confirm-password"
+                                <x-input-store type="password" name="password_confirmation" id="confirm-password"
                                     placeholder="Ingresa la contraseña" icon="password-validation"
                                     label="Confirmar contraseña" />
+                                <span id="password-match" class="hidden text-start text-xs text-red-500">Las contraseñas no
+                                    coinciden</span>
                             </div>
                         </div>
                         <div class="mt-8 flex items-center justify-center">
                             <x-button-store type="submit" typeButton="primary" class="px-11 font-bold"
                                 text="Registrarte" />
+                        </div>
+                        <div class="mt-4">
+                            <span class="text-sm text-zinc-500">O</span>
+                            <div class="mt-4 flex justify-center gap-2">
+                                <a href="{{ Route('auth.google') }}"
+                                    class="flex items-center gap-2 rounded-xl border border-zinc-300 px-6 py-3 text-sm text-zinc-700 hover:bg-zinc-100">
+                                    <x-icon-store icon="google" class="h-5 w-5 text-current" />
+                                    <span class="ms-2">
+                                        Registrarte con Google
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                         <div class="mt-4 flex flex-col">
                             <span class="mt-2 text-sm text-zinc-500">¿Ya tienes una cuenta?
