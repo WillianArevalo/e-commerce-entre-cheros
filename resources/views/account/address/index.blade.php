@@ -16,12 +16,12 @@
                             </h3>
                             <div class="mt-4 flex gap-6">
                                 <form action="{{ Route('account.addresses.destroy', $address->id) }}" method="POST"
-                                    id="formDelteAddress-{{ $address->id }}">
+                                    id="formDeleteAddress-{{ $address->id }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button"
                                         class="buttonDelete group flex items-center justify-center gap-1 text-sm font-medium text-red-500 transition-transform duration-300 ease-in-out hover:scale-105 hover:font-semibold hover:text-red-700"
-                                        data-form="formDelteAddress-{{ $address->id }}">
+                                        data-form="formDeleteAddress-{{ $address->id }}">
                                         Eliminar
                                         <x-icon-store icon="delete" class="h-4 w-4 text-current" />
                                     </button>

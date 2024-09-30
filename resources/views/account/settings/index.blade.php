@@ -106,43 +106,61 @@
                             <h3 class="text-base font-semibold text-zinc-700">
                                 Dirección
                             </h3>
-                            <a href="{{ Route('account.addresses.index') }}"
-                                class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-green-500">
-                                Editar dirección
-                                <x-icon-store icon="arrow-right-02"
-                                    class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
-                            </a>
+                            @if ($user->customer && $user->customer->address)
+                                <a href="{{ Route('account.addresses.index') }}"
+                                    class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-green-500">
+                                    Editar dirección
+                                    <x-icon-store icon="arrow-right-02"
+                                        class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                                </a>
+                            @else
+                                <a href="{{ Route('account.addresses.create') }}"
+                                    class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-blue-500">
+                                    Agregar dirección
+                                    <x-icon-store icon="arrow-right-02"
+                                        class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                                </a>
+                            @endif
+
                         </div>
-                        <div class="mt-3 flex gap-2">
-                            <h4 class="font-medium text-secondary">País:</h4>
-                            <p class="text-zinc-800">
-                                {{ $user->customer->address->country }}
-                            </p>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <h4 class="font-medium text-secondary">Dirección:</h4>
-                            <p class="text-zinc-800">
-                                {{ $user->customer->address->address_line_1 . ', ' . $user->customer->address->address_line_2 }}
-                            </p>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <h4 class="font-medium text-secondary">Código postal:</h4>
-                            <p class="text-zinc-800">
-                                {{ $user->customer->address->zip_code }}
-                            </p>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <h4 class="font-medium text-secondary">Estado:</h4>
-                            <p class="text-zinc-800">
-                                {{ $user->customer->address->state ?? '---' }}
-                            </p>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <h4 class="font-medium text-secondary">Ciudad:</h4>
-                            <p class="text-zinc-800">
-                                {{ $user->customer->address->city ?? '---' }}
-                            </p>
-                        </div>
+                        @if ($user->customer && $user->customer->address)
+                            <div class="mt-3 flex gap-2">
+                                <h4 class="font-medium text-secondary">País:</h4>
+                                <p class="text-zinc-800">
+                                    {{ $user->customer->address->country }}
+                                </p>
+                            </div>
+                            <div class="mt-3 flex gap-2">
+                                <h4 class="font-medium text-secondary">Dirección:</h4>
+                                <p class="text-zinc-800">
+                                    {{ $user->customer->address->address_line_1 . ', ' . $user->customer->address->address_line_2 }}
+                                </p>
+                            </div>
+                            <div class="mt-3 flex gap-2">
+                                <h4 class="font-medium text-secondary">Código postal:</h4>
+                                <p class="text-zinc-800">
+                                    {{ $user->customer->address->zip_code }}
+                                </p>
+                            </div>
+                            <div class="mt-3 flex gap-2">
+                                <h4 class="font-medium text-secondary">Estado:</h4>
+                                <p class="text-zinc-800">
+                                    {{ $user->customer->address->state ?? '---' }}
+                                </p>
+                            </div>
+                            <div class="mt-3 flex gap-2">
+                                <h4 class="font-medium text-secondary">Ciudad:</h4>
+                                <p class="text-zinc-800">
+                                    {{ $user->customer->address->city ?? '---' }}
+                                </p>
+                            </div>
+                        @else
+                            <div class="mt-3 rounded-xl border-2 border-dashed border-zinc-300 bg-zinc-100 p-8 text-sm">
+                                <p class="text-center text-zinc-800">
+                                    No has definido una dirección
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
