@@ -58,7 +58,8 @@
                             <li class="mb-2 w-full">
                                 <a href="{{ Route('account.index') }}"
                                     class="flex items-center justify-start rounded-xl px-4 py-2 hover:bg-zinc-100">
-                                    <img src="{{ Storage::url($user->profile) }}" alt=""
+                                    <img src="{{ $user->google_id ? $user->google_profile : Storage::url($user->profile) }}"
+                                        alt="Profile picture {{ $user->name }}"
                                         class="min-w-12 h-12 rounded-full object-cover">
                                     <div class="ml-2">
                                         <span class="block text-sm text-secondary">Hola,</span>

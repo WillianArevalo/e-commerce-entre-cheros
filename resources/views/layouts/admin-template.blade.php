@@ -171,12 +171,12 @@
     </main>
 </body>
 
-<div class="dark:bg-opacity-65 fixed inset-0 z-30 hidden bg-zinc-900 dark:bg-zinc-900" id="modal-search">
+<div class="dark:bg-opacity-65 bg-opacity-65 fixed inset-0 z-30 hidden bg-zinc-900 dark:bg-zinc-900" id="modal-search">
     <!-- Modal search -->
     <div class="mt-20 flex h-screen justify-center">
-        <div class="h-max w-full max-w-lg animate-jump-in overflow-hidden rounded-lg bg-white animate-duration-300 animate-once dark:bg-black"
+        <div class="h-max w-full max-w-lg animate-jump-in overflow-hidden rounded-xl bg-white animate-duration-300 animate-once dark:bg-black"
             id="content-modal-search">
-            <div class="flex items-center border-b border-zinc-400 dark:border-zinc-800">
+            <div class="flex items-center border-b border-zinc-300 dark:border-zinc-900">
                 <div class="flex w-full items-center px-4 py-1">
                     <x-icon icon="search" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                     <input type="text"
@@ -185,10 +185,10 @@
                 </div>
             </div>
             <div>
-                <div class="bg-black text-zinc-900 dark:text-white">
+                <div class="bg-white text-zinc-900 dark:bg-black dark:text-white">
                     <div class="p-4">
                         <!-- Recent Searches -->
-                        <h3 class="text-xs uppercase text-zinc-400 dark:text-zinc-500">Recent Searches</h3>
+                        <h3 class="text-xs uppercase text-zinc-700 dark:text-zinc-500">Recent Searches</h3>
                         <ul class="mt-2 space-y-2 text-sm text-zinc-500 dark:text-zinc-300">
                             <li class="flex items-center">
                                 <x-icon icon="search-list" class="mr-2 h-4 w-4 text-gray-500" />
@@ -202,7 +202,7 @@
                         </ul>
                     </div>
                     <div class="border-t border-zinc-400 p-4 dark:border-zinc-800">
-                        <h3 class="text-xs uppercase text-zinc-400 dark:text-zinc-500">Recent Pages</h3>
+                        <h3 class="text-xs uppercase text-zinc-700 dark:text-zinc-500">Recent Pages</h3>
                         <ul class="mt-2 space-y-2 text-sm text-zinc-500 dark:text-zinc-300">
                             <li class="flex items-center">
                                 <x-icon icon="app-window" class="mr-2 h-4 w-4 text-gray-500" />

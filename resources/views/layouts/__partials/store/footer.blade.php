@@ -42,7 +42,7 @@
                         <li class="footer-item group group w-max">
                             <a href="{{ Route('home') }}" class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="home" class="h-5 w-5 text-current" />
                                 </span>
                                 Incio
                             </a>
@@ -50,7 +50,7 @@
                         <li class="footer-item group group w-max">
                             <a href="{{ Route('store') }}" class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="store" class="h-5 w-5 text-current" />
                                 </span>
                                 Tienda
                             </a>
@@ -88,7 +88,7 @@
                             <a href="{{ Route('account.index') }}"
                                 class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="user" class="h-5 w-5 text-current" />
                                 </span>
                                 Cuenta
                             </a>
@@ -97,7 +97,7 @@
                             <a href="{{ Route('favorites') }}"
                                 class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="favourite" class="h-5 w-5 text-current" />
                                 </span>
                                 Favoritos
                             </a>
@@ -105,7 +105,7 @@
                         <li class="footer-item group group w-max">
                             <a href="{{ Route('login') }}" class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="login-02" class="h-5 w-5 text-current" />
                                 </span>
                                 Iniciar sesión
                             </a>
@@ -114,7 +114,7 @@
                             <a href="{{ Route('register') }}"
                                 class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="user-add" class="h-5 w-5 text-current" />
                                 </span>
                                 Registrarte
                             </a>
@@ -140,7 +140,7 @@
                         <li class="footer-item group group w-max">
                             <a href="{{ Route('faq') }}" class="footer-link flex items-center justify-between gap-2">
                                 <span class="arrow-icon">
-                                    <x-icon-store icon="arrow-right-02" class="h-5 w-5 text-current" />
+                                    <x-icon-store icon="cookie" class="h-5 w-5 text-current" />
                                 </span>
                                 Cookies
                             </a>
