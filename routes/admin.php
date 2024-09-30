@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\{
     SubCategorieController,
     SupportTicketController,
     TaxController,
+    TicketCommentController,
     UserController
 };
 
@@ -102,10 +103,14 @@ Route::middleware("role:admin")->prefix("admin")->name("admin.")->group(function
 
     // Support Tickets
     Route::resource("/support-tickets", SupportTicketController::class);
+    Route::resource("/ticket-comment", TicketCommentController::class);
+    Route::post("/support-tickets/asign/{id}", [SupportTicketController::class, "asign"])->name("support-tickets.asign");
+
 
     // Orders
     Route::resource("/orders", OrderController::class);
     Route::post("/order/status/{id}", [OrderController::class, "changeStatus"])->name("orders.status");
+    Route::post("/orders/payment-status/{id}", [OrderController::class, "changePaymentStatus"])->name("orders.payment-status");
 
     // Sales Strategies
     Route::prefix("sales-strategies")->name("sales-strategies.")->group(function () {

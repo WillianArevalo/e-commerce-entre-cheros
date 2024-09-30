@@ -20,7 +20,8 @@ use App\Http\Controllers\Store\{
     HomeController,
     ReviewController,
     StoreController,
-    CartController
+    CartController,
+    SupportTicketController
 };
 
 // Public Routes
@@ -75,10 +76,16 @@ Route::middleware("auth")->group(function () {
         Route::get("/change-password", [AccountController::class, "changePassword"])->name("change-password");
         Route::post("/edit-password", [AccountController::class, "editPassword"])->name("edit-password");
         Route::resource("/addresses", AddressController::class);
+        Route::resource("/tickets", SupportTicketController::class);
+        Route::post("/tickets/{id}/close", [SupportTicketController::class, "close"])->name("tickets.close");
     });
 
     // Orders
     Route::post("/orders/info-add", [CustomerController::class, "store"])->name("customer.store");
+    Route::get("/orders/{number_order}", [OrderController::class, "show"])->name("orders.show");
+    Route::post("/order/cancel/{id}", [OrderController::class, "cancel"])->name("order.cancel");
+    Route::post("/order/add-comment/{id}", [OrderController::class, "addComment"])->name("order.add-comment");
+    Route::post("/order-remove-comment/{id}", [OrderController::class, "removeComment"])->name("order.remove-comment");
     Route::resource("/orders", OrderController::class);
 
     // Favorites
