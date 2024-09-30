@@ -30,6 +30,8 @@ import "./settings";
 import "./customer";
 import "./order";
 import "./reviews";
+import "./ticket";
+import "./register";
 import { initSwiper } from "./swiper";
 
 initSwiper();
