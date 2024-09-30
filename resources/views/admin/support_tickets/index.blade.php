@@ -1,266 +1,196 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Tickets de soporte')
-
 @section('content')
-    <div class="mt-4 rounded-lg">
-        <div class="flex flex-col items-start border-y px-4 py-4 shadow-sm dark:border-zinc-800 dark:bg-black">
-            <h1 class="font-secondary text-2xl font-bold text-secondary dark:text-blue-400">
-                Tickets de soporte
-            </h1>
-            <p class="text-sm text-zinc-400">
-                Administra los tickets de soporte de los usuarios
-            </p>
-        </div>
+    <div class="rounded-lg">
+        @include('layouts.__partials.admin.header-page', [
+            'title' => 'Tickets de soporte',
+            'description' => 'Administra los tickets de soporte de tu plataforma',
+        ])
         <div class="bg-zinc-50 p-4 dark:bg-black">
-            <div class="mx-auto w-full">
-                <div class="relative bg-white shadow-md dark:border dark:border-zinc-800 dark:bg-black sm:rounded-lg">
-                    <div class="mb-4 border-b border-zinc-400 dark:border-zinc-800">
-                        <ul class="-mb-px flex flex-wrap text-center text-sm font-medium" id="default-tab"
-                            data-tabs-toggle="#default-tab-content" role="tablist">
-                            <li class="me-2" role="presentation">
-                                <button class="inline-block rounded-t-lg border-b-2 p-4" id="profile-tab"
-                                    data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
-                                    aria-selected="false">
-                                    <div
-                                        class="flex items-center justify-center gap-2 rounded-full bg-black px-3 py-2 text-white dark:bg-white dark:text-black">
-                                        Todos los tickets
-                                        <span
-                                            class="flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white">
-                                            2
-                                        </span>
-                                    </div>
-                                </button>
-                            </li>
-                            <li class="me-2" role="presentation">
-                                <button
-                                    class="inline-block rounded-t-lg border-b-2 p-4 hover:border-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
-                                    id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
-                                    aria-controls="dashboard" aria-selected="false">
-                                    <div
-                                        class="flex items-center justify-center gap-2 rounded-full border border-zinc-400 bg-white px-3 py-2 text-black dark:border-zinc-800 dark:bg-black dark:text-white">
-                                        Asignados a mí
-                                        <span
-                                            class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-white">
-                                            0
-                                        </span>
-                                    </div>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="default-tab-content">
-                        <div class="hidden" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div
-                                class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
-                                <div class="w-full md:w-1/2">
-                                    <form class="flex items-center" action="{{ route('admin.categories.search') }}"
-                                        id="formSearchProduct">
-                                        @csrf
-                                        <x-input type="text" id="inputSearch" name="inputSearch"
-                                            data-form="#formSearchProduct" data-table="#tableProduct" placeholder="Buscar"
-                                            icon="search" />
-                                    </form>
-                                </div>
-                                <div
-                                    class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
-                                    <div class="flex w-full items-center space-x-3 md:w-auto">
-                                        <div class="w-32">
-                                            <x-select label="" id="priority" name="priority" selected=""
-                                                text="Prioridad" value="" :options="[
-                                                    'low' => 'Baja',
-                                                    ',medium' => 'Media',
-                                                    'high' => 'Alta',
-                                                    'urgent' => 'Urgente',
-                                                ]" />
-                                        </div>
-                                        <div class="w-36">
-                                            <x-select label="" id="status" name="status" selected=""
-                                                text="Estado" value="" :options="[
-                                                    'open' => 'Abierto',
-                                                    ',in_progress' => 'En progreso',
-                                                    'resolved' => 'Resuelto',
-                                                    'closed' => 'Cerrado',
-                                                ]" />
-                                        </div>
-                                        <div class="w-36">
-                                            <x-select label="" id="category" name="category" selected=""
-                                                text="Categoría" value="" :options="[
-                                                    'billing' => 'Facturación',
-                                                    'system' => 'Sistema',
-                                                    'buy' => 'Compra',
-                                                    'general' => 'General',
-                                                ]" />
-                                        </div>
-                                        <div class="w-48">
-                                            <x-select label="" id="asigned_to" name="asigned_to" selected=""
-                                                text="Asignado a" value="" :options="$users->pluck('name', 'id')->toArray()" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                                <thead
-                                    class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
-                                    <tr>
-                                        <th scope="col" class="px-4 py-3">#</th>
-                                        <th scope="col" class="px-4 py-3">Asunto</th>
-                                        <th scope="col" class="px-4 py-3">Estado</th>
-                                        <th scope="col" class="px-4 py-3">Prioridad</th>
-                                        <th scope="col" class="px-4 py-3">Categoría</th>
-                                        <th scope="col" class="px-4 py-3">Asignado a</th>
-                                        <th scope="col" class="px-4 py-3">Fecha de creación</th>
-                                        <th scope="col" class="px-4 py-3">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="font-secondary text-sm">
-                                    <tr>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">1</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Problema con la factura</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Abierto</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Alta</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Facturación</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Juan Pérez</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">12/12/2021</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center space-x-2">
-                                                <x-button type="a" icon="edit" typeButton="success"
-                                                    href="" onlyIcon="true" />
-                                                <form action="" id="formDeleteCategorie" method="POST">
+            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="-mb-px flex flex-wrap text-center text-sm font-medium" id="default-styled-tab"
+                    data-tabs-toggle="#default-styled-tab-content"
+                    data-tabs-active-classes="text-primary-600 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-500 border-primary-600 dark:border-primary-500"
+                    data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                    role="tablist">
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block rounded-t-lg border-b-2 p-4" id="profile-styled-tab"
+                            data-tabs-target="#styled-profile" type="button" role="tab" aria-controls="profile"
+                            aria-selected="false">
+                            Todos los tickets
+                        </button>
+                    </li>
+                    <li class="me-2" role="presentation">
+                        <button
+                            class="inline-block rounded-t-lg border-b-2 p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                            id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab"
+                            aria-controls="dashboard" aria-selected="false">
+                            Tickets abiertos
+                        </button>
+                    </li>
+                    <li class="me-2" role="presentation">
+                        <button
+                            class="inline-block rounded-t-lg border-b-2 p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                            id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab"
+                            aria-controls="settings" aria-selected="false">
+                            Mis tickets
+                        </button>
+                    </li>
+                    <li role="presentation">
+                        <button
+                            class="inline-block rounded-t-lg border-b-2 p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                            id="contacts-styled-tab" data-tabs-target="#styled-contacts" type="button" role="tab"
+                            aria-controls="contacts" aria-selected="false">Contacts</button>
+                    </li>
+                </ul>
+            </div>
+            <div id="default-styled-tab-content">
+                <div class="hidden" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <x-table>
+                        <x-slot name="thead">
+                            <x-th class="w-10">
+                                <input id="default-checkbox" type="checkbox" value=""
+                                    class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                            </x-th>
+                            <x-th>
+                                Número de ticket
+                            </x-th>
+                            <x-th>Asunto</x-th>
+                            <x-th>Usuario</x-th>
+                            <x-th>Estado</x-th>
+                            <x-th>Prioridad</x-th>
+                            <x-th>Categoría</x-th>
+                            <x-th>Asignado a</x-th>
+                            <x-th last>Acciones</x-th>
+                        </x-slot>
+                        <x-slot name="tbody">
+                            @if ($tickets->count() > 0)
+                                @foreach ($tickets as $ticket)
+                                    <x-tr>
+                                        <x-td>
+                                            <input id="default-checkbox" type="checkbox" value=""
+                                                class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-primary-600">
+                                        </x-td>
+                                        <x-td>
+                                            {{ $ticket->ticket_number }}
+                                        </x-td>
+                                        <x-td>
+                                            {{ $ticket->subject }}
+                                        </x-td>
+                                        <x-td>
+                                            <div>
+                                                <img src="{{ Storage::url($ticket->user->profile) }}"
+                                                    alt="{{ $ticket->user->name }} profile"
+                                                    class="h-8 w-8 rounded-full object-cover"
+                                                    data-tooltip-target="tooltip-user-{{ $ticket->user->id }}">
+                                            </div>
+                                            <div id="tooltip-user-{{ $ticket->user->id }}" role="tooltip"
+                                                class="tooltip invisible absolute z-10 rounded-lg border border-zinc-400 bg-zinc-100 px-3 py-2 text-xs font-medium text-zinc-800 opacity-0 shadow-sm transition-opacity duration-300 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+                                                <div class="flex flex-col items-center gap-1">
+                                                    <p>
+                                                        {{ $ticket->user->name }}
+                                                    </p>
+                                                    <p>
+                                                        {{ $ticket->user->email }}
+                                                    </p>
+                                                </div>
+                                                <div class="tooltip-arrow" data-popper-arrow>
+                                                </div>
+                                            </div>
+                                        </x-td>
+                                        <x-td>
+                                            <x-status-badge status="{{ $ticket->status }}" />
+                                        </x-td>
+                                        <x-td>
+                                            <x-status-badge status="{{ $ticket->priority }}" />
+                                        </x-td>
+                                        <x-td>
+                                            {{ App\Utils\CategoryTickets::getCategory($ticket->category) }}
+                                        </x-td>
+                                        <x-td>
+                                            {{ $ticket->assigned_to }}
+                                        </x-td>
+                                        <x-td>
+                                            <div class="flex items-center gap-2">
+
+                                                <x-button icon="view" type="a"
+                                                    href="{{ Route('admin.support-tickets.show', $ticket->id) }}" onlyIcon
+                                                    typeButton="secondary" />
+                                                <x-button icon="message" type="a"
+                                                    href="{{ Route('admin.support-tickets.show', $ticket->id) }}"
+                                                    typeButton="secondary" onlyIcon />
+                                                <div class="relative">
+                                                    <x-button type="button" icon="user-star" typeButton="secondary"
+                                                        onlyIcon="true" class="show-options" />
+                                                    <div
+                                                        class="options absolute right-0 top-11 z-10 hidden w-max rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
+                                                        <p class="font-semibold text-zinc-800 dark:text-zinc-300">
+                                                            Asignar ticket a
+                                                        </p>
+                                                        <form
+                                                            action="{{ Route('admin.support-tickets.asign', $ticket->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <ul class="mt-2 flex flex-col text-sm">
+                                                                @foreach ($users as $user)
+                                                                    <li class="w-full">
+                                                                        <button type="button"
+                                                                            class="assign-ticket flex w-full items-center gap-1 rounded-lg px-2 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:bg-opacity-70"
+                                                                            data-user="{{ $user->id }}">
+                                                                            <img src="{{ Storage::url($user->profile) }}"
+                                                                                alt="{{ $user->name }} profile"
+                                                                                class="h-6 w-6 rounded-full object-cover">
+                                                                            {{ $user->name }}
+                                                                        </button>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <form action="{{ route('admin.support-tickets.destroy', $ticket->id) }}"
+                                                    id="formDeleteTicket-{{ $ticket->id }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <x-button type="button" data-form="formDeleteCategorie"
-                                                        icon="delete" typeButton="danger" class="buttonDelete"
-                                                        onlyIcon="true" />
+                                                    <x-button type="button"
+                                                        data-form="formDeleteTicket-{{ $ticket->id }}"
+                                                        class="buttonDelete" onlyIcon="true" icon="delete"
+                                                        typeButton="danger" data-modal-target="deleteModal"
+                                                        data-modal-toggle="deleteModal" />
                                                 </form>
-                                                <x-button type="a" icon="view" typeButton="secondary"
-                                                    href="{{ route('admin.support-tickets.show', 1) }}" onlyIcon="true" />
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="hidden" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                            <div
-                                class="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
-                                <div class="w-full md:w-1/2">
-                                    <form class="flex items-center" action="{{ route('admin.categories.search') }}"
-                                        id="formSearchProduct">
-                                        @csrf
-                                        <x-input type="text" id="inputSearch" name="inputSearch"
-                                            data-form="#formSearchProduct" data-table="#tableProduct"
-                                            placeholder="Buscar" icon="search" />
-                                    </form>
-                                </div>
-                                <div
-                                    class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
-                                    <div class="flex w-full items-center space-x-3 md:w-auto">
-                                        <div class="w-32">
-                                            <x-select label="" id="priority" name="priority" selected=""
-                                                text="Prioridad" value="" :options="[
-                                                    'low' => 'Baja',
-                                                    ',medium' => 'Media',
-                                                    'high' => 'Alta',
-                                                    'urgent' => 'Urgente',
-                                                ]" />
+                                        </x-td>
+                                    </x-tr>
+                                @endforeach
+                            @else
+                                <x-tr>
+                                    <x-td colspan="9">
+                                        <div class="flex items-center justify-center space-x-2 p-8">
+                                            <x-icon icon="alert-circle"
+                                                class="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
+                                            <span class="text-zinc-500 dark:text-zinc-400">
+                                                No se encontraron registros
+                                            </span>
                                         </div>
-                                        <div class="w-36">
-                                            <x-select label="" id="status" name="status" selected=""
-                                                text="Estado" value="" :options="[
-                                                    'open' => 'Abierto',
-                                                    ',in_progress' => 'En progreso',
-                                                    'resolved' => 'Resuelto',
-                                                    'closed' => 'Cerrado',
-                                                ]" />
-                                        </div>
-                                        <div class="w-36">
-                                            <x-select label="" id="category" name="category" selected=""
-                                                text="Categoría" value="" :options="[
-                                                    'billing' => 'Facturación',
-                                                    'system' => 'Sistema',
-                                                    'buy' => 'Compra',
-                                                    'general' => 'General',
-                                                ]" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                                <thead
-                                    class="bg-zinc-50 text-xs uppercase text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
-                                    <tr>
-                                        <th scope="col" class="px-4 py-3">#</th>
-                                        <th scope="col" class="px-4 py-3">Asunto</th>
-                                        <th scope="col" class="px-4 py-3">Estado</th>
-                                        <th scope="col" class="px-4 py-3">Prioridad</th>
-                                        <th scope="col" class="px-4 py-3">Categoría</th>
-                                        <th scope="col" class="px-4 py-3">Asignado a</th>
-                                        <th scope="col" class="px-4 py-3">Fecha de creación</th>
-                                        <th scope="col" class="px-4 py-3">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="font-secondary text-sm">
-                                    <tr>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">1</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Problema con la factura</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Abierto</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Alta</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Facturación</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">Juan Pérez</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <span class="font-medium">12/12/2021</span>
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center space-x-2">
-                                                <x-button type="a" icon="edit" typeButton="success"
-                                                    href="" onlyIcon="true" />
-                                                <form action="" id="formDeleteCategorie" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-button type="button" data-form="formDeleteCategorie"
-                                                        icon="delete" typeButton="danger" class="buttonDelete"
-                                                        onlyIcon="true" />
-                                                </form>
-                                                <x-button type="a" icon="view" typeButton="secondary"
-                                                    href="{{ route('admin.support-tickets.show', 1) }}" onlyIcon="true" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                    </x-td>
+                                </x-tr>
+                            @endif
+                        </x-slot>
+                    </x-table>
+                </div>
+                <div class="hidden p-4" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+
+                </div>
+                <div class="hidden p-4" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
+
+                </div>
+                <div class="hidden p-4" id="styled-contacts" role="tabpanel" aria-labelledby="contacts-tab">
+
                 </div>
             </div>
         </div>
-        <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar el usuario?"
+
+        <x-delete-modal modalId="deleteModal" title="¿Estás seguro de eliminar el ticket de soporte?"
             message="No podrás recuperar este registro" action="" />
     </div>
 @endsection
