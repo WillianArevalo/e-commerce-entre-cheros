@@ -49,6 +49,14 @@ class Order extends Model
         return $this->belongsTo(Coupon::class);
     }
 
+    protected $casts = [
+        "shipped_at" => "datetime",
+        "delivered_at" => "datetime",
+        "cancelled_at" => "datetime",
+        "completed_at" => "datetime",
+        "estimated_delivery" => "datetime",
+    ];
+
     protected $fillable = [
         "number_order",
         "status",

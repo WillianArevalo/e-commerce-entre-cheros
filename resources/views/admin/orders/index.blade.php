@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4">
+                    <div class="mx-4 mb-4">
                         <x-table>
                             <x-slot name="thead">
                                 <x-tr>
@@ -77,6 +77,7 @@
                                     <x-th>Total</x-th>
                                     <x-th>Fecha creado</x-th>
                                     <x-th>Estado</x-th>
+                                    <x-th>Pago</x-th>
                                     <x-th :last="true">Acciones</x-th>
                                 </x-tr>
                             </x-slot>
@@ -105,7 +106,10 @@
                                             <x-td>${{ $order->total }}</x-td>
                                             <x-td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M, Y') }}</x-td>
                                             <x-td>
-                                                <x-status-badge status="{{ $order->status }}" color="yellow" />
+                                                <x-status-badge status="{{ $order->status }}" />
+                                            </x-td>
+                                            <x-td>
+                                                <x-status-badge status="{{ $order->payment_status }}" />
                                             </x-td>
                                             <x-td>
                                                 <div class="items center flex justify-center gap-2">
@@ -145,6 +149,15 @@
                                                                             data-status="completed">
                                                                             <x-icon icon="check" class="h-4 w-4" />
                                                                             Completado
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button type="button"
+                                                                            class="change-status-order flex w-full items-center gap-1 rounded-lg px-2 py-2 text-blue-700 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-950 dark:hover:bg-opacity-20"
+                                                                            data-status="sent">
+                                                                            <x-icon icon="package-import"
+                                                                                class="h-4 w-4" />
+                                                                            Enviado
                                                                         </button>
                                                                     </li>
                                                                     <li>

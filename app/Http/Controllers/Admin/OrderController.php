@@ -82,6 +82,9 @@ class OrderController extends Controller
                     case "completed":
                         $order->update(["completed_at" => $dateNow, "cancelled_at" => null]);
                         break;
+                    case "sent":
+                        $order->update(["shipped_at" => $dateNow, "cancelled_at" => null]);
+                        break;
                     case "canceled":
                         $order->update(["cancelled_at" => $dateNow, "completed_at" => null]);
                         break;
@@ -96,6 +99,23 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with("error", "Error al actualizar el estado de la orden: " . $e->getMessage());
+        }
+    }
+
+    public function changePaymentStatus(Request $request, string $id)
+    {
+        DB::beginTransaction();
+        try {
+            $order = Order::find($id);
+            if ($order) {
+                $order->update(["payment_status" => $request->status]);
+                DB::commit();
+                return redirect()->route("admin.orders.index")->with("success", "Estado de pago de la orden actualizado correctamente");
+            }
+            throw new \Exception("Orden no encontrada");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with("error", "Error al actualizar el estado de pago de la orden: " . $e->getMessage());
         }
     }
 }

@@ -10,6 +10,28 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+
+    public function index()
+    {
+        $orders = auth()->user()->customer->orders;
+
+        $ordersPending = $orders->filter(function ($order) {
+            return $order->status === "pending";
+        });
+
+        $ordersApproved =
+            $orders->filter(function ($order) {
+                return $order->status === "completed" || $order->status === "sent";
+            });
+
+        $ordersRejected =
+            $orders->filter(function ($order) {
+                return $order->status === "canceled";
+            });
+
+        return view("orders.index", compact("orders", "ordersPending", "ordersApproved", "ordersRejected"));
+    }
+
     public function store()
     {
         DB::beginTransaction();
@@ -47,6 +69,62 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with("error", "Error al crear la orden: " . $e->getMessage());
+        }
+    }
+
+    public function show(string $numberOrder)
+    {
+        $order = Order::with("items.product", "customer", "address", "currency", "shipping_method", "payment_method")->where("number_order", $numberOrder)->firstOrFail();
+        return view("orders.show", compact("order"));
+    }
+
+    public function cancel(string $id)
+    {
+        DB::beginTransaction();
+        try {
+            $order = Order::findOrFail($id);
+            $order->update([
+                "status" => "canceled",
+                "cancelled_at" => now(),
+                "reason_canceled" => request("reason_canceled")
+            ]);
+            DB::commit();
+            return back()->with("success", "Pedido cancelado correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with("error", "Error al cancelar la orden: " . $e->getMessage());
+        }
+    }
+
+    public function addComment(Request $request, string $id)
+    {
+        DB::beginTransaction();
+        try {
+            $order = Order::findOrFail($id);
+            $order->update([
+                "customer_notes" => $request->customer_notes,
+            ]);
+            DB::commit();
+            return back()->with("success", "Comentario agregado correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with("error", "Error al agregar el comentario: " . $e->getMessage());
+        }
+    }
+
+    public function removeComment(string $id)
+    {
+        DB::beginTransaction();
+        try {
+            $order = Order::findOrFail($id);
+            $order->update([
+                "customer_notes" => null,
+            ]);
+            DB::commit();
+            return back()->with("success", "Comentario eliminado correctamente");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with("error", "Error al eliminar el comentario: " . $e->getMessage());
         }
     }
 
