@@ -2,7 +2,7 @@
 @section('profile-content')
     <div class="flex flex-col">
         <div class="mb-4 border-b border-zinc-400">
-            <ul class="-mb-px flex flex-wrap text-center text-sm font-medium" id="default-tab"
+            <ul class="-mb-px flex flex-wrap text-center text-base font-medium" id="default-tab"
                 data-tabs-toggle="#default-tab-content" role="tablist">
                 <li class="me-2" role="presentation">
                     <button class="inline-block rounded-t-lg border-b-2 p-4" id="all-orders" data-tabs-target="#orders"
@@ -36,66 +36,460 @@
         <div class="mb-4 flex gap-8">
             <div class="flex flex-[2]">
                 <x-input-store type="search" icon="search" name="search-order" id="search-order"
-                    placeholder="N° de pedido" />
+                    placeholder="Buscar pedido..." />
             </div>
-            <div class="flex w-80 flex-1 flex-col gap-2 font-secondary">
-                <input type="hidden" id="gender" name="gender" value="M">
-                <div class="relative">
-                    <div
-                        class="selected flex items-center justify-between rounded-full border border-zinc-400 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200">
-                        <span class="itemSelected">
-                            Más reciente
-                        </span>
-                        <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-600" />
-                    </div>
-                    <ul
-                        class="selectOptions absolute z-10 mt-2 hidden w-full rounded-2xl border border-zinc-400 bg-white py-1 shadow-lg">
-                        <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="M"
-                            data-input="#gender">
-                            Más reciente
-                        </li>
-                        <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="F"
-                            data-input="#gender">
-                            Más antiguo
-                        </li>
-                        <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="F"
-                            data-input="#gender">
-                            Último mes
-                        </li>
-                        <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="F"
-                            data-input="#gender">
-                            Último año
-                        </li>
-                    </ul>
-                </div>
+            <div class="font-secondary flex w-80 flex-1 flex-col gap-2">
+                <x-select-store label="" id="status-order" name="status-order" :options="[
+                    'mas_reciente' => 'Más reciente',
+                    'mas_antiguo' => 'Más antiguo',
+                    'ultimo_mes' => 'Último mes',
+                    'ultimo_año' => 'Último año',
+                ]"
+                    value="{{ old('status-order') }}" selected="{{ old('status-order') }}" />
             </div>
         </div>
-        <div id="default-tab-content">
-            <div class="hidden rounded-lg bg-zinc-50 p-4" id="orders" role="tabpanel" aria-labelledby="all-orders">
-                <div class="flex flex-col items-center justify-center gap-2 p-8">
-                    <x-icon-store icon="task" class="h-8 w-8 text-current text-zinc-400" />
-                    <p class="text-sm text-zinc-400">No hay pedidos</p>
-                </div>
-            </div>
-            <div class="hidden rounded-lg bg-zinc-50 p-4" id="pending" role="tabpanel" aria-labelledby="pending-orders">
-                <div class="flex flex-col items-center justify-center gap-2 p-8">
-                    <x-icon-store icon="task" class="h-8 w-8 text-current text-zinc-400" />
-                    <p class="text-sm text-zinc-400">No hay pedidos</p>
-                </div>
-            </div>
-            <div class="hidden rounded-lg bg-zinc-50 p-4" id="processed" role="tabpanel" aria-labelledby="processed-orders">
-                <div class="flex flex-col items-center justify-center gap-2 p-8">
-                    <x-icon-store icon="task" class="h-8 w-8 text-current text-zinc-400" />
-                    <p class="text-sm text-zinc-400">No hay pedidos</p>
-                </div>
-            </div>
-            <div class="hidden rounded-lg bg-zinc-50 p-4" id="cancelled" role="tabpanel" aria-labelledby="cancelled-orders">
-                <div class="flex flex-col items-center justify-center gap-2 p-8">
-                    <x-icon-store icon="task" class="h-8 w-8 text-current text-zinc-400" />
-                    <p class="text-sm text-zinc-400">No hay pedidos cancelados</p>
-                </div>
-            </div>
-        </div>
-
     </div>
-@endsection
+    <div id="default-tab-content">
+
+        <!-- All orders -->
+        <div class="hidden" id="orders" role="tabpanel" aria-labelledby="all-orders">
+            <div
+                class="flex flex-col items-center justify-center gap-2 rounded-xl border border-zinc-200 px-4 pb-4 shadow-sm">
+                @if ($orders->count() > 0)
+                    <table class="w-full font-league-spartan">
+                        <thead>
+                            <tr class="border-b border-zinc-200">
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de pedido
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de seguimiento
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Total
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Fecha de compra
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Estado
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-200 bg-white">
+                            @foreach ($orders as $order)
+                                <tr class="hover:bg-zinc-50">
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span
+                                            class="font-secondary rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-secondary">
+                                            {{ $order->number_order }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="font-secondary text-sm text-zinc-500">
+                                            {{ $order->tracking_number }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="rounded-full bg-blue-100 px-4 py-1 text-xs font-medium text-blue-700">
+                                            {{ $order->total }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace nowrap px-4 py-4 text-sm text-zinc-500">
+                                        {{ $order->created_at->format('d/m/Y') }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm text-zinc-500">
+                                        @switch($order->status)
+                                            @case('pending')
+                                                <span
+                                                    class="rounded-full bg-yellow-100 px-4 py-1 text-xs font-medium text-yellow-700">
+                                                    {{ ucfirst($order->status) }}
+                                                </span>
+                                            @break
+
+                                            @case('sent')
+                                                <span class="rounded-full bg-blue-100 px-4 py-1 text-xs font-medium text-blue-700">
+                                                    {{ ucfirst($order->status) }}
+                                                </span>
+                                            @break
+
+                                            @case('completed')
+                                                <span
+                                                    class="rounded-full bg-green-100 px-4 py-1 text-xs font-medium text-green-700">
+                                                    {{ ucfirst($order->status) }}
+                                                </span>
+                                            @break
+
+                                            @case('canceled')
+                                                <span class="rounded-full bg-red-100 px-4 py-1 text-xs font-medium text-red-700">
+                                                    {{ ucfirst($order->status) }}
+                                                </span>
+                                            @break
+
+                                            @default
+                                        @endswitch
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <x-button-store icon="view" type="a"
+                                                href="{{ Route('orders.show', $order->number_order) }}"
+                                                typeButton="secondary" onlyIcon="true" class="w-max" />
+                                            @if ($order->status !== 'completed' && $order->status !== 'canceled' && $order->status !== 'sent')
+                                                <div>
+                                                    <form action="{{ Route('order.cancel', $order->id) }}" method="POST"
+                                                        id="formCancelOrder-{{ $order->id }}">
+                                                        @csrf
+                                                        <x-button-store icon="cancel-circle" type="button"
+                                                            href="{{ Route('account.tickets.show', $order->id) }}"
+                                                            typeButton="danger" onlyIcon="true"
+                                                            class="buttonDelete w-max"
+                                                            data-tooltip-target="tooltip-cancel-ticket"
+                                                            data-form="formCancelOrder-{{ $order->id }}" />
+                                                    </form>
+                                                    <div id="tooltip-cancel-ticket" role="tooltip"
+                                                        class="tooltip invisible absolute z-10 inline-block rounded-lg bg-red-500 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300">
+                                                        Cancelar pedido
+                                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="mt-3 flex items-center justify-center gap-2 rounded-xl p-20 text-sm">
+                        <x-icon-store icon="information-circle" class="h-6 w-6 text-zinc-500" />
+                        <p class="text-center text-zinc-800">
+                            No tienes pedidos realizados
+                        </p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <!-- End All orders -->
+
+        <!-- Pending orders -->
+        <div class="hidden" id="pending" role="tabpanel" aria-labelledby="pending-orders">
+            <div
+                class="flex flex-col items-center justify-center gap-2 rounded-xl border border-zinc-200 px-4 pb-4 shadow-sm">
+                @if ($ordersPending->count() > 0)
+                    <table class="w-full font-league-spartan">
+                        <thead>
+                            <tr class="border-b border-zinc-200">
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de pedido
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de seguimiento
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Total
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Fecha de compra
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Estado
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-200 bg-white">
+                            @foreach ($ordersPending as $order)
+                                <tr class="hover:bg-zinc-50">
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span
+                                            class="font-secondary rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-secondary">
+                                            {{ $order->number_order }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="font-secondary text-sm text-zinc-500">
+                                            {{ $order->tracking_number }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="rounded-full bg-blue-100 px-4 py-1 text-xs font-medium text-blue-700">
+                                            {{ $order->total }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace nowrap px-4 py-4 text-sm text-zinc-500">
+                                        {{ $order->created_at->format('d/m/Y') }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm text-zinc-500">
+                                        <span
+                                            class="rounded-full bg-yellow-100 px-4 py-1 text-xs font-medium text-yellow-700">
+                                            {{ ucfirst($order->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <x-button-store icon="view" type="a"
+                                                href="{{ Route('orders.show', $order->number_order) }}"
+                                                typeButton="secondary" onlyIcon="true" class="w-max" />
+                                            <div>
+                                                <form action="{{ Route('order.cancel', $order->id) }}" method="POST"
+                                                    id="formCancelOrder-{{ $order->id }}">
+                                                    @csrf
+                                                    <x-button-store icon="cancel-circle" type="button"
+                                                        href="{{ Route('account.tickets.show', $order->id) }}"
+                                                        typeButton="danger" onlyIcon="true" class="buttonDelete w-max"
+                                                        data-tooltip-target="tooltip-cancel-ticket"
+                                                        data-form="formCancelOrder-{{ $order->id }}" />
+                                                </form>
+                                                <div id="tooltip-cancel-ticket" role="tooltip"
+                                                    class="tooltip invisible absolute z-10 inline-block rounded-lg bg-red-500 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300">
+                                                    Cancelar pedido
+                                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="mt-3 flex items-center justify-center gap-2 rounded-xl p-20 text-sm">
+                        <x-icon-store icon="information-circle" class="h-6 w-6 text-zinc-500" />
+                        <p class="text-center text-zinc-800">
+                            No tienes pedidos pendientes
+                        </p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <!-- End Pending orders -->
+
+        <!-- Processed orders -->
+        <div class="hidden" id="processed" role="tabpanel" aria-labelledby="processed-orders">
+            <div
+                class="flex flex-col items-center justify-center gap-2 rounded-xl border border-zinc-200 px-4 pb-4 shadow-sm">
+                @if ($ordersApproved->count() > 0)
+                    <table class="w-full font-league-spartan">
+                        <thead>
+                            <tr class="border-b border-zinc-200">
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de pedido
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de seguimiento
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Total
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Fecha de compra
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Estado
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-200 bg-white">
+                            @foreach ($ordersApproved as $order)
+                                <tr class="hover:bg-zinc-50">
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span
+                                            class="font-secondary rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-secondary">
+                                            {{ $order->number_order }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="font-secondary text-sm text-zinc-500">
+                                            {{ $order->tracking_number }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="rounded-full bg-blue-100 px-4 py-1 text-xs font-medium text-blue-700">
+                                            {{ $order->total }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace nowrap px-4 py-4 text-sm text-zinc-500">
+                                        {{ $order->created_at->format('d/m/Y') }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm text-zinc-500">
+                                        @if ($order->status === 'completed')
+                                            <span
+                                                class="rounded-full bg-green-100 px-4 py-1 text-xs font-medium text-green-700">
+                                                {{ ucfirst($order->status) }}
+                                            </span>
+                                        @elseif($order->status === 'sent')
+                                            <span
+                                                class="rounded-full bg-blue-100 px-4 py-1 text-xs font-medium text-blue-700">
+                                                {{ ucfirst($order->status) }}
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <x-button-store icon="view" type="a"
+                                                href="{{ Route('orders.show', $order->number_order) }}"
+                                                typeButton="secondary" onlyIcon="true" class="w-max" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="mt-3 flex items-center justify-center gap-2 rounded-xl p-20 text-sm">
+                        <x-icon-store icon="information-circle" class="h-6 w-6 text-zinc-500" />
+                        <p class="text-center text-zinc-800">
+                            No tienes pedidos completados
+                        </p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <!-- End Processed orders -->
+
+        <!-- Cancelled orders -->
+        <div class="hidden" id="cancelled" role="tabpanel" aria-labelledby="cancelled-orders">
+            <div
+                class="flex flex-col items-center justify-center gap-2 rounded-xl border border-zinc-200 px-4 pb-4 shadow-sm">
+                @if ($ordersRejected->count() > 0)
+                    <table class="w-full font-league-spartan">
+                        <thead>
+                            <tr class="border-b border-zinc-200">
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de pedido
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    N° de seguimiento
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Total
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Fecha de compra
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Estado
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left font-league-spartan text-xs font-medium uppercase tracking-wider text-zinc-500">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-200 bg-white">
+                            @foreach ($ordersRejected as $order)
+                                <tr class="hover:bg-zinc-50">
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span
+                                            class="font-secondary rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-secondary">
+                                            {{ $order->number_order }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="font-secondary text-sm text-zinc-500">
+                                            {{ $order->tracking_number }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span class="rounded-full bg-blue-100 px-4 py-1 text-xs font-medium text-blue-700">
+                                            {{ $order->total }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace nowrap px-4 py-4 text-sm text-zinc-500">
+                                        {{ $order->created_at->format('d/m/Y') }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm text-zinc-500">
+                                        <span class="rounded-full bg-red-100 px-4 py-1 text-xs font-medium text-red-700">
+                                            {{ ucfirst($order->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <x-button-store icon="view" type="a"
+                                                href="{{ Route('orders.show', $order->number_order) }}"
+                                                typeButton="secondary" onlyIcon="true" class="w-max" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="mt-3 flex items-center justify-center gap-2 rounded-xl p-20 text-sm">
+                        <x-icon-store icon="information-circle" class="h-6 w-6 text-zinc-500" />
+                        <p class="text-center text-zinc-800">
+                            No tienes pedidos cancelados
+                        </p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <!-- End Cancelled orders -->
+
+        <!-- Delete Modal -->
+        <div class="deleteModal fixed inset-0 z-50 hidden items-center justify-center bg-zinc-800 bg-opacity-75 transition-opacity"
+            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-center justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0">
+                <div class="inline-block transform animate-jump-in overflow-hidden rounded-xl bg-white text-left align-bottom shadow-xl transition-all animate-duration-300 animate-once sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
+                    role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <x-icon-store icon="alert" class="h-6 w-6 text-red-600" />
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">
+                                    Cancelar pedido
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        ¿Estás seguro de que deseas cancelar el pedido? Esta acción no se puede deshacer.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-4 bg-gray-50 px-4 py-3">
+                        <x-button-store type="button" text="Cerrar" class="closeModal w-max text-sm"
+                            typeButton="secondary" />
+                        <x-button-store type="button" text="Si, cancelar pedido" icon="cancel-circle"
+                            class="confirmDelete w-max text-sm" typeButton="danger" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Delete Modal -->
+
+    @endsection
