@@ -26,9 +26,9 @@ return new class extends Migration
             $table->timestamp('closed_at')->nullable();
             $table->timestamp('reopened_at')->nullable();
             $table->timestamp('assigned_at')->nullable();
-            $table->json('attachments')->nullable();
-            $table->json('comments')->nullable();
             $table->timestamp('last_replied_at')->nullable();
+            $table->foreignId('last_replied_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamp("due_date")->nullable();
             $table->timestamps();
         });
     }
