@@ -89,6 +89,40 @@ SECTION: Navbar and Footer
     transform: translateX(0);
 }
 
+.link-item {
+    position: relative;
+}
+
+.link-item-content {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-right: 0px;
+    text-decoration: none;
+    color: var(--secondary-color-store);
+    transition: padding-right 0.3s ease;
+}
+
+.icon-link {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.link-item:hover .link-item-content {
+    padding-right: 30px;
+    text-decoration: underline;
+}
+
+.link-item:hover .icon-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .footer {
     position: relative;
     background-image: url("/public/images/fondo4.jpg");
@@ -139,7 +173,7 @@ GENERAL STYLES
     background: linear-gradient(45deg, #011030, #0a396b, #0e70ad 100%);
 }
 
-.loader {
+.loader-container {
     position: fixed;
     top: 0;
     left: 0;
