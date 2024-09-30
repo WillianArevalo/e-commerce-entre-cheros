@@ -6,11 +6,37 @@
     'class' => '',
     'iconAlign' => 'left',
     'onlyIcon' => false,
+    'size' => 'normal',
+    'loading' => false, // Añadido para el estado de carga
 ])
 
 @php
-    $padding = $onlyIcon ? 'p-2' : 'px-4 py-3';
-    $baseClasses = 'rounded-full flex items-center justify-center gap-2 transition-colors duration-300  ' . $padding;
+    // Definir las clases según el tamaño
+    $sizes = [
+        'small' => [
+            'padding' => 'px-3 py-2',
+            'text' => 'text-xs',
+            'icon' => 'h-4 w-4',
+        ],
+        'normal' => [
+            'padding' => 'px-4 py-3',
+            'text' => 'text-base',
+            'icon' => 'h-5 w-5',
+        ],
+        'large' => [
+            'padding' => 'px-5 py-4',
+            'text' => 'text-lg',
+            'icon' => 'h-6 w-6',
+        ],
+    ];
+
+    // Establecer el padding dependiendo de si es solo ícono o no
+    $padding = $onlyIcon ? 'px-2.5 py-2' : $sizes[$size]['padding'];
+
+    // Clases base
+    $baseClasses = 'rounded-2xl flex items-center justify-center gap-2 transition-colors duration-300 ' . $padding;
+
+    // Tipos de botones (estilos únicos para la tienda)
     $buttonTypes = [
         'primary' => 'bg-primary text-white hover:bg-secondary bg-gradient',
         'secondary' => 'bg-white text-zinc-600 border border-zinc-400 hover:bg-zinc-100',
@@ -19,27 +45,54 @@
         'success' => 'bg-green-500 text-white hover:bg-green-600',
         'default' => 'bg-white text-zinc-600 border border-zinc-400 hover:bg-zinc-100',
     ];
+
+    // Clases finales para el botón
     $classes = $buttonTypes[$typeButton] . ' ' . $baseClasses . ' ' . $class;
+
+    // Estado de carga: cuando está cargando, añadimos opacidad
+    $loadingClasses = $loading ? 'opacity-75 cursor-not-allowed' : '';
+    $classes .= ' ' . $loadingClasses;
 @endphp
 
 @if ($type === 'a')
     <a href="{{ $attributes->get('href') }}" {{ $attributes->except('href') }} class="{{ $classes }}">
-        @if ($icon && $iconAlign === 'left')
-            <x-icon-store :icon="$icon" class="h-5 w-5 text-current" />
-        @endif
-        {{ $text }}
-        @if ($icon && $iconAlign === 'right')
-            <x-icon-store :icon="$icon" class="h-5 w-5 text-current" />
+        @if ($loading)
+            <!-- Spinner para estado de carga -->
+            <x-icon-store icon="spinner" class="{{ $sizes[$size]['icon'] }} animate-spin text-white" />
+        @else
+            @if ($iconAlign === 'left' && !$onlyIcon)
+                <x-icon-store :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if (!$onlyIcon)
+                <span class="{{ $sizes[$size]['text'] }}">{{ $text }}</span>
+            @endif
+            @if ($iconAlign === 'right' && !$onlyIcon)
+                <x-icon-store :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if ($onlyIcon)
+                <x-icon-store :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
         @endif
     </a>
 @else
-    <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}">
-        @if ($icon && $iconAlign === 'left')
-            <x-icon-store :icon="$icon" class="h-5 w-5 text-current" />
-        @endif
-        {{ $text }}
-        @if ($icon && $iconAlign === 'right')
-            <x-icon-store :icon="$icon" class="h-5 w-5 text-current" />
+    <button type="{{ $type }}" {{ $attributes }} class="{{ $classes }}"
+        @if ($loading) disabled @endif>
+        @if ($loading)
+            <!-- Spinner para estado de carga -->
+            <x-icon-store icon="spinner" class="{{ $sizes[$size]['icon'] }} animate-spin text-white" />
+        @else
+            @if ($iconAlign === 'left' && !$onlyIcon)
+                <x-icon-store :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if (!$onlyIcon)
+                <span class="{{ $sizes[$size]['text'] }}">{{ $text }}</span>
+            @endif
+            @if ($iconAlign === 'right' && !$onlyIcon)
+                <x-icon-store :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
+            @if ($onlyIcon)
+                <x-icon-store :icon="$icon" class="{{ $sizes[$size]['icon'] }} text-current" />
+            @endif
         @endif
     </button>
 @endif
