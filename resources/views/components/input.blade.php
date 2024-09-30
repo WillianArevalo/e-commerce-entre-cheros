@@ -50,7 +50,7 @@
     @endif
 
     @if ($type === 'textarea')
-        <textarea id="{{ $id }}" name="{{ $name }}" rows="4"
+        <textarea id="{{ $id }}" {{ $attributes }} name="{{ $name }}" rows="4"
             class="{{ $classes }} {{ $icon ? 'ps-10' : '' }}" placeholder="{{ $placeholder }}">{{ $value }}</textarea>
     @elseif ($type === 'checkbox')
         <input type="checkbox" value="{{ $value }}" name="{{ $name }}" id="{{ $id }}"

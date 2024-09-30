@@ -15,13 +15,13 @@
     $errorClass = $errors->has($name) ? 'is-invalid' : '';
     $labelClass = $required ? "after:content-['*'] after:ml-0.5 after:text-red-500" : '';
     $inputBaseClasses =
-        'text-sm w-full px-6 py-3 border border-zinc-400 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition duration-300 text-zinc-700';
+        'text-base w-full px-6 py-3 border border-zinc-400 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition duration-300 text-zinc-700';
     $classes = "{$inputBaseClasses} {$class} {$errorClass}";
 
     $id = $id ?? $name;
 @endphp
 
-<label for="{{ $id }}" class="{{ $labelClass }} text-start text-sm text-zinc-600">
+<label for="{{ $id }}" class="{{ $labelClass }} text-start text-base font-medium text-zinc-600">
     {{ $label }}
 </label>
 
@@ -40,7 +40,7 @@
         {{ $attributes }}>
 @else
     <textarea id="{{ $id }}" name="{{ $name }}" rows="4"
-        class="{{ $inputBaseClasses }} {{ $errorClass }} {{ $class }} w-full border border-zinc-400 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
+        class="{{ $inputBaseClasses }} {{ $errorClass }} {{ $class }} w-full border border-zinc-400 px-6 py-3 text-base focus:border-blue-500 focus:ring-4 focus:ring-blue-200"
         placeholder="{{ $placeholder }}">{{ $value }}</textarea>
 @endif
 

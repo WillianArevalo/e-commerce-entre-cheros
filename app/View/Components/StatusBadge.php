@@ -8,17 +8,11 @@ use Illuminate\View\Component;
 
 class StatusBadge extends Component
 {
-    public string $status;
-    public string $color;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($status, $color)
-    {
-        $this->status = $status;
-        $this->color = $color;
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
