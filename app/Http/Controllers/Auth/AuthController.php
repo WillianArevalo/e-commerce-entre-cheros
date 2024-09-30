@@ -37,7 +37,7 @@ class AuthController extends Controller
             $user->update(["last_login" => now()]);
             $user->update(["last_ip_address" => $request->ip()]);
             if ($user->role != "admin") {
-                return redirect()->attempt("/");
+                return redirect()->route("home");
             } else {
                 return redirect()->route("admin.index");
             }
