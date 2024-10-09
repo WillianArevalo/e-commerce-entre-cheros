@@ -35,6 +35,7 @@ Route::get("/contact", [ContactController::class, "index"])->name("contact");
 // Products
 Route::controller(ProductController::class)->group(function () {
     Route::get("/products/{slug}", "details")->name("products.details");
+    Route::post("/products/filter", [ProductController::class, "filter"])->name("products.filter");
 });
 
 // Policies

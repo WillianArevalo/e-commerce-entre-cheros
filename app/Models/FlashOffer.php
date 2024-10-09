@@ -16,6 +16,13 @@ class FlashOffer extends Model
 
     protected $table = "flash_offers";
 
+    protected $casts = [
+        "start_date" => "datetime",
+        "end_date" => "datetime",
+        "is_active" => "boolean",
+        "is_showing" => "boolean",
+    ];
+
     protected $fillable = [
         "start_date",
         "end_date",

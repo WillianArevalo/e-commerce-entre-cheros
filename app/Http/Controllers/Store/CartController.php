@@ -46,7 +46,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function add(string $id)
+    public function add(Request $request, string $id)
     {
         $product = Product::find($id);
         $user = auth()->user();
@@ -64,7 +64,7 @@ class CartController extends Controller
             } else {
                 $cart->items()->create([
                     "product_id" => $product->id,
-                    "quantity" => 1,
+                    "quantity" => $request->input("quantity") ?? 1,
                     "sub_total" => $price
                 ]);
                 DB::commit();
@@ -147,6 +147,7 @@ class CartController extends Controller
             "subtotal" => $this->priceFormat(CartHelper::subtotal()),
             "totalWithShippingMethod" => $this->priceFormat(CartHelper::totalWithShippingMethod()),
             "html" => view("layouts.__partials.ajax.store.row-cart", compact("cart"))->render(),
+            "html_mobile" => view("layouts.__partials.ajax.store.cart-mobile", compact("cart"))->render()
         ]);
     }
 

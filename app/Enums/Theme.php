@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-class THEME
+enum THEME: string
 {
-    const LIGHT = 'light';
-    const DARK = 'dark';
+    case LIGHT = 'light';
+    case DARK = 'dark';
 }

@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-interface STATUS
+enum STATUS: int
 {
-    const ACTIVE = 1;
-    const INACTIVE = 0;
-    const PENDING = 0;
-    const APPROVED = 1;
-    const REJECTED = 2;
+    case ACTIVE = 1;
+    case INACTIVE = 0;
+    case PENDING = 0;
+    case APPROVED = 1;
+    case REJECTED = 2;
 }

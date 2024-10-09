@@ -18,7 +18,11 @@ class ReviewController extends Controller
             $product = Product::findOrFail($request->product_id);
             $user = auth()->user();
 
-            $review = $product->reviews()->create([
+            if ($product->reviews()->where('user_id', $user->id)->exists()) {
+                return redirect()->route('products.details', $product->slug)->with('error', 'You have already reviewed this product');
+            }
+
+            $product->reviews()->create([
                 'user_id' => $user->id,
                 'rating' => $request->rating,
                 'comment' => $request->comment,
@@ -46,6 +50,20 @@ class ReviewController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('products.details', $review->product->slug)->with('error', 'Error updating review');
+        }
+    }
+
+    public function destroy(string $id)
+    {
+        DB::beginTransaction();
+        $review = Review::findOrFail($id);
+        try {
+            $review->delete();
+            DB::commit();
+            return redirect()->route('products.details', $review->product->slug)->with('success', 'Review deleted successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('products.details', $review->product->slug)->with('error', 'Error deleting review');
         }
     }
 }

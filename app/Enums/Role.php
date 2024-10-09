@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-interface ROLE
+enum ROLE: string
 {
-    const ADMIN = 1;
-    const USER = 2;
-    const CUSTOMER = 3;
+    case ADMIN = 'admin';
+    case USER = 'user';
+    case CUSTOMER = 'customer';
 }
