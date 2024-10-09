@@ -37,4 +37,8 @@ $(document).ready(function () {
             $("#modal-search").addClass("hidden");
         }
     });
+
+    $("#btn-hamburger").on("click", function () {
+        $("#mobile-menu").toggleClass("active");
+    });
 });

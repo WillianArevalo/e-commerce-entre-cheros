@@ -20,8 +20,8 @@
         ],
         'normal' => [
             'padding' => 'px-4 py-3',
-            'text' => 'text-base',
-            'icon' => 'h-5 w-5',
+            'text' => 'text-sm sm:text-base',
+            'icon' => 'h-5 w-5 sm:h-6 sm:w-6',
         ],
         'large' => [
             'padding' => 'px-5 py-4',
@@ -31,10 +31,10 @@
     ];
 
     // Establecer el padding dependiendo de si es solo ícono o no
-    $padding = $onlyIcon ? 'px-2.5 py-2' : $sizes[$size]['padding'];
+    $padding = $onlyIcon ? 'p-2' : $sizes[$size]['padding'];
 
     // Clases base
-    $baseClasses = 'rounded-2xl flex items-center justify-center gap-2 transition-colors duration-300 ' . $padding;
+    $baseClasses = 'rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 ' . $padding;
 
     // Tipos de botones (estilos únicos para la tienda)
     $buttonTypes = [
@@ -42,7 +42,7 @@
         'secondary' => 'bg-white text-zinc-600 border border-zinc-400 hover:bg-zinc-100',
         'danger' => 'bg-red-500 text-white hover:bg-red-600',
         'warning' => 'bg-yellow-500 text-white hover:bg-yellow-600',
-        'success' => 'bg-green-500 text-white hover:bg-green-600',
+        'success' => 'bg-green-100 text-green-500 hover:bg-green-600 hover:text-white',
         'default' => 'bg-white text-zinc-600 border border-zinc-400 hover:bg-zinc-100',
     ];
 

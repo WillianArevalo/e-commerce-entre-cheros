@@ -11,10 +11,11 @@
                 @foreach ($addresses as $address)
                     <div class="mt-6 flex flex-col">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-semibold text-zinc-700">
+                            <h3 class="flex items-center gap-2 text-base font-semibold text-zinc-700 sm:text-lg">
+                                <x-icon-store icon="location" class="h-6 w-6 text-zinc-500" />
                                 {{ App\Utils\Addresses::getAddress($address->type) }}
                             </h3>
-                            <div class="mt-4 flex gap-6">
+                            <div class="flex items-center gap-6">
                                 <form action="{{ Route('account.addresses.destroy', $address->id) }}" method="POST"
                                     id="formDeleteAddress-{{ $address->id }}">
                                     @csrf
@@ -33,7 +34,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ms-8 mt-4">
+                        <div class="ms-8 mt-4 text-sm sm:text-base">
                             <div class="flex flex-col gap-4">
                                 <div class="flex gap-2">
                                     <h4 class="font-medium text-secondary">País:</h4>
@@ -74,7 +75,7 @@
                     </div>
                 </div>
             @endif
-            <div class="mt-4 border-t border-zinc-400 pt-4">
+            <div class="mb-4 mt-4 flex justify-center border-t border-zinc-400 pt-4 sm:justify-start">
                 <x-button-store type="a" href="{{ Route('account.addresses.create') }}"
                     text="Agregar nueva dirección" icon="plus" class="w-max" typeButton="secondary" />
             </div>

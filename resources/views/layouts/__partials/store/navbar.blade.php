@@ -1,11 +1,14 @@
-<header class="{{ $classHead ?? '' }} glass w-full bg-primary" id="header">
-    <nav class="{{ $classNav ?? '' }} mx-auto flex items-center justify-between gap-2 px-6 py-2" id="navbar">
+<header class="{{ $classHead ?? '' }} glass w-full bg-primary py-2 lg:py-0" id="header">
+    <nav class="{{ $classNav ?? '' }} mx-auto flex items-center justify-between gap-2 px-4 py-2 md:px-6" id="navbar">
+        <button class="block lg:hidden" id="btn-hamburger">
+            <x-icon-store icon="menu" class="h-6 w-6 text-secondary" />
+        </button>
         <div class="flex items-center gap-10">
-            <div class="flex items-center">
+            <div class="hidden lg:flex lg:items-center">
                 <img src="{{ asset('images/logo de entre cheros.png') }}" alt="Logo"
                     class="h-12 w-12 rounded-full object-cover">
             </div>
-            <ul class="font-secondary flex gap-6 text-secondary">
+            <ul class="font-secondary hidden gap-6 text-secondary lg:flex">
                 <li class="link-nav {{ Request::is('home') || Request::is('/') ? 'active' : '' }}">
                     <a href="{{ Route('home') }}" class="">Inicio</a>
                 </li>
@@ -47,12 +50,12 @@
                 @if ($user = auth()->user())
                     <button type="button" class="profile flex items-center justify-center gap-1">
                         <x-icon-store icon="user" class="h-6 w-6 text-secondary" />
-                        <div class="flex items-center justify-center gap-1">
+                        <div class="hidden md:flex md:items-center md:justify-center md:gap-1">
                             <span class="block text-sm text-secondary">Hola,</span>
                             <span class="font-meidum truncate text-sm">{{ $user->name }}</span>
                         </div>
                     </button>
-                    <div class="font-secondary absolute top-8 z-50 hidden w-52 overflow-hidden rounded-lg bg-white text-sm shadow-md"
+                    <div class="font-secondary absolute right-0 top-8 z-50 hidden w-52 overflow-hidden rounded-lg bg-white text-sm shadow-md"
                         id="profile-options">
                         <ul class="flex flex-col p-2 font-medium">
                             <li class="mb-2 w-full">
@@ -62,8 +65,8 @@
                                         alt="Profile picture {{ $user->name }}"
                                         class="min-w-12 h-12 rounded-full object-cover">
                                     <div class="ml-2">
-                                        <span class="block text-sm text-secondary">Hola,</span>
-                                        <span class="font-meidum block w-28 truncate text-base"
+                                        <span class="block text-xs text-secondary lg:text-sm">Hola,</span>
+                                        <span class="block w-28 truncate text-sm font-medium lg:text-base"
                                             title="{{ $user->name }}">
                                             {{ $user->name }}
                                         </span>
@@ -130,4 +133,28 @@
             </li>
         </ul>
     </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="lg:hidden">
+        <ul class="mt-4 flex flex-col items-center gap-4">
+            <li class="link-nav {{ Request::is('home') || Request::is('/') ? 'active' : '' }}">
+                <a href="{{ Route('home') }}" class="">Inicio</a>
+            </li>
+            <li class="link-nav {{ Request::is('store') ? 'active' : '' }}">
+                <a href="{{ Route('store') }}">Tienda</a>
+            </li>
+            <li class="link-nav {{ Request::is('about') ? 'active' : '' }}">
+                <a href="{{ Route('about') }}">Conócenos</a>
+            </li>
+            <li class="link-nav {{ Request::is('faq') ? 'active' : '' }}">
+                <a href="{{ Route('faq') }}">
+                    Preguntas frecuentes
+                </a>
+            </li>
+            <li class="link-nav {{ Request::is('contact') ? 'active' : '' }}">
+                <a href="{{ Route('contact') }}">Contactanos</a>
+            </li>
+        </ul>
+    </div>
+
 </header>

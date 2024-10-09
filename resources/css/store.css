@@ -1,3 +1,17 @@
+#mobile-menu {
+    height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+        height 0.3s ease,
+        opacity 0.3s ease;
+}
+
+#mobile-menu.active {
+    height: 220px;
+    opacity: 1;
+}
+
 /*
 ================================================================
 SECTION: Login
@@ -269,6 +283,48 @@ SECTION: Details product
     svg {
         @apply fill-yellow-400 text-yellow-400;
     }
+}
+
+/* Dimensions box */
+.dimension-box-store {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-30deg);
+    animation: rotate 10s infinite linear;
+}
+
+.dimension-box-store .face {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: rgba(52, 152, 219, 0.6);
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.dimension-box-store .front {
+    transform: translateZ(35px);
+}
+.dimension-box-store .back {
+    transform: rotateY(180deg) translateZ(35px);
+}
+.dimension-box-store .left {
+    transform: rotateY(-90deg) translateZ(35px);
+}
+.dimension-box-store .right {
+    transform: rotateY(90deg) translateZ(35px);
+}
+.dimension-box-store .top {
+    transform: rotateX(90deg) translateZ(35px);
+}
+.dimension-box-store .bottom {
+    transform: rotateX(-90deg) translateZ(35px);
 }
 
 /*

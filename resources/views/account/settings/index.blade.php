@@ -1,6 +1,6 @@
 @extends('layouts.__partials.store.template-profile')
 @section('profile-content')
-    <div class="flex flex-col">
+    <div class="mb-6 flex flex-col">
         <div class="py-2">
             <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                 Configuración
@@ -8,11 +8,11 @@
         </div>
         <div class="border-t border-zinc-400">
             <div class="mt-4 flex flex-col">
-                <h3 class="text-lg font-semibold text-zinc-700">
+                <h3 class="text-base font-semibold text-zinc-700 sm:text-lg">
                     Datos de seguridad
                 </h3>
-                <div>
-                    <div class="flex flex-col">
+                <div class="mt-2">
+                    <div class="flex flex-col text-sm sm:text-base">
                         <div class="flex gap-2">
                             <h4 class="font-medium text-secondary">Correo electrónico:</h4>
                             <p>{{ $user->email }}</p>
@@ -22,7 +22,7 @@
                                 class="w-max" />
                         </div>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-4 text-sm sm:text-base">
                         <div class="flex items-center gap-2">
                             <h4 class="font-medium text-secondary">Contraseña:</h4>
                             <div class="flex items-center gap-1">
@@ -52,7 +52,7 @@
             </div>
             <div class="mt-4 border-t border-zinc-400">
                 <div class="flex items-center justify-between pt-4">
-                    <h3 class="text-lg font-semibold text-zinc-700">Datos personales</h3>
+                    <h3 class="text-base font-semibold text-zinc-700 sm:text-lg">Datos personales</h3>
                     <a href="{{ Route('account.settings-edit') }}"
                         class="group flex items-center justify-center gap-1 text-sm text-zinc-700 hover:font-semibold hover:text-green-500">
                         Editar datos
@@ -60,7 +60,7 @@
                             class="h-4 w-4 text-current transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
                     </a>
                 </div>
-                <div class="mt-2 flex flex-col gap-3">
+                <div class="mt-2 flex flex-col gap-3 text-sm sm:text-base">
                     <div class="flex gap-2">
                         <h4 class="font-medium text-secondary">Usuario:</h4>
                         <p class="text-zinc-800">{{ $user->username }}</p>
@@ -73,7 +73,7 @@
                         <h4 class="font-medium text-secondary">Apellidos:</h4>
                         <p class="text-zinc-800">{{ $user->last_name }}</p>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex flex-col justify-between gap-2 sm:flex-row sm:gap-0">
                         <div class="flex items-center gap-2">
                             <h4 class="font-medium text-secondary">Género:</h4>
                             <span class="flex items-center gap-1 text-zinc-800">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="mt-2">
                         <div class="flex items-center justify-between pt-4">
-                            <h3 class="text-base font-semibold text-zinc-700">
+                            <h3 class="text-base font-semibold text-zinc-700 sm:text-lg">
                                 Dirección
                             </h3>
                             @if ($user->customer && $user->customer->address)

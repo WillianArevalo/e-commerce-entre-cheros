@@ -19,7 +19,7 @@
 <body class="store overflow-x-hidden">
     @include('layouts.__partials.store.navbar', [
         'classHead' => 'z-50 fixed top-0',
-        'classNav' => ' w-9/12 mx-auto',
+        'classNav' => 'w-full lg:w-9/12',
     ])
     <main>
         @include('layouts.__partials.store.toast-store', ['top' => 'top-28'])

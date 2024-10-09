@@ -23,7 +23,7 @@
                                          </span>
                                      </div>
                                      <span
-                                         class="font-secondary me-2 mt-1 block rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800">
+                                         class="font-secondary me-2 mt-1 block w-max rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-semibold text-purple-800">
                                          En oferta
                                      </span>
                                  </div>
@@ -68,17 +68,16 @@
                  <form action="{{ route('cart.remove', $item->product->id) }}" method="POST"
                      id="form-remove-cart-{{ $item->product->id }}">
                      @csrf
-                     <button type="button" data-form="#form-remove-cart-{{ $item->product->id }}"
-                         class="btnRemoveCart rounded-lg bg-red-100 p-2 text-red-800 hover:bg-red-200">
-                         <x-icon-store icon="delete" class="h-4 w-4 text-current" />
-                     </button>
+                     <x-button-store type="button" typeButton="danger"
+                         data-form="#form-remove-cart-{{ $item->product->id }}" onlyIcon="true" icon="delete"
+                         id="btnRemoveCart-{{ $item->product->id }}" class="btnRemoveCart" size="small" />
                  </form>
              </td>
          </tr>
      @endforeach
  @else
      <tr class="border-t border-zinc-100">
-         <td class="whitespace-nowrap px-6 py-4 text-center font-league-spartan" colspan="4">
+         <td class="whitespace-nowrap px-6 py-4 text-center font-league-spartan text-sm text-zinc-500" colspan="4">
              Carrito vacío
          </td>
      </tr>

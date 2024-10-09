@@ -17,6 +17,11 @@ $(document).ready(function () {
     $(document).on("click", ".btn-add-favorite", function () {
         const form = $(this).closest("form");
         $(this).toggleClass("favorite").toggleClass("not-favorite");
+
+        $("#favorite-text").text(
+            $(this).hasClass("favorite") ? "Favorito" : "Agregar a favoritos",
+        );
+
         $.ajax({
             url: form.attr("action"),
             method: "POST",
@@ -45,6 +50,7 @@ $(document).ready(function () {
                 console.log(response);
                 if (response.status === "success") {
                     $("#tableCart").html(response.html); // Update table
+                    $("#cart-mobile").html(response.html_mobile);
                     $("#cart-count").text(response.total); // Update cart count
                     $("#totalPriceCart").text(response.totalPrice); // Update total price
                     $("#totalTaxes").text(response.totalTaxes);

@@ -15,7 +15,7 @@
             <form action="{{ Route('account.addresses.store') }}" method="POST" class="mt-4">
                 @csrf
                 <div class="flex flex-col gap-4">
-                    <div class="flex w-full gap-4">
+                    <div class="flex w-full flex-col gap-4 sm:flex-row">
                         <div class="flex flex-[2] flex-col gap-2">
                             <x-input-store type="text" placeholder="" value="El Salvador" name="country" label="País"
                                 value="{{ old('country') }}" required />
@@ -37,7 +37,7 @@
                                 value="{{ old('address_line_2') }}" />
                         </div>
                     </div>
-                    <div class="flex w-full gap-4">
+                    <div class="flex w-full flex-col gap-4 sm:flex-row">
                         <div class="flex flex-1 flex-col gap-2">
                             <x-input-store type="text" placeholder="Ingresa el estado" label="Estado" name="state"
                                 value="{{ old('state') }}" />
@@ -52,8 +52,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <x-button-store type="submit" text="Guardar dirección" icon="check" class="w-max text-sm"
+                <div class="my-4 flex items-center justify-center sm:justify-start">
+                    <x-button-store type="submit" text="Guardar dirección" icon="check" class="w-max font-bold"
                         typeButton="primary" />
                 </div>
             </form>

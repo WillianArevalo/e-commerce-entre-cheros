@@ -1,4 +1,23 @@
 $(document).ready(function () {
+    $(".accordion-header").click(function () {
+        const target = $(this).data("target");
+        const iconId = `#icon-${$(this).data("target").substring(1)}`;
+        if ($(target).hasClass("open")) {
+            $(target).removeClass("open").css("max-height", "0px");
+            $(iconId).removeClass("rotate-180");
+        } else {
+            $(".accordion-content")
+                .removeClass("open")
+                .css("max-height", "0px");
+            $(".accordion-header .w-5").removeClass("rotate-180");
+            const panelHeight = $(target)[0].scrollHeight;
+            $(target)
+                .addClass("open")
+                .css("max-height", panelHeight + "px");
+            $(iconId).addClass("rotate-180");
+        }
+    });
+
     $("#btn-plus").on("click", function () {
         var qty = parseInt($("#quantity").val());
         qty++;
@@ -45,8 +64,17 @@ $(document).ready(function () {
         $("#review-container").toggleClass("hidden");
     });
 
+    $("#btn-cancel-review").on("click", function () {
+        $("#review-container").addClass("hidden");
+    });
+
     $("#btn-edit-review").on("click", function () {
         $(".review-user-current").hide();
+        $("#edit-review-container").toggleClass("hidden");
+    });
+
+    $("#btn-cancel-edit-review").on("click", function () {
+        $(".review-user-current").show();
         $("#edit-review-container").toggleClass("hidden");
     });
 

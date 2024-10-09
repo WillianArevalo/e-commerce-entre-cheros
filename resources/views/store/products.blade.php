@@ -1,7 +1,5 @@
 @extends('layouts.template')
-
-@section('title', 'Home')
-
+@section('title', 'Entre Cheros | Tienda')
 @section('content')
     <main class="mb-20">
         <section class="relative h-[300px] w-full text-white"
@@ -12,162 +10,215 @@
                 </path>
             </svg>
         </section>
-        <section class="px-20">
-            <div class="flex justify-end">
-                <div class="flex w-80 flex-col gap-2 font-secondary">
-                    <label for="gender" class="text-start text-sm text-zinc-600">Ordenar por</label>
-                    <input type="hidden" id="gender" name="gender" value="M">
-                    <div class="relative">
-                        <div
-                            class="selected flex items-center justify-between rounded-full border border-zinc-400 px-6 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-200">
-                            <span class="itemSelected">
-                                Precio más alto
-                            </span>
-                            <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-600" />
-                        </div>
-                        <ul
-                            class="selectOptions absolute z-10 mt-2 hidden w-full rounded-2xl border border-zinc-400 bg-white py-1 shadow-lg">
-                            <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="M"
-                                data-input="#gender">
-                                Relevancia
-                            </li>
-                            <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="F"
-                                data-input="#gender">
-                                Más vendido
-                            </li>
-                            <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="F"
-                                data-input="#gender">
-                                Descuento
-                            </li>
-                            <li class="itemOption px-4 py-2.5 text-sm text-zinc-900 hover:bg-zinc-100" data-value="F"
-                                data-input="#gender">
-                                Precio más bajo
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 flex gap-4 font-secondary">
-                <div class="flex w-full flex-1 flex-col gap-8 rounded-lg border border-zinc-400 p-4">
-                    <div>
-                        <p class="mb-2 text-sm text-zinc-600">Más filtros</p>
-                        <div class="flex flex-col gap-2">
-                            <div class="flex items-center">
-                                <input id="offers" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                <label for="offers" class="ms-2 text-sm font-medium text-zinc-900">
-                                    Ofertas
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="flash_offers" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                <label for="flash_offers" class="ms-2 text-sm font-medium text-zinc-900">
-                                    Ofertas relampago
-                                </label>
+        <section class="px-8">
+            <div class="font-secondary mt-8 flex xl:gap-8">
+
+                <!-- Filters -->
+                <aside
+                    class="hidden h-max w-full flex-1 flex-col gap-4 rounded-xl border border-zinc-200 p-4 shadow xl:flex">
+                    <form action="{{ Route('products.filter') }}" method="POST" id="form-filters" class="hidden">
+                        @csrf
+                    </form>
+                    <div class="accordion-item">
+                        <button
+                            class="accordion-header-filter flex w-full items-center justify-between rounded-xl px-4 py-1 hover:bg-zinc-100"
+                            data-target="#panel1">
+                            <p class="text-sm font-semibold text-zinc-600 md:text-base">Más filtros</p>
+                            <x-icon-store icon="arrow-down" class="h-5 w-5 text-zinc-500" />
+                        </button>
+                        <div id="panel1"
+                            class="accordion-content-filter max-h-0 overflow-hidden px-4 transition-all duration-500 ease-in-out">
+                            <div class="mt-4 flex flex-col gap-2">
+                                <div class="flex items-center">
+                                    <input id="offers" type="checkbox" value="offers" name="offert_type"
+                                        class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    <label for="offers" class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                        Ofertas
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="flash_offers" type="checkbox" value="flash_offers" name="offert_type"
+                                        class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    <label for="flash_offers" class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                        Ofertas relampago
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="mb-2 text-sm text-zinc-600">Por rango de precio</p>
-                        <div class="flex flex-col gap-2">
-                            <div class="flex items-center">
-                                <input id="min-5" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                <label for="min-5" class="ms-2 text-sm font-medium text-zinc-900">
-                                    Menos de $5
-                                </label>
+
+                    <div class="accordion-item">
+                        <button
+                            class="accordion-header-filter flex w-full items-center justify-between rounded-xl px-4 py-1 hover:bg-zinc-100"
+                            data-target="#panel2">
+                            <p class="text-sm font-semibold text-zinc-600 md:text-base">
+                                Por rango de precio
+                            </p>
+                            <x-icon-store icon="arrow-down" class="h-5 w-5 text-zinc-500" />
+                        </button>
+                        <div id="panel2"
+                            class="accordion-content-filter max-h-0 overflow-hidden px-4 transition-all duration-500 ease-in-out">
+                            <div class="mt-4 flex flex-col gap-2">
+                                <div class="flex items-center">
+                                    <input id="min-5" type="checkbox" value="min_5" name="price_range"
+                                        class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    <label for="min-5" class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                        Menos de $5
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="entre-5-10" type="checkbox" value="entre_5_10" name="price_range"
+                                        class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    <label for="entre-5-10" class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                        Entre $5 y $10
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="more-10" type="checkbox" value="more_10" name="price_range"
+                                        class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                    <label for="more-10" class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                        Más de $10
+                                    </label>
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <input id="entre-5-10" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                <label for="entre-5-10" class="ms-2 text-sm font-medium text-zinc-900">
-                                    Entre $5 y $10
-                                </label>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button
+                            class="accordion-header-filter flex w-full items-center justify-between rounded-xl px-4 py-1 hover:bg-zinc-100"
+                            data-target="#panel3">
+                            <p class="text-sm font-semibold text-zinc-600 md:text-base">Categorías</p>
+                            <x-icon-store icon="arrow-down" class="h-5 w-5 text-zinc-500" />
+                        </button>
+                        <div id="panel3"
+                            class="accordion-content-filter max-h-0 overflow-hidden px-4 transition-all duration-500 ease-in-out">
+                            <div class="mt-4 flex flex-col gap-2">
+                                @if ($categories->count() > 0)
+                                    @foreach ($categories as $category)
+                                        <div class="flex items-center">
+                                            <input id="{{ $category->name }}" type="checkbox" value="{{ $category->id }}"
+                                                name="category"
+                                                class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            <label for="{{ $category->name }}"
+                                                class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                                {{ $category->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
-                            <div class="flex items-center">
-                                <input id="more-10" type="checkbox" value=""
-                                    class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                <label for="more-10" class="ms-2 text-sm font-medium text-zinc-900">
-                                    Más de $10
-                                </label>
+                        </div>
+                    </div>
+
+
+                    <div class="accordion-item">
+                        <button
+                            class="accordion-header-filter flex w-full items-center justify-between rounded-xl px-4 py-1 hover:bg-zinc-100"
+                            data-target="#panel4">
+                            <p class="text-sm font-semibold text-zinc-600 md:text-base">Subcategorías</p>
+                            <x-icon-store icon="arrow-down" class="h-5 w-5 text-zinc-500" />
+                        </button>
+                        <div id="panel4"
+                            class="accordion-content-filter max-h-0 overflow-hidden px-4 transition-all duration-500 ease-in-out">
+                            <div class="mt-4 flex flex-col gap-2">
+                                @if ($subcategories->count() > 0)
+                                    @foreach ($subcategories as $subcategorie)
+                                        <div class="flex items-center">
+                                            <input id="{{ $subcategorie->name }}" type="checkbox"
+                                                value="{{ $subcategorie->id }}" name="subcategorie"
+                                                class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            <label for="{{ $subcategorie->name }}"
+                                                class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                                {{ $subcategorie->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="mb-2 text-sm text-zinc-600">Categorías</p>
-                        <div class="flex flex-col gap-2">
-                            @if ($categories->count() > 0)
-                                @foreach ($categories as $category)
-                                    <div class="flex items-center">
-                                        <input id="{{ $category->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                        <label for="{{ $category->name }}" class="ms-2 text-sm font-medium text-zinc-900">
-                                            {{ $category->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            @endif
+
+
+                    <div class="accordion-item">
+                        <button
+                            class="accordion-header-filter flex w-full items-center justify-between rounded-xl px-4 py-1 hover:bg-zinc-100"
+                            data-target="#panel5">
+                            <p class="text-sm font-semibold text-zinc-600 md:text-base">Etiquetas</p>
+                            <x-icon-store icon="arrow-down" class="h-5 w-5 text-zinc-500" />
+                        </button>
+                        <div id="panel5"
+                            class="accordion-content-filter max-h-0 overflow-hidden px-4 transition-all duration-500 ease-in-out">
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                @if ($labels->count() > 0)
+                                    @foreach ($labels as $label)
+                                        <div class="flex items-center">
+                                            <input id="{{ $label->name }}" type="checkbox" value="{{ $label->id }}"
+                                                name="label"
+                                                class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            <label for="{{ $label->name }}"
+                                                class="bg-{{ $label->color }}-100 text-{{ $label->color }}-800 ms-2 rounded-xl p-0.5 px-2 text-sm font-medium text-zinc-900">
+                                                {{ $label->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="mb-2 text-sm text-zinc-600">Subcategorías</p>
-                        <div class="flex flex-col gap-2">
-                            @if ($subcategories->count() > 0)
-                                @foreach ($subcategories as $subcategorie)
-                                    <div class="flex items-center">
-                                        <input id="{{ $subcategorie->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                        <label for="{{ $subcategorie->name }}"
-                                            class="ms-2 text-sm font-medium text-zinc-900">
-                                            {{ $subcategorie->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            @endif
+
+                    <div class="accordion-item">
+                        <button
+                            class="accordion-header-filter flex w-full items-center justify-between rounded-xl px-4 py-1 hover:bg-zinc-100"
+                            data-target="#panel6">
+                            <p class="text-sm font-semibold text-zinc-600 md:text-base">Marcas</p>
+                            <x-icon-store icon="arrow-down" class="h-5 w-5 text-zinc-500" />
+                        </button>
+                        <div id="panel6"
+                            class="accordion-content-filter max-h-0 overflow-hidden px-4 transition-all duration-500 ease-in-out">
+                            <div class="mt-4 flex flex-col gap-2">
+                                @if ($brands->count() > 0)
+                                    @foreach ($brands as $brand)
+                                        <div class="flex items-center">
+                                            <input id="{{ $brand->name }}" type="checkbox" value="{{ $brand->id }}"
+                                                name="brand"
+                                                class="filter-check h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                                            <label for="{{ $brand->name }}"
+                                                class="ms-2 text-sm font-medium text-zinc-500 md:text-base">
+                                                {{ $brand->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="mb-2 text-sm text-zinc-600">Etiquetas</p>
-                        <div class="flex flex-wrap gap-2">
-                            @if ($labels->count() > 0)
-                                @foreach ($labels as $label)
-                                    <div class="flex items-center">
-                                        <input id="{{ $label->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                        <label for="{{ $label->name }}" class="ms-2 text-sm font-medium text-zinc-900">
-                                            {{ $label->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            @endif
+                </aside>
+
+                <!-- Products -->
+                <div class="flex flex-[5] flex-wrap justify-center gap-4">
+                    <div class="flex w-full justify-between gap-4">
+                        <div class="font-secondary flex w-1/2 flex-col gap-2">
+                            <x-input-store label="Buscar" icon="search" placeholder="Buscar producto..." name="search"
+                                id="search" />
+                        </div>
+                        <div class="font-secondary flex w-80 flex-col gap-2">
+                            <x-select-store label="Ordernar por" name="order" id="order" :options="[
+                                'recent' => 'Más recientes',
+                                'older' => 'Más antiguos',
+                                'price_asc' => 'Precio: Menor a mayor',
+                                'price_desc' => 'Precio: Mayor a menor',
+                                'offer' => 'Descuento',
+                            ]" />
                         </div>
                     </div>
-                    <div>
-                        <p class="mb-2 text-sm text-zinc-600">Marcas</p>
-                        <div class="flex flex-col gap-2">
-                            @if ($brands->count() > 0)
-                                @foreach ($brands as $brand)
-                                    <div class="flex items-center">
-                                        <input id="{{ $brand->name }}" type="checkbox" value=""
-                                            class="h-4 w-4 rounded border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
-                                        <label for="{{ $brand->name }}" class="ms-2 text-sm font-medium text-zinc-900">
-                                            {{ $brand->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-[5] flex-wrap gap-4">
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 justify-center gap-6 lg:grid-cols-2 xl:grid-cols-3" id="products-list">
                         @if ($products->count() > 0)
                             @foreach ($products as $product)
                                 <x-card-product :product="$product" :slide="false" width="w-auto" />
                             @endforeach
                         @else
-                            <p class="text-sm text-zinc-600">No hay productos que mostrar</p>
+                            <p class="text-sm text-zinc-600 md:text-base">No hay productos que mostrar</p>
                         @endif
                     </div>
                 </div>

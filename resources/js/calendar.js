@@ -49,10 +49,10 @@ $(document).ready(function () {
                     </svg>
                 </button>
                 <div class="flex items-center space-x-2">
-                    <select id="month-select" class="text-zinc-800 p-2 rounded-xl border border-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-200 text-sm">
+                    <select id="month-select" class="text-zinc-800 p-2 rounded-xl border border-zinc-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-200 text-xs sm:text-sm">
                         ${months.map((m, i) => `<option value="${i}" ${i === month ? "selected" : ""} class="hover:bg-zinc-100">${m}</option>`).join("")}
                     </select>
-                    <input type="number" id="year-input" class="text-sm border border-zinc-400 text-zinc-800 p-2 w-20 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-200" value="${year}">
+                    <input type="number" id="year-input" class="text-xs sm:text-sm border border-zinc-400 text-zinc-800 p-2 w-20 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-200" value="${year}">
                 </div>
                 <button class="next-month text-white p-2 rounded-xl bg-secondary hover:bg-blue-950">
                     <svg class="w-5 h-5 text-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
@@ -104,7 +104,7 @@ $(document).ready(function () {
                 : "hover:bg-gray-200 text-zinc-800";
 
             const cell = $(
-                `<td class="p-2 text-sm cursor-pointer rounded-xl ${cellClass}" data-day="${day}" data-month="${month + 1}" data-year="${year}">${day}</td>`,
+                `<td class="p-2 text-xs sm:text-sm cursor-pointer rounded-xl ${cellClass}" data-day="${day}" data-month="${month + 1}" data-year="${year}">${day}</td>`,
             );
             cell.click(function () {
                 $dateInput.val(`${year}-${month + 1}-${day}`);

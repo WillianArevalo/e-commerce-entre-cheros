@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Home')
+@section('title', 'Favoritos')
 @section('content')
     <main>
         <section class="relative h-[300px] w-full text-white"
@@ -10,16 +10,17 @@
                 </path>
             </svg>
         </section>
-        <section class="relative -top-28 px-20 py-4">
+        <section class="relative -top-28 px-4 py-4 md:px-20">
             <div class="flex w-full flex-col justify-center gap-4 text-center">
-                <h2 class="p-4 font-mystical text-5xl uppercase text-secondary" data-aos="fade-up">
+                <h2 class="mt-20 text-center font-mystical text-2xl font-normal uppercase text-secondary md:mt-0 md:text-start md:text-3xl xl:text-5xl"
+                    data-aos="fade-up">
                     Favoritos
                 </h2>
                 @if ($favorites->count() > 0)
-                    <div class="mx-auto flex flex-wrap justify-center gap-4">
-                        @foreach ($favorites as $product)
-                            <x-card-product :product="$product" :slide="false" width="w-auto" />
-                        @endforeach
+                    <div id="slider">
+                        @include('layouts.__partials.store.slider', [
+                            'products' => $favorites,
+                        ])
                     </div>
                 @else
                     <p class="font-secondary p-20 text-center text-lg font-medium">No hay productos favoritos</p>
@@ -30,5 +31,8 @@
                 </div>
             </div>
         </section>
+
+
+
     </main>
 @endsection

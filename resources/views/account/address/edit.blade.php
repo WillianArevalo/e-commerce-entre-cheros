@@ -11,7 +11,7 @@
                 @csrf
                 @method('PUT')
                 <div class="flex flex-col gap-4">
-                    <div class="flex w-full gap-4">
+                    <div class="flex w-full flex-col gap-4 sm:flex-row">
                         <div class="flex flex-[2] flex-col gap-2">
                             <x-input-store type="text" placeholder="" value="El Salvador" name="country" label="País"
                                 value="{{ $address->country }}" required />
@@ -33,7 +33,7 @@
                                 value="{{ $address->address_line_2 }}" />
                         </div>
                     </div>
-                    <div class="flex w-full gap-4">
+                    <div class="flex w-full flex-col gap-4 sm:flex-row">
                         <div class="flex flex-1 flex-col gap-2">
                             <x-input-store type="text" placeholder="Ingresa el estado" label="Estado" name="state"
                                 value="{{ $address->state ?? '' }}" />
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 flex items-center justify-center gap-4">
+                <div class="my-4 flex items-center justify-center gap-4">
                     <x-button-store type="submit" text="Editar dirección" icon="edit-01" class="w-max text-sm"
                         typeButton="primary" />
                     <x-button-store type="a" href="{{ Route('account.addresses.index') }}" text="Regresar"

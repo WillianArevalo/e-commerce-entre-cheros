@@ -32,6 +32,7 @@ import "./order";
 import "./reviews";
 import "./ticket";
 import "./register";
+import "./filters-store";
 import { initSwiper } from "./swiper";
 
 initSwiper();

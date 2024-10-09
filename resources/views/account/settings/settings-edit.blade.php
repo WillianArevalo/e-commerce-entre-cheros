@@ -1,6 +1,6 @@
 @extends('layouts.__partials.store.template-profile')
 @section('profile-content')
-    <div class="flex flex-col">
+    <div class="mb-4 flex flex-col">
         <div class="py-2">
             <h2 class="font-league-spartan text-3xl font-bold text-secondary">
                 Editar datos
@@ -21,12 +21,12 @@
                             name="last_name" />
                     </div>
                 </div>
-                <div class="mt-4 flex gap-4">
+                <div class="mt-4 flex flex-col gap-4 md:flex-row">
                     <div class="flex flex-1 flex-col gap-2">
                         <x-input-store type="text" label="Usuario" placeholder="Usuario" value="{{ $user->username }}"
                             icon="user" name="username" />
                     </div>
-                    <div class="flex flex-1 gap-4">
+                    <div class="flex flex-1 flex-col gap-4 sm:flex-row">
                         <div class="flex flex-1 flex-col gap-2">
                             <x-input-store type="text" placeholder="503" label="Código" icon="plus" name="area_code"
                                 value="{{ optional($user->customer)->area_code ?? '' }}" />
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 flex gap-4">
+                <div class="mt-4 flex flex-col gap-4 md:flex-row">
                     <div class="flex flex-1 flex-col gap-2">
                         <x-select-store label="Género" id="gender" name="gender" :options="['male' => 'Masculino', 'female' => 'Femenino']"
                             value="{{ optional($user->customer)->gender ?? '' }}"
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
+                <div class="flex justify-center md:justify-start">
                     <x-button-store type="submit" text="Guardar cambios" typeButton="primary"
                         class="mt-4 w-max font-semibold" />
                 </div>

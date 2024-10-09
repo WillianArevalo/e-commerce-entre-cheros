@@ -4,7 +4,7 @@
     @php
         $user = Auth::user();
     @endphp
-    <main>
+    <div>
         <section>
             <div class="relative flex h-[320px] w-full items-center justify-center text-white"
                 style="background-image:url('{{ asset('images/fondo7.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
@@ -17,7 +17,7 @@
                     class="absolute top-32 h-56 w-56 rounded-full object-cover shadow-md">
             </div>
         </section>
-        <section class="mx-auto mt-4 p-8">
+        <section class="mx-auto mt-4 p-0 xl:p-8">
             <div class="mx-auto flex w-max justify-center gap-16 rounded-2xl p-4 px-10 font-semibold">
                 <a href="{{ Route('favorites') }}"
                     class="flex flex-col items-center justify-center gap-1 text-sm text-rose-500 hover:scale-105">
@@ -35,8 +35,9 @@
                     Cupones
                 </a>
             </div>
-            <div class="mx-auto mt-8 flex gap-8 px-20">
-                <div class="h-max min-w-[350px] rounded-2xl border border-zinc-200">
+            <div class="mx-auto mt-4 flex flex-col px-4 sm:mt-8 sm:flex-row md:gap-4 xl:gap-8 xl:px-20">
+                <div
+                    class="mx-auto mb-4 h-max w-max overflow-hidden rounded-2xl border border-zinc-200 sm:mx-0 sm:w-auto sm:overflow-auto xl:min-w-[350px]">
                     @include('layouts.__partials.store.nav-profile')
                 </div>
                 <div class="h-max w-full rounded-2xl">
@@ -44,5 +45,5 @@
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 @endsection

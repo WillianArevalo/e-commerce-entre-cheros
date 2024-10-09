@@ -1,9 +1,7 @@
 @extends('layouts.template')
-
-@section('title', 'Home')
-
+@section('title', 'Entre Cheros | Tienda')
 @section('content')
-    <div class="mb-20">
+    <div class="mb-10 xl:mb-20">
         <section class="relative h-[300px] w-full text-white"
             style="background-image:url('{{ asset('images/fondo3.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute bottom-0 w-full">
@@ -12,42 +10,46 @@
                 </path>
             </svg>
         </section>
-        <section class="relative -top-24" data-aos="zoom-in">
-            <div class="relative mx-auto flex w-4/5 items-center justify-center">
+
+        <!-- Swiper slider -->
+        <section class="relative top-0 lg:-top-24" data-aos="zoom-in">
+            <div class="relative mx-auto flex w-full items-center justify-between lg:w-4/5">
                 <button
-                    class="button-prev-home absolute -left-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 p-2 hover:bg-zinc-100">
-                    <x-icon icon="arrow-left" class="h-6 w-6 text-secondary" />
+                    class="button-prev-home absolute left-6 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-white p-2 hover:bg-zinc-100 lg:-left-14">
+                    <x-icon-store icon="arrow-left" class="h-4 w-4 text-secondary lg:h-6 lg:w-6" />
                 </button>
-                <div class="swiper swiper-home rounded-lg">
+                <div class="swiper swiper-home lg:rounded-[40px]">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <img src="{{ asset('images/fondo4.jpg') }}" alt=""
-                                class="h-[500px] w-full object-cover">
+                                class="h-[250px] w-full object-cover lg:h-[500px]">
                         </div>
                         <div class="swiper-slide">
                             <img src="{{ asset('images/fondo5.jpg') }}" alt=""
-                                class="h-[500px] w-full object-cover">
+                                class="h-[250px] w-full object-cover lg:h-[500px]">
                         </div>
                         <div class="swiper-slide">
                             <img src="{{ asset('images/fondo6.jpg') }}" alt=""
-                                class="h-[500px] w-full object-cover">
+                                class="h-[250px] w-full object-cover lg:h-[500px]">
                         </div>
                         <div class="swiper-slide">
                             <img src="{{ asset('images/fondo7.jpg') }}" alt=""
-                                class="h-[500px] w-full object-cover">
+                                class="h-[250px] w-full object-cover lg:h-[500px]">
                         </div>
                         <div class="swiper-slide">
-                            <img src="{{ asset('images/fondo.jpg') }}" alt="" class="h-[500px] w-full object-cover">
+                            <img src="{{ asset('images/fondo.jpg') }}" alt=""
+                                class="h-[250px] w-full object-cover lg:h-[500px]">
                         </div>
                     </div>
                 </div>
                 <button
-                    class="button-next-home absolute -right-14 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 p-2 hover:bg-zinc-100">
-                    <x-icon icon="arrow-right" class="h-6 w-6 text-secondary" />
+                    class="button-next-home absolute right-5 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-white p-2 hover:bg-zinc-100 lg:-right-14">
+                    <x-icon-store icon="arrow-right" class="h-4 w-4 text-secondary lg:h-6 lg:w-6" />
                 </button>
             </div>
         </section>
-        <section class="px-20">
+
+        {{--  <section class="px-20">
             <div class="mb-8 flex flex-col items-center justify-center gap-4 text-center" data-aos="fade-up">
                 <h2 class="w-2/3 font-league-spartan text-5xl font-bold uppercase text-secondary">
                     Lo mejor de <span class="font-mystical">Entre Cheros</span>
@@ -67,16 +69,40 @@
                     @endforeach
                 </div>
             @endif
+        </section> --}}
+
+        <section class="mt-8 p-4 md:mt-0 xl:p-20">
+            <div class="flex flex-col items-center justify-center gap-4 text-center">
+                <h2 class="font-league-spartan text-xl font-bold uppercase text-secondary md:w-2/3 md:text-3xl lg:text-5xl">
+                    Lo mejor de <span class="font-mystical">Entre Cheros</span>
+                </h2>
+                <p class="text-sm text-zinc-600 md:text-base lg:w-1/2">
+                    Encuentra los mejores productos de la región, hechos con amor y calidad.
+                </p>
+            </div>
+            @if ($products)
+                <div id="slider" class="mt-8">
+                    @include('layouts.__partials.store.slider', [
+                        'products' => $products,
+                    ])
+                </div>
+            @endif
         </section>
-        <section class="mt-16 px-20">
-            <div class="flex justify-center gap-6">
+
+        <section class="mt-4 p-4 lg:mt-8 xl:mt-16 xl:px-20">
+            <div class="flex justify-center gap-4 xl:gap-6">
                 @if ($categories->count() > 0)
                     @foreach ($categories as $category)
                         <a href="{{ route('store.search', ['search' => 'categorie_id', 'value' => $category->id]) }}"
-                            class="font-secondary flex flex-col items-center justify-center gap-2" data-aos="zoom-in">
-                            <img src="{{ Storage::url($category->image) }}" alt=""
-                                class="h-40 w-40 rounded-full object-cover">
-                            {{ $category->name }}
+                            class="font-secondary relative flex h-32 w-32 flex-col items-center justify-center overflow-hidden rounded-full border border-zinc-400 transition-transform hover:scale-110 sm:h-36 sm:w-36 md:h-40 md:w-40 lg:h-48 lg:w-48 xl:h-56 xl:w-56"
+                            data-aos="zoom-in">
+                            <img src="{{ Storage::url($category->image) }}" alt="Image {{ $category->image }}"
+                                class="absolute inset-0 z-0 h-full w-full object-cover">
+                            <div class="absolute inset-0 z-10 bg-black opacity-50"></div>
+                            <span
+                                class="relative z-20 text-center text-xs font-bold text-white sm:text-sm md:text-base lg:text-lg xl:text-xl">
+                                {{ $category->name }}
+                            </span>
                         </a>
                     @endforeach
                 @endif

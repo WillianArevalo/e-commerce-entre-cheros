@@ -3,23 +3,25 @@
 @section('content')
     <div class="mb-20">
         <section>
-            <div class="relative flex h-[500px] w-full items-center justify-center text-white"
+            <div class="relative flex h-[400px] w-full items-center justify-center text-white xl:h-[500px]"
                 style="background-image:url('{{ asset('images/fondo3.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
                 <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-0 w-full" viewBox="0 0 1440 320">
                     <path fill="#fff" fill-opacity="1"
                         d="M0,192L48,197.3C96,203,192,213,288,208C384,203,480,181,576,181.3C672,181,768,203,864,224C960,245,1056,267,1152,266.7C1248,267,1344,245,1392,234.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
                     </path>
                 </svg>
-                <h1 class="mb-16 font-mystical text-5xl font-normal uppercase text-white" data-aos="zoom-in">Acerca de
-                    nosotros</h1>
-                <div class="absolute bottom-0 flex items-center gap-4">
-                    <img src="{{ asset('images/photo.jpg') }}" alt="Image about" class="h-48 w-48 rounded-3xl object-cover"
+                <h1 class="mb-16 font-mystical text-2xl font-normal uppercase text-white md:text-3xl xl:text-5xl"
+                    data-aos="zoom-in">
+                    Acerca de nosotros
+                </h1>
+                <div class="absolute bottom-0 hidden items-center gap-4 md:flex">
+                    <img src="{{ asset('images/fondo.jpg') }}" alt="Image about" class="h-48 w-48 rounded-3xl object-cover"
                         data-aos="fade-right">
-                    <img src="{{ asset('images/photo.jpg') }}" alt="Image about" class="h-32 w-52 rounded-3xl object-cover"
+                    <img src="{{ asset('images/fondo2.jpg') }}" alt="Image about" class="h-32 w-52 rounded-3xl object-cover"
                         data-aos="zoom-in">
-                    <img src="{{ asset('images/photo.jpg') }}" alt="Image about" class="h-48 w-48 rounded-3xl object-cover"
+                    <img src="{{ asset('images/fondo3.jpg') }}" alt="Image about" class="h-48 w-48 rounded-3xl object-cover"
                         data-aos="zoom-in">
-                    <img src="{{ asset('images/photo.jpg') }}" alt="Image about" class="h-32 w-52 rounded-3xl object-cover"
+                    <img src="{{ asset('images/fondo4.jpg') }}" alt="Image about" class="h-32 w-52 rounded-3xl object-cover"
                         data-aos="fade-left">
                 </div>
             </div>
@@ -28,6 +30,7 @@
                     typeButton="primary" />
             </div>
         </section>
+
         <section class="relative mt-10 flex flex-col items-center justify-center gap-4 p-20">
             <h2 class="font-league-spartan text-5xl font-bold text-secondary">
                 ¿Quiénes somos?

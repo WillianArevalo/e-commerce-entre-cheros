@@ -8,11 +8,15 @@ export function initSwiper() {
                 prevEl: ".button-prev",
             },
             breakpoints: {
-                320: {
+                200: {
                     slidesPerView: 1,
                     spaceBetween: 20,
                 },
-                640: {
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                760: {
                     slidesPerView: 2,
                     spaceBetween: 20,
                 },
