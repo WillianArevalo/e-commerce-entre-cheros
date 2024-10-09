@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Status;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string("symbol");
             $table->string("name");
             $table->decimal("exchange_rate", 10, 4);
-            $table->boolean("is_default")->default(Status::INACTIVE);
-            $table->boolean("auto_update")->default(Status::INACTIVE);
-            $table->boolean("active")->default(Status::ACTIVE);
+            $table->boolean("is_default")->default(false);
+            $table->boolean("auto_update")->default(false);
+            $table->boolean("active")->default(true);
             $table->timestamps();
         });
     }

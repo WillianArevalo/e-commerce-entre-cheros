@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\STATUS;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +24,7 @@ return new class extends Migration
             $table->date("offer_end_date")->nullable();
             $table->boolean("offer_active")->default(false);
             $table->boolean("is_active")->default(true);
-            $table->string("status")->default(STATUS::ACTIVE);
+            $table->string("status")->default("draft");
             $table->string("sku");
             $table->string("barcode")->nullable();
             $table->decimal("weight", 10, 2);

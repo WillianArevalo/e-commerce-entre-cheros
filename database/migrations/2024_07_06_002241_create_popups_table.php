@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\STATUS;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("name");
             $table->longText("content");
             $table->enum("type", ["redirect", "store"])->default("redirect");
-            $table->boolean("active")->default(STATUS::ACTIVE);
+            $table->boolean("active")->default(true);
             $table->string("link")->nullable();
             $table->timestamps();
         });

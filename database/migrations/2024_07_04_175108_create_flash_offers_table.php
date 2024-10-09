@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\STATUS;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date("start_date");
             $table->date("end_date");
-            $table->boolean("is_active")->default(STATUS::INACTIVE);
-            $table->boolean("is_showing")->default(STATUS::INACTIVE);
+            $table->boolean("is_active")->default(false);
+            $table->boolean("is_showing")->default(false);
             $table->foreignId("product_id")->constrained()->onDelete("cascade");
             $table->timestamps();
         });

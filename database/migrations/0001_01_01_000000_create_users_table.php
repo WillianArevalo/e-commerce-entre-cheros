@@ -1,8 +1,5 @@
 <?php
 
-use App\Enums\ROLE;
-use App\Enums\STATUS;
-use App\Enums\THEME;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,8 +20,8 @@ return new class extends Migration
             $table->string("profile")->default("images/default-profile.webp");
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean("status")->default(STATUS::ACTIVE);
-            $table->string('role')->default(ROLE::USER);
+            $table->boolean("status")->default(1);
+            $table->string('role')->default("user");
             $table->string('locale')->default('en');
             $table->string('timezone')->default('UTC');
             $table->string('currency')->default('USD');
@@ -32,7 +29,7 @@ return new class extends Migration
             $table->timestamp('last_activity')->nullable();
             $table->timestamp('last_password_change')->nullable();
             $table->string("last_ip_address")->nullable();
-            $table->string("theme")->default(THEME::LIGHT);
+            $table->string("theme")->default("light");
             $table->string("color")->default("blue");
             $table->string("google_id")->nullable();
             $table->string("google_profile")->nullable();

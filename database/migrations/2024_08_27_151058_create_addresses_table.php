@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string("zip_code")->nullable();
             $table->string("type")->nullable();
             $table->string("slug")->nullable();
-            $table->boolean("default")->default(Status::INACTIVE);
-            $table->boolean("active")->default(Status::ACTIVE);
+            $table->boolean("default")->default(true);
+            $table->boolean("active")->default(true);
             $table->foreignId("customer_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

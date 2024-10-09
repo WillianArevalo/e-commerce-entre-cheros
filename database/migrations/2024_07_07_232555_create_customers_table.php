@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\STATUS;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("phone")->nullable();
             $table->date("birthdate")->nullable();
             $table->enum("gender", ["male", "female", "other"])->nullable();
-            $table->boolean("status")->default(STATUS::ACTIVE);
+            $table->boolean("status")->default(true);
             $table->string("area_code")->nullable();
             $table->foreignId("user_id")->constrained()->onDelete("cascade");
             $table->timestamps();
