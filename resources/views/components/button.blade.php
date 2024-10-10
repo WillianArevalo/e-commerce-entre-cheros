@@ -35,7 +35,8 @@
 
     // Clases base
     $baseClasses =
-        'font-medium rounded-lg flex items-center gap-2 transition-colors transition duration-300 ' . $padding;
+        'font-medium rounded-lg flex items-center justify-center gap-2 transition-colors transition duration-300 ' .
+        $padding;
 
     // Tipos de botones
     $buttonTypes = [
