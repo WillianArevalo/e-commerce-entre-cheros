@@ -77,3 +77,7 @@
 .dimension-box .bottom {
     transform: rotateX(-90deg) translateZ(25px);
 }
+
+div[drawer-backdrop] {
+    display: none;
+}

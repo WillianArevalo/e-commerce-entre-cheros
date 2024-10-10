@@ -38,6 +38,19 @@ $(document).ready(function () {
         }
     });
 
+    $("#btn-sidebar-toggle").on("click", function () {
+        $("#overlay").toggleClass("hidden");
+        $("#sidebar").toggleClass("transform-none");
+        $("#sidebar").toggleClass("-translate-x-full");
+    });
+
+    $("#overlay").on("click", function () {
+        $("#overlay").addClass("hidden");
+        $("#sidebar")
+            .removeClass("transform-none")
+            .addClass("-translate-x-full");
+    });
+
     $("#btn-hamburger").on("click", function () {
         $("#mobile-menu").toggleClass("active");
     });
