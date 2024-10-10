@@ -1,7 +1,7 @@
 @extends('layouts.template')
 @section('title', 'Home')
 @section('content')
-    <div>
+    <div class="overflow-x-hidden">
         <section class="relative h-[400px] w-full text-white md:h-[500px] lg:h-[600px]"
             style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
             <div class="flex w-full flex-col gap-4" data-aos="fade-right">

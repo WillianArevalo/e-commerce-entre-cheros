@@ -85,7 +85,11 @@
                         <div>
                             <span class="font-bold text-secondary">Método de envío:</span>
                             <span class="text-zinc-800">
-                                {{ $order->shipping_method->name }}
+                                @if ($order->shipping_method)
+                                    {{ $order->shipping_method->name }}
+                                @else
+                                    Sin especificar
+                                @endif
                             </span>
                         </div>
                         <div class="mt-2">

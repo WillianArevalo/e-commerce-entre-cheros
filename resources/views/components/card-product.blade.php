@@ -43,12 +43,12 @@
             <div>
                 @if ($product->offer_price && $product->offer_active === 1)
                     <span
-                        class="font-secondary text-base font-semibold text-secondary lg:text-2xl">${{ $product->offer_price }}</span>
+                        class="font-secondary text-base font-semibold text-secondary lg:text-xl">${{ $product->offer_price }}</span>
                     <span
                         class="font-secondary text-xs text-zinc-500 line-through lg:text-base">${{ $product->price }}</span>
                 @else
                     <span
-                        class="font-secondary text-base font-semibold text-secondary lg:text-2xl">{{ $product->price_in_currency }}
+                        class="font-secondary text-base font-semibold text-secondary lg:text-xl">{{ $product->price_in_currency }}
                     </span>
                 @endif
             </div>
@@ -61,11 +61,11 @@
                 <input type="hidden" name="quantity" value="1">
                 <button type="button" data-form="#form-add-cart-{{ $product->id }}"
                     class="add-to-cart flex items-center justify-center rounded-xl bg-secondary px-4 py-2 font-league-spartan text-sm text-white hover:bg-blue-950 sm:rounded-2xl sm:px-4 sm:py-3">
-                    <x-icon-store icon="shopping-cart-add" class="h-3 w-3 text-current sm:h-5 sm:w-5" />
-                    <span class="ml-2 hidden text-xs sm:block sm:text-base">
+                    <x-icon-store icon="shopping-cart-add" class="w- h-3 text-current sm:h-5 sm:w-5" />
+                    <span class="ml-2 hidden text-xs sm:block sm:text-sm">
                         Agregar al carrito
                     </span>
-                    <span class="ml-2 block text-xs sm:hidden sm:text-base">
+                    <span class="ml-2 block text-xs sm:hidden sm:text-sm">
                         Agregar
                     </span>
                 </button>

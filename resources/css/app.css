@@ -89,3 +89,11 @@ div[modal-backdrop] {
     line-height: 1.2em;
     max-height: 5.4em;
 }
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Número de líneas que quieres mostrar antes del corte */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Muestra los tres puntitos */
+}

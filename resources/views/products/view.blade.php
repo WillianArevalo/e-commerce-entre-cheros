@@ -1,7 +1,7 @@
 @extends('layouts.template')
 @section('title', 'Detalles del producto')
 @section('content')
-    <div class="mx-auto mb-10 w-full px-4 md:w-4/5 md:px-0">
+    <div class="mx-auto mb-10 w-full overflow-x-hidden px-4 md:w-4/5 md:px-0">
         <!-- Section details product -->
         <section class="mt-32">
             <div class="flex flex-col gap-4 xl:flex-row xl:gap-32">

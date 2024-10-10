@@ -11,7 +11,7 @@
         }
     @endphp
 
-    <div>
+    <div class="overflow-x-hidden">
         <!-- Header container -->
         <section class="relative h-[320px] w-full text-white"
             style="background-image:url('{{ asset('images/fondo6.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">

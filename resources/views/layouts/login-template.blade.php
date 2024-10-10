@@ -8,7 +8,6 @@
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('images/imagen6.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')
-    @vite('resources/css/home.css')
     <script>
         (function() {
             let theme = localStorage.getItem('theme') || '{{ App\Enums\Theme::LIGHT }}';
