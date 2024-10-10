@@ -1,0 +1,29 @@
+{
+  "public/fonts/MysticalWoodsRoughScript.woff": {
+    "file": "assets/MysticalWoodsRoughScript-CGvg9NjA.woff",
+    "src": "public/fonts/MysticalWoodsRoughScript.woff"
+  },
+  "public/fonts/Poppins-Black.ttf": {
+    "file": "assets/Poppins-Black-yHqY0KRU.ttf",
+    "src": "public/fonts/Poppins-Black.ttf"
+  },
+  "public/fonts/Poppins-Regular.ttf": {
+    "file": "assets/Poppins-Regular-CTKNfV9P.ttf",
+    "src": "public/fonts/Poppins-Regular.ttf"
+  },
+  "public/images/fondo4.jpg": {
+    "file": "assets/fondo4-DUQIuQYn.jpg",
+    "src": "public/images/fondo4.jpg"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-D5GL_L95.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Ns7TbP8x.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
