@@ -59,45 +59,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4 mb-4 rounded-lg border border-zinc-400 dark:border-zinc-800">
-                        <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400" id="tableCategorie">
-                            <thead
-                                class="border-y border-zinc-400 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:text-zinc-300">
-                                <tr>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                    <div class="mx-4 mb-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th>
                                         Imagen
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Nombre
-                                    </th>
-                                    <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th>
                                         Subcategorías
-                                    </th>
-                                    <th scope="col" class="border-b border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                    </x-th>
+                                    <x-th :last="true">
                                         Acciones
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                    </x-th>
+                                </x-tr>
+                            </x-slot>
+                            <x-slot name="tbody" id="tableCategorie">
                                 @if ($categories->count() == 0)
-                                    <tr class="border-b dark:border-zinc-950">
-                                        <td colspan="4"
-                                            class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
-                                            No hay categorías
-                                        </td>
-                                    </tr>
+                                    <x-tr>
+                                        <x-td colspan="4">
+                                            <div class="p-10 text-center">
+                                                No hay categorías
+                                            </div>
+                                        </x-td>
+                                    </x-tr>
                                 @else
                                     @foreach ($categories as $category)
-                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                            <th scope="row"
-                                                class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
+                                        <x-tr section="body">
+                                            <x-td>
                                                 <img src="{{ Storage::url($category->image) }}" alt="Product 1"
-                                                    class="h-16 w-16 rounded-lg object-cover">
-                                            </th>
-                                            <td class="px-4 py-3">
-                                                <span>{{ $category->name }}</span>
-                                            </td>
-                                            <td class="px-4 py-3">
+                                                    class="h-10 w-10 rounded-lg object-cover sm:h-16 sm:w-16">
+                                            </x-td>
+                                            <x-td>
+                                                <span class="text-nowrap">{{ $category->name }}</span>
+                                            </x-td>
+                                            <x-td>
                                                 @if ($category->subcategories->isNotEmpty())
                                                     <div class="flex flex-col gap-2">
                                                         @foreach ($category->subcategories as $subcategorie)
@@ -110,14 +109,13 @@
                                                                         class="h-5 w-5 text-current" />
                                                                 </button>
                                                                 <div
-                                                                    class="dropDownContent absolute top-10 z-30 hidden w-44 overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-900">
-                                                                    <ul
-                                                                        class="p-2 text-sm text-zinc-700 dark:text-zinc-200">
+                                                                    class="dropDownContent absolute right-0 top-11 z-30 hidden w-28 rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
+                                                                    <ul class="text-sm text-zinc-700 dark:text-zinc-200">
                                                                         <li>
                                                                             <button type="button"
                                                                                 data-href="{{ route('admin.subcategories.edit', $subcategorie->id) }}"
                                                                                 data-action="{{ route('admin.subcategories.update', $subcategorie->id) }}"
-                                                                                class="editCategorie flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:hover:text-white">
+                                                                                class="editCategorie flex w-full items-center gap-1 rounded-lg px-2 py-2 text-emerald-700 hover:bg-emerald-100 dark:text-emerald-400 dark:hover:bg-emerald-950 dark:hover:bg-opacity-20">
                                                                                 <x-icon icon="edit"
                                                                                     class="h-4 w-4 text-current" />
                                                                                 Editar
@@ -134,7 +132,7 @@
                                                                                     data-form="formDeleteSubCategorie-{{ $subcategorie->id }}"
                                                                                     data-modal-target="deleteModal"
                                                                                     data-modal-toggle="deleteModal"
-                                                                                    class="buttonDelete flex w-full items-center gap-2 rounded-lg px-4 py-2 text-start hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800">
+                                                                                    class="buttonDelete flex w-full items-center gap-1 rounded-lg px-2 py-2 text-red-700 hover:bg-red-100 dark:text-red-400 dark:hover:bg-red-950 dark:hover:bg-opacity-20">
                                                                                     <x-icon icon="delete"
                                                                                         class="h-4 w-4 text-current" />
                                                                                     Eliminar
@@ -149,8 +147,8 @@
                                                 @else
                                                     <span>No hay subcategorías</span>
                                                 @endif
-                                            </td>
-                                            <td class="px-4 py-3">
+                                            </x-td>
+                                            <x-td>
                                                 <div class="flex gap-2">
                                                     <x-button type="button" class="editCategorie" onlyIcon="true"
                                                         data-href="{{ route('admin.categories.edit', $category->id) }}"
@@ -167,12 +165,12 @@
                                                             data-modal-toggle="deleteModal" class="buttonDelete" />
                                                     </form>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </x-td>
+                                        </x-tr>
                                     @endforeach
                                 @endif
-                            </tbody>
-                        </table>
+                            </x-slot>
+                        </x-table>
                     </div>
                     {{ $categories->links('vendor.pagination.pagination-custom') }}
                 </div>
@@ -183,7 +181,7 @@
             message="No podrás recuperar este registro" action="" />
 
         <div id="drawer-new-categorie"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -251,7 +249,7 @@
         </div>
 
         <div id="drawer-edit-categorie"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-edit-categorie">
             <h5 id="drawer-new-categorie-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">

@@ -163,7 +163,7 @@
     <main class="h-full bg-zinc-50 dark:bg-black">
         @include('layouts.__partials.admin.toast')
         <div id="overlay" class="fixed inset-0 z-30 hidden bg-zinc-950 bg-opacity-50"></div>
-        <div class="mt-16 xl:ml-72">
+        <div class="mt-16 2xl:ml-72">
             <div>
                 @include('layouts.__partials.admin.breadcrumb')
             </div>

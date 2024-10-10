@@ -1,21 +1,15 @@
+<!-- Top header -->
 <header>
-    <nav class="fixed top-0 z-30 w-full border-b border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black">
+    <nav class="fixed top-0 z-[60] w-full border-b border-zinc-400 bg-white dark:border-zinc-800 dark:bg-black 2xl:z-30">
         <div class="py-3">
             <div class="flex items-center justify-between">
                 <div class="flex w-72 items-center justify-start ps-4 rtl:justify-end">
-                    <button data-drawer-target="sidebar-multi-level-sidebar"
-                        data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar"
-                        type="button"
+                    <button type="button" id="btn-sidebar-toggle"
                         class="inline-flex items-center rounded-lg p-2 text-sm text-zinc-500 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:text-zinc-400 dark:hover:bg-zinc-950 dark:focus:ring-zinc-600 xl:hidden">
                         <span class="sr-only">Open sidebar</span>
-                        <svg class="h-6 w-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd" fill-rule="evenodd"
-                                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-                            </path>
-                        </svg>
+                        <x-icon icon="menu" class="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
                     </button>
-                    <div class="flex items-center gap-8">
+                    <div class="hidden items-center gap-8 sm:flex">
                         <a href="{{ route('admin.index') }}" class="flex items-center">
                             <x-icon icon="logo" class="me-2 h-8 w-8 text-primary-700 dark:text-primary-700" />
                             <span
@@ -35,6 +29,7 @@
                 </div>
                 <div class="flex w-auto items-center justify-end pe-4 md:w-full">
                     <div class="flex items-center gap-2">
+                        <!-- Search -->
                         <div class="flex items-center justify-center">
                             <button id="search-toggle"
                                 class="relative flex h-10 w-10 items-center justify-center rounded-lg p-3 hover:bg-zinc-100 focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
@@ -43,6 +38,7 @@
                                 </span>
                             </button>
                         </div>
+                        <!-- Notifications -->
                         <div class="flex items-center justify-center">
                             <button type="button" data-dropdown-toggle="dropdown-alerts"
                                 class="relative inline-flex items-center rounded-lg p-2 text-center text-sm font-medium text-white hover:bg-zinc-100 focus:outline-none focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
@@ -94,7 +90,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="ms-2 rounded-full border border-zinc-400 px-2 py-1 dark:border-zinc-800">
+                        <!-- Theme toggle -->
+                        <div
+                            class="ms-2 hidden rounded-full border border-zinc-400 px-2 py-1 dark:border-zinc-800 sm:block">
                             <form action="{{ Route('admin.settings.change-theme') }}" method="POST"
                                 class="flex items-center justify-center gap-2">
                                 @csrf
@@ -112,6 +110,7 @@
                                 </button>
                             </form>
                         </div>
+                        <!--Information -->
                         <div class="flex items-center justify-center">
                             <button
                                 class="relative flex h-10 w-10 items-center justify-center rounded-lg p-3 hover:bg-zinc-100 focus:ring-4 focus:ring-zinc-300 dark:hover:bg-zinc-950 dark:focus:ring-zinc-800">
@@ -123,17 +122,17 @@
                         <div class="relative">
                             <div class="flex items-center gap-2">
                                 <button type="button" class="flex items-center gap-2" id="profile-admin">
-                                    <div id="container-profile-photo">
-                                        <img class="h-8 w-8 rounded-full object-cover"
+                                    <div id="container-profile-photo" class="h-8 w-8">
+                                        <img class="h-full w-full rounded-full object-cover"
                                             src="{{ Storage::url(auth()->user()->profile) }}" alt="user photo">
                                     </div>
-                                    <span class="flex flex-col text-sm font-bold text-primary-500">
+                                    <span class="hidden flex-col text-sm font-bold text-primary-500 lg:flex">
                                         {{ auth()->user()->name }}
                                     </span>
                                     <x-icon icon="arrow-down" class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
                                 </button>
                             </div>
-                            <div class="absolute right-0 top-10 z-50 hidden list-none divide-y divide-zinc-400 overflow-hidden rounded-lg bg-white p-2 text-base shadow dark:divide-zinc-800 dark:bg-zinc-950"
+                            <div class="absolute right-0 top-10 z-50 hidden list-none divide-y divide-zinc-400 overflow-hidden rounded-lg border border-zinc-200 bg-white p-2 text-base shadow dark:divide-zinc-800 dark:border-zinc-900 dark:bg-zinc-950"
                                 id="dropdown-user">
                                 <div class="px-4 py-3" role="none">
                                     <p class="text-sm text-zinc-900 dark:text-white" role="none">
@@ -152,7 +151,7 @@
                                             Dashboard
                                         </a>
                                     </li>
-                                    <li class="mb-2">
+                                    <li class="mb-0 sm:mb-2">
                                         <a href="{{ route('admin.settings.index') }}"
                                             class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                                             role="menuitem">
@@ -160,14 +159,38 @@
                                             Configuración
                                         </a>
                                     </li>
+                                    <li class="mb-2 mt-2 block sm:hidden">
+                                        <div
+                                            class="w-full rounded-lg border border-zinc-400 px-1.5 py-0.5 dark:border-zinc-800">
+                                            <form action="{{ Route('admin.settings.change-theme') }}" method="POST"
+                                                class="flex items-center justify-center gap-2">
+                                                @csrf
+                                                <button type="button" data-theme="light"
+                                                    class="theme-toggle theme-light flex items-center rounded-lg p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                                    <x-icon icon="sun"
+                                                        class="h-3.5 w-3.5 text-zinc-700 dark:text-white" />
+                                                </button>
+                                                <button type="button" data-theme="system"
+                                                    class="theme-toggle theme-system flex items-center rounded-lg p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                                    <x-icon icon="device-desktop"
+                                                        class="h-3.5 w-3.5 text-zinc-700 dark:text-white" />
+                                                </button>
+                                                <button type="button" data-theme="dark"
+                                                    class="theme-toggle theme-dark flex items-center rounded-lg p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-900">
+                                                    <x-icon icon="moon"
+                                                        class="h-3.5 w-3.5 text-zinc-700 dark:text-white" />
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
                                     <li class="border-t border-zinc-400 pt-2 dark:border-zinc-800">
+                                        <x-button type="a" typeButton="secondary" text="Ver tienda"
+                                            icon="external-link" size="small"
+                                            class="mb-2 block w-full sm:hidden" />
                                         <form action="{{ route('logout') }}" method="POST" class="w-full">
                                             @csrf
-                                            <button type="submit"
-                                                class="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-400 px-2.5 py-1.5 text-sm text-zinc-600 transition-colors duration-300 hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
-                                                <x-icon icon="logout" class="h-4 w-4 text-current" />
-                                                Cerrar sesión
-                                            </button>
+                                            <x-button type="submit" size="small" text="Cerrar sesión"
+                                                icon="logout" typeButton="secondary" class="w-full text-center" />
                                         </form>
                                     </li>
                                 </ul>
@@ -179,8 +202,10 @@
         </div>
     </nav>
 </header>
-<aside id="sidebar-multi-level-sidebar"
-    class="fixed left-0 top-0 z-20 mt-2 h-screen w-72 -translate-x-full border-e border-zinc-400 pt-12 transition-transform dark:border-zinc-800 xl:translate-x-0"
+
+<!-- Sidebar -->
+<aside id="sidebar"
+    class="fixed left-0 top-0 z-50 mt-2 h-screen w-72 -translate-x-full border-e border-zinc-400 pt-12 transition-transform dark:border-zinc-800 2xl:z-20 2xl:translate-x-0"
     aria-label="Sidebar">
     <div class="mt-2 h-full overflow-y-auto bg-white px-3 py-4 dark:bg-black">
         <ul class="space-y-2 font-medium">
