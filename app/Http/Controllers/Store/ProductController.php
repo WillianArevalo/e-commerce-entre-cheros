@@ -119,7 +119,35 @@ class ProductController extends Controller
             $query->whereIn('brand_id', $filters['brand']);
         }
 
+        if (isset($filters["older"])) {
+            $query->orderBy("created_at", "asc");
+        }
+
+        if (isset($filters["order"])) {
+            if ($filters["order"] === "recent") {
+                $query->orderBy("created_at", "desc");
+            }
+
+            if ($filters["order"] === "price_asc") {
+                $query->orderBy("price", "asc");
+            }
+
+            if ($filters["order"] === "price_desc") {
+                $query->orderBy("price", "desc");
+            }
+
+            if ($filters["order"] === "offer") {
+                $query->where("offer_price", ">", 0)->orderBy("offer_price", "asc");
+            }
+        }
         $products = $query->get();
+        return response()->json(["html" => view('layouts.__partials.ajax.store.product-list', compact('products'))->render()]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input("search");
+        $products = Product::where("name", "like", "%$search%")->get();
         return response()->json(["html" => view('layouts.__partials.ajax.store.product-list', compact('products'))->render()]);
     }
 }

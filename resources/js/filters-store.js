@@ -1,8 +1,10 @@
 $(document).ready(function () {
     var $filterCheckboxes = $(".filter-check");
     const $form = $("#form-filters");
+    var selectedFilters = {};
+    const $resetButton = $("#reset-filters");
+
     $filterCheckboxes.on("change", function () {
-        var selectedFilters = {};
         $filterCheckboxes.filter(":checked").each(function () {
             var name = $(this).attr("name");
             var value = $(this).val();
@@ -13,23 +15,30 @@ $(document).ready(function () {
             selectedFilters[name].push(value);
         });
         addFiltersToForm(selectedFilters);
+        toggleResetButton();
+    });
+
+    $("#order").on("Changed", function () {
+        var selectedOrder = $(this).val();
+        delete selectedFilters["order"];
+        selectedFilters["order"] = selectedOrder;
+        addFiltersToForm(selectedFilters);
+        toggleResetButton();
     });
 
     function addFiltersToForm(filters) {
         $form.find('input[name="filters"]').remove();
         var filtersString = JSON.stringify(filters);
+        console.log(filtersString);
         $form.append(
             '<input type="hidden" name="filters" value=\'' +
                 filtersString +
                 "' >",
         );
-
         sendFilters();
     }
 
     function sendFilters() {
-        console.log($form.serialize());
-
         $.ajax({
             url: $form.attr("action"),
             type: "POST",
@@ -38,7 +47,6 @@ $(document).ready(function () {
                 $("#loader").removeClass("hidden");
             },
             success: function (response) {
-                console.log(response);
                 $("#products-list").html(response.html);
                 $("#loader").addClass("hidden");
             },
@@ -55,6 +63,23 @@ $(document).ready(function () {
         });
     }
 
+    function toggleResetButton() {
+        if (Object.keys(selectedFilters).length > 0) {
+            $resetButton.removeClass("hidden");
+        } else {
+            $resetButton.addClass("hidden");
+        }
+    }
+
+    $resetButton.on("click", function () {
+        $filterCheckboxes.prop("checked", false);
+        $("#order").val("");
+        $("#search").val("");
+        selectedFilters = {};
+        addFiltersToForm(selectedFilters);
+        toggleResetButton();
+    });
+
     $(".accordion-header-filter").click(function () {
         const target = $(this).data("target");
         if ($(target).hasClass("open")) {
@@ -65,5 +90,29 @@ $(document).ready(function () {
                 .addClass("open")
                 .css("max-height", panelHeight + "px");
         }
+    });
+
+    $("#search").on("input", function () {
+        var $form = $("#form-search-product");
+
+        if ($(this).val()) {
+            $resetButton.removeClass("hidden");
+        }
+
+        $.ajax({
+            url: $form.attr("action"),
+            method: "POST",
+            data: $form.serialize(),
+            beforeSend: function () {
+                $("#loading-overlay").removeClass("hidden").addClass("flex");
+            },
+            success: function (response) {
+                $("#products-list").html(response.html);
+                $("#loading-overlay").addClass("hidden").removeClass("flex");
+            },
+            complete: function () {
+                $("#loading-overlay").addClass("hidden").removeClass("flex");
+            },
+        });
     });
 });
