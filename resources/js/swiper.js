@@ -10,11 +10,11 @@ export function initSwiper() {
             breakpoints: {
                 200: {
                     slidesPerView: 1,
-                    spaceBetween: 20,
+                    spaceBetween: 10,
                 },
                 320: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    spaceBetween: 10,
                 },
                 760: {
                     slidesPerView: 2,

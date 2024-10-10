@@ -1,6 +1,6 @@
 @if (Session::has('success') || Session::has('error') || Session::has('info'))
     <div id="toast"
-        class="{{ $top }} fixed right-5 z-50 flex w-96 animate-fade-left items-center justify-between gap-4 rounded-xl bg-white p-4 font-secondary text-zinc-500 shadow animate-duration-300 animate-once"
+        class="{{ $top }} font-secondary fixed left-0 right-0 z-50 mx-auto flex w-max animate-fade-left items-center justify-between gap-4 rounded-xl bg-white p-4 text-zinc-500 shadow animate-duration-300 animate-once sm:right-5 sm:w-96"
         role="alert">
         <div class="inline-flex flex-shrink-0 items-center justify-center">
             @if ($message = Session::get('success'))
@@ -11,7 +11,7 @@
                 <x-icon-store icon="information-circle" class="h-6 w-6 text-blue-600" />
             @endif
         </div>
-        <div class="ms-auto text-center text-sm font-normal">
+        <div class="ms-auto text-center text-xs font-normal sm:text-sm">
             {{ $message }}
         </div>
         <button type="button"

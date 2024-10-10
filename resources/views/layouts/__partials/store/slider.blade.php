@@ -2,7 +2,7 @@
       <div class="w-100 relative mx-auto mt-4 flex flex-wrap items-center justify-center lg:w-[91%]">
           <button
               class="button-prev absolute -left-2 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-white p-2 hover:bg-zinc-100 lg:-left-14">
-              <x-icon-store icon="arrow-left" class="h-6 w-6 text-secondary" />
+              <x-icon-store icon="arrow-left" class="h-4 w-4 text-secondary sm:h-6 sm:w-6" />
           </button>
           <div class="swiper mySwiper">
               <div class="swiper-wrapper">
@@ -13,7 +13,7 @@
           </div>
           <button
               class="button-next absolute -right-2 z-30 flex cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-white p-2 hover:bg-zinc-100 lg:-right-14">
-              <x-icon-store icon="arrow-right" class="h-6 w-6 text-secondary" />
+              <x-icon-store icon="arrow-right" class="h-4 w-4 text-secondary sm:h-6 sm:w-6" />
           </button>
       </div>
   @else

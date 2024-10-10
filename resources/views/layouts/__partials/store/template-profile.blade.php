@@ -17,21 +17,21 @@
                     class="absolute top-32 h-56 w-56 rounded-full object-cover shadow-md">
             </div>
         </section>
-        <section class="mx-auto mt-4 p-0 xl:p-8">
-            <div class="mx-auto flex w-max justify-center gap-16 rounded-2xl p-4 px-10 font-semibold">
+        <section class="mx-auto mt-8 p-0 xl:p-8">
+            <div class="sm:ga-8 mx-auto flex w-max justify-center gap-4 rounded-2xl p-4 font-semibold sm:px-10">
                 <a href="{{ Route('favorites') }}"
-                    class="flex flex-col items-center justify-center gap-1 text-sm text-rose-500 hover:scale-105">
-                    <x-icon-store icon="favourite" class="h-8 w-8 fill-rose-500 text-current" />
+                    class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-zinc-200 p-4 text-xs text-rose-500 hover:scale-105 sm:text-sm">
+                    <x-icon-store icon="favourite" class="h-4 w-4 text-current sm:h-6 sm:w-6 md:h-8 md:w-8" />
                     Favoritos
                 </a>
                 <a href="{{ Route('cart') }}"
-                    class="flex flex-col items-center justify-center gap-1 text-sm text-tertiary hover:scale-105">
-                    <x-icon-store icon="shopping-cart" class="h-8 w-8 text-current" />
+                    class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-zinc-200 p-4 text-xs text-primary hover:scale-105 sm:text-sm">
+                    <x-icon-store icon="shopping-cart" class="h-4 w-4 text-current sm:h-6 sm:w-6 md:h-8 md:w-8" />
                     Carrito
                 </a>
                 <a href="{{ Route('favorites') }}"
-                    class="flex flex-col items-center justify-center gap-1 text-sm text-secondary hover:scale-105">
-                    <x-icon-store icon="coupon" class="h-8 w-8 fill-secondary text-current" />
+                    class="flex flex-col items-center justify-center gap-1 rounded-2xl border border-zinc-200 p-4 text-xs text-secondary hover:scale-105 sm:text-sm">
+                    <x-icon-store icon="coupon" class="h-4 w-4 text-current sm:h-6 sm:w-6 md:h-8 md:w-8" />
                     Cupones
                 </a>
             </div>

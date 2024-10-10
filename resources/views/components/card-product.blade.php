@@ -2,34 +2,34 @@
     class="{{ $slide ? 'swiper-slide' : '' }} flex h-max flex-col overflow-hidden rounded-3xl border border-zinc-300 bg-white text-start shadow md:w-[300px] lg:w-[350px]">
     <!-- Card header -->
     <div>
-        <div class="relative mx-4 mt-4">
+        <div class="relative sm:mx-4 sm:mt-4">
             <img src="{{ Storage::url($product->main_image) }}" alt=""
                 class="h-40 w-full rounded-3xl bg-zinc-50 object-cover xl:h-72">
             <form action="{{ route('favorites.add', $product->id) }}" method="POST"
                 id="form-add-favorite-{{ $product->id }}">
                 @csrf
                 <button type="button"
-                    class="btn-add-favorite {{ $product->is_favorite ? 'favorite' : '' }} not-favorite absolute right-0 top-0 m-4 flex items-center justify-center rounded-full border p-2 hover:border-rose-600 hover:bg-rose-600 hover:text-white">
-                    <x-icon-store icon="favourite" class="h-5 w-5 text-current" />
+                    class="btn-add-favorite {{ $product->is_favorite ? 'favorite' : '' }} not-favorite absolute right-0 top-0 m-4 flex items-center justify-center rounded-full border p-1 hover:border-rose-600 hover:bg-rose-600 hover:text-white sm:p-2">
+                    <x-icon-store icon="favourite" class="h-3 w-3 text-current sm:h-5 sm:w-5" />
                 </button>
             </form>
         </div>
-        <div class="flex h-[120px] flex-col gap-2 p-4">
+        <div class="flex h-[60px] flex-col gap-2 p-4 sm:h-[120px]">
             @if ($product->labels->count() > 0)
-                <div class="flex gap-2">
+                <div class="hidden flex-wrap gap-2 sm:flex">
                     @foreach ($product->labels as $label)
                         <span
-                            class="bg-{{ $label->color }}-100 text-{{ $label->color }}-800 rounded-full px-3 py-1 text-[10px] font-semibold sm:text-xs">
+                            class="bg-{{ $label->color }}-100 text-{{ $label->color }}-800 rounded-full px-3 py-1 text-[8px] font-semibold sm:text-xs">
                             {{ $label->name }}
                         </span>
                     @endforeach
                 </div>
             @endif
             <a href="{{ Route('products.details', $product->slug) }}"
-                class="font-league-spartan text-base font-bold text-secondary underline underline-offset-4 md:text-xl xl:text-2xl">
+                class="mt-2 font-league-spartan text-sm font-bold text-secondary underline underline-offset-4 sm:text-base md:text-xl xl:text-2xl">
                 {{ $product->name }}
             </a>
-            <p class="font-secondary truncate pb-4 text-sm text-zinc-800">
+            <p class="font-secondary hidden truncate pb-4 text-xs text-zinc-800 sm:block sm:text-sm">
                 {{ $product->short_description }}
             </p>
         </div>
@@ -37,16 +37,18 @@
     <!-- Card end header -->
 
     <!-- Card footer -->
-    <div class="mt-auto flex items-center border-t border-zinc-200 bg-zinc-100 p-4" id="{{ $product->id }}">
-        <div class="flex w-full items-center justify-between gap-2">
+    <div class="mt-auto flex items-center border-t border-zinc-200 bg-zinc-100 px-4 py-2 lg:p-4"
+        id="{{ $product->id }}">
+        <div class="flex w-full flex-col items-center justify-between gap-1 sm:flex-row">
             <div>
                 @if ($product->offer_price && $product->offer_active === 1)
                     <span
-                        class="font-secondary text-2xl font-semibold text-secondary">${{ $product->offer_price }}</span>
-                    <span class="font-secondary text-base text-zinc-500 line-through">${{ $product->price }}</span>
+                        class="font-secondary text-base font-semibold text-secondary lg:text-2xl">${{ $product->offer_price }}</span>
+                    <span
+                        class="font-secondary text-xs text-zinc-500 line-through lg:text-base">${{ $product->price }}</span>
                 @else
                     <span
-                        class="font-secondary text-2xl font-semibold text-secondary">{{ $product->price_in_currency }}
+                        class="font-secondary text-base font-semibold text-secondary lg:text-2xl">{{ $product->price_in_currency }}
                     </span>
                 @endif
             </div>
@@ -58,10 +60,13 @@
                 @csrf
                 <input type="hidden" name="quantity" value="1">
                 <button type="button" data-form="#form-add-cart-{{ $product->id }}"
-                    class="add-to-cart flex items-center justify-center rounded-2xl bg-secondary px-4 py-3 font-league-spartan text-sm text-white hover:bg-blue-950">
-                    <x-icon-store icon="shopping-cart-add" class="h-5 w-5 text-current" />
-                    <span class="ml-2 hidden sm:block">
+                    class="add-to-cart flex items-center justify-center rounded-xl bg-secondary px-4 py-2 font-league-spartan text-sm text-white hover:bg-blue-950 sm:rounded-2xl sm:px-4 sm:py-3">
+                    <x-icon-store icon="shopping-cart-add" class="h-3 w-3 text-current sm:h-5 sm:w-5" />
+                    <span class="ml-2 hidden text-xs sm:block sm:text-base">
                         Agregar al carrito
+                    </span>
+                    <span class="ml-2 block text-xs sm:hidden sm:text-base">
+                        Agregar
                     </span>
                 </button>
             </form>

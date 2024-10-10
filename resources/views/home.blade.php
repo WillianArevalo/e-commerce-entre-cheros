@@ -4,12 +4,13 @@
     <div>
         <section class="relative h-[400px] w-full text-white md:h-[500px] lg:h-[600px]"
             style="background-image:url('{{ asset('images/fondo.jpg') }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
-            <div class="relative left-10 top-20 flex flex-col gap-4 md:left-20 md:top-32 xl:w-2/3" data-aos="fade-right">
-                <h1 class="text-start font-league-spartan text-2xl font-bold uppercase md:text-3xl lg:text-4xl xl:text-6xl">
+            <div class="flex w-full flex-col gap-4" data-aos="fade-right">
+                <h1
+                    class="mx-10 mt-20 text-start font-league-spartan text-2xl font-bold uppercase md:text-3xl lg:text-4xl xl:mt-36 xl:text-6xl">
                     ¡Bienvenido a tu <span class="block">rincón salvadoreño!</span>
                 </h1>
-                <p class="font-secondary w-2/4 text-start text-sm font-semibold md:text-lg">
-                    Explora una selcción de productos auténticos que te harán sentir más cerca de El Salvador.
+                <p class="font-secondary text-wrap mx-10 inline-block text-start text-sm font-semibold md:text-lg">
+                    Explora una selcción de productos auténticos que te harán <br> sentir más cerca de El Salvador.
                 </p>
             </div>
             <div class="flex items-center justify-center xl:block">

@@ -161,14 +161,14 @@
                                         <!-- Producto e Imagen -->
                                         <div
                                             class="flex flex-wrap items-center justify-between gap-4 px-4 pt-4 max-[360px]:flex-col max-[360px]:items-start">
-                                            <div class="flex items-center">
+                                            <div class="flex items-center gap-4">
                                                 <div class="flex-shrink-0">
                                                     <img class="h-20 w-20 rounded-lg border border-zinc-100 object-cover"
                                                         src="{{ Storage::url($item->product->main_image) }}"
                                                         alt="{{ $item->product->name }}">
                                                 </div>
                                                 <div class="ml-4 flex-1 max-[360px]:ml-0 max-[360px]:mt-4">
-                                                    <h3 class="font-secondary text-lg font-semibold text-secondary">
+                                                    <h3 class="font-secondary text-base font-semibold text-secondary">
                                                         {{ $item->product->name ?? 'Sin nombre' }}
                                                     </h3>
                                                     <div class="font-secondary mt-1 text-sm text-zinc-500">
@@ -193,8 +193,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="px-4">
-                                                <div class="mt-2 flex items-center">
+                                            <div class="mx-auto px-4">
+                                                <div class="flex items-center justify-center">
                                                     <form action="{{ route('cart.update', $item->product->id) }}"
                                                         method="POST" id="form-minus-cart-{{ $item->product->id }}">
                                                         @csrf
@@ -221,7 +221,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- Cantidad -->
 
 
@@ -316,7 +315,7 @@
                                         </span>
                                         @if (!$cart || !$cart->coupon)
                                             <button type="submit" id="apply-coupon"
-                                                class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-400 bg-white px-4 py-3 text-sm uppercase text-zinc-600 transition-colors hover:bg-zinc-100">
+                                                class="flex w-max items-center justify-center gap-2 rounded-full border border-zinc-400 bg-white px-4 py-2 text-xs uppercase text-zinc-600 transition-colors hover:bg-zinc-100 sm:text-sm md:px-4 md:py-3">
                                                 Aplicar cupón
                                             </button>
                                         @endif
@@ -372,7 +371,7 @@
                                 <div class="flex flex-col gap-4">
                                     @foreach ($shipping_methods as $method)
                                         <div
-                                            class="shipping-method shipping-method-{{ $method->id ?? '' }} {{ $cart->shippingMethod != null ? ($cart->shippingMethod->id == $method->id ? 'method-shipping-selected' : '') : '' }} grid grid-cols-3 gap-4 rounded-2xl border border-zinc-400 bg-zinc-50 p-4 lg:gap-8">
+                                            class="shipping-method shipping-method-{{ $method->id ?? '' }} {{ $cart->shippingMethod != null ? ($cart->shippingMethod->id == $method->id ? 'method-shipping-selected' : '') : '' }} flex items-center justify-between gap-4 rounded-2xl border border-zinc-400 bg-zinc-50 p-4 lg:gap-8">
                                             <div class="flex items-center justify-start gap-4">
                                                 <div class="flex items-center">
                                                     <input type="radio" name="shipping_method" id="shipping_method"
@@ -380,12 +379,12 @@
                                                         {{ $cart->shippingMethod ? ($cart->shippingMethod->id == $method->id ? 'checked' : '') : '' }}
                                                         class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500">
                                                 </div>
-                                                <p class="font-bold text-secondary">
+                                                <p class="text-sm font-bold text-secondary sm:text-base">
                                                     {{ $method->name }}
                                                 </p>
                                             </div>
                                             <div class="flex items-center justify-start">
-                                                <p class="text-sm text-zinc-600">
+                                                <p class="text-xs text-zinc-600 sm:text-sm">
                                                     {{ $method->time }}
                                                 </p>
                                             </div>

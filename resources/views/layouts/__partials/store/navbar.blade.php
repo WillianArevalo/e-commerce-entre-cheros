@@ -1,5 +1,5 @@
-<header class="{{ $classHead ?? '' }} glass w-full bg-primary py-2 lg:py-0" id="header">
-    <nav class="{{ $classNav ?? '' }} mx-auto flex items-center justify-between gap-2 px-4 py-2 md:px-6" id="navbar">
+<header class="glass fixed top-0 z-50 w-full bg-primary py-2 lg:py-0" id="header">
+    <nav class="mx-auto flex items-center justify-between gap-2 px-4 py-2 md:px-6" id="navbar">
         <button class="block lg:hidden" id="btn-hamburger">
             <x-icon-store icon="menu" class="h-6 w-6 text-secondary" />
         </button>
@@ -23,8 +23,11 @@
                         Preguntas frecuentes
                     </a>
                 </li>
-                <li class="link-nav {{ Request::is('contact') ? 'active' : '' }}"><a
-                        href="{{ Route('contact') }}">Contactanos</a></li>
+                <li class="link-nav {{ Request::is('contact') ? 'active' : '' }}">
+                    <a href="{{ Route('contact') }}">
+                        Contactanos
+                    </a>
+                </li>
             </ul>
         </div>
         <ul class="flex items-center gap-6">
