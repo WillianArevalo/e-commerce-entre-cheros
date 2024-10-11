@@ -64,7 +64,7 @@ class ProductController extends Controller
 
     public function show(string $id)
     {
-        $product = Product::with(['categories', 'brands', 'taxes', 'labels'])->findOrFail($id);
+        $product = Product::with(['categories', 'brands', 'taxes', 'labels', 'reviews'])->findOrFail($id);
         $this->extractDimensions($product);
 
         $nextProduct = Product::where('id', '>', $id)->first();
