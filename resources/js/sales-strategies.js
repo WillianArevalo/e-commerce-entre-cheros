@@ -1,6 +1,19 @@
 import { openDrawer } from "./drawer";
 
 $(document).ready(function () {
+    $("#btn-nav-sales").on("click", function () {
+        $("#overlay").toggleClass("hidden");
+        $("#drawer-sales").toggleClass("transform-none");
+        $("#drawer-sales").toggleClass("-translate-x-full");
+    });
+
+    $("#overlay").on("click", function () {
+        $("#overlay").addClass("hidden");
+        $("#drawer-sales")
+            .removeClass("transform-none")
+            .addClass("-translate-x-full");
+    });
+
     let ids = $("#parameters_ids");
     let names = $("#parameters_names");
     let parameters = names.val() ? names.val().split(",") : [];
