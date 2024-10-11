@@ -1,5 +1,5 @@
 <div>
-    <div class="flex gap-4">
+    <div class="flex flex-col gap-4 sm:flex-row">
         <div class="flex flex-1 flex-col items-center gap-2 rounded-xl border border-zinc-400 p-4 dark:border-zinc-800">
             <div class="h-16 w-16">
                 <img src="{{ Storage::url($review->user->profile) }}" alt="Profile {{ $review->user->name }}"
