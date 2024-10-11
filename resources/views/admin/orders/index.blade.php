@@ -75,7 +75,11 @@
                                     <x-th>Cliente</x-th>
                                     <x-th>N° orden</x-th>
                                     <x-th>Total</x-th>
-                                    <x-th>Fecha creado</x-th>
+                                    <x-th>
+                                        <span class="text-nowrap">
+                                            Fecha creado
+                                        </span>
+                                    </x-th>
                                     <x-th>Estado</x-th>
                                     <x-th>Pago</x-th>
                                     <x-th :last="true">Acciones</x-th>
@@ -94,7 +98,7 @@
                                                     <div>
                                                         <img src="{{ Storage::url($order->customer->user->profile) }}"
                                                             alt="{{ $order->customer->user->name }} profile"
-                                                            class="h-10 w-10 rounded-full object-cover">
+                                                            class="min-h-10 min-w-10 h-10 w-10 rounded-full object-cover">
                                                     </div>
                                                     <div class="flex flex-col items-start justify-center gap-1 text-sm">
                                                         <p>{{ $order->customer->user->name }}</p>
@@ -132,9 +136,10 @@
                                                         onlyIcon="true" />
                                                     <div class="relative">
                                                         <x-button type="button" icon="refresh" typeButton="secondary"
-                                                            onlyIcon="true" class="show-options" />
-                                                        <div
-                                                            class="options absolute right-0 top-11 z-10 hidden w-40 rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
+                                                            onlyIcon="true" class="show-options"
+                                                            data-target="#options-order-{{ $order->id }}" />
+                                                        <div class="options absolute right-0 top-11 z-10 hidden w-40 animate-jump-in rounded-lg border border-zinc-400 bg-white p-2 animate-duration-200 dark:border-zinc-800 dark:bg-zinc-950"
+                                                            id="options-order-{{ $order->id }}">
                                                             <p class="font-semibold text-zinc-800 dark:text-zinc-300">
                                                                 Cambiar estado
                                                             </p>

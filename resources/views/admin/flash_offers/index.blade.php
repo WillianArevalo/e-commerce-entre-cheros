@@ -25,139 +25,139 @@
                                 typeButton="primary" text="Agregar oferta relámpago" icon="plus" />
                         </div>
                     </div>
-                    <div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
-                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                                <thead
-                                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                                    <tr>
-                                        <th scope="col"
-                                            class="w-10 border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            #
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Nombre
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+
+                    <div class="mx-4">
+                        <x-table>
+                            <x-slot name="thead">
+                                <x-tr>
+                                    <x-th class="w-10">
+                                        #
+                                    </x-th>
+                                    <x-th>
+                                        Nombre
+                                    </x-th>
+                                    <x-th>
+                                        <span class="text-nowrap">
                                             Fecha de inicio
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </span>
+                                    </x-th>
+                                    <x-th>
+                                        <span class="text-nowrap">
                                             Fecha de fin
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Visualización
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Estado
-                                        </th>
-                                        <th scope="col" class="px-4 py-3">
-                                            Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if ($offers->count() == 0)
-                                        <tr>
-                                            <td colspan="7"
-                                                class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
-                                                No hay ofertas relámpago registradas
-                                            </td>
-                                        </tr>
-                                    @else
-                                        @foreach ($offers as $offer)
-                                            <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                                <th scope="row"
-                                                    class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
-                                                    {{ $loop->iteration }}
-                                                </th>
-                                                <td class="px-4 py-3">
-                                                    <a href="{{ route('admin.products.show', $offer->product->id) }}"
-                                                        class="flex w-max items-center gap-2 rounded-lg p-2">
-                                                        <img src="{{ Storage::url($offer->product->main_image) }}"
-                                                            alt="" class="h-12 w-12 rounded-lg object-cover">
-                                                        <div class="flex flex-col">
-                                                            <span>{{ $offer->product->name }}</span>
-                                                            <span
-                                                                class="me-2 w-max rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
-                                                                ${{ $offer->product->offer_price }}
-                                                            </span>
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                                <td class="px-4 py-3">
-                                                    <span>{{ \Carbon\Carbon::parse($offer->start_date)->format('d M, Y') }}</span>
-                                                </td>
-                                                <td class="px-4 py-3">
-                                                    <span>{{ \Carbon\Carbon::parse($offer->end_date)->format('d M, Y') }}</span>
-                                                </td>
-                                                <td class="px-4 py-3">
-                                                    <form action="{{ route('admin.flash-offers.change-show', $offer->id) }}"
-                                                        id="formChangeShow-{{ $offer->id }}" method="POST">
-                                                        @csrf
-                                                        <label class="inline-flex cursor-pointer items-center"
-                                                            for="{{ $offer->id }}">
-                                                            <input id="{{ $offer->id }}" type="checkbox"
-                                                                name="is_showing"
-                                                                data-form="#formChangeShow-{{ $offer->id }}"
-                                                                value="" class="toggleShow peer sr-only"
-                                                                {{ $offer->is_showing === 1 ? 'checked' : '' }}>
-                                                            <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
-                                                            </div>
-                                                            <span
-                                                                class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
-                                                                Activo
-                                                            </span>
-                                                        </label>
-                                                    </form>
-                                                </td>
-                                                <td class="px-4 py-3">
-                                                    <form
-                                                        action="{{ route('admin.flash-offers.change-status', $offer->id) }}"
-                                                        id="formChangeActive-{{ $offer->id }}" method="POST">
-                                                        @csrf
-                                                        <label class="cursor-pointe inline-flex items-center"
-                                                            for="active-{{ $offer->id }}">
-                                                            <input id="active-{{ $offer->id }}" type="checkbox"
-                                                                name="is_active"
-                                                                data-form="#formChangeActive-{{ $offer->id }}"
-                                                                data-change="active" value=""
-                                                                class="toggleStatus peer sr-only"
-                                                                {{ $offer->is_active === 1 ? 'checked' : '' }}>
-                                                            <div
-                                                                class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-800">
-                                                            </div>
-                                                            <span
-                                                                class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
-                                                                Activar
-                                                            </span>
-                                                        </label>
-                                                    </form>
-                                                </td>
-                                                <td class="px-4 py-3">
-                                                    <div class="flex gap-2">
-                                                        <x-button type="button"
-                                                            data-href="{{ route('admin.flash-offers.edit', $offer->id) }}"
-                                                            data-action="{{ route('admin.flash-offers.update', $offer->id) }}"
-                                                            typeButton="success" icon="edit" onlyIcon="true"
-                                                            class="editFlashOffer" />
-                                                        <form
-                                                            action="{{ route('admin.flash-offers.destroy', $offer->id) }}"
-                                                            id="formDeleteCategorie" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <x-button type="button" data-form="formDeleteCategorie"
-                                                                class="buttonDelete" onlyIcon="true" icon="delete"
-                                                                typeButton="danger" data-modal-target="deleteModal" />
-                                                        </form>
+                                        </span>
+                                    </x-th>
+                                    <x-th>
+                                        Visualización
+                                    </x-th>
+                                    <x-th>
+                                        Estado
+                                    </x-th>
+                                    <x-th>
+                                        Acciones
+                                    </x-th>
+                                </x-tr>
+                            </x-slot>
+                            <x-slot name="tbody">
+                                @if ($offers->count() == 0)
+                                    <x-tr>
+                                        <x-td colspan="7">
+                                            No hay ofertas relámpago registradas
+                                        </x-td>
+                                    </x-tr>
+                                @else
+                                    @foreach ($offers as $offer)
+                                        <x-tr>
+                                            <x-td>
+                                                {{ $loop->iteration }}
+                                            </x-td>
+                                            <x-td>
+                                                <a href="{{ route('admin.products.show', $offer->product->id) }}"
+                                                    class="flex w-max items-center gap-2 rounded-lg p-2">
+                                                    <img src="{{ Storage::url($offer->product->main_image) }}"
+                                                        alt="" class="h-12 w-12 rounded-lg object-cover">
+                                                    <div class="flex flex-col">
+                                                        <span>{{ $offer->product->name }}</span>
+                                                        <span
+                                                            class="me-2 w-max rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                                                            ${{ $offer->product->offer_price }}
+                                                        </span>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
+                                                </a>
+                                            </x-td>
+                                            <x-td>
+                                                <span class="text-nowrap">
+                                                    {{ \Carbon\Carbon::parse($offer->start_date)->format('d M, Y') }}
+                                                </span>
+                                            </x-td>
+                                            <x-td>
+                                                <span class="text-nowrap">
+                                                    {{ \Carbon\Carbon::parse($offer->end_date)->format('d M, Y') }}
+                                                </span>
+                                            </x-td>
+                                            <x-td>
+                                                <form action="{{ route('admin.flash-offers.change-show', $offer->id) }}"
+                                                    id="formChangeShow-{{ $offer->id }}" method="POST">
+                                                    @csrf
+                                                    <label class="inline-flex cursor-pointer items-center"
+                                                        for="{{ $offer->id }}">
+                                                        <input id="{{ $offer->id }}" type="checkbox" name="is_showing"
+                                                            data-form="#formChangeShow-{{ $offer->id }}" value=""
+                                                            class="toggleShow peer sr-only"
+                                                            {{ $offer->is_showing === 1 ? 'checked' : '' }}>
+                                                        <div
+                                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-zinc-800">
+                                                        </div>
+                                                        <span
+                                                            class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
+                                                            Activo
+                                                        </span>
+                                                    </label>
+                                                </form>
+                                            </x-td>
+                                            <x-td>
+                                                <form action="{{ route('admin.flash-offers.change-status', $offer->id) }}"
+                                                    id="formChangeActive-{{ $offer->id }}" method="POST">
+                                                    @csrf
+                                                    <label class="cursor-pointe inline-flex items-center"
+                                                        for="active-{{ $offer->id }}">
+                                                        <input id="active-{{ $offer->id }}" type="checkbox"
+                                                            name="is_active"
+                                                            data-form="#formChangeActive-{{ $offer->id }}"
+                                                            data-change="active" value=""
+                                                            class="toggleStatus peer sr-only"
+                                                            {{ $offer->is_active === 1 ? 'checked' : '' }}>
+                                                        <div
+                                                            class="peer relative h-6 w-11 rounded-full bg-zinc-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-zinc-400 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rtl:peer-checked:after:-translate-x-full dark:border-zinc-600 dark:bg-zinc-900 dark:peer-focus:ring-primary-800">
+                                                        </div>
+                                                        <span
+                                                            class="ms-3 text-sm font-medium text-zinc-900 dark:text-zinc-300">
+                                                            Activar
+                                                        </span>
+                                                    </label>
+                                                </form>
+                                            </x-td>
+                                            <x-td class="px-4 py-3">
+                                                <div class="flex gap-2">
+                                                    <x-button type="button"
+                                                        data-href="{{ route('admin.flash-offers.edit', $offer->id) }}"
+                                                        data-action="{{ route('admin.flash-offers.update', $offer->id) }}"
+                                                        typeButton="success" icon="edit" onlyIcon="true"
+                                                        class="editFlashOffer" />
+                                                    <form action="{{ route('admin.flash-offers.destroy', $offer->id) }}"
+                                                        id="formDeleteCategorie" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-button type="button" data-form="formDeleteCategorie"
+                                                            class="buttonDelete" onlyIcon="true" icon="delete"
+                                                            typeButton="danger" data-modal-target="deleteModal" />
+                                                    </form>
+                                                </div>
+                                            </x-td>
+                                        </x-tr>
+                                    @endforeach
+                                @endif
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
 
@@ -165,7 +165,7 @@
                     message="No podrás recuperar este registro" action="" />
 
                 <div id="drawer-new-flash-offer"
-                    class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+                    class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
                     tabindex="-1" aria-labelledby="drawer-new-categorie">
                     <h5 id="drawer-new-categorie-label"
                         class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -300,7 +300,7 @@
                 </div>
 
                 <div id="drawer-edit-flash-offer"
-                    class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+                    class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
                     tabindex="-1" aria-labelledby="drawer-new-categorie">
                     <h5 id="drawer-new-categorie-label"
                         class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">

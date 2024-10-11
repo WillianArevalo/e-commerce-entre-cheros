@@ -15,7 +15,9 @@
                     @method('PUT')
                     <div>
                         <div class="flex flex-col gap-1">
-                            <h2 class="text-lg uppercase text-zinc-700 dark:text-zinc-300">Información del producto</h2>
+                            <h2 class="text-sm font-bold uppercase text-zinc-600 dark:text-zinc-300 sm:text-base md:text-lg">
+                                Editar información del producto
+                            </h2>
                             <x-paragraph>
                                 Los campos marcados con <span class="text-red-500">*</span> son obligatorios
                             </x-paragraph>
@@ -26,7 +28,8 @@
 
                                 <!-- General info -->
                                 <div>
-                                    <h4 class="mb-2 text-lg font-semibold text-primary-800 dark:text-primary-500">
+                                    <h4
+                                        class="mb-2 text-base font-semibold text-primary-800 dark:text-primary-500 md:text-lg">
                                         General
                                     </h4>
                                     <div
@@ -70,7 +73,8 @@
                                                         </div>
                                                         <span
                                                             class="mt-7 rounded-lg border border-zinc-400 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-800 dark:bg-black dark:text-white">
-                                                            <x-icon icon="x" class="h-4 w-4 text-current" />
+                                                            <x-icon icon="x"
+                                                                class="h-3 w-3 text-current sm:h-4 sm:w-4" />
                                                         </span>
                                                         <div>
                                                             <x-input type="number" label="Ancho" id="width"
@@ -80,7 +84,8 @@
                                                         </div>
                                                         <span
                                                             class="mt-7 rounded-lg border border-zinc-400 bg-zinc-100 p-2 text-zinc-900 dark:border-zinc-800 dark:bg-black dark:text-white">
-                                                            <x-icon icon="x" class="h-4 w-4 text-current" />
+                                                            <x-icon icon="x"
+                                                                class="h-3 w-3 text-current sm:h-4 sm:w-4" />
                                                         </span>
                                                         <div>
                                                             <x-input type="number" label="Alto" id="height"
@@ -109,14 +114,15 @@
 
                                 <!-- SEO info -->
                                 <div>
-                                    <h4 class="mb-2 text-lg font-semibold text-primary-800 dark:text-primary-500">
-                                        Categoría y marca
+                                    <h4
+                                        class="mb-2 text-base font-semibold text-primary-800 dark:text-primary-500 md:text-lg">
+                                        Categoría y Etiquetas
                                     </h4>
                                     <div
                                         class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
 
                                         <div class="flex flex-col gap-4">
-                                            <div class="flex gap-4">
+                                            <div class="flex flex-col gap-4 sm:flex-row">
                                                 <div class="flex-1">
                                                     <x-select label="Categoría del producto" id="categorie_id"
                                                         name="categorie_id" :options="$categories->pluck('name', 'id')->toArray()"
@@ -164,8 +170,9 @@
 
                                 <!-- Shipping info -->
                                 <div>
-                                    <h4 class="mb-2 text-lg font-semibold text-primary-800 dark:text-primary-500">
-                                        Información de venta
+                                    <h4
+                                        class="mb-2 text-base font-semibold text-primary-800 dark:text-primary-500 md:text-lg">
+                                        Información de Etiquetas
                                     </h4>
                                     <div
                                         class="h-max rounded-lg border border-zinc-400 bg-transparent dark:border-zinc-800 dark:bg-black">
@@ -189,14 +196,14 @@
                                                         class="mb-2 block text-sm font-medium text-zinc-900 dark:text-white">
                                                         Fecha de la oferta
                                                     </label>
-                                                    <div class="flex items-center">
-                                                        <div class="flex-1">
+                                                    <div class="mt-2 flex flex-col items-center gap-2 sm:mt-0 sm:flex-row">
+                                                        <div class="w-full flex-1">
                                                             <x-input type="date" name="offer_start_date"
                                                                 icon="calendar" value="{{ $product->offer_start_date }}"
                                                                 placeholder="Seleccionar fecha de inicio" />
                                                         </div>
                                                         <span class="mx-4 text-zinc-500">a</span>
-                                                        <div class="flex-1">
+                                                        <div class="w-full flex-1">
                                                             <x-input type="date" name="offer_end_date" icon="calendar"
                                                                 value="{{ $product->offer_end_date }}"
                                                                 placeholder="Seleccionar fecha de fin" />
@@ -263,8 +270,9 @@
                             <div class="flex flex-1 flex-col gap-4">
                                 <!-- Images -->
                                 <div>
-                                    <h4 class="mb-2 text-lg font-semibold text-primary-800 dark:text-primary-500">
-                                        Imágenes
+                                    <h4
+                                        class="mb-2 text-base font-semibold text-primary-800 dark:text-primary-500 md:text-lg">
+                                        Etiquetas
                                     </h4>
                                     <div
                                         class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
@@ -309,7 +317,9 @@
                                                     <label for="gallery_image"
                                                         class="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-400 px-3.5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900">
                                                         <x-icon icon="image-add" class="h-4 w-4 text-current" />
-                                                        Seleccionar imágenes
+                                                        <span class="hidden sm:block">
+                                                            Seleccionar imágenes
+                                                        </span>
                                                     </label>
                                                     <input type="file" name="gallery_image[]" id="gallery_image"
                                                         multiple class="hidden">
@@ -336,12 +346,13 @@
 
                                 <!-- Inventory -->
                                 <div>
-                                    <h4 class="mb-2 text-lg font-semibold text-primary-800 dark:text-primary-500">
-                                        Inventario
+                                    <h4
+                                        class="mb-2 text-base font-semibold text-primary-800 dark:text-primary-500 md:text-lg">
+                                        Etiquetas
                                     </h4>
                                     <div
                                         class="h-max rounded-lg border border-zinc-400 bg-transparent p-4 dark:border-zinc-800 dark:bg-black">
-                                        <div class="flex gap-4">
+                                        <div class="flex flex-col gap-4 sm:flex-row">
                                             <div class="flex-1">
                                                 <x-input label="SKU" type="text" id="sku" name="sku"
                                                     value="{{ $product->sku }}" placeholder="XXXXXX"
@@ -353,7 +364,7 @@
                                                     placeholder="Código de barras del producto" required="required" />
                                             </div>
                                         </div>
-                                        <div class="mt-4 flex gap-4">
+                                        <div class="mt-4 flex flex-col gap-4 sm:flex-row">
                                             <div class="flex-1">
                                                 <x-input label="Cantidad" type="number" id="stock" name="stock"
                                                     value="{{ $product->stock }}" placeholder="#" required="required" />
@@ -375,8 +386,9 @@
 
                                 <!-- Labels -->
                                 <div>
-                                    <h4 class="mb-2 text-lg font-semibold text-primary-800 dark:text-primary-500">
-                                        Inventario
+                                    <h4
+                                        class="mb-2 text-base font-semibold text-primary-800 dark:text-primary-500 md:text-lg">
+                                        Etiquetas
                                     </h4>
                                     <div
                                         class="h-max rounded-lg border border-zinc-400 bg-transparent dark:border-zinc-800 dark:bg-black">

@@ -1,11 +1,30 @@
- @if ($status === 1)
-     <span
-         class="inline-block rounded-full bg-green-100 px-2 py-1 text-xs font-semibold uppercase text-green-500 dark:bg-green-900 dark:text-green-300"">
-         Activo
-     </span>
- @else
-     <span
-         class="inline-block rounded-full bg-red-100 px-2 py-1 text-xs font-semibold uppercase text-red-500 dark:bg-red-900 dark:text-red-300"">
-         Inactivo
-     </span>
- @endif
+@props(['status', 'color' => 'gray', 'size' => 'small'])
+
+@php
+    $colorMap = [
+        1 => 'green',
+        2 => 'yellow',
+        0 => 'red',
+    ];
+
+    $textMap = [
+        1 => 'Active',
+        2 => 'Pending',
+        0 => 'Inactive',
+    ];
+
+    $color = $colorMap[$status] ?? 'zinc';
+
+    $sizeClasses = [
+        'small' => 'px-2 py-0.5 text-xs',
+        'medium' => 'px-3 py-1 text-sm',
+        'large' => 'px-4 py-1.5 text-base',
+    ];
+
+    $sizeClass = $sizeClasses[$size] ?? $sizeClasses['small'];
+@endphp
+
+<span
+    class="bg-{{ $color }}-100 text-{{ $color }}-800 dark:bg-{{ $color }}-900 dark:text-{{ $color }}-300 {{ $sizeClass }} text-nowrap w-max rounded-full font-medium dark:bg-opacity-20">
+    {{ $textMap[$status] }}
+</span>

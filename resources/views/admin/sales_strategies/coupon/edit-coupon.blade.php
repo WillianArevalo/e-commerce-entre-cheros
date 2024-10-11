@@ -2,7 +2,7 @@
 @section('title', 'Nuevo cupón')
 @section('content')
     <div>
-        <div class="ms-60">
+        <div class="lg:ms-60">
             @include('layouts.__partials.admin.header-crud-page', [
                 'title' => 'Editar cupón',
                 'text' => 'Regresar a la lista de cupones',
@@ -11,9 +11,9 @@
         </div>
         <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
-            <div class="mx-auto ms-60 w-full p-4">
+            <div class="mx-auto w-full p-4 lg:ms-60">
                 <div class="flex flex-col gap-1">
-                    <h2 class="text-lg font-bold uppercase text-zinc-700 dark:text-zinc-300">
+                    <h2 class="text-sm font-bold uppercase text-zinc-600 dark:text-zinc-300 sm:text-base md:text-lg">
                         Editar información del cupón
                     </h2>
                     <p class="text-sm text-zinc-500 dark:text-zinc-400">
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex gap-4">
+                                <div class="flex flex-col gap-4 sm:flex-row">
                                     <div class="flex-1">
                                         <x-input type="date" name="start_date" id="start_date" label="Fecha de inicio"
                                             icon="calendar" required value="{{ $coupon->start_date }}" />

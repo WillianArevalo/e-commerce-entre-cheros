@@ -41,7 +41,9 @@
                                         Estado
                                     </x-th>
                                     <x-th>
-                                        Fecha de creación
+                                        <span class="text-nowrap">
+                                            Fecha de creación
+                                        </span>
                                     </x-th>
                                     <x-th last="true">
                                         Acciones
@@ -76,7 +78,7 @@
                                                 <div class="flex flex-col">
                                                     <span>{{ $review->product->name }}</span>
                                                     <span
-                                                        class="me-2 w-max rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                                                        class="me-2 w-max rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:bg-opacity-10 dark:text-primary-300">
                                                         ${{ $review->product->price }}
                                                     </span>
                                                 </div>
@@ -114,7 +116,7 @@
                                             @endif
                                         </x-td>
                                         <x-td>
-                                            {{ $review->created_at->format('d/m/Y') }}
+                                            {{ $review->created_at->format('d M, Y') }}
                                         </x-td>
                                         <x-td last="true">
                                             <div class="flex items-center justify-start gap-2">
@@ -130,9 +132,10 @@
                                                 </form>
                                                 <div class="relative">
                                                     <x-button type="button" icon="refresh" typeButton="secondary"
-                                                        onlyIcon="true" class="show-options" />
-                                                    <div
-                                                        class="options absolute right-0 top-11 z-10 hidden w-40 rounded-lg border border-zinc-400 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">
+                                                        onlyIcon="true" class="show-options"
+                                                        data-target="#options-reviews-{{ $review->id }}" />
+                                                    <div class="options absolute right-0 top-11 z-10 hidden w-40 animate-jump-in rounded-lg border border-zinc-400 bg-white p-2 animate-duration-200 dark:border-zinc-800 dark:bg-zinc-950"
+                                                        id="options-reviews-{{ $review->id }}">
                                                         <p class="font-semibold text-zinc-800 dark:text-zinc-300">
                                                             Cambiar estado
                                                         </p>
@@ -207,7 +210,7 @@
             message="No podrás recuperar este registro" action="" />
 
         <div id="drawer-show-review"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-show-review">
             <h5 id="drawer-show-review-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -228,10 +231,11 @@
         </div>
 
         <div id="add-reason-reject" tabindex="-1" aria-hidden="true"
-            class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-90 md:inset-0 md:h-full">
-            <div class="relative h-full w-full max-w-md p-4 md:h-auto">
+            class="fixed left-0 right-0 top-0 z-[70] hidden h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-90">
+            <div class="relative flex h-full w-full max-w-md items-center justify-center p-4 md:h-auto">
                 <!-- Modal content -->
-                <div class="relative animate-jump-in rounded-xl bg-white shadow animate-duration-300 dark:bg-zinc-950">
+                <div
+                    class="relative w-full animate-jump-in rounded-xl bg-white shadow animate-duration-300 dark:bg-zinc-950">
                     <!-- Modal header -->
                     <div
                         class="mb-4 flex items-center justify-between rounded-t-xl border-b border-zinc-300 p-4 pb-4 dark:border-zinc-800">

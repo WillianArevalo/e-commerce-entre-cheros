@@ -4,7 +4,7 @@
     <div class="flex items-center justify-center sm:justify-end">
         <nav class="flex w-max px-0 py-3 text-zinc-700 sm:px-6" aria-label="Breadcrumb">
             <ol
-                class="inline-flex items-center space-x-0 text-[10px] uppercase rtl:space-x-reverse sm:text-xs md:space-x-2">
+                class="inline-flex flex-wrap items-center justify-center gap-2 space-x-0 text-[10px] uppercase rtl:space-x-reverse sm:gap-0 sm:text-xs md:space-x-2">
                 @foreach ($breadcrumbs as $key => $breadcrumb)
                     @if ($breadcrumb->url && !$loop->last)
                         <li>

@@ -1,27 +1,17 @@
 @if ($method)
     <div class="p-4">
         <div class="flex flex-col rounded-lg border border-zinc-400 dark:border-zinc-800">
-            <div class="flex items-center justify-between gap-4 px-4 py-2">
+            <div class="flex items-center justify-between gap-4 p-4">
                 <div>
                     <h2 class="font-bold uppercase text-zinc-700 dark:text-zinc-300">Nombre:</h2>
                     <x-paragraph>{{ $method->name }}</x-paragraph>
                 </div>
                 <div>
-                    @if ($method->is_active === 1)
-                        <span
-                            class="rounded-full border-2 border-green-300 bg-green-200 px-4 py-1 font-secondary text-xs font-medium text-green-800 dark:border-green-400 dark:bg-green-800 dark:text-green-100">
-                            Activo
-                        </span>
-                    @else
-                        <span
-                            class="rounded-full border-2 border-red-300 bg-red-200 px-4 py-1 font-secondary text-xs font-medium text-red-800 dark:border-red-400 dark:bg-red-800 dark:text-red-100">
-                            Inactivo
-                        </span>
-                    @endif
+                    <x-badge-status :status="$method->active" />
                 </div>
             </div>
             <div class="border-t border-zinc-400 dark:border-zinc-800">
-                <div class="flex flex-col gap-2 px-4 py-2">
+                <div class="flex flex-col gap-2 px-4 pb-2 pt-4">
                     <h3 class="font-bold uppercase text-zinc-700 dark:text-zinc-300">Descripción:</h3>
                     <x-paragraph>
                         {{ $method->description }}
@@ -42,7 +32,7 @@
                         </x-paragraph>
                     </div>
                 </div>
-                <div class="flex items-center gap-2 px-5 py-2">
+                <div class="flex items-center gap-2 px-5 pb-4 pt-2">
                     <h3 class="font-bold uppercase text-zinc-700 dark:text-zinc-300">Costo:</h3>
                     <x-paragraph>
                         ${{ $method->cost }}

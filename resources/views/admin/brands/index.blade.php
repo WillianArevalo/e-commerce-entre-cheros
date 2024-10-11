@@ -51,22 +51,22 @@
                                             </x-td>
                                             <x-td>
                                                 <img src="{{ Storage::url($brand->logo) }}" alt="Logo {{ $brand->name }}"
-                                                    class="h-14 w-14 rounded-lg object-cover">
+                                                    class="min-w-14 h-14 w-14 rounded-lg object-cover">
                                             </x-td>
                                             <x-td>
                                                 <img src="{{ Storage::url($brand->banner) }}"
                                                     alt="Banner {{ $brand->name }}"
-                                                    class="h-14 w-36 rounded-lg object-cover">
+                                                    class="min-w-36 h-14 w-36 rounded-lg object-cover">
                                             </x-td>
                                             <x-td>
-                                                <span>{{ $brand->name }}</span>
+                                                <span class="text-nowrap">{{ $brand->name }}</span>
                                             </x-td>
                                             <x-td>
-                                                <span>
+                                                <span class="text-xs sm:text-sm">
                                                     @if ($brand->description != null)
                                                         {{ $brand->description }}
                                                     @else
-                                                        <span class="text-zinc-500">No hay descripción</span>
+                                                        No hay descripción
                                                     @endif
                                                 </span>
                                             </x-td>
@@ -107,7 +107,7 @@
 
         <!-- Drawer new brand -->
         <div id="drawer-new-brand"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -131,7 +131,7 @@
                             <x-input type="text" name="name" label="Nombre"
                                 placeholder="Ingresa el nombre de la marca" value="{{ old('name') }}" required />
                         </div>
-                        <div class="flex gap-4">
+                        <div class="flex flex-col gap-4 sm:flex-row">
                             <div class="flex-1">
                                 <p class="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-300">Logo</p>
                                 <label for="logo"
@@ -188,7 +188,7 @@
 
         <!-- Drawer edit brand -->
         <div id="drawer-edit-brand"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-new-categorie">
             <h5 id="drawer-new-categorie-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -212,7 +212,7 @@
                             <x-input type="text" name="name" label="Nombre" id="name"
                                 placeholder="Ingresa el nombre de la marca" value="{{ old('name') }}" required />
                         </div>
-                        <div class="flex gap-4">
+                        <div class="flex flex-col gap-4 sm:flex-row">
                             <div class="flex-1">
                                 <p class="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-300">Logo</p>
                                 <label for="logo-edit"

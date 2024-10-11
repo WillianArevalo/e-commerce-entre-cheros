@@ -1,7 +1,5 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Productos')
-
 @section('content')
     <div>
         @include('layouts.__partials.admin.header-page', [
@@ -11,15 +9,18 @@
         <div class="bg-zinc-50 dark:bg-black">
             <div class="mx-auto w-full">
                 <div class="relative overflow-hidden bg-white dark:bg-black">
-                    <div class="mt-4 flex w-full items-center justify-between gap-2 px-4">
-                        <div class="flex items-center gap-10">
-                            <span class="font-secondary text-xl font-semibold uppercase text-zinc-600 dark:text-zinc-200">
+                    <div class="mt-4 flex w-full flex-col items-center justify-between gap-2 px-4 sm:flex-row">
+                        <div class="flex items-center">
+                            <span
+                                class="font-secondary text-sm font-semibold uppercase text-zinc-600 dark:text-zinc-200 sm:text-lg md:text-xl">
                                 {{ $count }} productos
                             </span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <x-button type="button" icon="import" typeButton="secondary" text="Importar" />
-                            <x-button type="button" icon="export" typeButton="secondary" text="Exportar" />
+                        <div class="mt-2 flex w-full items-center gap-2 sm:mt-0 sm:w-auto">
+                            <x-button type="button" icon="import" class="w-full sm:w-auto" typeButton="secondary"
+                                text="Importar" />
+                            <x-button type="button" icon="export" class="w-full sm:w-auto" typeButton="secondary"
+                                text="Exportar" />
                         </div>
                     </div>
                     <div
@@ -32,10 +33,12 @@
                                     data-table="#tableProduct" placeholder="Buscar" icon="search" />
                             </form>
                         </div>
-                        <div
-                            class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
-                            <x-button type="button" icon="reload" typeButton="secondary" onlyIcon="true" />
-                            <div class="flex w-full items-center space-x-3 md:w-auto">
+                        <div class="h flex w-full flex-row flex-wrap items-center justify-end gap-4 md:w-auto">
+                            <div>
+                                <x-button type="button" icon="reload" class="w-max" typeButton="secondary"
+                                    onlyIcon="true" />
+                            </div>
+                            <div class="flex md:w-auto">
                                 <x-button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button"
                                     icon="filter" typeButton="secondary" text="Filtros" />
                                 <div id="filterDropdown"
@@ -89,13 +92,13 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div>
+                            <div class="w-full sm:w-auto">
                                 <x-button type="a" href="{{ route('admin.products.create') }}"
                                     text-="Agregar producto" icon="plus" typeButton="primary" />
                             </div>
                         </div>
                     </div>
-                    <div class="mx-4">
+                    <div class="mx-4 mb-4">
                         <x-table>
                             <x-slot name="thead">
                                 <x-tr>
@@ -142,7 +145,8 @@
                                             </x-td>
                                             <x-td>
                                                 <img src="{{ Storage::url($product->main_image) }}"
-                                                    alt="{{ $product->name }}" class="h-16 w-16 rounded-lg object-cover">
+                                                    alt="{{ $product->name }}"
+                                                    class="min-w-16 h-16 w-16 rounded-lg object-cover">
                                             </x-td>
                                             <x-td>
                                                 <span>${{ $product->price }}</span>
@@ -155,7 +159,7 @@
                                             </x-td>
                                             <x-td>
                                                 <span
-                                                    class="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium uppercase text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                                                    class="text-nowrap w-max rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300">
                                                     {{ $product->categories->name }}
                                                 </span>
                                             </x-td>

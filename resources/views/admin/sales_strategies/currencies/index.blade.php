@@ -1,8 +1,8 @@
 @extends('layouts.admin-template')
 @section('title', 'Monedas')
 @section('content')
-    <div class="mt-4 rounded-lg">
-        <div class="ms-60">
+    <div>
+        <div class="lg:ms-60">
             @include('layouts.__partials.admin.header-page', [
                 'title' => 'Estrategias de venta',
                 'description' =>
@@ -11,9 +11,9 @@
         </div>
         <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
-            <div class="mx-auto ms-60 w-full">
+            <div class="mx-auto w-full lg:ms-60">
                 <div class="mb-4">
-                    <h2 class="font-secondary px-4 pt-4 text-xl font-medium text-zinc-600 dark:text-zinc-200">
+                    <h2 class="font-secondary px-4 pt-4 text-lg font-medium text-zinc-600 dark:text-zinc-200 md:text-xl">
                         Monedas
                     </h2>
                 </div>
@@ -35,46 +35,45 @@
                                     typeButton="primary" text="Nueva moneda" icon="plus" />
                             </div>
                         </div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
-                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                                <thead
-                                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                                    <tr>
-                                        <th scope="col"
-                                            class="w-10 border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                        <div class="mx-4 mb-4">
+                            <x-table>
+                                <x-slot name="thead">
+                                    <x-tr>
+                                        <x-th class="w-10">
+                                        </x-th>
+                                        <x-th>
                                             Nombre
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Código
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Simbolo
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
-                                            Tasa de cambio
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
+                                            <span class="text-nowrap">
+                                                Tasa de cambio
+                                            </span>
+                                        </x-th>
+                                        <x-th>
                                             Estado
-                                        </th>
-                                        <th scope="col" class="px-4 py-3">
+                                        </x-th>
+                                        <x-th :last="true">
                                             Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        </x-th>
+                                    </x-tr>
+                                </x-slot>
+                                <x-slot name="tbody">
                                     @if ($currencies->count() == 0)
-                                        <tr>
-                                            <td colspan="7"
-                                                class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
+                                        <x-tr>
+                                            <x-td colspan="7">
                                                 No hay monedas registradas
-                                            </td>
-                                        </tr>
+                                            </x-td>
+                                        </x-tr>
                                     @else
                                         @foreach ($currencies as $currency)
-                                            <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                                <td class="px-4 py-3">
+                                            <x-tr>
+                                                <x-td>
                                                     @if ($currency->is_default === 1)
                                                         <span data-tooltip-target="tooltip-default" type="button">
                                                             <x-icon icon="badge-check" class="h-5 w-5 text-green-600" />
@@ -85,24 +84,23 @@
                                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                                         </div>
                                                     @endif
-                                                </td>
-                                                <th scope="row"
-                                                    class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
+                                                </x-td>
+                                                <x-td>
                                                     {{ $currency->name }}
-                                                </th>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td class="px-4 py-3">
                                                     {{ $currency->code }}
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td class="px-4 py-3">
                                                     {{ $currency->symbol }}
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td class="px-4 py-3">
                                                     {{ $currency->exchange_rate }}
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td class="px-4 py-3">
                                                     <x-badge-status :status="$currency->active" />
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td class="px-4 py-3">
                                                     <div class="flex gap-2">
                                                         <x-button type="button" class="btnEditCurrency"
                                                             data-href="{{ route('admin.sales-strategies.currencies.edit', $currency->id) }}"
@@ -120,12 +118,12 @@
                                                                 data-modal-toggle="deleteModal" />
                                                         </form>
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                </x-td>
+                                            </x-tr>
                                         @endforeach
                                     @endif
-                                </tbody>
-                            </table>
+                                </x-slot>
+                            </x-table>
                         </div>
                     </div>
                 </div>
@@ -139,7 +137,7 @@
 
         <!-- Drawer new currency  -->
         <div id="drawer-new-currency"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-new-currency">
             <h5 id="drawer-new-currency-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -159,8 +157,8 @@
                     method="POST">
                     @csrf
                     <div class="w-full">
-                        <x-input type="text" name="code" required placeholder="Ej. USD, EUR, MXN"
-                            label="Abreviatura" value="{{ old('code') }}" />
+                        <x-input type="text" name="code" required placeholder="Ej. USD, EUR, MXN" label="Abreviatura"
+                            value="{{ old('code') }}" />
                     </div>
                     <div class="w-full">
                         <x-input type="text" name="symbol" required placeholder="Ej. $, €" label="Símbolo"
@@ -234,7 +232,7 @@
 
         <!-- Drawer edit currency -->
         <div id="drawer-edit-currency"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-edit-currency">
             <h5 id="drawer-edit-currency-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">

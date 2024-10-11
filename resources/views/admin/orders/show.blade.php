@@ -9,7 +9,7 @@
         ])
         <div class="h-full bg-white p-4 dark:bg-black">
             <div>
-                <div class="flex items-center justify-between">
+                <div class="flex flex-col-reverse justify-between sm:flex-row sm:items-center">
                     <div class="flex flex-col gap-2">
                         <h2 class="flex items-center gap-1 text-3xl font-bold text-zinc-800 dark:text-white">
                             <x-icon icon="hash" class="h-6 w-6" />
@@ -24,10 +24,12 @@
                             {{ $order->tracking_number }}
                         </div>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <div class="flex gap-2">
-                            <x-button type="button" icon="printer" text="Imprimir" typeButton="secondary" class="h-max" />
-                            <x-button type="button" icon="truck" text="Enviar" typeButton="primary" class="h-max" />
+                    <div class="mb-4 flex flex-col gap-2 sm:mb-0">
+                        <div class="flex justify-end gap-2">
+                            <x-button type="button" icon="printer" text="Imprimir" typeButton="secondary"
+                                class="h-max w-full sm:w-auto" />
+                            <x-button type="button" icon="truck" text="Enviar" typeButton="primary"
+                                class="h-max w-full sm:w-auto" />
                         </div>
                         <div class="flex justify-end gap-2">
                             <x-button type="a" href="{{ Route('admin.orders.edit', $order->id) }}" icon="edit"
@@ -44,7 +46,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <div class="flex gap-4">
+                    <div class="flex flex-col gap-4 lg:flex-row">
                         <div class="flex-[2]">
                             <x-table>
 
@@ -57,7 +59,6 @@
                                     <x-th>Precio</x-th>
                                     <x-th last="true">Subtotal</x-th>
                                 </x-slot>
-
                                 <x-slot name="tbody">
                                     @foreach ($order->items as $item)
                                         <x-tr section="body">
@@ -75,7 +76,8 @@
                                                             alt="{{ $item->product->name }}">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                                        <div
+                                                            class="text-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                                             {{ $item->product->name }}
                                                         </div>
                                                     </div>
@@ -100,43 +102,47 @@
                                     @endforeach
                                 </x-slot>
                             </x-table>
-                            <div class="mt-4 flex gap-8 p-4">
-                                <div class="flex flex-1 flex-col gap-4">
+                            <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                                <div class="flex flex-col items-center gap-4 sm:items-start">
                                     <h4 class="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
                                         Detalles del cliente
                                     </h4>
                                     <div class="flex flex-col gap-4">
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
                                             <span class="flex items-center gap-2">
                                                 <x-icon icon="user" class="h-5 w-5" />
                                                 Nombre completo:
                                             </span>
                                             <x-paragraph
-                                                class="ms-7">{{ $order->user->name . ' ' . $order->user->last_name }}
+                                                class="sm:ms-7">{{ $order->user->name . ' ' . $order->user->last_name }}
                                             </x-paragraph>
                                         </div>
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
                                             <span class="flex items-center gap-2">
                                                 <x-icon icon="mail" class="h-5 w-5" />
                                                 Email:
                                             </span>
-                                            <x-paragraph class="ms-7">{{ $order->user->email }}</x-paragraph>
+                                            <x-paragraph class="sm:ms-7">{{ $order->user->email }}</x-paragraph>
                                         </div>
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
                                             <span class="flex items-center gap-2">
                                                 <x-icon icon="phone" class="h-5 w-5" />
                                                 Telefono:
                                             </span>
-                                            <x-paragraph class="ms-7">+
+                                            <x-paragraph class="sm:ms-7">+
                                                 {{ $order->customer->area_code . ' ' . $order->customer->phone }}
                                             </x-paragraph>
                                         </div>
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
-                                            <span class="flex items-center gap-2">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
+                                            <span class="flex gap-2 sm:items-baseline">
                                                 <x-icon icon="home" class="h-5 w-5" />
                                                 Dirección:
                                             </span>
-                                            <x-paragraph class="ms-7 w-52">
+                                            <x-paragraph class="w-52 text-center sm:ms-7 sm:text-left">
                                                 {{ $order->address->address_line_1 .
                                                     ', ' .
                                                     $order->address->address_line_2 .
@@ -149,37 +155,40 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-1 flex-col gap-4">
+                                <div class="flex flex-col items-center gap-4 sm:items-start">
                                     <h4 class="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
                                         Detalles de envío
                                     </h4>
                                     <div class="flex flex-col gap-4">
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
                                             <span class="flex items-center gap-2">
                                                 <x-icon icon="truck" class="h-5 w-5" />
                                                 Envío:
                                             </span>
-                                            <x-paragraph class="ms-7">
+                                            <x-paragraph class="sm:ms-7">
                                                 {{ $order->shipping_method->name }}
                                             </x-paragraph>
                                         </div>
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
                                             <span class="flex items-center gap-2">
                                                 <x-icon icon="clock" class="h-5 w-5" />
                                                 Tiempo de entrega:
                                             </span>
-                                            <x-paragraph class="ms-7">
+                                            <x-paragraph class="sm:ms-7">
                                                 {{ $order->shipping_method->time }}
                                             </x-paragraph>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-1 flex-col gap-4">
+                                <div class="flex flex-col items-center gap-4 sm:items-start">
                                     <h4 class="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
                                         Detalles de pago
                                     </h4>
                                     <div class="flex flex-col gap-4">
-                                        <div class="flex flex-col gap-2 text-sm text-zinc-800 dark:text-zinc-300">
+                                        <div
+                                            class="flex flex-col items-center gap-2 text-sm text-zinc-800 dark:text-zinc-300 sm:items-baseline">
                                             <span class="flex items-center gap-2">
                                                 <x-icon icon="credit-card" class="h-5 w-5" />
                                                 Método de pago:

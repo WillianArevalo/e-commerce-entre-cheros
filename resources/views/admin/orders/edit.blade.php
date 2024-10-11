@@ -1,11 +1,9 @@
 @extends('layouts.admin-template')
 @section('title', 'Editar pedido')
 @section('content')
-
     @php
         $date = now()->format('Y-m-d');
     @endphp
-
     <div>
         @include('layouts.__partials.admin.header-crud-page', [
             'title' => 'Editar pedido',
@@ -13,7 +11,7 @@
             'url' => route('admin.orders.index'),
         ])
         <div class="p-4">
-            <div class="mb-4 flex justify-end gap-2">
+            <div class="mb-4 flex flex-col justify-end gap-2 sm:flex-row">
                 @if ($order->status != 'completed' && $order->status != 'canceled')
                     <x-button type="button" typeButton="success" icon="shopping-bag-check" text="Completar pedido"
                         data-modal-target="order-completed" data-modal-toggle="order-completed" />
@@ -21,10 +19,10 @@
                 @if ($order->status === 'pending')
                     <x-button type="button" typeButton="danger" icon="shopping-bag-x" text="Cancelar pedido"
                         data-modal-target="order-canceled" data-modal-toggle="order-canceled" />
-                    <form action="{{ Route('admin.orders.status', $order->id) }}" method="POST">
+                    <form action="{{ Route('admin.orders.status', $order->id) }}" method="POST" class="w-full">
                         @csrf
                         <input type="hidden" name="status" value="sent">
-                        <x-button type="submit" typeButton="primary" icon="truck" text="Enviar pedido" />
+                        <x-button type="submit" typeButton="primary" icon="truck" text="Enviar pedido" class="w-full" />
                     </form>
                 @endif
                 @if ($order->status === 'canceled')
@@ -36,7 +34,7 @@
                 <div class="w-full">
                     @switch($order->status)
                         @case('pending')
-                            <div class="flex justify-between gap-2">
+                            <div class="flex flex-col justify-between gap-2 md:flex-row">
                                 <div class="flex items-center gap-2 text-sm">
                                     <p class="font-medium text-zinc-800 dark:text-zinc-300">Estado del pedido:</p>
                                     <span class="text-lg font-bold text-yellow-400 dark:text-yellow-500">
@@ -58,7 +56,7 @@
                         @break
 
                         @case('sent')
-                            <div class="flex justify-between gap-2">
+                            <div class="flex flex-col justify-between gap-2 md:flex-row">
                                 <div class="flex items-center gap-2 text-sm">
                                     <p class="font-medium text-zinc-800 dark:text-zinc-300">Estado del pedido:</p>
                                     <span class="text-lg font-bold text-blue-400 dark:text-blue-500">
@@ -84,7 +82,7 @@
                         @break
 
                         @case('canceled')
-                            <div class="flex justify-between gap-2">
+                            <div class="flex flex-col justify-between gap-2 md:flex-row">
                                 <div class="flex items-center gap-2 text-sm">
                                     <p class="font-medium text-zinc-800 dark:text-zinc-300">Estado del pedido:</p>
                                     <span class="text-lg font-bold text-red-400 dark:text-red-500">Cancelado</span>
@@ -119,11 +117,11 @@
             <form action="{{ route('admin.orders.update', $order->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="flex gap-4">
-                    <div class="flex-[2]">
+                <div class="flex flex-col gap-4 md:flex-row">
+                    <div class="flex-1 lg:flex-[2]">
                         <div class="flex h-max flex-col gap-4 rounded-xl border border-zinc-400 dark:border-zinc-800">
                             <div class="p-4">
-                                <div class="flex gap-4">
+                                <div class="flex flex-col gap-4 lg:flex-row">
                                     <div class="flex-1">
                                         <x-input type="text" name="number_order" id="number_order"
                                             label="Número de Orden" value="{{ old('number_order', $order->number_order) }}"
@@ -137,7 +135,7 @@
                                             placeholder="Ingresa el número de tracking del pedido" />
                                     </div>
                                 </div>
-                                <div class="mt-4 flex gap-4">
+                                <div class="mt-4 flex flex-col gap-4 lg:flex-row">
                                     <!-- Fechas de Envío y Entrega -->
                                     <div class="flex-1">
                                         <x-input type="date" name="shipped_at" icon="calendar-up" id="shipped_at"
@@ -208,7 +206,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="flex-1">
                         <!-- Subtotal, Descuento, Impuesto, Total -->
                         <div class="flex flex-col gap-4 rounded-xl border border-zinc-400 p-4 dark:border-zinc-800">
@@ -335,10 +332,11 @@
                     </div>
                 </div>
                 <!-- Botones de Acción -->
-                <div class="mt-4 flex items-center justify-center gap-2">
-                    <x-button type="submit" text="Actualizar Pedido" icon="check" typeButton="primary" />
-                    <x-button type="a" href="{{ route('admin.orders.index') }}" text="Cancelar"
-                        typeButton="secondary" />
+                <div class="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row">
+                    <x-button class="w-full sm:w-auto" type="submit" text="Actualizar Pedido" icon="check"
+                        typeButton="primary" />
+                    <x-button type="a" class="w-full sm:w-auto" href="{{ route('admin.orders.index') }}"
+                        text="Cancelar" typeButton="secondary" />
                 </div>
             </form>
 
@@ -350,8 +348,8 @@
 
             <!-- Modal order completed -->
             <div id="order-completed" tabindex="-1" aria-hidden="true"
-                class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50 md:inset-0 md:h-full">
-                <div class="relative h-full w-full max-w-md p-4 md:h-auto">
+                class="fixed inset-0 left-0 right-0 top-0 z-50 hidden h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50">
+                <div class="relative flex h-full w-full max-w-md items-center justify-center p-4 md:h-auto">
                     <!-- Modal content -->
                     <div
                         class="relative animate-jump-in rounded-lg bg-white p-4 shadow animate-duration-300 dark:bg-zinc-950 sm:p-5">
@@ -400,8 +398,8 @@
 
             <!-- Modal order canceled -->
             <div id="order-canceled" tabindex="-1" aria-hidden="true"
-                class="fixed left-0 right-0 top-0 z-50 hidden h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50 md:inset-0 md:h-full">
-                <div class="relative h-full w-full max-w-md p-4 md:h-auto">
+                class="fixed inset-0 left-0 right-0 top-0 z-50 hidden h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50">
+                <div class="relative flex h-full w-full max-w-md items-center justify-center p-4 md:h-auto">
                     <!-- Modal content -->
                     <div
                         class="relative animate-jump-in rounded-lg bg-white p-4 shadow animate-duration-300 dark:bg-zinc-950 sm:p-5">
@@ -452,9 +450,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 @endsection

@@ -1,8 +1,8 @@
 @extends('layouts.admin-template')
 @section('title', 'Métodos de pago')
 @section('content')
-    <div class="mt-4 rounded-lg">
-        <div class="ms-60">
+    <div>
+        <div class="lg:ms-60">
             @include('layouts.__partials.admin.header-page', [
                 'title' => 'Estrategias de venta',
                 'description' =>
@@ -11,8 +11,8 @@
         </div>
         <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
-            <div class="mx-auto ms-60 w-full">
-                <h2 class="font-secondary px-4 pt-4 text-xl font-medium text-zinc-600 dark:text-zinc-200">
+            <div class="mx-auto w-full lg:ms-60">
+                <h2 class="font-secondary px-4 pt-4 text-lg font-medium text-zinc-600 dark:text-zinc-200 md:text-xl">
                     Métodos de pago
                 </h2>
                 <div class="mx-auto w-full">
@@ -33,66 +33,65 @@
                                     typeButton="primary" text="Agregar método" icon="plus" />
                             </div>
                         </div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
-                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                                <thead
-                                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                                    <tr>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                        <div class="mx-4 mb-4">
+                            <x-table>
+                                <x-slot name="thead">
+                                    <x-tr>
+                                        <x-th>
                                             Nombre
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Imagen
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Estado
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Descripción
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Proveedor
-                                        </th>
-                                        <th scope="col" class="px-4 py-3">
+                                        </x-th>
+                                        <x-th :last="true">
                                             Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        </x-th>
+                                    </x-tr>
+                                </x-slot>
+                                <x-slot name="tbody">
                                     @if ($methods->count() == 0)
-                                        <tr>
-                                            <td colspan="5"
-                                                class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
+                                        <x-tr>
+                                            <x-td colspan="5">
                                                 No hay métodos de envío registrados
-                                            </td>
-                                        </tr>
+                                            </x-td>
+                                        </x-tr>
                                     @else
                                         @foreach ($methods as $method)
-                                            <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                                <th scope="row"
-                                                    class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
-                                                    {{ $method->name }}
-                                                </th>
-                                                <td class="px-4 py-3">
-                                                    <div class="h-12 w-full">
+                                            <x-tr>
+                                                <x-td>
+                                                    <span class="text-nowrap">
+                                                        {{ $method->name }}
+                                                    </span>
+                                                </x-td>
+                                                <x-td>
+                                                    <div class="min-h-12 h-12 w-full min-w-full">
                                                         <img src="{{ Storage::url($method->image) }}"
                                                             alt="{{ $method->name }}" class="h-full w-full object-contain">
                                                     </div>
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <x-badge-status status="{{ $method->active }}" />
-                                                </td>
-                                                <td class="px-4 py-3">
-                                                    <p class="text-wrap">
+                                                </x-td>
+                                                <x-td>
+                                                    <p class="text-wrap w-80">
                                                         {{ $method->description }}
                                                     </p>
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <span>
                                                         {{ $method->provider }}
                                                     </span>
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <div class="flex gap-2">
                                                         <x-button type="button" class="btnEditPaymentMethod"
                                                             data-href="{{ route('admin.sales-strategies.payment-methods.edit', $method->id) }}"
@@ -111,12 +110,12 @@
                                                                 data-modal-toggle="deleteModal" />
                                                         </form>
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                </x-td>
+                                            </x-tr>
                                         @endforeach
                                     @endif
-                                </tbody>
-                            </table>
+                                </x-slot>
+                            </x-table>
                         </div>
                     </div>
                 </div>
@@ -130,7 +129,7 @@
 
         <!-- Drawer new payment method  -->
         <div id="drawer-new-method"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-new-method">
             <h5 id="drawer-new-method-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">
@@ -203,7 +202,7 @@
 
         <!-- Drawer edit payment method -->
         <div id="drawer-edit-method"
-            class="drawer fixed right-0 top-0 z-40 h-screen w-[500px] translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black"
+            class="drawer fixed right-0 top-0 z-[70] h-screen w-full translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-black sm:w-[500px]"
             tabindex="-1" aria-labelledby="drawer-edit-method">
             <h5 id="drawer-edit-method-label"
                 class="mb-4 inline-flex items-center text-base font-semibold text-zinc-500 dark:text-zinc-400">

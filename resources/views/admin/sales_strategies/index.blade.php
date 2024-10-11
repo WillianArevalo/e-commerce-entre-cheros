@@ -1,10 +1,8 @@
 @extends('layouts.admin-template')
-
 @section('title', 'Tickets de soporte')
-
 @section('content')
-    <div class="mt-4 rounded-lg">
-        <div class="ms-60">
+    <div>
+        <div class="lg:ms-60">
             @include('layouts.__partials.admin.header-page', [
                 'title' => 'Estrategias de venta',
                 'description' =>
@@ -13,8 +11,8 @@
         </div>
         <div class="flex bg-zinc-50 dark:bg-black">
             @include('layouts.__partials.admin.nav-sales-strategies')
-            <div class="mx-auto ms-60 w-full">
-                <h2 class="font-secondary px-4 pt-4 text-xl font-medium text-zinc-600 dark:text-zinc-200">
+            <div class="mx-auto w-full lg:ms-60">
+                <h2 class="font-secondary px-4 pt-4 text-lg font-medium text-zinc-600 dark:text-zinc-200 md:text-xl">
                     Cupones de descuento
                 </h2>
                 <div class="mx-auto w-full">
@@ -35,61 +33,57 @@
                                     typeButton="primary" text="Agregar cupon" icon="plus" />
                             </div>
                         </div>
-                        <div class="mx-4 mb-4 overflow-hidden rounded-lg border border-zinc-400 dark:border-zinc-800">
-                            <table class="w-full text-left text-sm text-zinc-500 dark:text-zinc-400">
-                                <thead
-                                    class="border-b border-zinc-400 bg-zinc-50 text-xs uppercase text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                                    <tr>
-                                        <th scope="col"
-                                            class="w-10 border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                        <div class="mx-4 mb-4">
+                            <x-table>
+                                <x-slot name="thead">
+                                    <x-tr>
+                                        <x-th class="w-10">
                                             <input id="default-checkbox" type="checkbox" value=""
                                                 class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Código
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Tipo de descuento
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Valor de descuento
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Regla
-                                        </th>
-                                        <th scope="col" class="border-e border-zinc-400 px-4 py-3 dark:border-zinc-800">
+                                        </x-th>
+                                        <x-th>
                                             Estado
-                                        </th>
-                                        <th scope="col" class="px-4 py-3">
+                                        </x-th>
+                                        <x-th :last="true">
                                             Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        </x-th>
+                                    </x-tr>
+                                </x-slot>
+                                <x-slot name="tbody">
                                     @if ($coupons->count() == 0)
-                                        <tr>
-                                            <td colspan="7"
-                                                class="px-4 py-3 text-center font-medium text-zinc-900 dark:text-white">
+                                        <x-tr>
+                                            <x-td colspan="7">
                                                 No hay cupones registrados
-                                            </td>
-                                        </tr>
+                                            </x-td>
+                                        </x-tr>
                                     @else
                                         @foreach ($coupons as $coupon)
-                                            <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-950">
-                                                <td class="px-4 py-3">
+                                            <x-tr>
+                                                <x-td>
                                                     <input id="default-checkbox" type="checkbox" value=""
                                                         class="h-4 w-4 rounded border-2 border-zinc-400 bg-zinc-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-800 dark:focus:ring-blue-600">
-                                                </td>
-                                                <th scope="row"
-                                                    class="whitespace-nowrap px-4 py-3 font-medium text-zinc-900 dark:text-white">
+                                                </x-td>
+                                                <x-td>
                                                     {{ $coupon->code }}
-                                                </th>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <span>
                                                         {{ $coupon->discount_type === 'percentage' ? 'Porcentaje' : 'Fijo' }}
                                                     </span>
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <span class="flex items-center gap-1">
                                                         @if ($coupon->discount_type === 'percentage')
                                                             {{ $coupon->discount_value }}
@@ -99,14 +93,14 @@
                                                             {{ $coupon->discount_value }}
                                                         @endif
                                                     </span>
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     {{ \App\Utils\CouponRules::getRule($coupon->rule->predefined_rule) }}
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <x-badge-status status="{{ $coupon->active }}" />
-                                                </td>
-                                                <td class="px-4 py-3">
+                                                </x-td>
+                                                <x-td>
                                                     <div class="flex gap-2">
                                                         <x-button type="a"
                                                             href="{{ route('admin.sales-strategies.coupon.edit', $coupon->id) }}"
@@ -126,12 +120,12 @@
                                                             typeButton="secondary" icon="view" onlyIcon="true"
                                                             data-drawer="#drawer-details-coupon" />
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                </x-td>
+                                            </x-tr>
                                         @endforeach
                                     @endif
-                                </tbody>
-                            </table>
+                                </x-slot>
+                            </x-table>
                         </div>
                     </div>
                 </div>
